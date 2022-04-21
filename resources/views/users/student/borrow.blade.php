@@ -29,8 +29,8 @@
                                             <label class="form-control-label"
                                                    for="stock_num">{{ __('คำนำหน้า') }}</label>
                                             <input type="text" name="stock_num"
-                                                   value="{{ old('stock_num') ? old('stock_num') : '' }}"
-                                                   class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }} placeholder="{{ __('ประเภท') }}" autofocus>
+                                                   value="{{ auth()->user()->user_prefix->prefix_name }}"
+                                                   class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }} " disabled>
                                             @if ($errors->has('stock_num'))
                                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('stock_num') }}</strong>
@@ -42,8 +42,8 @@
                                         <div class="form-group">
                                             <label class="form-control-label"
                                                    for="stock_name">{{ __('ชื่อ') }}</label>
-                                            <input type="text" name="stock_name" value="{{ old('stock_name') }}"
-                                                   class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }} placeholder="{{ __('ประเภท') }}" >
+                                            <input type="text" name="stock_name" value="{{ auth()->user()->firstname }}"
+                                                   class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }} " disabled>
                                             @if ($errors->has('stock_name'))
                                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('stock_name') }}</strong>
@@ -55,8 +55,8 @@
                                         <div class="form-group">
                                             <label class="form-control-label"
                                                    for="stock_amount">{{ __('นามสกุล') }}</label>
-                                            <input type="number" name="stock_amount" value="{{ old('stock_amount') }}"
-                                                   class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }} placeholder="{{ __('ประเภท') }}" >
+                                            <input type="text" name="stock_amount" value="{{ auth()->user()->lastname }}"
+                                                   class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }} " disabled>
                                             @if ($errors->has('stock_amount'))
                                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('stock_amount') }}</strong>

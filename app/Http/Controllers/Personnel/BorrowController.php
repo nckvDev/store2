@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Prefix;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class BorrowController extends Controller
 
     public function index() {
         $stocks = Stock::all();
-        return view('users.personnel.borrow', compact('stocks'));
+        $prefixs = Prefix::all();
+        return view('users.personnel.borrow', compact('stocks', 'prefixs'));
     }
 }

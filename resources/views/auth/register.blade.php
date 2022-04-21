@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.headers.guest')
 
-<div class="container mt--8 pb-5">
+<div class="container-fluid mt--8 pb-5">
     <!-- Table -->
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
@@ -27,19 +27,59 @@
                     </div>
                     <form role="form" method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                            <div class="input-group input-group-alternative mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-single-02"></i></span>
-                                </div>
-                                <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" type="text" name="name" value="{{ old('name') }}" autofocus>
-                            </div>
-                            @if ($errors->has('name'))
-                            <span class="invalid-feedback" style="display: block;" role="alert">
-                                <strong>{{ $errors->first('name') }}</strong>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group{{ $errors->has('prefix') ? ' has-danger' : '' }}">
+                                    <div class="input-group input-group-alternative mb-3">
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <span class="input-group-text"><i class="ni ni-badge"></i></span>--}}
+{{--                                        </div>--}}
+                                        <select class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}" name="prefix">
+                                            <option value="">Prefix</option>
+                                            @foreach($prefixs as $row)
+                                            <option value="{{ $row->id }}">{{ $row->prefix_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if ($errors->has('prefix'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                <strong>{{ $errors->first('prefix') }}</strong>
                             </span>
-                            @endif
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group{{ $errors->has('firstname') ? ' has-danger' : '' }}">
+                                    <div class="input-group input-group-alternative mb-3">
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
+{{--                                        </div>--}}
+                                        <input class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('FirstName') }}" type="text" name="firstname" value="{{ old('firstname') }}" autofocus>
+                                    </div>
+                                    @if ($errors->has('firstname'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                <strong>{{ $errors->first('firstname') }}</strong>
+                            </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
+                                    <div class="input-group input-group-alternative mb-3">
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
+{{--                                        </div>--}}
+                                        <input class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('lastname') }}" type="text" name="lastname" value="{{ old('lastname') }}" autofocus>
+                                    </div>
+                                    @if ($errors->has('lastname'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                <strong>{{ $errors->first('lastname') }}</strong>
+                            </span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                             <div class="input-group input-group-alternative mb-3">
                                 <div class="input-group-prepend">

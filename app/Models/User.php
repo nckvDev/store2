@@ -18,11 +18,18 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'prefix_id',
+        'firstname',
+        'lastname',
         'email',
         'role',
         'password',
     ];
+
+    public function user_prefix()
+    {
+        return $this->belongsTo('App\Models\Prefix', 'prefix_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -91,7 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('device', [DeviceController::class, 'index'])->name('device');
         Route::post('device', [DeviceController::class, 'store'])->name('addDevice');
 
-        Route::get('stock/add_device', [DeviceController::class, 'add'])->name('add_device');
+        Route::get('device/add_device', [DeviceController::class, 'add'])->name('add_device');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
