@@ -31,7 +31,6 @@
                                 <th scope="col">รูปภาพ</th>
                                 <th scope="col">ตำแหน่ง</th>
                                 <th scope="col">ประเภท</th>
-                                <th scope="col">ชำรุด</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -48,7 +47,6 @@
                                     <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80" height="80" /></td>
                                     <td>{{ $row->location }}</td>
                                     <td>{{ $row->device_type->type_detail }}</td>
-                                    <td>{{ $row->defective_device }}</td>
                                     <td class="text-right">
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

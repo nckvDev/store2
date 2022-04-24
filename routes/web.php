@@ -101,6 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');
         Route::get('student_borrow', [\App\Http\Controllers\Student\BorrowController::class, 'index'])->name('student_borrow');
+        Route::get('student_borrow/select/{id}', [\App\Http\Controllers\Student\BorrowController::class, 'filters'])->name('student_borrow_select');
     });
 
     // Search

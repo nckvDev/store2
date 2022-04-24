@@ -100,7 +100,6 @@
                                 </div>
                                 <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                     <option value="">-- Select Roles --</option>
-                                    <option value="admin">Admin</option>
                                     <option value="personnel">Personnel</option>
                                     <option value="student">Student</option>
                                 </select>

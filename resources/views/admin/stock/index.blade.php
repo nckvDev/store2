@@ -28,11 +28,10 @@
                                 <th scope="col">รหัสอุปกรณ์</th>
                                 <th scope="col">ชื่ออุปกรณ์</th>
                                 <th scope="col">จำนวนทั้งหมด</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">รูปภาพ</th>
+                                <th scope="col" class="text-center">สถานะ</th>
+                                <th scope="col" class="text-center">รูปภาพ</th>
                                 <th scope="col">ตำแหน่ง</th>
                                 <th scope="col">ประเภท</th>
-                                <th scope="col">ชำรุด</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -50,7 +49,6 @@
                                 <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80" height="80" /></td>
                                 <td>{{ $row->position }}</td>
                                 <td>{{ $row->stock_type->type_detail }}</td>
-                                <td>{{ $row->defective_stock }}</td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

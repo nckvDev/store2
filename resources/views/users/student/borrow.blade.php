@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('addStock') }}" enctype="multipart/form-data" autocomplete="off">
+                        <form method="post" action="#" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <div class="pl-lg-2">
                                 <div class="row">
@@ -91,13 +91,13 @@
 {{--                                            <input type="text" name="amount_minimum" value="{{ old('amount_minimum') }}"--}}
 {{--                                                   class="form-control form-control-alternative{{ $errors->has('amount_minimum') ? ' is-invalid' : '' }} placeholder="{{ __('ประเภท') }}" >--}}
 
-                                            <select class="form-control form-control-alternative" data-toggle="select" >
+                                            <select class="form-control form-control-alternative filter" name="filter" id="filter" data-toggle="select" >
                                                 <option>-- เลือก --</option>
-                                                <option>วัสดุ</option>
-                                                <option>วัสดุสิ้นเปลือง</option>
-{{--                                                @foreach($stocks as $row)--}}
-{{--                                                <option value="{{$row->id}}">{{$row->stock_name}} {{ $row->id }}</option>--}}
-{{--                                                @endforeach --}}
+{{--                                                <option>วัสดุ</option>--}}
+{{--                                                <option>วัสดุสิ้นเปลือง</option>--}}
+                                                @foreach($types as $row)
+                                                <option value="{{$row->id}}">{{$row->type_detail}} {{ $row->id }}</option>
+                                                @endforeach
                                             </select>
                                             @if ($errors->has('amount_minimum'))
                                                 <span class="invalid-feedback" role="alert">
@@ -106,6 +106,70 @@
                                             @endif
 {{--                                            <textarea class="form-control form-control-alternative my-2" rows="3" placeholder="Write a large text here ..."></textarea>--}}
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="nav-wrapper">
+                                            <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-settings mr-2"></i>วัสดุ</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                                                        <div class="card shadow mb-3">
+                                                            <div class="table-responsive">
+                                                                <table class="table align-items-center table-flush">
+                                                                    <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th scope="col">รหัสอุปกรณ์</th>
+                                                                        <th scope="col">ชื่ออุปกรณ์</th>
+                                                                        <th scope="col" class="text-center">สถานะ</th>
+                                                                        <th scope="col" class="text-center">รูปภาพ</th>
+                                                                        <th scope="col">ตำแหน่ง</th>
+                                                                        <th scope="col">ประเภท</th>
+                                                                        <th scope="col"></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach($stocks as $row)
+                                                                        <tr>
+                                                                            <td>{{ $row->stock_num }}</td>
+                                                                            <td>{{ $row->stock_name }}</td>
+                                                                            @if($row->stock_status == 1)
+                                                                                <td>
+                                                                                    <div class="rounded text-white bg-green text-center">ปกติ</div>
+                                                                                </td>
+                                                                            @endif
+                                                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80" height="80" /></td>
+                                                                            <td>{{ $row->position }}</td>
+                                                                            <td>{{ $row->stock_type->type_detail }}</td>
+                                                                            <td class="text-right">
+                                                                                <a href="#" class="btn btn-sm bg-gradient-green text-white">เลือก</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                </table>
+
+                                                                @if (session('delete'))
+                                                                    <script>
+                                                                        Swal.fire({
+                                                                            position: 'center',
+                                                                            icon: 'error',
+                                                                            title: 'ลบข้อมูลเรียบร้อย',
+                                                                            showConfirmButton: false,
+                                                                            timer: 1500
+                                                                        })
+                                                                    </script>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                       </div>
+                                                </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
