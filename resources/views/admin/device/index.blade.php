@@ -27,8 +27,8 @@
                             <tr>
                                 <th scope="col">รหัสวัสดุ</th>
                                 <th scope="col">ชื่อวัสดุ</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">รูปภาพ</th>
+                                <th scope="col" class="text-center">สถานะ</th>
+                                <th scope="col" class="text-center">รูปภาพ</th>
                                 <th scope="col">ตำแหน่ง</th>
                                 <th scope="col">ประเภท</th>
                                 <th scope="col"></th>
