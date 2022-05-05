@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ url('/disposable/update/'.$disposable->id) }}"
+                    <form method="post" action="{{ url('/disposable/update/'.$disposables->id) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="pl-lg-2">
