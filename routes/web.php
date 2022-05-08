@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfirmFormController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageLocationController;
@@ -118,4 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('people', [SearchController::class, 'index'])->name('search');
     Route::get('people/simple', [SearchController::class, 'simple'])->name('simple_search');
     Route::get('people/advance', [SearchController::class, 'advance'])->name('advance_search');
+
+    // Form
+    Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
 });

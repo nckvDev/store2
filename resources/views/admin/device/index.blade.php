@@ -55,9 +55,10 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ url('/stock/edit/'.$row->id) }}">Edit</a>
                                             <a class="dropdown-item"
-                                                href="{{ url('/stock/delete/'.$row->id) }}">Delete</a>
+                                                href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                            <a class="dropdown-item"
+                                                href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>

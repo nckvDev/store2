@@ -58,9 +58,9 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item"
-                                                href="{{ url('/disposable/edit/'.$row->id) }}">Edit</a>
+                                                href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                             <a class="dropdown-item"
-                                                href="{{ url('/disposable/delete/'.$row->id) }}">Delete</a>
+                                                href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>
