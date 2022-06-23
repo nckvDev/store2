@@ -271,7 +271,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
                         href="{{ route('personnel_borrow') }}">
-                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืมวัสดุ-พัสดุ') }}
+                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืม/เบิกวัสดุ-พัสดุ') }}
                     </a>
                 </li>
             </ul>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\Disposable;
 use App\Models\Prefix;
 use App\Models\Stock;
 use App\Models\Type;
@@ -20,6 +21,7 @@ class BorrowController extends Controller
         $stocks = Stock::all();
         $devices = Device::all();
         $prefixs = Prefix::all();
-        return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices'));
+        $disposables = Disposable::all();
+        return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices' , 'disposables'));
     }
 }
