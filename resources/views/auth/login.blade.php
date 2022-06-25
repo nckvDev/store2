@@ -50,7 +50,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" value="123456789">
+                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" value="123456789" id="password">
+                                <i class="bg-white pt-3 pr-3 fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
                             </div>
                             @if ($errors->has('password'))
                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -58,12 +59,12 @@
                             </span>
                             @endif
                         </div>
-                        <div class="custom-control custom-control-alternative custom-checkbox">
+                        <!-- <div class="custom-control custom-control-alternative custom-checkbox">
                             <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
                             <label class="custom-control-label" for="customCheckLogin">
                                 <span class="text-muted">{{ __('Remember me') }}</span>
                             </label>
-                        </div>
+                        </div> -->
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>
                         </div>
@@ -87,4 +88,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // toggle the icon
+        this.classList.toggle("fa-eye-slash")
+
+    });
+</script>
 @endsection

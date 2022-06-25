@@ -115,7 +115,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" type="password" name="password">
+                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" type="password" name="password" id="password">
+                                <i class="bg-white pt-3 pr-3 fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
                             </div>
                             @if ($errors->has('password'))
                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -128,7 +129,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation">
+                                <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" id="confirmPassword">
+                                <i class="bg-white pt-3 pr-3 fa fa-eye" id="toggleConfirmPassword" style="cursor: pointer"></i>
                             </div>
                         </div>
                         <!-- <div class="text-muted font-italic">
@@ -148,16 +150,16 @@
 {{--                            </span>--}}
 {{--                            @endif--}}
 {{--                        </div>--}}
-                        <div class="row my-2">
-                            <div class="col-12">
-                                <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                    <label class="custom-control-label" for="customCheckRegister">
-                                        <span class="text-muted">{{ __('I agree with the') }} <a href="#!">{{ __('Privacy Policy') }}</a></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="row my-2">--}}
+{{--                            <div class="col-12">--}}
+{{--                                <div class="custom-control custom-control-alternative custom-checkbox">--}}
+{{--                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">--}}
+{{--                                    <label class="custom-control-label" for="customCheckRegister">--}}
+{{--                                        <span class="text-muted">{{ __('I agree with the') }} <a href="#!">{{ __('Privacy Policy') }}</a></span>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mt-4">{{ __('Create account') }}</button>
                         </div>
@@ -167,6 +169,29 @@
         </div>
     </div>
 </div>
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
 
+    const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword")
+    const confirmPassword = document.querySelector("#confirmPassword")
+
+
+    togglePassword.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // toggle the icon
+        this.classList.toggle("fa-eye-slash")
+    });
+
+    toggleConfirmPassword.addEventListener("click", function () {
+        const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
+        confirmPassword.setAttribute("type", type);
+
+        this.classList.toggle("fa-eye-slash")
+    });
+</script>
 
 @endsection
