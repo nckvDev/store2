@@ -134,11 +134,13 @@
                                 </select>
                             </div>
                         </div> -->
-                        <table id="example" class="display">
-                            <thead>
+
+                        <table id="example" class="table align-items-center">
+                            <thead class="thead-light">
                                 <tr>
                                     <th>รหัสพัสดุ</th>
                                     <th>ชื่อพัสดุ</th>
+                                    <th>รูปภาพ</th>
                                     <th>เลือก</th>
                                 </tr>
                             </thead>
@@ -147,26 +149,36 @@
                                 <tr>
                                     <td>{{ $row->stock_num }}</td>
                                     <td>{{ $row->stock_name }}</td>
+                                    <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
                                     <td><input type="checkbox" name="title[]" id="idItem" value="{{ $row->stock_num }}">
                                     </td>
-
                                 </tr>
                                 @endforeach
                                 @foreach($devices as $row)
                                 <tr>
                                     <td>{{ $row->device_num }}</td>
                                     <td>{{ $row->device_name }}</td>
+                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
                                     <td><input type="checkbox" name="title[]" id="idItem"
                                             value="{{ $row->device_num }}">
                                     </td>
                                 </tr>
                                 @endforeach
+                                @foreach($disposables as $row)
+                                <tr>
+                                    <td>{{ $row->disposable_num }}</td>
+                                    <td>{{ $row->disposable_name }}</td>
+                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                    <td><input type="checkbox" name="prog" id="idItem" onclick="myFunction()"
+                                            value="{{ $row->disposable_num }}">
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        <button onclick=" submitdata()" type="submit"
+                        <button onclick="submitdata()" type="submit"
                             class="btn btn-success mt-2">{{ __('ยืนยัน') }}</button>
                     </div>
-                    <!-- </form> -->
 
                     @if (session('success'))
                     <script>
@@ -184,7 +196,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('js')
@@ -194,14 +205,16 @@ $(function() {
         "language": {
             "search": "ค้นหา:",
             "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
             "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+            "infoEmpty": "ไม่มีข้อมูล",
+            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
             "paginate": {
                 "previous": "ปัจจุบัน",
                 "next": "หน้า"
             }
         }
     });
-
 
     $('#button').click(function() {
         alert(table.rows('.selected').data().length + ' row(s) selected');
@@ -265,9 +278,9 @@ function submitdata() {
                     showConfirmButton: true
                 })
             }
-
         }
     })
+
 }
 </script>
 <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
