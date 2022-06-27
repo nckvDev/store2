@@ -24,4 +24,9 @@ class BorrowController extends Controller
         $disposables = Disposable::all();
         return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices' , 'disposables'));
     }
+
+    public function borrow(Request $request) {
+//        dd($request);
+    }
+
 }

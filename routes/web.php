@@ -82,11 +82,11 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Stock
         Route::get('stock', [StockController::class, 'index'])->name('stock');
-        Route::post('stock/add', [StockController::class, 'store'])->name('addStock');
+        Route::post('stock/add', [StockController::class, 'store'])->name('addStock'); // create stock
 
-        Route::get('stock/add_stock', [StockController::class, 'add'])->name('add_stock');
-        Route::get('stock/edit/{id}', [StockController::class, 'edit']);
-        Route::post('stock/update/{id}', [StockController::class, 'update']);
+        Route::get('stock/add_stock', [StockController::class, 'add'])->name('add_stock'); // form add stock
+        Route::get('stock/edit/{id}', [StockController::class, 'edit']); // show data edit
+        Route::post('stock/update/{id}', [StockController::class, 'update']); // edit data
         Route::get('stock/delete/{id}', [StockController::class, 'delete']);
 
          // Disposable
@@ -108,6 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:personnel'], function () {
         Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'index'])->name('personnel_borrow');
+        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'borrow'])->name('borrow');
     });
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');

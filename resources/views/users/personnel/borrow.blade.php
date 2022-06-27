@@ -21,6 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <form id="ajaxform">
                     <!-- <form method="post" action="{{ route('addStock') }}" enctype="multipart/form-data"
                     autocomplete="off"> -->
                     @csrf
@@ -79,7 +80,7 @@
                                         </div>
                                         <input
                                             class="form-control datepicker {{ $errors->has('date') ? ' is-invalid' : '' }}"
-                                            placeholder="Select date" type="text" value="{{ \Carbon\Carbon::now() }}">
+                                            placeholder="Select date" type="datetime-local" value="{{ \Carbon\Carbon::now() }}">
                                     </div>
                                     @if ($errors->has('date'))
                                     <span class="invalid-feedback" role="alert">
@@ -163,10 +164,11 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button onclick=" submitdata()" type="submit"
+                        <button onclick="submitdata()" type="submit"
                             class="btn btn-success mt-2">{{ __('ยืนยัน') }}</button>
                     </div>
                     <!-- </form> -->
+                    </form>
 
                     @if (session('success'))
                     <script>
@@ -225,9 +227,9 @@ function submitdata() {
             alert('error');
         }
     });
-    console.log(dataSend);
+    console.log('dataSent' ,dataSend);
 
-    let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     let data = {
         '_token': CSRF_TOKEN,
         'prefix': $('#prefix').val(),
@@ -237,11 +239,11 @@ function submitdata() {
         'borrowDisposable': $('#borrowDisposable').val(),
         'numDisposable': $('#numDisposable').val()
     }
-    console.log(data);
+    console.log('data', data);
     return;
     $.ajax({
         type: 'post',
-        url: "",
+        url: "/personnel_borrow/borrow",
         data: data,
         success: function(response) {
             if (response.status === true) {
