@@ -88,53 +88,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row align-items-center">
-                            <h3 class="mb-0 ml-4">{{ __('กรุณาเลือกพัสดุ') }}</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
-                                    id="borrowItem" style="width:100%">
-                                    @foreach($stocks as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->stock_num }}</td>
-                                            <td>{{ $row->stock_name }}</td>
-                                    </option>
-                                    @endforeach
-                                    @foreach($devices as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->device_num }}</td>
-                                            <td>{{ $row->device_name }}</td>
-                                            @if($row->device_status == 1)
-                                            @endif
-                                        </tr>
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <h3 class="mb-0 ml-4">{{ __('กรุณาเลือกวัสดุสิ้นเปลือง') }}</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="display:flex">
-                                <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
-                                    id="borrowDisposable" style="width:88%">
-                                    @foreach($disposables as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->disposable_num }}</td>
-                                            <td>{{ $row->disposable_name }}</td>
-                                    </option>
-                                    @endforeach
-                                    <input style="height:65%" type="num" id="numDisposable"
-                                        placeholder="กรุณาระบุจำนวน">
-                                </select>
-                            </div>
-                        </div> -->
-
                         <table id="example" class="table align-items-center">
                             <thead class="thead-light">
                                 <tr>
@@ -142,6 +95,7 @@
                                     <th>ชื่อพัสดุ</th>
                                     <th>รูปภาพ</th>
                                     <th>เลือก</th>
+                                    <th>จำนวน</th>
                                 </tr>
                             </thead>
                             <tbody id="borrowItem">
@@ -152,6 +106,7 @@
                                     <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
                                     <td><input type="checkbox" name="title[]" id="idItem" value="{{ $row->stock_num }}">
                                     </td>
+                                    <td></td>
                                 </tr>
                                 @endforeach
                                 @foreach($devices as $row)
@@ -162,16 +117,19 @@
                                     <td><input type="checkbox" name="title[]" id="idItem"
                                             value="{{ $row->device_num }}">
                                     </td>
+                                    <td></td>
                                 </tr>
                                 @endforeach
-                                @foreach($disposables as $row)
+                                @foreach($disposables as $key => $row)
                                 <tr>
                                     <td>{{ $row->disposable_num }}</td>
                                     <td>{{ $row->disposable_name }}</td>
                                     <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
-                                    <td><input type="checkbox" name="prog" id="idItem" onclick="myFunction()"
-                                            value="{{ $row->disposable_num }}">
+                                    <td><input type="checkBox" id="myCheck{{$key}}" name="title[]"
+                                            onclick=" myFunction({{$key}})" value="{{ $row->disposable_num }}">
                                     </td>
+                                    <td><input id="text{{$key}}" style="display:none" placeholder="ระบุจำนวน"
+                                            class="form-control"></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -179,7 +137,6 @@
                         <button onclick="submitdata()" type="submit"
                             class="btn btn-success mt-2">{{ __('ยืนยัน') }}</button>
                     </div>
-
                     @if (session('success'))
                     <script>
                     Swal.fire({
@@ -200,10 +157,24 @@
 
 @push('js')
 <script>
+function myFunction(id) {
+    var chk = "text" + id;
+    var text = document.getElementById(chk);
+    var checkBox = document.getElementById("myCheck" + id);
+    if (checkBox.checked == true) {
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
+}
 $(function() {
+    $.extend($.fn.dataTableExt.oStdClasses, {
+        "sFilterInput": "form-control form-control-sm",
+        "sLengthSelect": "form-control form-control-sm"
+    });
     $('#example').dataTable({
         "language": {
-            "search": "ค้นหา:",
+            "search": "ค้นหา ",
             "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
             "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
             "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
@@ -215,7 +186,11 @@ $(function() {
             }
         }
     });
-
+    $('[type=search]').each(function() {
+        +
+        $(this).attr("placeholder", "Search...");
+        $(this).before('<span class="fa fa-search"></span>');
+    });
     $('#button').click(function() {
         alert(table.rows('.selected').data().length + ' row(s) selected');
     });
@@ -238,8 +213,7 @@ function submitdata() {
             alert('error');
         }
     });
-    console.log(dataSend);
-
+    console.log('dataSend', dataSend)
     let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
     let data = {
         '_token': CSRF_TOKEN,
