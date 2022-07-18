@@ -244,7 +244,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirmform*') ? 'active text-yellow' : '' }}"
                         href="{{ route('confirmform') }}">
-                        <i class="ni ni-settings text-orange"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
+                        <i class="ni ni-archive-2 text-orange"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
                 {{--                <li class="nav-item">--}}

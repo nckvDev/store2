@@ -28,6 +28,15 @@
                     <form role="form" method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <input class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" placeholder="{{ __('UserID') }}" type="text" name="user_id" value="{{ old('user_id') }}" autofocus>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-2">
                                 <div class="form-group{{ $errors->has('prefix') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
