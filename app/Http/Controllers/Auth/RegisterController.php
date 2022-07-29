@@ -48,7 +48,7 @@ class RegisterController extends Controller
                 return '/student_dashboard';
                 break;
             default:
-                return '/home';
+                return '/';
                 break;
         }
     }
@@ -71,7 +71,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_id' => ['required', 'string', 'max:10', 'unique:users'],
+            'user_id' => ['required', 'string', 'max:10'],
             'prefix' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -89,6 +89,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $masterUser = MasterUser::where('user_id', $data['user_id'])->first();
         if($masterUser !== null) {
             return User::create([
@@ -102,6 +103,7 @@ class RegisterController extends Controller
             ]);
         }
 
+//        return redirect()->route('register')->with('error', "อัพเดตข้อมูลเรียบร้อย");
         dd('Sorry! You are not listed in MasterUser!!');
     }
 }

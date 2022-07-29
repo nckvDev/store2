@@ -26,16 +26,16 @@ class RedirectIfAuthenticated
                 $role = Auth::user()->role;
                 switch ($role) {
                     case 'admin':
-                        return '/admin_dashboard';
+                        return redirect()->route('admin_dashboard');
                         break;
                     case 'personnel':
-                        return '/personnel_dashboard';
+                        return redirect()->route('personnel_dashboard');
                         break;
                     case 'student':
-                        return '/student_dashboard';
+                        return redirect()->route('student_dashboard');
                         break;
                     default:
-                        return '/home';
+                        return redirect()->route('home');
                         break;
                 }
 //                return redirect(RouteServiceProvider::HOME);

@@ -11,6 +11,8 @@ use App\Http\Controllers\DisposableController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegistersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+//Auth::routes();
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('register', [RegistersController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegistersController::class, 'registers']);
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Auth::routes();
@@ -35,26 +43,26 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-    Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-    Route::get('upgrade', function () {
-        return view('pages.upgrade');
-    })->name('upgrade');
-
-    Route::get('map', function () {
-        return view('pages.maps');
-    })->name('map');
-
-    Route::get('icons', function () {
-        return view('pages.icons');
-    })->name('icons');
-
-    Route::get('table-list', function () {
-        return view('pages.tables');
-    })->name('table');
-
-    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+//    Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+//    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+//    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+//    Route::get('upgrade', function () {
+//        return view('pages.upgrade');
+//    })->name('upgrade');
+//
+//    Route::get('map', function () {
+//        return view('pages.maps');
+//    })->name('map');
+//
+//    Route::get('icons', function () {
+//        return view('pages.icons');
+//    })->name('icons');
+//
+//    Route::get('table-list', function () {
+//        return view('pages.tables');
+//    })->name('table');
+//
+//    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
 //    Route::get('device', [DeviceController::class, 'index'])->name('device');
 
@@ -71,7 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:admin'], function () {
 
-        Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index']);
+        Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->name('admin_dashboard');
 
         // Type
         Route::get('type', [TypeController::class, 'index'])->name('type');
@@ -92,7 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
          // Disposable
          Route::get('disposable', [DisposableController::class, 'index'])->name('disposable');
          Route::post('disposable/add', [DisposableController::class, 'store'])->name('addDisposable');
- 
+
          Route::get('disposable/add_disposable', [DisposableController::class, 'add'])->name('add_disposable');
          Route::get('disposable/edit/{id}', [DisposableController::class, 'edit']);
          Route::post('disposable/update/{id}', [DisposableController::class, 'update']);

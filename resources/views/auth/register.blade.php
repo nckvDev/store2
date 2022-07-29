@@ -29,11 +29,16 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('user_id') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
                                         <input class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" placeholder="{{ __('UserID') }}" type="text" name="user_id" value="{{ old('user_id') }}" autofocus>
                                     </div>
                                 </div>
+                                @if ($errors->has('user_id'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -109,6 +114,7 @@
                                 </div>
                                 <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                     <option value="">-- Select Roles --</option>
+{{--                                    <option value="admin">Admin</option>--}}
                                     <option value="personnel">Personnel</option>
                                     <option value="student">Student</option>
                                 </select>
@@ -173,6 +179,17 @@
                             <button type="submit" class="btn btn-primary mt-4">{{ __('Create account') }}</button>
                         </div>
                     </form>
+                    @if (session('error'))
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'คุณไม่มีสิทธิ์สมัครเข้าใช้งาน',
+                                showConfirmButton: false,
+                                timer: 2500
+                            })
+                        </script>
+                    @endif
                 </div>
             </div>
         </div>
