@@ -22,6 +22,8 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <!-- <form method="post" action="{{ route('addStock') }}" enctype="multipart/form-data"
+                    autocomplete="off"> -->
                     @csrf
                     <div class="pl-lg-2">
                         <div class="row">
@@ -87,75 +89,81 @@
                                 </div>
                             </div>
                         </div>
-                        <table id="example" class="table align-items-center">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>รหัสพัสดุ</th>
-                                    <th>ชื่อพัสดุ</th>
-                                    <th>รูปภาพ</th>
-                                    <th>เลือก</th>
-                                </tr>
-                            </thead>
-                            <tbody id="borrowItem">
-                                @foreach($stocks as $row)
-                                <tr>
-                                    <td>{{ $row->stock_num }}</td>
-                                    <td>{{ $row->stock_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
-                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @foreach($devices as $row)
-                                <tr>
-                                    <td>{{ $row->device_num }}</td>
-                                    <td>{{ $row->device_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
-                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
-                                </tr>
+                        <form action="{{route('personnel_borrow_all.store')}}" method="post">
+                            @csrf
+                            <table id="example" class="table align-items-center">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>รหัสพัสดุ</th>
+                                        <th>ชื่อพัสดุ</th>
+                                        <th>รูปภาพ</th>
+                                        <th>เลือก</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="borrowItem">
+                                    @foreach($stocks as $row)
+                                    <tr>
+                                        <td>{{ $row->stock_num }}</td>
+                                        <td>{{ $row->stock_name }}</td>
+                                        <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
+                                        <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @foreach($devices as $row)
+                                    <tr>
+                                        <td>{{ $row->device_num }}</td>
+                                        <td>{{ $row->device_name }}</td>
+                                        <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                        <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
+                                    </tr>
 
-                                @endforeach
-                                @foreach($disposables as $key => $row)
-                                <tr>
-                                    <td>{{ $row->disposable_num }}</td>
-                                    <td>{{ $row->disposable_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
-                                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal">เลือก</button></td>
-                                </tr>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="name">
-                                                    ระบุจำนวน</h3>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="text" name="name" id="name"
-                                                    class="form-control form-control-muted" placeholder="กรุณาใส่จำนวน">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">ปิด</button>
-                                                <button class="btn btn-primary">ตกลง</button>
+                                    @endforeach
+                                    @foreach($disposables as $key => $row)
+                                    <tr>
+                                        <td>{{ $row->disposable_num }}</td>
+                                        <td>{{ $row->disposable_name }}</td>
+                                        <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#exampleModal">เลือก</button></td>
+                                    </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="name">
+                                                        ระบุจำนวน</h3>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="text" name="name" id="name"
+                                                        class="form-control form-control-muted"
+                                                        placeholder="กรุณาใส่จำนวน">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">ปิด</button>
+                                                    <button class="btn btn-primary">ตกลง</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </form>
                         <div class="mt-2">
+                            <a href="{{route('product.index')}}" class="btn btn-primary btn-fab btn-icon btn-round">
+                                รายการ</a>
+
                             <button onclick="submitdata()" type="submit"
                                 class="btn btn-success">{{ __('ยืนยัน') }}</button>
                         </div>
-
                     </div>
                     @if (session('success'))
                     <script>
@@ -183,8 +191,8 @@
                                 <table id="myTable">
                                     <thead>
                                         <tr>
-                                            <th>รหัสพัสดุ</th>
-                                            <th>ชื่อพัสดุ</th>
+                                            <th>ลำดับ</th>
+                                            <th>ชื่อ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -199,7 +207,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('js')
@@ -210,6 +217,15 @@
 <script>
 $(function() {
     $('#myTable').dataTable({
+        ajax: "{{route('personnel_borrow_all.index')}}",
+        columns: [{
+                data: 'DT_RowIndex'
+            },
+            {
+                data: 'name'
+            },
+        ],
+
         "searching": false,
         "lengthChange": false,
         "bPaginate": false,
@@ -217,14 +233,9 @@ $(function() {
         "bFilter": true,
         "bInfo": false,
         "bAutoWidth": false,
-        ajax: "",
-        columns: [{
-                data: 'DT_RowIndex'
-            },
-            {
-                data: 'name'
-            },
-        ]
+
+
+
     });
 });
 
@@ -247,6 +258,7 @@ $(function() {
                 "next": "หน้า"
             }
         }
+
     });
     $('[type=search]').each(function() {
         +
@@ -258,9 +270,44 @@ $(function() {
     });
 });
 
+function submitSelect() {
+    let numDis = $('input[id="numDisposable"]');
+    let dataNumDis = [];
+    for (var i = 0; i < numDis.length; i++) {
+        dataNumDis[i] = numDis[i].value;
+    }
+    $.ajax({
+        type: 'get',
+        url: "#",
+        dataNumDis: dataNumDis,
+        success: (response) => {
+            alert('success');
+        },
+        error: (err) => {
+            alert('error');
+        }
+    });
+    console.log('dataNumDis', dataNumDis)
+}
 
 function submitdata() {
+    let number = $('input[type="checkbox"]:checked');
+    let dataSend = [];
+    for (var i = 0; i < number.length; i++) {
+        dataSend[i] = number[i].value;
+    }
 
+    $.ajax({
+        type: 'get',
+        url: "#",
+        dataSend: dataSend,
+        success: (response) => {
+            alert('success');
+        },
+        error: (err) => {
+            alert('error');
+        }
+    });
 
     let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
     let data = {

@@ -1,9 +1,9 @@
 @extends('layouts.app', ['class' => 'bg-neutral'])
+
 @section('content')
 @include('layouts.headers.cards')
-
 <div class="container-fluid mt--9">
-    @csrf
+    csrf
     <div class="row">
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-8 mb-4">
+        <div class="col-xl-7 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
@@ -68,25 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="date">{{ __('วันที่ยืม') }}</label>
-                                    <div class="input-group input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                                        </div>
-                                        <input
-                                            class="form-control datepicker {{ $errors->has('date') ? ' is-invalid' : '' }}"
-                                            placeholder="Select date" type="text" value="{{ \Carbon\Carbon::now() }}">
-                                    </div>
-                                    @if ($errors->has('date'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('date') }}</strong></span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
                         <table id="example" class="table align-items-center">
                             <thead class="thead-light">
                                 <tr>
@@ -94,84 +75,94 @@
                                     <th>ชื่อพัสดุ</th>
                                     <th>รูปภาพ</th>
                                     <th>เลือก</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="borrowItem">
-                                @foreach($stocks as $row)
                                 <tr>
-                                    <td>{{ $row->stock_num }}</td>
-                                    <td>{{ $row->stock_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
-                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
-                                    </td>
+                                    <form action="{{ route('cart.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @foreach ($devices as $item)
+                                        <td><input type="text" value="{{ $item->device_num }}" name="id" readonly></td>
+                                        <td><input type="text" value="{{ $item->device_name }}" name="name" readonly>
+                                        </td>
+                                        <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                        <input type="hidden" value="1" name="price" readonly>
+                                        <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                        <input type="hidden" value="1" name="quantity" readonly>
+                                        @endforeach
+
+                                        <td> <button class="btn btn-primary btn-sm">เลือก</button></td>
+
+                                    </form>
                                 </tr>
-                                @endforeach
-                                @foreach($devices as $row)
                                 <tr>
-                                    <td>{{ $row->device_num }}</td>
-                                    <td>{{ $row->device_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
-                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
+                                    <form action="{{ route('cart.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @foreach ($stocks as $item)
+                                        <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly></td>
+                                        <td><input type="text" value="{{ $item->stock_name }}" name="name" readonly>
+                                        </td>
+                                        <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                        <input type="hidden" value="1" name="price" readonly>
+                                        <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                        <input type="hidden" value="1" name="quantity" readonly>
+                                        @endforeach
+                                        <td><button class="btn btn-primary btn-sm">เลือก</button></td>
+                                    </form>
                                 </tr>
 
-                                @endforeach
-                                @foreach($disposables as $key => $row)
-                                <tr>
-                                    <td>{{ $row->disposable_num }}</td>
-                                    <td>{{ $row->disposable_name }}</td>
-                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @foreach ($disposables as $item)
+
+                                    <td><input type="text" value="{{ $item->disposable_num }}" name="id" readonly>
+                                    </td>
+                                    <td><input type="text" value="{{ $item->disposable_name }}" name="name" readonly>
+                                    </td>
+                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                    <input type="hidden" value="1" name="price" readonly>
+                                    <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                    <input type="hidden" value="1" name="quantity" readonly>
                                     <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal">เลือก</button></td>
-                                </tr>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="name">
-                                                    ระบุจำนวน</h3>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="text" name="name" id="name"
-                                                    class="form-control form-control-muted" placeholder="กรุณาใส่จำนวน">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">ปิด</button>
-                                                <button class="btn btn-primary">ตกลง</button>
+                                            data-target="#exampleModal">เลือก</button>
+                                    </td>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="name">
+                                                        ระบุจำนวน</h3>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="text" value="" name="quantity" id="name"
+                                                        class="form-control form-control-muted"
+                                                        placeholder="กรุณาใส่จำนวน">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">ปิด</button>
+                                                    <button class="btn btn-primary">ตกลง</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
+                                </form>
                             </tbody>
                         </table>
-                        <div class="mt-2">
-                            <button onclick="submitdata()" type="submit"
-                                class="btn btn-success">{{ __('ยืนยัน') }}</button>
-                        </div>
-
                     </div>
-                    @if (session('success'))
-                    <script>
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'บันทึกข้อมูลเรียบร้อย',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    </script>
-                    @endif
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 mb-4">
+        <div class="col-xl-5 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
@@ -180,17 +171,55 @@
                     <div class="container">
                         <div class="card">
                             <div class="card-body">
+                                <div class="flex flex-col sm:flex-row">
+                                    <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                    {{ Cart::getTotalQuantity()}}
+                                    </a>
+                                </div>
                                 <table id="myTable">
                                     <thead>
                                         <tr>
                                             <th>รหัสพัสดุ</th>
                                             <th>ชื่อพัสดุ</th>
+                                            <th>จำนวน</th>
+                                            <th>ลบ</th>
                                         </tr>
                                     </thead>
+                                    @foreach ($cartItems as $item)
                                     <tbody>
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>
+                                                <form action="{{ route('cart.update') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $item->id}}">
+                                                    <input type="number" name="quantity" value="{{ $item->quantity }}"
+                                                        class="w-6 text-center bg-gray-300" />
+                                                    <button type="submit" class="btn btn-warning btn-sm">แก้ไข</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('cart.remove') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $item->id }}" name="id">
+                                                    <button class="btn btn-danger btn-sm">ลบ</button>
+                                                </form>
+                                            </td>
+                                        </tr>
 
                                     </tbody>
+                                    @endforeach
                                 </table>
+                                <form action="{{ route('cart.clear') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">ลบทั้งหมด</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -199,14 +228,13 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('js')
-
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script>
 $(function() {
     $('#myTable').dataTable({
@@ -305,6 +333,8 @@ function submitdata() {
 
 }
 </script>
+
+
 <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
