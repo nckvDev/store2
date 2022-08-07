@@ -43,28 +43,6 @@ Route::post('register', [RegistersController::class, 'registers']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-//    Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-//    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-//    Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-//    Route::get('upgrade', function () {
-//        return view('pages.upgrade');
-//    })->name('upgrade');
-//
-//    Route::get('map', function () {
-//        return view('pages.maps');
-//    })->name('map');
-//
-//    Route::get('icons', function () {
-//        return view('pages.icons');
-//    })->name('icons');
-//
-//    Route::get('table-list', function () {
-//        return view('pages.tables');
-//    })->name('table');
-//
-//    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-
-//    Route::get('device', [DeviceController::class, 'index'])->name('device');
 
     // Admin
 //    Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->middleware('role:admin');
@@ -111,6 +89,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('device', [DeviceController::class, 'store'])->name('addDevice');
 
         Route::get('device/add_device', [DeviceController::class, 'add'])->name('add_device');
+
+         // Export
+//         Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('report');
+         Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('report_xlsm');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {

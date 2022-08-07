@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StocksExport;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -18,4 +21,10 @@ class UserController extends Controller
     {
         return view('users.index');
     }
+
+    public function exportXlsm()
+    {
+        return Excel::download(new UsersExport(), 'users.xlsx');
+    }
+
 }

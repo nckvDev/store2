@@ -240,6 +240,12 @@
                         <i class="ni ni-archive-2 text-orange"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
+{{--                <li class="nav-item ">--}}
+{{--                    <a class="nav-link {{ request()->is('report*') ? 'active text-blue' : '' }}"--}}
+{{--                       href="{{ route('report') }}">--}}
+{{--                        <i class="ni ni-single-copy-04 text-blue"> </i> {{ __('รายงาน') }}--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 {{--                <li class="nav-item">--}}
                 {{--                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">--}}
                 {{--                        <i class="ni ni-spaceship"></i> Getting started--}}

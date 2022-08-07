@@ -7,7 +7,6 @@ use App\Models\Device;
 use App\Models\Stock;
 use App\Models\Type;
 use App\Models\Disposable;
-use Illuminate\Http\Request;
 
 class DashboardControlle extends Controller
 {

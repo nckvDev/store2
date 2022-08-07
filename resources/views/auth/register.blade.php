@@ -185,8 +185,7 @@
                                 position: 'center',
                                 icon: 'error',
                                 title: 'คุณไม่มีสิทธิ์สมัครเข้าใช้งาน',
-                                showConfirmButton: false,
-                                timer: 2500
+                                confirmButtonText: 'ตกลง'
                             })
                         </script>
                     @endif

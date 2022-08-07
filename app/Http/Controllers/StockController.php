@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StocksExport;
+use App\Exports\UsersExport;
 use App\Models\Stock;
 use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StockController extends Controller
 {
@@ -140,5 +143,10 @@ class StockController extends Controller
 
         Stock::destroy($id);
         return redirect()->route('stock')->with('delete', 'ลบข้อมุลเรียบร้อย');
+    }
+
+    public function exportXlsm()
+    {
+        return Excel::download(new StocksExport(), 'stocks.xlsx');
     }
 }
