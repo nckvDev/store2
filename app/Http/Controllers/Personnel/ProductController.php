@@ -1,20 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use DataTables;
 
-class BorrowFormController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-    
+
+        if($request->ajax()){
+
+            $data = Product::all();
+
+            return Datatables::make($data)
+            ->addIndexColumn()
+            ->addColumn('name', function($data){
+                return $data['name'];
+            })
+            ->rawColumns(['name'])
+            ->make(true);
+        }
+        return view('users.personnel.product');
     }
 
     /**
@@ -24,7 +39,7 @@ class BorrowFormController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.personnel.create');
     }
 
     /**
@@ -35,7 +50,16 @@ class BorrowFormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->name;
+        $product->price = $request->price;
+
+        if($product->save()){
+            // Alert::success('บันทึก');
+            return view('users.personnel.product');
+        }else{
+            echo 'failed';
+        }
     }
 
     /**
@@ -46,7 +70,7 @@ class BorrowFormController extends Controller
      */
     public function show($id)
     {
-        echo "ตลก";
+        //
     }
 
     /**
@@ -80,6 +104,7 @@ class BorrowFormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $models = Product::WhereId($id)->first();
+        $models->delete();
     }
 }

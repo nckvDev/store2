@@ -9,6 +9,8 @@ use App\Models\Prefix;
 use App\Models\Stock;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use DataTables;
+use Carbon\Carbon;
 
 class BorrowController extends Controller
 {
@@ -22,11 +24,7 @@ class BorrowController extends Controller
         $devices = Device::all();
         $prefixs = Prefix::all();
         $disposables = Disposable::all();
+
         return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices' , 'disposables'));
     }
-
-    public function borrow(Request $request) {
-//        dd($request);
-    }
-
 }

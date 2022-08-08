@@ -8,13 +8,15 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--Select2-->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Date Table -->
 
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js">
-    </script>
+    <!-- Cart -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Date Table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+
+    <!-- Icon -->
+    <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 
     <title>{{ config('app.name', 'Argon Dashboard') }}</title>
     <!-- Favicon -->
@@ -60,11 +62,8 @@
     @stack('js')
 
     <!-- data tabel -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js">
-    </script>
-    <script>
-    src = "/cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
     <script src="assets/vendor/select2/dist/js/select2.min.js"></script>

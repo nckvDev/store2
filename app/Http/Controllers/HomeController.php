@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Device;
+use App\Models\Disposable;
 use App\Models\Stock;
 
 class HomeController extends Controller
@@ -23,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::paginate(5);
-        return view('admin.dashboard', compact('stocks'));
-//        return view('dashboard');
+        $stocks = Stock::paginate();
+        $devices = Device::all();
+        $disposables = Disposable::all();
+        return view('admin.dashboard', compact('stocks', 'devices', 'disposables'));
     }
 }

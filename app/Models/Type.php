@@ -24,4 +24,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Device', 'type_id', 'id');
     }
+
+    public function type_disposable()
+    {
+        return $this->hasMany('App\Models\Disposable', 'type_id', 'id');
+    }
 }

@@ -13,7 +13,7 @@
                             <h3 class="mb-0">รายการวัสดุ</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('report_xlsm') }}" class="btn btn-sm btn-outline-danger">รายงาน XLSM</a>
+                            <a href="{{ route('report_xlsm') }}" class="btn btn-sm btn-outline-danger">รายงาน XLSX</a>
                             <a href="{{ route('add_stock') }}" class="btn btn-sm btn-primary">เพิ่มวัสดุ</a>
                         </div>
                     </div>

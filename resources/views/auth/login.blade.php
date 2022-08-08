@@ -7,31 +7,10 @@
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
             <div class="card bg-secondary shadow border-0">
-                <!-- <div class="card-header bg-transparent pb-3">
-                    <div class="text-muted text-center mt-2"><small>{{ __('Log in ') }}</small></div>
-                    <div class="btn-wrapper text-center">
-                            <a href="#" class="btn btn-neutral btn-icon" aria-controls="1" >
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/github.svg"></span>
-                                <span class="btn-inner--text">{{ __('Member') }}</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon" aria-controls="2">
-                                <span class="btn-inner--icon"><img src="{{ asset('argon') }}/img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">{{ __('Staff') }}</span>
-                            </a>
-                        </div>
-                </div> -->
                 <div class="card-body px-lg-5 py-lg-5" >
                     <div class="text-muted text-center mb-4"><small>{{ __('Log in ') }}</small></div>
-                    <!-- <div class="text-center text-muted mb-4">
-                            <small>
-                                    Create new account OR Sign in with these credentials:
-                                    <br>
-                                    Username <strong>admin@argon.com</strong> Password: <strong>secret</strong>
-                            </small>
-                        </div> -->
                     <form role="form" method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
@@ -69,6 +48,16 @@
                             <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>
                         </div>
                     </form>
+                    @if (session('error'))
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Email-Address And Password Are Wrong.',
+                                confirmButtonText: 'ตกลง'
+                            })
+                        </script>
+                    @endif
                 </div>
             </div>
             <div class="row mt-3">

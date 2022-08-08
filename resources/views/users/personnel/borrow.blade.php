@@ -3,6 +3,7 @@
 @include('layouts.headers.cards')
 
 <div class="container-fluid mt--9">
+    @csrf
     <div class="row">
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
@@ -13,7 +14,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-12 mb-4">
+        <div class="col-xl-8 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
@@ -89,57 +90,12 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row align-items-center">
-                            <h3 class="mb-0 ml-4">{{ __('กรุณาเลือกพัสดุ') }}</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
-                                    id="borrowItem" style="width:100%">
-                                    @foreach($stocks as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->stock_num }}</td>
-                                            <td>{{ $row->stock_name }}</td>
-                                    </option>
-                                    @endforeach
-                                    @foreach($devices as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->device_num }}</td>
-                                            <td>{{ $row->device_name }}</td>
-                                            @if($row->device_status == 1)
-                                            @endif
-                                        </tr>
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <h3 class="mb-0 ml-4">{{ __('กรุณาเลือกวัสดุสิ้นเปลือง') }}</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="display:flex">
-                                <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
-                                    id="borrowDisposable" style="width:88%">
-                                    @foreach($disposables as $row)
-                                    <option value="AL">
-                                        <tr>
-                                            <td>{{ $row->disposable_num }}</td>
-                                            <td>{{ $row->disposable_name }}</td>
-                                    </option>
-                                    @endforeach
-                                    <input style="height:65%" type="num" id="numDisposable"
-                                        placeholder="กรุณาระบุจำนวน">
-                                </select>
-                            </div>
-                        </div> -->
-                        <table id="example" class="display">
-                            <thead>
+                        <table id="example" class="table align-items-center">
+                            <thead class="thead-light">
                                 <tr>
                                     <th>รหัสพัสดุ</th>
                                     <th>ชื่อพัสดุ</th>
+                                    <th>รูปภาพ</th>
                                     <th>เลือก</th>
                                 </tr>
                             </thead>
@@ -148,19 +104,53 @@
                                 <tr>
                                     <td>{{ $row->stock_num }}</td>
                                     <td>{{ $row->stock_name }}</td>
-                                    <td><input type="checkbox" name="title[]" id="idItem" value="{{ $row->stock_num }}">
+                                    <td><img src="{{ asset($row->image) }}" width="80" height="80" /></td>
+                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
                                     </td>
-
                                 </tr>
                                 @endforeach
                                 @foreach($devices as $row)
                                 <tr>
                                     <td>{{ $row->device_num }}</td>
                                     <td>{{ $row->device_name }}</td>
-                                    <td><input type="checkbox" name="title[]" id="idItem"
-                                            value="{{ $row->device_num }}">
-                                    </td>
+                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                    <td><button type="submit" class="btn btn-primary btn-sm">เลือก</button>
                                 </tr>
+
+                                @endforeach
+                                @foreach($disposables as $key => $row)
+                                <tr>
+                                    <td>{{ $row->disposable_num }}</td>
+                                    <td>{{ $row->disposable_name }}</td>
+                                    <td><img src="{{ asset($row->image) }}" width="70" height="70" /></td>
+                                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#exampleModal">เลือก</button></td>
+                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="name">
+                                                    ระบุจำนวน</h3>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="text" name="name" id="name"
+                                                    class="form-control form-control-muted" placeholder="กรุณาใส่จำนวน">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">ปิด</button>
+                                                <button class="btn btn-primary">ตกลง</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -169,7 +159,12 @@
                     </div>
                     <!-- </form> -->
                     </form>
+                        <div class="mt-2">
+                            <button onclick="submitdata()" type="submit"
+                                class="btn btn-success">{{ __('ยืนยัน') }}</button>
+                        </div>
 
+                    </div>
                     @if (session('success'))
                     <script>
                     Swal.fire({
@@ -184,33 +179,96 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-4 mb-4">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <h3 class="mb-0 ml-4">{{ __('รายการพัสดุ') }}</h3>
+                    </div>
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>รหัสพัสดุ</th>
+                                            <th>ชื่อพัสดุ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @endsection
 
 @push('js')
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(function() {
+    $('#myTable').dataTable({
+        "searching": false,
+        "lengthChange": false,
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        ajax: "",
+        columns: [{
+                data: 'DT_RowIndex'
+            },
+            {
+                data: 'name'
+            },
+        ]
+    });
+});
+
+
+$(function() {
+    $.extend($.fn.dataTableExt.oStdClasses, {
+        "sFilterInput": "form-control form-control-sm",
+        "sLengthSelect": "form-control form-control-sm"
+    });
     $('#example').dataTable({
         "language": {
-            "search": "ค้นหา:",
+            "search": "ค้นหา ",
             "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
             "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+            "infoEmpty": "ไม่มีข้อมูล",
+            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
             "paginate": {
                 "previous": "ปัจจุบัน",
                 "next": "หน้า"
             }
         }
     });
-
-
+    $('[type=search]').each(function() {
+        +
+        $(this).attr("placeholder", "Search...");
+        $(this).before('<span class="fa fa-search"></span>');
+    });
     $('#button').click(function() {
         alert(table.rows('.selected').data().length + ' row(s) selected');
     });
 });
 
+
 function submitdata() {
+<<<<<<< HEAD
     let number = $('input[type="checkbox"]:checked');
     let dataSend = [];
     for (var i = 0; i < number.length; i++) {
@@ -228,6 +286,9 @@ function submitdata() {
         }
     });
     console.log('dataSent' ,dataSend);
+=======
+
+>>>>>>> 9d1a39898285d40de187c2d7cb3c3261dd397aca
 
     let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     let data = {
@@ -239,7 +300,11 @@ function submitdata() {
         'borrowDisposable': $('#borrowDisposable').val(),
         'numDisposable': $('#numDisposable').val()
     }
+<<<<<<< HEAD
     console.log('data', data);
+=======
+
+>>>>>>> 9d1a39898285d40de187c2d7cb3c3261dd397aca
     return;
     $.ajax({
         type: 'post',
@@ -267,9 +332,9 @@ function submitdata() {
                     showConfirmButton: true
                 })
             }
-
         }
     })
+
 }
 </script>
 <script src="assets/vendor/select2/dist/js/select2.min.js"></script>

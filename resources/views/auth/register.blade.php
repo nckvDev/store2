@@ -45,10 +45,11 @@
                             <div class="col-lg-2">
                                 <div class="form-group{{ $errors->has('prefix') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <span class="input-group-text"><i class="ni ni-badge"></i></span>--}}
-{{--                                        </div>--}}
-                                        <select class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}" name="prefix">
+                                        {{--                                        <div class="input-group-prepend">--}}
+                                        {{--                                            <span class="input-group-text"><i class="ni ni-badge"></i></span>--}}
+                                        {{--                                        </div>--}}
+                                        <select class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}"
+                                            name="prefix">
                                             <option value="">Prefix</option>
                                             @foreach($prefixs as $row)
                                             <option value="{{ $row->id }}">{{ $row->prefix_name }}</option>
@@ -56,39 +57,43 @@
                                         </select>
                                     </div>
                                     @if ($errors->has('prefix'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                <strong>{{ $errors->first('prefix') }}</strong>
-                            </span>
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('prefix') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="col-lg-5">
                                 <div class="form-group{{ $errors->has('firstname') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
-{{--                                        </div>--}}
-                                        <input class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" placeholder="{{ __('FirstName') }}" type="text" name="firstname" value="{{ old('firstname') }}" autofocus>
+                                        {{--                                        <div class="input-group-prepend">--}}
+                                        {{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
+                                        {{--                                        </div>--}}
+                                        <input class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('FirstName') }}" type="text" name="firstname"
+                                            value="{{ old('firstname') }}" autofocus>
                                     </div>
                                     @if ($errors->has('firstname'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                <strong>{{ $errors->first('firstname') }}</strong>
-                            </span>
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="col-lg-5">
                                 <div class="form-group{{ $errors->has('lastname') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
-{{--                                        </div>--}}
-                                        <input class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" placeholder="{{ __('lastname') }}" type="text" name="lastname" value="{{ old('lastname') }}" autofocus>
+                                        {{--                                        <div class="input-group-prepend">--}}
+                                        {{--                                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>--}}
+                                        {{--                                        </div>--}}
+                                        <input class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('lastname') }}" type="text" name="lastname"
+                                            value="{{ old('lastname') }}" autofocus>
                                     </div>
                                     @if ($errors->has('lastname'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                <strong>{{ $errors->first('lastname') }}</strong>
-                            </span>
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>
@@ -99,7 +104,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                 </div>
-                                <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') }}">
+                                <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Email') }}" type="email" name="email"
+                                    value="{{ old('email') }}">
                             </div>
                             @if ($errors->has('email'))
                             <span class="invalid-feedback" style="display: block;" role="alert">
@@ -120,7 +127,7 @@
                                 </select>
                             </div>
                             @if ($errors->has('role'))
-                                <span class="invalid-feedback" style="display: block;" role="alert">
+                            <span class="invalid-feedback" style="display: block;" role="alert">
                                 <strong>{{ $errors->first('role') }}</strong>
                             </span>
                             @endif
@@ -148,29 +155,14 @@
                                 <i class="bg-white pt-3 pr-3 fa fa-eye" id="toggleConfirmPassword" style="cursor: pointer"></i>
                             </div>
                         </div>
-                        <!-- <div class="text-muted font-italic">
-                            <small>{{ __('password strength') }}: <span class="text-success font-weight-700">{{ __('strong') }}strong</span></small>
-                        </div> -->
-{{--                        <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">--}}
-{{--                            <div class="input-group input-group-alternative mb-3">--}}
-{{--                                <div class="input-group-prepend">--}}
-{{--                                    <span class="input-group-text"><i class="ni ni-square-pin"></i></span>--}}
-{{--                                </div>--}}
-{{--                                <textarea class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" aria-label="With textarea" placeholder="{{ __('Address') }}" name="address" value="{{ old('address') }}" autofocus></textarea>--}}
-{{--                            </div>--}}
 
-{{--                            @if ($errors->has('address'))--}}
-{{--                            <span class="invalid-feedback" style="display: block;" role="alert">--}}
-{{--                                <strong>{{ $errors->first('address') }}</strong>--}}
-{{--                            </span>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
 {{--                        <div class="row my-2">--}}
 {{--                            <div class="col-12">--}}
 {{--                                <div class="custom-control custom-control-alternative custom-checkbox">--}}
 {{--                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">--}}
 {{--                                    <label class="custom-control-label" for="customCheckRegister">--}}
-{{--                                        <span class="text-muted">{{ __('I agree with the') }} <a href="#!">{{ __('Privacy Policy') }}</a></span>--}}
+{{--                                        <span class="text-muted">{{ __('I agree with the') }} <a--}}
+{{--                                                href="#!">{{ __('Privacy Policy') }}</a></span>--}}
 {{--                                    </label>--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
