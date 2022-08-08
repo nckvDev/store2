@@ -52,7 +52,7 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
     {
         // TODO: Implement columnFormats() method.
         return [
-            'E' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'F' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }

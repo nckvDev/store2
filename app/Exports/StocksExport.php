@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class StocksExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize, WithCustomValueBinder
+class StocksExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -64,8 +64,8 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
         ];
     }
 
-    public function bindValue(Cell $cell, $value)
-    {
-        // TODO: Implement bindValue() method.
-    }
+//    public function bindValue(Cell $cell, $value)
+//    {
+//        // TODO: Implement bindValue() method.
+//    }
 }
