@@ -14,7 +14,7 @@ class BorrowFormController extends Controller
      */
     public function index()
     {
-        echo "ควย";
+    
     }
 
     /**

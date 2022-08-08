@@ -11,6 +11,7 @@ use App\Http\Controllers\DisposableController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\Personnel\BorrowController;
 use App\Http\Controllers\Personnel\BorrowAllController;
+use App\Http\Controllers\Personnel\CartController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -110,18 +111,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:personnel'], function () {
         Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'index'])->name('personnel_borrow');
-        Route::post('personnel_cart', [\App\Http\Controllers\Personnel\BorrowController::class, 'addToCart'])->name('personnel.store');
-        Route::post('personnel_update-cart', [\App\Http\Controllers\Personnel\BorrowController::class, 'updateCart'])->name('personnel.update');
-        Route::post('personnel_remove', [\App\Http\Controllers\Personnel\BorrowController::class, 'removeCart'])->name('personnel.remove');
-        Route::post('personnel_clear', [\App\Http\Controllers\Personnel\BorrowController::class, 'clearAllCart'])->name('personnel.clear');
-        
-        Route::resource('/personnel_borrow_all',App\Http\Controllers\Personnel\BorrowAllController::class);
         
         Route::get('/', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
         Route::post('cart', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
         Route::post('update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('cart.update');
         Route::post('remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('cart.clear');
+        Route::post('save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('cart.save');
 
     });
     Route::group(['middleware' => 'role:student'], function () {

@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.headers.cards')
 <div class="container-fluid mt--9">
-    csrf
+    @csrf
     <div class="row">
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
@@ -16,11 +16,6 @@
     <div class="row">
         <div class="col-xl-7 mb-4">
             <div class="card bg-secondary shadow">
-                <div class="card-header bg-white border-0">
-                    <div class="row align-items-center">
-                        <h3 class="mb-0 ml-4">{{ __('ยืมวัสดุ-พัสดุ') }}</h3>
-                    </div>
-                </div>
                 <div class="card-body">
                     @csrf
                     <div class="pl-lg-2">
@@ -78,7 +73,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="borrowItem">
+                            <tbody>
                                 <tr>
                                     <form action="{{ route('cart.store') }}" method="POST"
                                         enctype="multipart/form-data">
@@ -181,45 +176,56 @@
                                     {{ Cart::getTotalQuantity()}}
                                     </a>
                                 </div>
-                                <table id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th>รหัสพัสดุ</th>
-                                            <th>ชื่อพัสดุ</th>
-                                            <th>จำนวน</th>
-                                            <th>ลบ</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach ($cartItems as $item)
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>
-                                                <form action="{{ route('cart.update') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="id" value="{{ $item->id}}">
-                                                    <input type="number" name="quantity" value="{{ $item->quantity }}"
-                                                        class="w-6 text-center bg-gray-300" />
-                                                    <button type="submit" class="btn btn-warning btn-sm">แก้ไข</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('cart.remove') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" value="{{ $item->id }}" name="id">
-                                                    <button class="btn btn-danger btn-sm">ลบ</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                    @endforeach
-                                </table>
+                                <form action="{{ route('cart.save') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-success btn-sm">ยืนยัน</button>
+                                    <table id="myTable">
+                                        <thead>
+                                            <!-- {{(session('4yTlTDKu3oJOfzD_cart_items'));}} -->
+                                            <tr>
+                                                <th>รหัสพัสดุ</th>
+                                                <th>ชื่อพัสดุ</th>
+                                                <th>จำนวน</th>
+                                                <th>ลบ</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($cartItems as $item)
+                                        <tbody id="borrowItem">
+                                            <tr>
+                                                <td><input type="text" value="{{ $item->id }}" name="borrow_id"
+                                                        readonly>
+                                                </td>
+                                                <td><input type="text" value="{{ $item->name }}" name="borrow_name"
+                                                        readonly></td>
+                                                <td>
+                                                    <form action="{{ route('cart.update') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $item->id}}">
+                                                        <input type="number" name="quantity"
+                                                            value="{{ $item->quantity }}"
+                                                            class="w-6 text-center bg-gray-300" />
+                                                        <button type="submit"
+                                                            class="btn btn-warning btn-sm">แก้ไข</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('cart.remove') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $item->id }}" name="id">
+                                                        <button class="btn btn-danger btn-sm">ลบ</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        @endforeach
+                                    </table>
+                                </form>
                                 <form action="{{ route('cart.clear') }}" method="POST">
                                     @csrf
                                     <button class="btn btn-danger btn-sm">ลบทั้งหมด</button>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>
@@ -227,6 +233,7 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
 
@@ -285,53 +292,6 @@ $(function() {
         alert(table.rows('.selected').data().length + ' row(s) selected');
     });
 });
-
-
-function submitdata() {
-
-
-    let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
-    let data = {
-        '_token': CSRF_TOKEN,
-        'prefix': $('#prefix').val(),
-        'fname': $('#fname').val(),
-        'lname': $('#lname').val(),
-        'borrowItem': $('#borrowItem').val(),
-        'borrowDisposable': $('#borrowDisposable').val(),
-        'numDisposable': $('#numDisposable').val()
-    }
-
-    return;
-    $.ajax({
-        type: 'post',
-        url: "",
-        data: data,
-        success: function(response) {
-            if (response.status === true) {
-                Swal.fire({
-                    icon: 'success',
-                    timer: 1000,
-                    showCancelButton: false,
-                    showConfirmButton: true
-                });
-                $('#prefix').val('');
-                $('#fname').val('');
-                $('#lname').val('');
-                $('#borrowItem').val('');
-                $('#borrowDisposable').val('');
-                $('#numDisposable').val('');
-            } else {
-                Swal.fire({
-                    icon: 'success',
-                    timer: 1000,
-                    showCancelButton: false,
-                    showConfirmButton: true
-                })
-            }
-        }
-    })
-
-}
 </script>
 
 

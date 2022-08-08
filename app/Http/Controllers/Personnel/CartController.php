@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Stock;
 use App\Models\Disposable;
+use App\Models\Borrow;
 
 class CartController extends Controller
 {
@@ -68,5 +69,20 @@ class CartController extends Controller
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
         return redirect()->route('cart.list');
+    }
+
+    public function saveCart(Request $request)
+    {   
+        Borrow::create([
+            'borrow_id' => $request->borrow_id,
+            'borrow_name' => $request->borrow_name,
+            'borrow_user_id' => $request->borrow_user_id,
+            'borrow_user_fname' => $request->borrow_user_fname,
+            'borrow_user_fname' => $borrow_user_fname,
+            'image' => $full_path,
+        ]);
+        
+        return redirect('users/personnel/cart');
+        
     }
 }
