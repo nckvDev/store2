@@ -11,13 +11,13 @@ class Borrow extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'borrow_id',
         'borrow_name',
-        'borrow_user_id',
-        'borrow_user_fname',
-        'borrow_user_lname',
-        'image',
-        'status_form',
+        'borrow_status',
+        'user_id',
     ];
 
+    public function borrow_user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 }

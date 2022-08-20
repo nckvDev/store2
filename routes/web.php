@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
         Route::post('confirmform/update/{id}', [ConfirmFormController::class, 'update'])->name('update');
         Route::post('confirmform/add', [ConfirmFormController::class, 'create'])->name('form-add');
-        
+
         Route::get('confirmuser', [ConfirmUserController::class, 'index'])->name('form-detail');
 
         // Type
@@ -134,9 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('people/simple', [SearchController::class, 'simple'])->name('simple_search');
     Route::get('people/advance', [SearchController::class, 'advance'])->name('advance_search');
 
-   
-
     //Personnel Borrow
-    Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
+//    Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
 });
-Route::resource('borrowform',\App\Http\Controllers\Admin\BorrowFormController::class);
+//Route::resource('borrowform',\App\Http\Controllers\Admin\BorrowFormController::class);

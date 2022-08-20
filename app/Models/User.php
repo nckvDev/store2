@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Prefix', 'prefix_id', 'id');
     }
 
+    public function user_borrow()
+    {
+        return $this->hasMany('App\Models\Borrow', 'user_id', 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

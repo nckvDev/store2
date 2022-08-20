@@ -36,28 +36,28 @@
                             </div>
                             <div class="col-xl-5">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="stock_name">{{ __('ชื่อ') }}</label>
-                                    <input id="fname" type="text" name="stock_name"
+                                    <label class="form-control-label" for="firstname">{{ __('ชื่อ') }}</label>
+                                    <input id="fname" type="text" name="firstname"
                                         value="{{ auth()->user()->firstname }}"
-                                        class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }} "
+                                        class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }} "
                                         readonly>
-                                    @if ($errors->has('stock_name'))
+                                    @if ($errors->has('firstname'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('stock_name') }}</strong>
+                                        <strong>{{ $errors->first('firstname') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="col-xl-5">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="stock_amount">{{ __('นามสกุล') }}</label>
-                                    <input id="lname" type="text" name="stock_amount"
+                                    <label class="form-control-label" for="lastname">{{ __('นามสกุล') }}</label>
+                                    <input id="lname" type="text" name="lastname"
                                         value="{{ auth()->user()->lastname }}"
-                                        class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }} "
+                                        class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }} "
                                         readonly>
-                                    @if ($errors->has('stock_amount'))
+                                    @if ($errors->has('lastname'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('stock_amount') }}</strong>
+                                        <strong>{{ $errors->first('lastname') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -109,48 +109,50 @@
                                     </form>
                                 </tr>
 
-                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @foreach ($disposables as $item)
+                                <tr>
+                                      <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @foreach ($disposables as $item)
 
-                                    <td><input type="text" value="{{ $item->disposable_num }}" name="id" readonly>
-                                    </td>
-                                    <td><input type="text" value="{{ $item->disposable_name }}" name="name" readonly>
-                                    </td>
-                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
-                                    <input type="hidden" value="1" name="price" readonly>
-                                    <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                    <input type="hidden" value="1" name="quantity" readonly>
-                                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal">เลือก</button>
-                                    </td>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title" id="name">
-                                                        ระบุจำนวน</h3>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="text" value="" name="quantity" id="name"
-                                                        class="form-control form-control-muted"
-                                                        placeholder="กรุณาใส่จำนวน">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">ปิด</button>
-                                                    <button class="btn btn-primary">ตกลง</button>
+                                        <td><input type="text" value="{{ $item->disposable_num }}" name="id" readonly>
+                                        </td>
+                                        <td><input type="text" value="{{ $item->disposable_name }}" name="name" readonly>
+                                        </td>
+                                        <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                        <input type="hidden" value="1" name="price" readonly>
+                                        <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                        <input type="hidden" value="1" name="quantity" readonly>
+                                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#exampleModal">เลือก</button>
+                                        </td>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="name">
+                                                            ระบุจำนวน</h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="text" value="" name="quantity" id="name"
+                                                            class="form-control form-control-muted"
+                                                            placeholder="กรุณาใส่จำนวน">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">ปิด</button>
+                                                        <button class="btn btn-primary">ตกลง</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    @endforeach
-                                </form>
+                                        @endforeach
+                                    </form>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -181,7 +183,7 @@
                                     <button class="btn btn-success btn-sm">ยืนยัน</button>
                                     <table id="myTable">
                                         <thead>
-                                            <!-- {{(session('4yTlTDKu3oJOfzD_cart_items'));}} -->
+                                            <!-- {{(session('4yTlTDKu3oJOfzD_cart_items'))}} -->
                                             <tr>
                                                 <th>รหัสพัสดุ</th>
                                                 <th>ชื่อพัสดุ</th>
@@ -194,10 +196,10 @@
                                             <tr>
                                                 <td>
                                                     <input type="text" value="{{ $item->id }}" name="borrow_id"
-                                                        readonly>
+                                                        readonly style="width: 60px">
                                                 </td>
                                                 <td><input type="text" value="{{ $item->name }}" name="borrow_name"
-                                                        readonly></td>
+                                                        readonly style="width: 90px"></td>
                                                 <td>
                                                     <form action="{{ route('cart.update') }}" method="POST">
                                                         @csrf
@@ -225,8 +227,6 @@
                                     @csrf
                                     <button class="btn btn-danger btn-sm">ลบทั้งหมด</button>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
