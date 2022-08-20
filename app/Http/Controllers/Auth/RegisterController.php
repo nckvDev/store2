@@ -104,6 +104,6 @@ class RegisterController extends Controller
         }
 
 //        return redirect()->route('register')->with('error', "อัพเดตข้อมูลเรียบร้อย");
-        dd('Sorry! You are not listed in MasterUser!!');
+//        dd('Sorry! You are not listed in MasterUser!!');
     }
 }

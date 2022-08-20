@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\Data;
+use App\Models\MasterUser;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -15,7 +15,7 @@ class DataImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
-        return new Data([
+        return new MasterUser([
             'user_id' => $row['user_id'],
             'firstname' => $row['firstname'],
             'lastname' => $row['lastname'],

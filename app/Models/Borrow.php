@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Borrow extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+//    public $timestamps = false;
 
     protected $fillable = [
         'borrow_name',

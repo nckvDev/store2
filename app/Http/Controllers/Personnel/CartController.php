@@ -80,7 +80,7 @@ class CartController extends Controller
             'user_id' => $user_id,
         ]);
 
-        return redirect('/');
+        return redirect('personnel_borrow')->with('successes', 'ยืนยันรายการยืมสำเร็จ');
 
     }
 }

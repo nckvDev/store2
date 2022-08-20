@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrow;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Conform;
@@ -10,7 +11,7 @@ class ConfirmFormController extends Controller
 {
     public function index()
     {
-        $conforms = Conform::where('status',0)->get();
+        $conforms = Borrow::where('borrow_status',0)->get();
         return view('admin.form.index', compact('conforms'));
     }
 
@@ -32,10 +33,10 @@ class ConfirmFormController extends Controller
 
     public function update(Request $request, $id)
     {
-        Conform::find($id)->update([
-            'status' => $request->status,
+        Borrow::find($id)->update([
+            'borrow_status' => $request->borrow_status,
         ]);
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
-    
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Borrow;
 use App\Models\Device;
 use App\Models\Disposable;
 use App\Models\Prefix;
@@ -18,13 +19,19 @@ class BorrowController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
-        $types = Type::all();
-        $stocks = Stock::all();
-        $devices = Device::all();
-        $prefixs = Prefix::all();
-        $disposables = Disposable::all();
+//    public function index() {
+//        $types = Type::all();
+//        $stocks = Stock::all();
+//        $devices = Device::all();
+//        $prefixs = Prefix::all();
+//        $disposables = Disposable::all();
+//
+//        return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices' , 'disposables'));
+//    }
 
-        return view('users.personnel.borrow', compact('stocks', 'prefixs' , 'types' , 'devices' , 'disposables'));
+    public function borrow()
+    {
+//        $borrows = Borrow::where('borrow_status', 0);
+//        return view('users.personnel.');
     }
 }

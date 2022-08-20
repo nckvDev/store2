@@ -7,6 +7,7 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageLocationController;
 use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\Personnel\DashboardController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\DisposableController;
@@ -112,12 +113,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
-        Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
-        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'index'])->name('personnel_borrow');
-        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'borrow'])->name('borrow');
+        Route::get('personnel_dashboard', [DashboardController::class, 'index'])->name('personnel_dashboard');
+//        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'index'])->name('personnel_borrow');
+//        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'borrow'])->name('borrow');
 
-        Route::get('/', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
-        Route::post('cart', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
+        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
+        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
         Route::post('update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('cart.update');
         Route::post('remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('cart.clear');

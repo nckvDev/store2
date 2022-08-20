@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\DataImport;
 use Excel;
-use App\Models\Data;
+use App\Models\MasterUser;
 
 class DataImportController extends Controller
 {
     public function index(){
-        $datas = Data::all();
-        return view('admin.ImportData.index', compact('datas'));
+        $masterusers = MasterUser::all();
+        return view('admin.ImportData.index', compact('masterusers'));
     }
 
     public function import(Request $request){

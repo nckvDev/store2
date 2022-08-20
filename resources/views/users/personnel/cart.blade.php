@@ -227,6 +227,18 @@
                                     @csrf
                                     <button class="btn btn-danger btn-sm">ลบทั้งหมด</button>
                                 </form>
+
+                                @if (session('successes'))
+                                    <script>
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'ยืนยันรายการยืมสำเร็จ',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    </script>
+                                @endif
                             </div>
                         </div>
                     </div>

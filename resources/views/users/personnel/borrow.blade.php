@@ -159,10 +159,10 @@
                     </div>
                     <!-- </form> -->
                     </form>
-                        <div class="mt-2">
-                            <button onclick="submitdata()" type="submit"
-                                class="btn btn-success">{{ __('ยืนยัน') }}</button>
-                        </div>
+{{--                        <div class="mt-2">--}}
+{{--                            <button onclick="submitdata()" type="submit"--}}
+{{--                                class="btn btn-success">{{ __('ยืนยัน') }}</button>--}}
+{{--                        </div>--}}
 
                     </div>
                     @if (session('success'))

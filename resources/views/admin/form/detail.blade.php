@@ -31,19 +31,19 @@
                             @foreach($conforms as $row)
                             <tr>
                                 <td>{{ $row->id}}</td>
-                                <td>{{ $row->user_id}}</td>
-                                <td>{{ $row->firstname }}</td>
-                                @if($row->status=="1")
+                                <td>{{ $row->borrow_user->user_id}}</td>
+                                <td>{{ \Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>
+                                @if($row->borrow_status=="1")
                                 <td class="align-middle text-sm">
                                     <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                 </td>
                                 @endif
-                                @if($row->status=="0")
+                                @if($row->borrow_status=="0")
                                 <td class="align-middle text-sm">
                                     <span class="badge text-white bg-gradient-warning">ไม่อนุมัติ</span>
                                 </td>
                                 @endif
-                                <td>{{ $row->lastname }}</td>
+                                <td>{{ $row->borrow_name }}</td>
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -69,13 +69,13 @@
                                                 <div class="modal-footer">
                                                     <form action="{{route('update',$row->id)}}" method="post">
                                                         @csrf
-                                                        <input type="hidden" name="status" value="1">
+                                                        <input type="hidden" name="borrow_status" value="1">
                                                         <button type="submit"
                                                             class="btn btn-primary btn-sm">อนุมัติ</button>
                                                     </form>
                                                     <form action="{{route('update',$row->id)}}" method="post">
                                                         @csrf
-                                                        <input type="hidden" name="status" value="0">
+                                                        <input type="hidden" name="borrow_status" value="0">
                                                         <button type="submit"
                                                             class="btn btn-danger btn-sm">ไม่อนุมัติ</button>
                                                     </form>

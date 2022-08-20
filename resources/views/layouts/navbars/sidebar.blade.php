@@ -287,7 +287,7 @@
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
-                        href="{{ route('personnel_borrow') }}">
+                        href="{{ route('cart.list') }}">
                         <i class="ni ni-archive-2 text-green"></i> {{ __('ยืม/เบิกวัสดุ-พัสดุ') }}
                     </a>
                 </li>
