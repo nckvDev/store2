@@ -8,6 +8,7 @@ use App\Models\Device;
 use App\Models\Stock;
 use App\Models\Disposable;
 use App\Models\Borrow;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -72,13 +73,15 @@ class CartController extends Controller
 
     public function saveCart(Request $request)
     {
+        $user_id = Auth::user()->id;
+
         Borrow::create([
             'borrow_id' => $request->borrow_id,
             'borrow_name' => $request->borrow_name,
-            'borrow_user_id' => $request->borrow_user_id,
+            'user_id' => $user_id,
         ]);
 
-        return redirect('users/personnel/cart');
+        return redirect('/');
 
     }
 }

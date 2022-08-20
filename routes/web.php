@@ -121,6 +121,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
 
     //Personnel Borrow
-    Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
+//    Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
 });
-Route::resource('borrowform',\App\Http\Controllers\Admin\BorrowFormController::class);
+//Route::resource('borrowform',\App\Http\Controllers\Admin\BorrowFormController::class);
