@@ -36,7 +36,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($datas as $row)
+                                        @foreach($masterusers as $row)
                                         <tr>
                                             <td>{{ $row->id}}</td>
                                             <td>{{ $row->user_id}}</td>
