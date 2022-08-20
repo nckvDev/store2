@@ -7,6 +7,7 @@
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">ยืนยันแบบฟอร์ม</li>
+                    <li class="breadcrumb-item active" aria-current="page">รายละเอียดแบบฟอร์ม</li>
                 </ol>
             </nav>
         </div>
@@ -127,14 +128,6 @@
             alert(table.rows('.selected').data().length + ' row(s) selected');
         });
     });
-
-    function submitButton() {
-
-    }
-
-    function submitCheckbox() {
-        checkbox.checked = true;
-    }
     </script>
 
 

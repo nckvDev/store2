@@ -21,6 +21,7 @@ class CreateBorrowsTable extends Migration
             $table->string('borrow_user_fname');
             $table->string('borrow_user_lname');
             $table->string('image');
+            $table->boolean('status_form');
             $table->timestamps();
         });
     }

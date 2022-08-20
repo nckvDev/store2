@@ -17,6 +17,7 @@ class Borrow extends Model
         'borrow_user_fname',
         'borrow_user_lname',
         'image',
+        'status_form',
     ];
 
 }

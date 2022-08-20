@@ -211,13 +211,19 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
+                    <a class="nav-link {{ request()->is('type*') ? 'active text-indigo' : '' }}"
                         href="{{ route('type') }}">
                         <i class="ni ni-archive-2 text-green"></i> {{ __('ประเภท') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('stock*') ? 'active text-orange' : '' }}"
+                    <a class="nav-link {{ request()->is('manage-role*') ?  'active text-indigo' : '' }}"
+                        href="{{ route('manage-role') }}">
+                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('stock*') ? 'active text-indigo' : '' }}"
                         href="{{ route('stock') }}">
                         <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุ') }}
                     </a>
@@ -229,23 +235,29 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('disposable*') ? 'active text-red' : '' }}"
+                    <a class="nav-link {{ request()->is('disposable*') ? 'active text-indigo' : '' }}"
                         href="{{ route('disposable') }}">
                         <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุสิ้นเปลือง') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('confirmform*') ? 'active text-yellow' : '' }}"
+                    <a class="nav-link {{ request()->is('confirmform*') ? 'active text-indigo' : '' }}"
                         href="{{ route('confirmform') }}">
-                        <i class="ni ni-archive-2 text-orange"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
+                        <i class="ni ni-archive-2 text-green"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
-{{--                <li class="nav-item ">--}}
-{{--                    <a class="nav-link {{ request()->is('report*') ? 'active text-blue' : '' }}"--}}
-{{--                       href="{{ route('report') }}">--}}
-{{--                        <i class="ni ni-single-copy-04 text-blue"> </i> {{ __('รายงาน') }}--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('form-detail*') ?  'active text-indigo' : '' }}"
+                        href="{{ route('form-detail') }}">
+                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
+                    </a>
+                </li>
+                {{--                <li class="nav-item ">--}}
+                {{--                    <a class="nav-link {{ request()->is('report*') ? 'active text-blue' : '' }}"--}}
+                {{--                       href="{{ route('report') }}">--}}
+                {{--                        <i class="ni ni-single-copy-04 text-blue"> </i> {{ __('รายงาน') }}--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
                 {{--                <li class="nav-item">--}}
                 {{--                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">--}}
                 {{--                        <i class="ni ni-spaceship"></i> Getting started--}}

@@ -1,6 +1,8 @@
 <?php
-
+use App\Http\Controllers\Admin\ManageRoleController;
+use App\Http\Controllers\Admin\DataImportController;
 use App\Http\Controllers\ConfirmFormController;
+use App\Http\Controllers\ConfirmUserController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageLocationController;
@@ -57,6 +59,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:admin'], function () {
 
         Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->name('admin_dashboard');
+
+        // Manage Role
+        Route::get('managerole', [\App\Http\Controllers\Admin\ManageRoleController::class, 'index'])->name('manage-role');
+        Route::post('managerole/update/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'update'])->name('role-update');
+
+        // Import Data
+        Route::get('dataimport', [\App\Http\Controllers\Admin\DataImportController::class, 'index'])->name('data-import');
+        Route::post('import', [\App\Http\Controllers\Admin\DataImportController::class, 'import'])->name('import-list');
+
+        // Form
+        Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
+        Route::post('confirmform/update/{id}', [ConfirmFormController::class, 'update'])->name('update');
+        Route::post('confirmform/add', [ConfirmFormController::class, 'create'])->name('form-add');
+        
+        Route::get('confirmuser', [ConfirmUserController::class, 'index'])->name('form-detail');
 
         // Type
         Route::get('type', [TypeController::class, 'index'])->name('type');
@@ -117,8 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('people/simple', [SearchController::class, 'simple'])->name('simple_search');
     Route::get('people/advance', [SearchController::class, 'advance'])->name('advance_search');
 
-    // Form
-    Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
+   
 
     //Personnel Borrow
     Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
