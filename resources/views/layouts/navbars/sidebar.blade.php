@@ -223,6 +223,12 @@
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('data-import*') ?  'active text-indigo' : '' }}"
+                        href="{{ route('data-import') }}">
+                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link {{ request()->is('stock*') ? 'active text-indigo' : '' }}"
                         href="{{ route('stock') }}">
                         <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุ') }}
