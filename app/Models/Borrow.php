@@ -16,6 +16,10 @@ class Borrow extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'borrow_name' => 'array'
+    ];
+
     public function borrow_user()
     {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');

@@ -18,7 +18,7 @@ class CartController extends Controller
         $stocks = Stock::all();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
-        return view('users/personnel/cart', compact('cartItems','devices', 'stocks','disposables'));
+        return view('users/personnel/cart', compact('cartItems', 'devices', 'stocks', 'disposables'));
     }
 
     public function addToCart(Request $request)
@@ -76,7 +76,7 @@ class CartController extends Controller
         $user_id = Auth::user()->id;
 
         Borrow::create([
-            'borrow_name' => $request->borrow_name,
+            'borrow_name' => [$request->borrow_name],
             'user_id' => $user_id,
         ]);
 

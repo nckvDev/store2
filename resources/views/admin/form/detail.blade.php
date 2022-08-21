@@ -6,8 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">ยืนยันแบบฟอร์ม</li>
-                    <li class="breadcrumb-item active" aria-current="page">รายละเอียดแบบฟอร์ม</li>
+                    <li class="breadcrumb-item active" aria-current="page">ตรวจสอบสถานะอนุมัติ</li>
                 </ol>
             </nav>
         </div>
@@ -24,7 +23,6 @@
                                 <th>วันที่</th>
                                 <th>สถานะ</th>
                                 <th>อนุมัติ</th>
-                                <th>รายละเอียดการยืม-เบิก</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +41,7 @@
                                     <span class="badge text-white bg-gradient-warning">ไม่อนุมัติ</span>
                                 </td>
                                 @endif
-                                <td>{{ $row->borrow_name }}</td>
+
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -64,7 +62,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-
+                                                    @foreach($row->borrow_name as $item)
+                                                        @foreach( $item as $items)
+                                                            <div>{{ $items }}</div>
+                                                        @endforeach
+                                                    @endforeach
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="{{route('update',$row->id)}}" method="post">

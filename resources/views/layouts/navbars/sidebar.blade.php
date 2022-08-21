@@ -253,7 +253,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('form-detail*') ?  'active text-indigo' : '' }}"
+                    <a class="nav-link {{ request()->is('confirmuser*') ?  'active text-indigo' : '' }}"
                         href="{{ route('form-detail') }}">
                         <i class="ni ni-archive-2 text-pink"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>

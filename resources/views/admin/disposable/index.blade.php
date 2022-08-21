@@ -31,7 +31,7 @@
                                 <th scope="col">จำนวนทั้งหมด</th>
                                 <th scope="col" class="text-center">สถานะ</th>
                                 <th scope="col" class="text-center">รูปภาพ</th>
-                                <th scope="col">ตำแหน่ง</th>
+{{--                                <th scope="col">ตำแหน่ง</th>--}}
                                 <th scope="col">ประเภท</th>
                                 <th scope="col"></th>
                             </tr>
