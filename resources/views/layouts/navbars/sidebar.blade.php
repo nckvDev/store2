@@ -217,13 +217,13 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('manage-role*') ?  'active text-indigo' : '' }}"
+                    <a class="nav-link {{ request()->is('managerole*') ?  'active text-indigo' : '' }}"
                         href="{{ route('manage-role') }}">
                         <i class="ni ni-archive-2 text-pink"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('data-import*') ?  'active text-indigo' : '' }}"
+                    <a class="nav-link {{ request()->is('dataimport*') ?  'active text-indigo' : '' }}"
                         href="{{ route('data-import') }}">
                         <i class="ni ni-archive-2 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
                     </a>

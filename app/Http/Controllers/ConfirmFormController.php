@@ -38,5 +38,4 @@ class ConfirmFormController extends Controller
         ]);
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
-
 }

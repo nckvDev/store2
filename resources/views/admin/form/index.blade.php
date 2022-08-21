@@ -20,6 +20,8 @@
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสผู้ใช้งาน</th>
+                                <th>ชื่อ</th>
+                                <th>นามสกุล</th>
                                 <th>วันที่</th>
                                 <th>สถานะ</th>
                                 <th>อนุมัติ</th>
@@ -31,7 +33,10 @@
                                 <tr>
                                     <td>{{ $row->id}}</td>
                                     <td>{{ $row->borrow_user->user_id}}</td>
-                                    <td>{{\Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>
+                                    <td>{{ $row->borrow_user->firstname}}</td>
+                                    <td>{{ $row->borrow_user->lastname}}</td>
+                                    <td>{{ $row->created_at }}</td>
+{{--                                    <td>{{\Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>--}}
                                     @if($row->borrow_status=="1")
                                         <td class="align-middle text-sm">
                                             <span class="badge text-white bg-gradient-success">อนุมัติ</span>
@@ -63,89 +68,89 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                    @foreach($row->borrow_name as $item)
-                                        @foreach( $item as $items)
-                                            <div>{{ $items }}</div>
-                        @endforeach
-                        @endforeach
-                    </div>
-                    <div class="modal-footer">
-                        <form action="{{route('update',$row->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="borrow_status" value="1">
-                            <button type="submit"
-                                    class="btn btn-primary btn-sm">อนุมัติ
-                            </button>
-                        </form>
-                        <form action="{{route('update',$row->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="borrow_status" value="0">
-                            <button type="submit"
-                                    class="btn btn-danger btn-sm">ไม่อนุมัติ
-                            </button>
-                        </form>
+                                                        @foreach($row->borrow_name as $item)
+                                                            @foreach( $item as $items)
+                                                                <div>{{ $items }}</div>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{{route('update',$row->id)}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="borrow_status" value="1">
+                                                            <button type="submit"
+                                                                    class="btn btn-primary btn-sm">อนุมัติ
+                                                            </button>
+                                                        </form>
+                                                        <form action="{{route('update',$row->id)}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="borrow_status" value="0">
+                                                            <button type="submit"
+                                                                    class="btn btn-danger btn-sm">ไม่อนุมัติ
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        </td>
-        </tr>
-        @endforeach
-        </tbody>
-        </table>
-    </div>
-    </div>
-    </div>
-    </div>
-@endsection
+        @endsection
 
-@push('js')
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        @push('js')
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script src="{{ asset('js/app.js') }}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script>
-        $(function () {
-            $.extend($.fn.dataTableExt.oStdClasses, {
-                "sFilterInput": "form-control form-control-sm",
-                "sLengthSelect": "form-control form-control-sm"
-            });
-            $('#table_id').dataTable({
-                "language": {
-                    "search": "ค้นหา ",
-                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
-                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
-                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
-                    "infoEmpty": "ไม่มีข้อมูล",
-                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
-                    "paginate": {
-                        "previous": "ปัจจุบัน",
-                        "next": "หน้า"
-                    }
+            <script>
+                $(function () {
+                    $.extend($.fn.dataTableExt.oStdClasses, {
+                        "sFilterInput": "form-control form-control-sm",
+                        "sLengthSelect": "form-control form-control-sm"
+                    });
+                    $('#table_id').dataTable({
+                        "language": {
+                            "search": "ค้นหา ",
+                            "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+                            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                            "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+                            "infoEmpty": "ไม่มีข้อมูล",
+                            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+                            "paginate": {
+                                "previous": "ปัจจุบัน",
+                                "next": "หน้า"
+                            }
+                        }
+                    });
+                    $('[type=search]').each(function () {
+                        +
+                            $(this).attr("placeholder", "Search...");
+                        $(this).before('<span class="fa fa-search"></span>');
+                    });
+                    $('#button').click(function () {
+                        alert(table.rows('.selected').data().length + ' row(s) selected');
+                    });
+                });
+
+                function submitButton() {
+
                 }
-            });
-            $('[type=search]').each(function () {
-                +
-                    $(this).attr("placeholder", "Search...");
-                $(this).before('<span class="fa fa-search"></span>');
-            });
-            $('#button').click(function () {
-                alert(table.rows('.selected').data().length + ' row(s) selected');
-            });
-        });
 
-        function submitButton() {
-
-        }
-
-        function submitCheckbox() {
-            checkbox.checked = true;
-        }
-    </script>
+                function submitCheckbox() {
+                    checkbox.checked = true;
+                }
+            </script>
 
 
-    <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-@endpush
+            <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
+            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
+            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+            <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @endpush
