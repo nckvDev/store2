@@ -106,7 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('device', [DeviceController::class, 'store'])->name('addDevice');
 
         Route::get('device/add_device', [DeviceController::class, 'add'])->name('add_device');
-
+        Route::get('device/edit/{id}', [DeviceController::class, 'edit']); // show data edit
+        Route::post('device/update/{id}', [DeviceController::class, 'update']); // edit data
+        Route::get('device/delete/{id}', [DeviceController::class, 'delete']);
          // Export
 //         Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('report');
          Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('report_xlsm');

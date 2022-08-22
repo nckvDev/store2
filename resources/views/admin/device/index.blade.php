@@ -30,6 +30,7 @@
                                 <th scope="col">สถานะ</th>
                                 <th scope="col" class="text-center">รูปภาพ</th>
                                 <th scope="col">ตำแหน่ง</th>
+                                <th scope="col">ปี</th>
                                 <th scope="col">ประเภท</th>
                                 <th scope="col"></th>
                             </tr>
@@ -47,6 +48,7 @@
                                 <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80"
                                         height="80" /></td>
                                 <td>{{ $row->location }}</td>
+                                <td>{{ $row->device_year }}</td>
                                 <td>{{ $row->device_type->type_detail }}</td>
                                 <td class="text-right">
                                     <div class="dropdown">
@@ -56,9 +58,9 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item"
-                                                href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                             <a class="dropdown-item"
-                                                href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>
