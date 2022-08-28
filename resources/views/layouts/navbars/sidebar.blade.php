@@ -211,21 +211,39 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('prefix*') ? 'active text-indigo' : '' }}"
+                        href="{{ route('prefix') }}">
+                        <i class="ni ni-badge text-blue"></i> {{ __('คำนำหน้า') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-indigo' : '' }}"
                         href="{{ route('type') }}">
                         <i class="ni ni-archive-2 text-green"></i> {{ __('ประเภท') }}
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('department*') ? 'active text-indigo' : '' }}"
+                        href="{{ route('department') }}">
+                        <i class="ni ni-building text-red"></i> {{ __('แผนก') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('group*') ? 'active text-indigo' : '' }}"
+                        href="{{ route('group') }}">
+                        <i class="ni ni-paper-diploma text-yellow"></i> {{ __('กลุ่มเรียน') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link {{ request()->is('managerole*') ?  'active text-indigo' : '' }}"
                         href="{{ route('manage-role') }}">
-                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
+                        <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('dataimport*') ?  'active text-indigo' : '' }}"
                         href="{{ route('data-import') }}">
-                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
+                        <i class="ni ni-cloud-download-95 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -243,19 +261,19 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('disposable*') ? 'active text-indigo' : '' }}"
                         href="{{ route('disposable') }}">
-                        <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุสิ้นเปลือง') }}
+                        <i class="ni ni-bulb-61 text-red "> </i> {{ __('วัสดุสิ้นเปลือง') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirmform*') ? 'active text-indigo' : '' }}"
                         href="{{ route('confirmform') }}">
-                        <i class="ni ni-archive-2 text-green"> </i> {{ __('ยืนยันแบบฟอร์ม') }}
+                        <i class="ni ni-single-copy-04 text-gray "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirmuser*') ?  'active text-indigo' : '' }}"
                         href="{{ route('form-detail') }}">
-                        <i class="ni ni-archive-2 text-pink"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
+                        <i class="ni ni-curved-next text-black"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>
                 </li>
                 {{--                <li class="nav-item ">--}}

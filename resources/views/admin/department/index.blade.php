@@ -7,7 +7,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">ประเภทพัสดุ</li>
+                    <li class="breadcrumb-item active" aria-current="page">แผนก</li>
                 </ol>
             </nav>
         </div>
@@ -20,16 +20,16 @@
                         <thead>
                             <tr>
                                 <th>ลำดับ</th>
-                                <th>ประเภท</th>
+                                <th>ชื่อแผนก</th>
                                 <th>วันที่สร้าง</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($types as $row)
+                            @foreach($departments as $row)
                             <tr>
-                                <td>{{ $types->firstItem()+$loop->index }}</td>
-                                <td>{{ $row->type_detail }}</td>
+                                <td>{{ $departments->firstItem()+$loop->index }}</td>
+                                <td>{{ $row->department_name }}</td>
                                 <td>
                                     @if ( $row->created_at == NULL)
                                     ไม่ถูกนิยาม
@@ -44,8 +44,10 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ url('/type/edit/'.$row->id) }}">แก้ไข</a>
-                                            <a class="dropdown-item" href="{{ url('/type/delete/'.$row->id) }}">ลบ</a>
+                                            <a class="dropdown-item"
+                                                href="{{ url('/department/edit/'.$row->id) }}">แก้ไข</a>
+                                            <a class="dropdown-item"
+                                                href="{{ url('/department/delete/'.$row->id) }}">ลบ</a>
                                         </div>
                                     </div>
                                 </td>
@@ -61,22 +63,22 @@
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
-                        <h3 class="mb-0">{{ __('เพิ่มประเภท') }}</h3>
+                        <h3 class="mb-0">{{ __('เพิ่มแผนก') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('addType') }}" autocomplete="off">
+                    <form method="post" action="{{ route('addDepartment') }}" autocomplete="off">
                         @csrf
                         <div class="pl-lg-2">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-name">{{ __('ประเภท') }}</label>
-                                <input type="text" name="type_detail" id="input-name"
-                                    class="form-control form-control-alternative{{ $errors->has('type_detail') ? ' is-invalid' : '' }}"
-                                    placeholder="{{ __('ประเภท') }}" autofocus>
+                                <label class="form-control-label" for="input-name">{{ __('แผนก') }}</label>
+                                <input type="text" name="department_name" id="input-name"
+                                    class="form-control form-control-alternative{{ $errors->has('department_name') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('กรุณาใส่ข้อมูลแผนก') }}" autofocus>
 
-                                @if ($errors->has('type_detail'))
+                                @if ($errors->has('department_name'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('type_detail') }}</strong>
+                                    <strong>{{ $errors->first('department_name') }}</strong>
                                 </span>
                                 @endif
                             </div>

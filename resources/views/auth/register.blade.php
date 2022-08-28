@@ -31,13 +31,15 @@
                             <div class="col-lg-12">
                                 <div class="form-group{{ $errors->has('user_id') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
-                                        <input class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}" placeholder="{{ __('UserID') }}" type="text" name="user_id" value="{{ old('user_id') }}" autofocus>
+                                        <input class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('UserID') }}" type="text" name="user_id"
+                                            value="{{ old('user_id') }}" autofocus>
                                     </div>
                                 </div>
                                 @if ($errors->has('user_id'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                        <strong>{{ $errors->first('user_id') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                    <strong>{{ $errors->first('user_id') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -121,7 +123,7 @@
                                 </div>
                                 <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                     <option value="">-- Select Roles --</option>
-                                    <option value="admin">Admin</option>
+                                    <!-- <option value="admin">Admin</option> -->
                                     <option value="personnel">Personnel</option>
                                     <option value="student">Student</option>
                                 </select>
@@ -137,7 +139,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" type="password" name="password" id="password">
+                                <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Password') }}" type="password" name="password" id="password">
                                 <i class="bg-white pt-3 pr-3 fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
                             </div>
                             @if ($errors->has('password'))
@@ -151,35 +154,39 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" id="confirmPassword">
-                                <i class="bg-white pt-3 pr-3 fa fa-eye" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                                <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password"
+                                    name="password_confirmation" id="confirmPassword">
+                                <i class="bg-white pt-3 pr-3 fa fa-eye" id="toggleConfirmPassword"
+                                    style="cursor: pointer"></i>
                             </div>
                         </div>
 
-{{--                        <div class="row my-2">--}}
-{{--                            <div class="col-12">--}}
-{{--                                <div class="custom-control custom-control-alternative custom-checkbox">--}}
-{{--                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">--}}
-{{--                                    <label class="custom-control-label" for="customCheckRegister">--}}
-{{--                                        <span class="text-muted">{{ __('I agree with the') }} <a--}}
-{{--                                                href="#!">{{ __('Privacy Policy') }}</a></span>--}}
-{{--                                    </label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary mt-4">{{ __('Create account') }}</button>
-                        </div>
+                        {{--                        <div class="row my-2">--}}
+                        {{--                            <div class="col-12">--}}
+                        {{--                                <div class="custom-control custom-control-alternative custom-checkbox">--}}
+                        {{--                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">--}}
+                        {{--                                    <label class="custom-control-label" for="customCheckRegister">--}}
+                        {{--                                        <span class="text-muted">{{ __('I agree with the') }}
+                        <a--}}
+                            {{--                                                href="#!">{{ __('Privacy Policy') }}</a>
+                            </span>--}}
+                            {{--                                    </label>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                            {{--                        </div>--}}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mt-4">{{ __('Create account') }}</button>
+                            </div>
                     </form>
                     @if (session('error'))
-                        <script>
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'error',
-                                title: 'คุณไม่มีสิทธิ์สมัครเข้าใช้งาน',
-                                confirmButtonText: 'ตกลง'
-                            })
-                        </script>
+                    <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'คุณไม่มีสิทธิ์สมัครเข้าใช้งาน',
+                        confirmButtonText: 'ตกลง'
+                    })
+                    </script>
                     @endif
                 </div>
             </div>
@@ -187,28 +194,28 @@
     </div>
 </div>
 <script>
-    const togglePassword = document.querySelector("#togglePassword");
-    const password = document.querySelector("#password");
+const togglePassword = document.querySelector("#togglePassword");
+const password = document.querySelector("#password");
 
-    const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword")
-    const confirmPassword = document.querySelector("#confirmPassword")
+const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword")
+const confirmPassword = document.querySelector("#confirmPassword")
 
 
-    togglePassword.addEventListener("click", function () {
-        // toggle the type attribute
-        const type = password.getAttribute("type") === "password" ? "text" : "password";
-        password.setAttribute("type", type);
+togglePassword.addEventListener("click", function() {
+    // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
 
-        // toggle the icon
-        this.classList.toggle("fa-eye-slash")
-    });
+    // toggle the icon
+    this.classList.toggle("fa-eye-slash")
+});
 
-    toggleConfirmPassword.addEventListener("click", function () {
-        const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
-        confirmPassword.setAttribute("type", type);
+toggleConfirmPassword.addEventListener("click", function() {
+    const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
+    confirmPassword.setAttribute("type", type);
 
-        this.classList.toggle("fa-eye-slash")
-    });
+    this.classList.toggle("fa-eye-slash")
+});
 </script>
 
 @endsection

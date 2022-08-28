@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">จัดการสถานะผู้ใช้งาน</li>
+                    <li class="breadcrumb-item active" aria-current="page">จัดการสิทธิ์ผู้ใช้งาน</li>
                 </ol>
             </nav>
         </div>

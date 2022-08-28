@@ -7,7 +7,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">ประเภทพัสดุ</li>
+                    <li class="breadcrumb-item active" aria-current="page">กลุ่มเรียน</li>
                 </ol>
             </nav>
         </div>
@@ -20,16 +20,18 @@
                         <thead>
                             <tr>
                                 <th>ลำดับ</th>
-                                <th>ประเภท</th>
+                                <th>แผนก</th>
+                                <th>กลุ่มเรียน</th>
                                 <th>วันที่สร้าง</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($types as $row)
+                            @foreach($groups as $row)
                             <tr>
-                                <td>{{ $types->firstItem()+$loop->index }}</td>
-                                <td>{{ $row->type_detail }}</td>
+                                <td>{{ $groups->firstItem()+$loop->index }}</td>
+                                <td>{{ $row->department_name }}</td>
+                                <td>{{ $row->group_name }}</td>
                                 <td>
                                     @if ( $row->created_at == NULL)
                                     ไม่ถูกนิยาม
@@ -44,8 +46,8 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ url('/type/edit/'.$row->id) }}">แก้ไข</a>
-                                            <a class="dropdown-item" href="{{ url('/type/delete/'.$row->id) }}">ลบ</a>
+                                            <a class="dropdown-item" href="{{ url('/group/edit/'.$row->id) }}">แก้ไข</a>
+                                            <a class="dropdown-item" href="{{ url('/group/delete/'.$row->id) }}">ลบ</a>
                                         </div>
                                     </div>
                                 </td>
@@ -61,22 +63,32 @@
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
-                        <h3 class="mb-0">{{ __('เพิ่มประเภท') }}</h3>
+                        <h3 class="mb-0">{{ __('เพิ่มกลุ่มเรียน') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('addType') }}" autocomplete="off">
+                    <form method="post" action="{{ route('addGroup') }}" autocomplete="off">
                         @csrf
                         <div class="pl-lg-2">
+                            <div>
+                                <label class="form-control-label" for="input-name">{{ __('กรุณาเลือกแผนก') }}</label>
+                                <select class="form-control" data-toggle="select" title="Simple select"
+                                    data-live-search="true" data-live-search-placeholder="Search ..."
+                                    name="department_name">
+                                    <option>เลือก</option>
+                                    @foreach($departments as $row)
+                                    <option>{{ $row->department_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-name">{{ __('ประเภท') }}</label>
-                                <input type="text" name="type_detail" id="input-name"
-                                    class="form-control form-control-alternative{{ $errors->has('type_detail') ? ' is-invalid' : '' }}"
-                                    placeholder="{{ __('ประเภท') }}" autofocus>
-
-                                @if ($errors->has('type_detail'))
+                                <label class="form-control-label" for="input-name">{{ __('กลุ่มเรียน') }}</label>
+                                <input type="text" name="group_name" id="input-name"
+                                    class="form-control form-control-alternative{{ $errors->has('department_name') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('กลุ่มเรียน') }}" autofocus>
+                                @if ($errors->has('group_name'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('type_detail') }}</strong>
+                                    <strong>{{ $errors->first('group_name') }}</strong>
                                 </span>
                                 @endif
                             </div>

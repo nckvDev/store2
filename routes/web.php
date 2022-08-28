@@ -1,6 +1,12 @@
 <?php
 use App\Http\Controllers\Admin\ManageRoleController;
 use App\Http\Controllers\Admin\DataImportController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\PrefixController;
+use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\DeviceImportController;
+use App\Http\Controllers\Admin\StockImportController;
+use App\Http\Controllers\Admin\DisposableImportController;
 use App\Http\Controllers\ConfirmFormController;
 use App\Http\Controllers\ConfirmUserController;
 use App\Http\Controllers\DeviceController;
@@ -61,13 +67,47 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->name('admin_dashboard');
 
+        // Prefix
+        Route::get('prefix', [\App\Http\Controllers\Admin\PrefixController::class, 'index'])->name('prefix');
+        Route::post('prefix/add', [\App\Http\Controllers\Admin\PrefixController::class, 'store'])->name('addPrefix');
+        Route::get('prefix/edit/{id}', [\App\Http\Controllers\Admin\PrefixController::class, 'edit']);
+        Route::post('prefix/update/{id}', [\App\Http\Controllers\Admin\PrefixController::class, 'update']);
+        Route::get('prefix/delete/{id}', [\App\Http\Controllers\Admin\PrefixController::class, 'delete']);
+
         // Manage Role
         Route::get('managerole', [\App\Http\Controllers\Admin\ManageRoleController::class, 'index'])->name('manage-role');
         Route::post('managerole/update/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'update'])->name('role-update');
 
-        // Import Data
+        // Department
+        Route::get('department', [\App\Http\Controllers\Admin\DepartmentController::class, 'index'])->name('department');
+        Route::post('department/add', [\App\Http\Controllers\Admin\DepartmentController::class, 'store'])->name('addDepartment');
+        Route::get('department/edit/{id}', [\App\Http\Controllers\Admin\DepartmentController::class, 'edit']);
+        Route::post('department/update/{id}', [\App\Http\Controllers\Admin\DepartmentController::class, 'update']);
+        Route::get('department/delete/{id}', [\App\Http\Controllers\Admin\DepartmentController::class, 'delete']);
+
+        // Group
+        Route::get('group', [\App\Http\Controllers\Admin\GroupController::class, 'index'])->name('group');
+        Route::post('group/add', [\App\Http\Controllers\Admin\GroupController::class, 'store'])->name('addGroup');
+        Route::get('group/edit/{id}', [\App\Http\Controllers\Admin\GroupController::class, 'edit']);
+        Route::post('group/update/{id}', [\App\Http\Controllers\Admin\GroupController::class, 'update']);
+        Route::get('group/delete/{id}', [\App\Http\Controllers\Admin\GroupController::class, 'delete']);
+
+        // Import Data Excel&Csv
         Route::get('dataimport', [\App\Http\Controllers\Admin\DataImportController::class, 'index'])->name('data-import');
         Route::post('import', [\App\Http\Controllers\Admin\DataImportController::class, 'import'])->name('import-list');
+
+        // Import Device Excel&Csv
+        Route::get('device/import', [\App\Http\Controllers\Admin\DeviceImportController::class, 'index'])->name('device-import');
+        Route::post('importdevice', [\App\Http\Controllers\Admin\DeviceImportController::class, 'import'])->name('import-device');
+
+        // Import Stock Excel&Csv
+        Route::get('stock/import', [\App\Http\Controllers\Admin\StockImportController::class, 'index'])->name('stock-import');
+        Route::post('importstock', [\App\Http\Controllers\Admin\StockImportController::class, 'import'])->name('import-stock');
+
+        // Import Disposable Excel&Csv
+        Route::get('disposable/import', [\App\Http\Controllers\Admin\DisposableImportController::class, 'index'])->name('disposable-import');
+        Route::post('importdisposable', [\App\Http\Controllers\Admin\DisposableImportController::class, 'import'])->name('import-disposable');
+
 
         // Form
         Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
@@ -116,8 +156,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:personnel'], function () {
         Route::get('personnel_dashboard', [DashboardController::class, 'index'])->name('personnel_dashboard');
-//        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'index'])->name('personnel_borrow');
-//        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\BorrowController::class, 'borrow'])->name('borrow');
 
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
         Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
@@ -137,7 +175,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('people/simple', [SearchController::class, 'simple'])->name('simple_search');
     Route::get('people/advance', [SearchController::class, 'advance'])->name('advance_search');
 
-    //Personnel Borrow
-//    Route::resource('/product',App\Http\Controllers\Personnel\ProductController::class);
 });
-//Route::resource('borrowform',\App\Http\Controllers\Admin\BorrowFormController::class);

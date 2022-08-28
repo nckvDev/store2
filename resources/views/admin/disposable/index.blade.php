@@ -13,27 +13,31 @@
                             <h3 class="mb-0">รายการวัสดุสิ้นเปลือง</h3>
                         </div>
                         <div class="col-4 text-right">
+                            <a href="{{ route('disposable-import') }}"
+                                class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
+                                XLSX & CSV</a>
                             <a href="{{ route('add_disposable') }}"
                                 class="btn btn-sm btn-primary">เพิ่มวัสดุสิ้นเปลือง</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12">
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 mb-4">
+            <div class="card bg-secondary shadow">
+                <div class="card-body">
+                    <table id="table_id" class="">
+                        <thead>
                             <tr>
-                                <th scope="col">รหัสวัสดุสิ้นเปลือง</th>
-                                <th scope="col">ชื่อวัสดุสิ้นเปลือง</th>
-                                <th scope="col">จำนวนทั้งหมด</th>
+                                <th>รหัสวัสดุสิ้นเปลือง</th>
+                                <th>ชื่อวัสดุสิ้นเปลือง</th>
+                                <th>จำนวนทั้งหมด</th>
                                 <th scope="col" class="text-center">สถานะ</th>
                                 <th scope="col" class="text-center">รูปภาพ</th>
-{{--                                <th scope="col">ตำแหน่ง</th>--}}
-                                <th scope="col">ประเภท</th>
-                                <th scope="col"></th>
+                                <th>ประเภท</th>
+                                <th>จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +72,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
                     @if (session('delete'))
                     <script>
                     Swal.fire({
@@ -80,14 +83,51 @@
                     })
                     </script>
                     @endif
+                    <div class="mt-4">
+                        {{ $disposables->links() }}
+                    </div>
                 </div>
-
             </div>
-            <div class="mt-4">
-                {{ $disposables->links() }}
-            </div>
-
         </div>
     </div>
 </div>
 @endsection
+@push('js')
+<script>
+$(function() {
+    $.extend($.fn.dataTableExt.oStdClasses, {
+        "sFilterInput": "form-control form-control-sm",
+        "sLengthSelect": "form-control form-control-sm"
+    });
+    $('#table_id').dataTable({
+        "language": {
+            "search": "ค้นหา ",
+            "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+            "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+            "infoEmpty": "ไม่มีข้อมูล",
+            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+            "paginate": {
+                "previous": "ปัจจุบัน",
+                "next": "หน้า"
+            }
+        }
+    });
+    $('[type=search]').each(function() {
+        +
+        $(this).attr("placeholder", "Search...");
+        $(this).before('<span class="fa fa-search"></span>');
+    });
+    $('#button').click(function() {
+        alert(table.rows('.selected').data().length + ' row(s) selected');
+    });
+});
+</script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="assets/vendor/select2/dist/js/select2.min.js"></script>
+<script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+@endpush
