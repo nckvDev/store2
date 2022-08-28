@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">นำเข้าข้อมูลครุวัสดุ</li>
+                    <li class="breadcrumb-item active" aria-current="page">นำเข้าข้อมูลวัสดุ</li>
                 </ol>
             </nav>
         </div>
