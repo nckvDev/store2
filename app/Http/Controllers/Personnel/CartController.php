@@ -76,6 +76,7 @@ class CartController extends Controller
         $user_id = Auth::user()->id;
 
         Borrow::create([
+            'borrow_id' => [$request->borrow_id],
             'borrow_name' => [$request->borrow_name],
             'user_id' => $user_id,
         ]);

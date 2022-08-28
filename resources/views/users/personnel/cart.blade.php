@@ -87,7 +87,6 @@
                                             <input type="hidden" value="1" name="price" readonly>
                                             <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                             <input type="hidden" value="1" name="quantity" readonly>
-
                                             <td>
                                                 <button class="btn btn-primary btn-sm">เลือก</button>
                                             </td>
@@ -202,19 +201,19 @@
                                                 <tbody id="borrowItem">
                                                 <tr>
                                                     <td>
-                                                        <input type="text" value="{{ $item->id }}" name="borrow_id"
+                                                        <input type="text" value="{{ $item->id }}" name="borrow_id[]"
                                                                readonly style="width: 60px">
                                                     </td>
                                                     <td><input type="text" value="{{ $item->name }}"
                                                                name="borrow_name[]"
-                                                               readonly style="width: 90px"></td>
-                                                    <td>
+                                                                          readonly style="width: 60px"></td>
+                                                    <td class="flex">
                                                         <form action="{{ route('cart.update') }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id" value="{{ $item->id}}">
                                                             <input type="number" name="quantity"
                                                                    value="{{ $item->quantity }}"
-                                                                   class="w-6 text-center bg-gray-300"/>
+                                                                   class="w-6 text-center bg-gray-100"/>
                                                             <button type="submit"
                                                                     class="btn btn-warning btn-sm">แก้ไข
                                                             </button>

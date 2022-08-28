@@ -32,6 +32,7 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                             <tr>
+                                <th scope="col">รหัส</th>
                                 <th scope="col">รายการ</th>
                                 <th scope="col">เวลา</th>
                                 <th scope="col">สถานะ</th>
@@ -40,6 +41,13 @@
                             <tbody>
                             @foreach($borrowList as $row)
                                 <tr>
+                                    <td>
+                                        @foreach($row->borrow_id as $item)
+                                            @foreach( $item as $items)
+                                                {{ $items }}
+                                            @endforeach
+                                        @endforeach
+                                    </td>
                                     <td>
                                     @foreach($row->borrow_name as $item)
                                             @foreach( $item as $items)
@@ -55,7 +63,7 @@
                                     @endif
                                     @if($row->borrow_status=="0")
                                         <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-warning">ไม่อนุมัติ</span>
+                                            <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
                                         </td>
                                     @endif
                                 </tr>
