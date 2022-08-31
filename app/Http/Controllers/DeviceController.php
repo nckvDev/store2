@@ -58,7 +58,7 @@ class DeviceController extends Controller
         ]);
 
         $deviceImage->move($upload_location, $imgName);
-        return redirect()->back()->with('success', 'บันทึกข้อมูลวัสดุเรียบร้อย');
+        return redirect()->route('device')->with('success', 'บันทึกข้อมูลวัสดุเรียบร้อย');
     }
 
     public function edit($id)
@@ -102,6 +102,15 @@ class DeviceController extends Controller
             ]);
 
             $old_image = $request->old_image;
+            if($old_image == null){
+                $upload_location = 'images/devices/';
+                $full_path = $upload_location . $imgName;
+                Device::find($id)->update([
+                    'image' => $full_path,
+                ]);
+                $deviceImage->move($upload_location, $imgName);
+                return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+            }
             unlink($old_image);
 
             $deviceImage->move($upload_location, $imgName);

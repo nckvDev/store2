@@ -54,7 +54,7 @@ class RegistersController extends Controller
     public function registers(Request $request)
     {
         $request->validate([
-            'user_id' => ['required', 'string', 'max:10'],
+            'user_id' => ['required', 'string', 'max:10', 'unique:users'],
             'prefix' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],

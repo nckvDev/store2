@@ -15,6 +15,6 @@ class DeviceImportController extends Controller
 
     public function import(Request $request){
         Excel::import(new DeviceImport,$request->file);
-        return redirect()->back()->with('success', 'เพิ่มข้อมูลสำเร็จ');
+        return redirect()->route('device-import')->with('success', 'เพิ่มข้อมูลสำเร็จ');
     }
 }

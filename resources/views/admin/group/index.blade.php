@@ -47,7 +47,8 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ url('/group/edit/'.$row->id) }}">แก้ไข</a>
-                                            <a class="dropdown-item" href="{{ url('/group/delete/'.$row->id) }}">ลบ</a>
+                                            <a class="dropdown-item" href="{{ url('/group/delete/'.$row->id) }}"
+                                                onclick="return confirm('ต้องการลบข้อมูล?');">ลบ</a>
                                         </div>
                                     </div>
                                 </td>
@@ -72,8 +73,7 @@
                         <div class="pl-lg-2">
                             <div>
                                 <label class="form-control-label" for="input-name">{{ __('กรุณาเลือกแผนก') }}</label>
-                                <select class="form-control" data-toggle="select" title="Simple select"
-                                    data-live-search="true" data-live-search-placeholder="Search ..."
+                                <select class="form-control {{ $errors->has('department_name') ? ' is-invalid' : '' }}"
                                     name="department_name">
                                     <option>เลือก</option>
                                     @foreach($departments as $row)
@@ -84,7 +84,7 @@
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-name">{{ __('กลุ่มเรียน') }}</label>
                                 <input type="text" name="group_name" id="input-name"
-                                    class="form-control form-control-alternative{{ $errors->has('department_name') ? ' is-invalid' : '' }}"
+                                    class="form-control form-control-alternative{{ $errors->has('group_name') ? ' is-invalid' : '' }}"
                                     placeholder="{{ __('กลุ่มเรียน') }}" autofocus>
                                 @if ($errors->has('group_name'))
                                 <span class="invalid-feedback" role="alert">

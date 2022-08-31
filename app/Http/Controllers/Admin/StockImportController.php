@@ -15,6 +15,6 @@ class StockImportController extends Controller
 
     public function import(Request $request){
         Excel::import(new StockImport,$request->file);
-        return redirect()->back()->with('success', 'เพิ่มข้อมูลสำเร็จ');
+        return redirect()->route('stock-import')->with('success', 'เพิ่มข้อมูลสำเร็จ');
     }
 }

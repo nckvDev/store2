@@ -64,7 +64,7 @@ class DisposableController extends Controller
         ]);
 
         $disposableImage->move($upload_location, $imgName);
-        return redirect()->back()->with('success', 'บันทึกข้อมูลอุปกรณ์เรียบร้อย');
+        return redirect()->route('disposable')->with('success', 'บันทึกข้อมูลอุปกรณ์เรียบร้อย');
     }
 
     public function edit($id)
@@ -117,6 +117,15 @@ class DisposableController extends Controller
             ]);
 
             $old_image = $request->old_image;
+            if($old_image == null){
+                $upload_location = 'images/disposables/';
+                $full_path = $upload_location . $imgName;
+                Disposable::find($id)->update([
+                    'image' => $full_path,
+                ]);
+                $deviceImage->move($upload_location, $imgName);
+                return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+            }
             unlink($old_image);
 
             $disposableImage->move($upload_location, $imgName);
