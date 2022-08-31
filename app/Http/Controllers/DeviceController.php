@@ -26,13 +26,13 @@ class DeviceController extends Controller
     {
 //        dd($request->all());
         $request->validate([
-            'device_name' => 'required|unique:devices|max:255',
+            'device_name' => 'required|max:255',
             'image' => 'required|mimes:jpg,jpeg,png'
         ],
         [
             'device_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
             'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
-            'device_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
+//            'device_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
             'image.required' => "กรุณาใส่ภาพด้วยครับ",
             'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
         ]);

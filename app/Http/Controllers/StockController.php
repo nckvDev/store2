@@ -30,7 +30,7 @@ class StockController extends Controller
         $request->validate(
             [
                 'stock_num'  => 'required|unique:stocks|max:5',
-                'stock_name' => 'required|unique:stocks|max:255',
+                'stock_name' => 'required|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
@@ -40,7 +40,7 @@ class StockController extends Controller
                 'stock_num.unique'       => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'stock_name.required'     => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'stock_name.max'          => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'stock_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
+//                'stock_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
                 'image.required'    => "กรุณาใส่ภาพด้วยครับ",
                 'image.mimes'       => "ประเภทไฟล์ไม่ถูกต้อง"
             ]

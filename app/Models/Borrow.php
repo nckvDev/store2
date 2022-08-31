@@ -11,13 +11,15 @@ class Borrow extends Model
 //    public $timestamps = false;
 
     protected $fillable = [
+        'borrow_list_id',
         'borrow_name',
         'borrow_status',
         'user_id',
     ];
 
     protected $casts = [
-        'borrow_name' => 'array'
+        'borrow_list_id' => 'array',
+        'borrow_name' => 'array',
     ];
 
     public function borrow_user()

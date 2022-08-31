@@ -18,4 +18,8 @@ class DashboardController extends Controller
         $borrowList = Borrow::where('user_id', $user)->get();
         return view('users.personnel.dashboard', compact('borrowList'));
     }
+
+    public function update() {
+
+    }
 }

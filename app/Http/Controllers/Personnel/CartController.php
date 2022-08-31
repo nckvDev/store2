@@ -9,6 +9,7 @@ use App\Models\Stock;
 use App\Models\Disposable;
 use App\Models\Borrow;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -73,12 +74,22 @@ class CartController extends Controller
 
     public function saveCart(Request $request)
     {
-        $user_id = Auth::user()->id;
-
+        $user_id = Auth::user()['id'];
+        dd($request['borrow_list_id']);
         Borrow::create([
-            'borrow_name' => [$request->borrow_name],
+            'borrow_list_id' => $request['borrow_list_id'],
+            'borrow_name' => $request['borrow_name'],
             'user_id' => $user_id,
         ]);
+
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
+                'stock_status' => 1
+            ]);
+        }
+
+        \Cart::clear();
+        session()->flash('success', 'All Item Cart Clear Successfully !');
 
         return redirect('personnel_borrow')->with('successes', 'ยืนยันรายการยืมสำเร็จ');
 

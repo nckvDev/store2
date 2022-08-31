@@ -36,18 +36,17 @@
                                     <td>{{ $row->borrow_user->firstname}}</td>
                                     <td>{{ $row->borrow_user->lastname}}</td>
                                     <td>{{ $row->created_at }}</td>
-{{--                                    <td>{{\Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>--}}
-                                    @if($row->borrow_status=="1")
+                                    {{--                                    <td>{{\Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>--}}
+                                    @if($row->borrow_status=="2")
                                         <td class="align-middle text-sm">
                                             <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                         </td>
                                     @endif
                                     @if($row->borrow_status=="0")
                                         <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-warning">ไม่อนุมัติ</span>
+                                            <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
                                         </td>
                                     @endif
-
                                     <td>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -68,16 +67,30 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        @foreach($row->borrow_name as $item)
-                                                            @foreach( $item as $items)
-                                                                <div>{{ $items }}</div>
-                                                            @endforeach
-                                                        @endforeach
+                                                        <div class="mb-4">
+                                                            {{
+                                                                \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('LLL')
+                                                            }}
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                @foreach($row->borrow_list_id as $item)
+                                                                        <div class="mb-2 text-primary"> {{ $item }} </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="col-lg-8">
+                                                                @foreach($row->borrow_name as $item)
+                                                                        <div class="mb-2"> {{ $item }} </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <form action="{{route('update',$row->id)}}" method="post">
                                                             @csrf
-                                                            <input type="hidden" name="borrow_status" value="1">
+                                                            <input type="hidden" name="borrow_status" value="2">
+{{--                                                            <input type="hidden" name="borrow_list_id[]" value="{{ $row->borrow_list_id }}">--}}
                                                             <button type="submit"
                                                                     class="btn btn-primary btn-sm">อนุมัติ
                                                             </button>
@@ -85,6 +98,7 @@
                                                         <form action="{{route('update',$row->id)}}" method="post">
                                                             @csrf
                                                             <input type="hidden" name="borrow_status" value="0">
+{{--                                                            <input type="hidden" name="borrow_list_id[]" value="{{ $row->borrow_list_id }}">--}}
                                                             <button type="submit"
                                                                     class="btn btn-danger btn-sm">ไม่อนุมัติ
                                                             </button>

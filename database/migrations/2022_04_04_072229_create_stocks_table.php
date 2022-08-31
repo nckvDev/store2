@@ -17,7 +17,7 @@ class CreateStocksTable extends Migration
             $table->bigIncrements('id');
             $table->string('stock_name');
             $table->integer('stock_amount');
-            $table->integer('stock_status')->default(1);
+            $table->integer('stock_status')->default(0);
             $table->string('image');
             $table->string('position');
             $table->integer('amount_minimum');
@@ -37,6 +37,7 @@ class CreateStocksTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('borrows');
         Schema::dropIfExists('stocks');
     }
 }

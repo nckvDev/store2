@@ -156,6 +156,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:personnel'], function () {
         Route::get('personnel_dashboard', [DashboardController::class, 'index'])->name('personnel_dashboard');
+        Route::post('personnel_dashboard/update/{id}', [DashboardController::class, 'update'])->name('update');
 
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
         Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');

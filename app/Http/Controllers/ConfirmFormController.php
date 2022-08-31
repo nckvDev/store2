@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrow;
+use App\Models\Stock;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Conform;
@@ -11,7 +12,7 @@ class ConfirmFormController extends Controller
 {
     public function index()
     {
-        $conforms = Borrow::where('borrow_status',0)->get();
+        $conforms = Borrow::where('borrow_status', 0)->get();
         return view('admin.form.index', compact('conforms'));
     }
 
@@ -33,6 +34,8 @@ class ConfirmFormController extends Controller
 
     public function update(Request $request, $id)
     {
+//        dd($request['borrow_list_id']);
+
         Borrow::find($id)->update([
             'borrow_status' => $request->borrow_status,
         ]);

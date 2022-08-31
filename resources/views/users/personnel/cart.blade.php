@@ -63,6 +63,18 @@
                                     </div>
                                 </div>
                             </div>
+                            @php
+                                $addData = array();
+                            @endphp
+
+                            @if(session('4yTlTDKu3oJOfzD_cart_items'))
+                                @foreach(session('4yTlTDKu3oJOfzD_cart_items') as $data)
+                                    @php
+                                        $addData[] = $data->id;
+                                    @endphp
+                                @endforeach
+                            @endif
+
                             <table id="example" class="table align-items-center">
                                 <thead class="thead-light">
                                 <tr>
@@ -74,50 +86,115 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($devices as $item)
-                                    <tr>
-                                        <form action="{{ route('cart.store') }}" method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            <td><input type="text" value="{{ $item->device_num }}" name="id" readonly>
-                                            </td>
-                                            <td><input type="text" value="{{ $item->device_name }}" name="name"
-                                                       readonly>
-                                            </td>
-                                            <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
-                                            <input type="hidden" value="1" name="price" readonly>
-                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                            <input type="hidden" value="1" name="quantity" readonly>
-
-                                            <td>
-                                                <button class="btn btn-primary btn-sm">เลือก</button>
-                                            </td>
-                                        </form>
-                                    </tr>
+                                    @if($addData)
+                                        @if(!in_array($item->device_num, $addData))
+                                            <tr>
+                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                      enctype="multipart/form-data">
+                                                    @csrf
+                                                    <td><input type="text" value="{{ $item->device_num }}" name="id"
+                                                               readonly>
+                                                    </td>
+                                                    <td><input type="text" value="{{ $item->device_name }}" name="name"
+                                                               readonly>
+                                                    </td>
+                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly>
+                                                    </td>
+                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                                    <input type="hidden" value="{{ $item->image }}" name="image"
+                                                           readonly>
+                                                    <input type="hidden" value="1" name="quantity" readonly>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm">เลือก</button>
+                                                    </td>
+                                                </form>
+                                            </tr>
+                                        @endif
+                                    @else
+                                        <tr>
+                                            <form action="{{ route('cart.store') }}" method="POST"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <td><input type="text" value="{{ $item->device_num }}" name="id"
+                                                           readonly>
+                                                </td>
+                                                <td><input type="text" value="{{ $item->device_name }}" name="name"
+                                                           readonly>
+                                                </td>
+                                                <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                                <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                                <input type="hidden" value="1" name="quantity" readonly>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">เลือก</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 @foreach ($stocks as $item)
-                                    <tr>
-                                        <form action="{{ route('cart.store') }}" method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly>
-                                            </td>
-                                            <td><input type="text" value="{{ $item->stock_name }}" name="name" readonly>
-                                            </td>
-                                            <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
-                                            <input type="hidden" value="1" name="price" readonly>
-                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                            <input type="hidden" value="1" name="quantity" readonly>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm">เลือก</button>
-                                            </td>
-                                        </form>
-                                    </tr>
+                                    @if($item->stock_status == 0)
+                                        @if($addData)
+                                            @if(!in_array($item->stock_num, $addData))
+                                                <tr>
+                                                    <form action="{{ route('cart.store') }}" method="POST"
+                                                          enctype="multipart/form-data">
+                                                        @csrf
+                                                        <td><input type="text" value="{{ $item->stock_num }}" name="id"
+                                                                   readonly>
+                                                        </td>
+                                                        <td><input type="text" value="{{ $item->stock_name }}"
+                                                                   name="name"
+                                                                   readonly>
+                                                        </td>
+                                                        <td><img src="{{ $item->image }}" width="80" height="80"
+                                                                 readonly>
+                                                        </td>
+                                                        <input type="hidden" value="{{ $item->id }}" name="price"
+                                                               readonly>
+                                                        <input type="hidden" value="{{ $item->image }}" name="image"
+                                                               readonly>
+                                                        <input type="hidden" value="1" name="quantity" readonly>
+                                                        <td>
+                                                            <button class="btn btn-primary btn-sm">เลือก</button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                            @endif
+                                        @else
+                                            <tr>
+                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                      enctype="multipart/form-data">
+                                                    @csrf
+                                                    <td><input type="text" value="{{ $item->stock_num }}" name="id"
+                                                               readonly>
+                                                    </td>
+                                                    <td><input type="text" value="{{ $item->stock_name }}"
+                                                               name="name"
+                                                               readonly>
+                                                    </td>
+                                                    <td><img src="{{ $item->image }}" width="80" height="80"
+                                                             readonly>
+                                                    </td>
+                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                                    <input type="hidden" value="{{ $item->image }}" name="image"
+                                                           readonly>
+                                                    <input type="hidden" value="1" name="quantity" readonly>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm">เลือก</button>
+                                                    </td>
+                                                </form>
+                                            </tr>
+                                        @endif
+                                    @endif
                                 @endforeach
                                 @foreach ($disposables as $item)
 
-                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                        <td><input type="text" value="{{ $item->disposable_num }}" name="id" readonly>
+                                    <form action="{{ route('cart.store') }}" method="POST"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <td><input type="text" value="{{ $item->disposable_num }}" name="id"
+                                                   readonly>
                                         </td>
                                         <td><input type="text" value="{{ $item->disposable_name }}" name="name"
                                                    readonly>
@@ -127,7 +204,8 @@
                                         <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                         <input type="hidden" value="1" name="quantity" readonly>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    data-toggle="modal"
                                                     data-target="#exampleModal">เลือก
                                             </button>
                                         </td>
@@ -153,14 +231,13 @@
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">ปิด
                                                         </button>
-                                                            <button class="btn btn-primary">ตกลง</button>
+                                                        <button class="btn btn-primary">ตกลง</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                </form>
+                                    </form>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -190,7 +267,7 @@
                                         @csrf
                                         <table id="myTable">
                                             <thead>
-                                            <!-- {{(session('4yTlTDKu3oJOfzD_cart_items'))}} -->
+                                            {{--                                           {{(dd(session('4yTlTDKu3oJOfzD_cart_items')) )}}--}}
                                             <tr>
                                                 <th>รหัสพัสดุ</th>
                                                 <th>ชื่อพัสดุ</th>
@@ -202,19 +279,22 @@
                                                 <tbody id="borrowItem">
                                                 <tr>
                                                     <td>
-                                                        <input type="text" value="{{ $item->id }}" name="borrow_id"
+                                                        <input type="text" value="{{ $item->id }}"
+                                                               name="borrow_list_id[]"
                                                                readonly style="width: 60px">
                                                     </td>
                                                     <td><input type="text" value="{{ $item->name }}"
                                                                name="borrow_name[]"
-                                                               readonly style="width: 90px"></td>
-                                                    <td>
+                                                               readonly style="width: 60px"></td>
+                                                    <input type="hidden" value="{{ $item->price }}" name="borrow_id[]"
+                                                           readonly>
+                                                    <td class="flex">
                                                         <form action="{{ route('cart.update') }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id" value="{{ $item->id}}">
                                                             <input type="number" name="quantity"
                                                                    value="{{ $item->quantity }}"
-                                                                   class="w-6 text-center bg-gray-300"/>
+                                                                   class="w-6 text-center bg-gray-100"/>
                                                             <button type="submit"
                                                                     class="btn btn-warning btn-sm">แก้ไข
                                                             </button>
