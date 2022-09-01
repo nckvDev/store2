@@ -59,33 +59,47 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel"> รายการยืม </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        @foreach($row->borrow_name as $item)
-                                                            <div>{{ $item }}</div>
-                                                        @endforeach
+                                                        <div class="mb-4">
+                                                            {{
+                                                                \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('LLL')
+                                                            }}
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                @foreach($row->borrow_list_id as $item)
+                                                                    <div class="mb-2 text-primary"> {{ $item }} </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="col-lg-8">
+                                                                @foreach($row->borrow_name as $item)
+                                                                    <div class="mb-2"> {{ $item }} </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{route('update',$row->id)}}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="borrow_status" value="1">
-                                                            <button type="submit"
-                                                                    class="btn btn-primary btn-sm">อนุมัติ
-                                                            </button>
-                                                        </form>
-                                                        <form action="{{route('update',$row->id)}}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="borrow_status" value="0">
-                                                            <button type="submit"
-                                                                    class="btn btn-danger btn-sm">ไม่อนุมัติ
-                                                            </button>
-                                                        </form>
-                                                    </div>
+{{--                                                    <div class="modal-footer">--}}
+{{--                                                        <form action="{{route('update',$row->id)}}" method="post">--}}
+{{--                                                            @csrf--}}
+{{--                                                            <input type="hidden" name="borrow_status" value="1">--}}
+{{--                                                            <button type="submit"--}}
+{{--                                                                    class="btn btn-primary btn-sm">อนุมัติ--}}
+{{--                                                            </button>--}}
+{{--                                                        </form>--}}
+{{--                                                        <form action="{{route('update',$row->id)}}" method="post">--}}
+{{--                                                            @csrf--}}
+{{--                                                            <input type="hidden" name="borrow_status" value="0">--}}
+{{--                                                            <button type="submit"--}}
+{{--                                                                    class="btn btn-danger btn-sm">ไม่อนุมัติ--}}
+{{--                                                            </button>--}}
+{{--                                                        </form>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                             </div>
                                         </div>

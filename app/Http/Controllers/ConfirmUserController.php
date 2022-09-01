@@ -11,7 +11,7 @@ class ConfirmUserController extends Controller
 {
     public function index()
     {
-        $conforms = Borrow::where('borrow_status',2)->get();
+        $conforms = Borrow::where('borrow_status', 2)->get();
         return view('admin.form.detail', compact('conforms'));
     }
 }

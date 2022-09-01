@@ -3,46 +3,29 @@
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--9">
-
-<<<<<<< HEAD
         <div class="row">
             <div class="col-xl-12 mb-4">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <h3 class="mb-0">รายการวัสดุ</h3>
                             </div>
-                            <div class="col-6 text-right">
+                            <div class="col-8 text-right">
+                                <a href="{{asset('pdf/stock.pdf')}}" target="_blank"
+                                   class="btn btn-sm btn-outline-info">ตัวอย่างการนำเข้าข้อมูล</a>
                                 <a href="{{ route('stock-import') }}" class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
                                     XLSX & CSV</a>
                                 <a href="{{ route('report_xlsm') }}" class="btn btn-sm btn-outline-danger">รายงาน XLSX &
                                     CSV</a>
                                 <a href="{{ route('add_stock') }}" class="btn btn-sm btn-primary">เพิ่มวัสดุ</a>
                             </div>
-=======
-    <div class="row">
-        <div class="col-xl-12 mb-4">
-            <div class="card shadow">
-                <div class="card-header border-0">
-                    <div class="row align-items-center">
-                        <div class="col-7">
-                            <h3 class="mb-0">รายการวัสดุ</h3>
-                        </div>
-                        <div class="col-5 text-right">
-                            <a href="{{asset('pdf/stock.pdf')}}" target="_blank"
-                                class="btn btn-sm btn-outline-info">ตัวอย่างการนำเข้าข้อมูล</a>
-                            <a href="{{ route('stock-import') }}" class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
-                                XLSX & CSV</a>
-                            <a href="{{ route('report_xlsm') }}" class="btn btn-sm btn-outline-danger">รายงาน XLSX &
-                                CSV</a>
-                            <a href="{{ route('add_stock') }}" class="btn btn-sm btn-primary">เพิ่มวัสดุ</a>
->>>>>>> 5058bdd905fe714c9f204c36bf3e30ae7c6b9fbe
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xl-12 mb-4">
                 <div class="card bg-secondary shadow">
@@ -62,14 +45,13 @@
                             </thead>
                             <tbody>
                             @foreach($stocks as $row)
-<<<<<<< HEAD
                                 <tr>
                                     <td>{{ $row->stock_num }}</td>
                                     <td>{{ $row->stock_name }}</td>
                                     <td>{{ $row->stock_amount }}</td>
                                     @if($row->stock_status == 0)
                                         <td>
-                                            <div class="rounded text-white bg-green text-center">ปกติ</div>
+                                            <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
                                         </td>
                                     @elseif($row->stock_status == 1)
                                         <td>
@@ -96,38 +78,6 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
-=======
-                            <tr>
-                                <td>{{ $row->stock_num }}</td>
-                                <td>{{ $row->stock_name }}</td>
-                                <td>{{ $row->stock_amount }}</td>
-                                @if($row->stock_status == 1)
-                                <td>
-                                    <div class="rounded text-white bg-green text-center">ปกติ</div>
-                                </td>
-                                @endif
-                                @if($row->image == 0)
-                                <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
-                                        width="80" height="80" /></td>
-                                @else
-                                <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80"
-                                        height="80" />
-                                    @endif
-                                </td>
-                                <td>{{ $row->position }}</td>
-                                <td>{{ $row->stock_type->type_detail }}</td>
-                                <td class="text-center">
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item"
-                                                href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                            <a class="dropdown-item" onclick="return confirm('ต้องการลบข้อมูล?');"
-                                                href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
->>>>>>> 5058bdd905fe714c9f204c36bf3e30ae7c6b9fbe
                                         </div>
                                     </td>
                                 </tr>

@@ -113,7 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Form
         Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
-        Route::post('confirmform/update/{id}', [ConfirmFormController::class, 'update'])->name('update');
+        Route::post('confirmform/update/{id}', [ConfirmFormController::class, 'update']);
         Route::post('confirmform/add', [ConfirmFormController::class, 'create'])->name('form-add');
 
         Route::get('confirmuser', [ConfirmUserController::class, 'index'])->name('form-detail');
@@ -158,7 +158,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'role:personnel'], function () {
         Route::get('personnel_dashboard', [DashboardController::class, 'index'])->name('personnel_dashboard');
-        Route::post('personnel_dashboard/update/{id}', [DashboardController::class, 'update'])->name('update');
+        Route::post('personnel_dashboard/update/{id}', [DashboardController::class, 'update']);
 
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
         Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrow;
 use App\Models\Stock;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Conform;
+use Illuminate\Support\Facades\DB;
 
 class ConfirmFormController extends Controller
 {
     public function index()
     {
-        $conforms = Borrow::where('borrow_status', 0)->get();
+        $conforms = Borrow::where('borrow_status', 1)->get();
         return view('admin.form.index', compact('conforms'));
     }
 
@@ -34,11 +34,16 @@ class ConfirmFormController extends Controller
 
     public function update(Request $request, $id)
     {
-//        dd($request['borrow_list_id']);
-
         Borrow::find($id)->update([
-            'borrow_status' => $request->borrow_status,
+            'borrow_status' => $request['borrow_status'],
         ]);
+
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
+                'stock_status' => $request['borrow_status']
+            ]);
+        }
+
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
 }

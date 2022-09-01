@@ -237,17 +237,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('managerole*') ?  'active text-purple' : '' }}"
                         href="{{ route('manage-role') }}">
-<<<<<<< HEAD
-                        <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('dataimport*') ?  'active text-pink' : '' }}"
-                        href="{{ route('data-import') }}">
-                        <i class="ni ni-cloud-download-95 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
-=======
                         <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการข้อมูลผู้ใช้งาน') }}
->>>>>>> 5058bdd905fe714c9f204c36bf3e30ae7c6b9fbe
                     </a>
                 </li>
                 <li class="nav-item ">

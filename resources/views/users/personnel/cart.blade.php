@@ -288,6 +288,8 @@
                                                                readonly style="width: 60px"></td>
                                                     <input type="hidden" value="{{ $item->price }}" name="borrow_id[]"
                                                            readonly>
+                                                    <input type="hidden" value="1" name="borrow_status"
+                                                           readonly>
                                                     <td class="flex">
                                                         <form action="{{ route('cart.update') }}" method="POST">
                                                             @csrf

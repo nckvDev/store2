@@ -75,10 +75,11 @@ class CartController extends Controller
     public function saveCart(Request $request)
     {
         $user_id = Auth::user()['id'];
-        dd($request['borrow_list_id']);
+
         Borrow::create([
             'borrow_list_id' => $request['borrow_list_id'],
             'borrow_name' => $request['borrow_name'],
+            'borrow_status' => $request['borrow_status'],
             'user_id' => $user_id,
         ]);
 

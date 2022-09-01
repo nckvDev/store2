@@ -7,10 +7,10 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
-                        <div class="col-8">
+                        <div class="col-4">
                             <h3 class="mb-0">จัดการข้อมูลผู้ใช้งาน</h3>
                         </div>
-                        <div class="col-4 text-right">
+                        <div class="col-8 text-right">
                             <a href="{{asset('pdf/test.pdf')}}" target="_blank"
                                 class="btn btn-sm btn-outline-info">ตัวอย่างการนำเข้าข้อมูลผู้ใช้งาน</a>
                             <a href="{{ route('data-import') }}"
