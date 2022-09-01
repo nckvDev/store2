@@ -3,12 +3,23 @@
 @include('layouts.headers.cards')
 <div class="container-fluid mt--9">
     <div class="row">
-        <div class="col-xl-12">
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">จัดการสิทธิ์ผู้ใช้งาน</li>
-                </ol>
-            </nav>
+        <div class="col-xl-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">จัดการข้อมูลผู้ใช้งาน</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{{asset('pdf/test.pdf')}}" target="_blank"
+                                class="btn btn-sm btn-outline-info">ตัวอย่างการนำเข้าข้อมูลผู้ใช้งาน</a>
+                            <a href="{{ route('data-import') }}"
+                                class="btn btn-sm btn-outline-success">นำเข้าข้อมูลผู้ใช้งาน
+                                .XLSX & .CSV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -20,12 +31,12 @@
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>รหัสผู้ใช้งาน</th>
+                                <th>คำนำหน้า</th>
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
                                 <th>อีเมล</th>
                                 <th>สิทธิ์ปัจจุบัน</th>
-                                <th>เปลี่ยนสิทธิ์</th>
-                                <th></th>
+                                <th>จัดการข้อมูล</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,22 +44,25 @@
                             <tr>
                                 <td>{{ $row->id}}</td>
                                 <td>{{ $row->user_id}}</td>
+                                <td>{{ $row->prefix_name}}</td>
                                 <td>{{ $row->firstname}}</td>
                                 <td>{{ $row->lastname}}</td>
                                 <td>{{ $row->email}}</td>
                                 <td>{{ $row->role}}</td>
-                                <td>
-                                    <form action="{{route('role-update',$row->id)}}" method="post">
-                                        @csrf
-                                        <select class="form-control form-control-sm" name="role">
-                                            <option>กรุณาเลือกสิทธิ์</option>
-                                            <option value="admin" name="role">admin</option>
-                                            <option value=" personnel" name="role">personnel</option>
-                                            <option value=" student" name="role">student</option>
-                                        </select>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <a class="dropdown-item"
+                                                href="{{ url('/managerole/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                            <a class="dropdown-item" onclick="return confirm('ต้องการลบข้อมูล?');"
+                                                href="{{ url('/managerole/delete'.$row->id) }}">ลบข้อมูล</a>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td><button type="submit" class="btn btn-primary">ยืนยัน</button></td>
-                                </form>
                             </tr>
                             @endforeach
                         </tbody>

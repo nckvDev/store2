@@ -45,7 +45,7 @@ class DepartmentController extends Controller
     {
         $request->validate(
             [
-                'department_name'  => 'required|max:255'
+                'department_name'  => 'required|max:255','unique:departments'
             ],
             [
                 'department_name.required' => "กรุณาป้อนชื่อรูปภาพ",

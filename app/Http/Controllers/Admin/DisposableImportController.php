@@ -15,6 +15,6 @@ class DisposableImportController extends Controller
 
     public function import(Request $request){
         Excel::import(new DisposableImport,$request->file);
-        return redirect()->back()->with('success', 'เพิ่มข้อมูลสำเร็จ');
+        return redirect()->route('disposable-import')->with('success', 'เพิ่มข้อมูลสำเร็จ');
     }
 }

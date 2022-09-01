@@ -237,13 +237,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('managerole*') ?  'active text-indigo' : '' }}"
                         href="{{ route('manage-role') }}">
-                        <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการสิทธิ์ผู้ใช้งาน') }}
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('dataimport*') ?  'active text-indigo' : '' }}"
-                        href="{{ route('data-import') }}">
-                        <i class="ni ni-cloud-download-95 text-pink"> </i> {{ __('นำเข้าข้อมูลผู้ใช้งาน') }}
+                        <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการข้อมูลผู้ใช้งาน') }}
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -267,13 +261,13 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirmform*') ? 'active text-indigo' : '' }}"
                         href="{{ route('confirmform') }}">
-                        <i class="ni ni-single-copy-04 text-gray "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
+                        <i class="ni ni-single-copy-04 text-pink "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirmuser*') ?  'active text-indigo' : '' }}"
                         href="{{ route('form-detail') }}">
-                        <i class="ni ni-curved-next text-black"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
+                        <i class="ni ni-curved-next text-gray"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>
                 </li>
                 {{--                <li class="nav-item ">--}}
