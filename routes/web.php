@@ -76,7 +76,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Manage Role
         Route::get('managerole', [\App\Http\Controllers\Admin\ManageRoleController::class, 'index'])->name('manage-role');
-        Route::post('managerole/update/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'update'])->name('role-update');
+        Route::post('managerole/update/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'update']);
+        Route::get('managerole/edit/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'edit']);
+        Route::get('managerole/delete/{id}', [\App\Http\Controllers\Admin\ManageRoleController::class, 'delete']);
 
         // Department
         Route::get('department', [\App\Http\Controllers\Admin\DepartmentController::class, 'index'])->name('department');

@@ -20,18 +20,18 @@ class GroupController extends Controller
     {
         $request->validate(
             [
-                'group_name' => 'required|unique:groups|max:255'
+                'group_name' => 'required|unique:groups|max:255','unique:groups',
             ],
             [
-                'group_name.required' => 'กรุณาป้อนชื่อแผนก',
-                'group_name.max'      => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'group_name.unique'   => "มีข้อมูลชื่อบริการนี้ในฐานข้อมูลแล้ว"
+                'group_name.required' => 'กรุณาป้อนชื่อกลุ่มเรียน',
+                'group_name.max'      => 'ห้ามป้อนเกิน 255 ตัวอักษร',
+                'group_name.unique'   => 'มีข้อมูลชื่อบริการนี้ในฐานข้อมูลแล้ว',
             ]
         );
         
         Group::insert([
            'group_name' => $request->group_name,
-           'department_name' => $request->department_name,
+           'department_name' => $request->input('department_name'),
            'created_at'  => Carbon::now()
         ]);
         

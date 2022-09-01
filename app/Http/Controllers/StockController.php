@@ -68,7 +68,7 @@ class StockController extends Controller
         ]);
 
         $stockImage->move($upload_location, $imgName);
-        return redirect()->back()->with('success', 'บันทึกข้อมูลอุปกรณ์เรียบร้อย');
+        return redirect()->route('stock')->with('success', 'บันทึกข้อมูลอุปกรณ์เรียบร้อย');
     }
 
     public function edit($id)
@@ -116,6 +116,15 @@ class StockController extends Controller
             ]);
 
             $old_image = $request->old_image;
+            if($old_image == null){
+                $upload_location = 'images/stocks/';
+                $full_path = $upload_location . $imgName;
+                Stock::find($id)->update([
+                    'image' => $full_path,
+                ]);
+                $deviceImage->move($upload_location, $imgName);
+                return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+            }
             unlink($old_image);
 
             $stockImage->move($upload_location, $imgName);

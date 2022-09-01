@@ -3,7 +3,6 @@
 @section('content')
 @include('layouts.headers.cards')
 <div class="container-fluid mt--9">
-
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card shadow">
@@ -34,10 +33,10 @@
                                 <th>รหัสวัสดุสิ้นเปลือง</th>
                                 <th>ชื่อวัสดุสิ้นเปลือง</th>
                                 <th>จำนวนทั้งหมด</th>
-                                <th scope="col" class="text-center">สถานะ</th>
-                                <th scope="col" class="text-center">รูปภาพ</th>
+                                <th class="text-center">สถานะ</th>
+                                <th class="text-center">รูปภาพ</th>
                                 <th>ประเภท</th>
-                                <th>จัดการ</th>
+                                <th class="text-center">จัดการข้อมูล</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,10 +50,16 @@
                                     <div class="rounded text-white bg-green text-center">ปกติ</div>
                                 </td>
                                 @endif
+                                @if($row->image == 0)
+                                <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
+                                        width="80" height="80" /></td>
+                                @else
                                 <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80"
-                                        height="80" /></td>
+                                        height="80" />
+                                    @endif
+                                </td>
                                 <td>{{ $row->disposable_type->type_detail }}</td>
-                                <td class="text-right">
+                                <td class="text-center">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +68,7 @@
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item"
                                                 href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                            <a class="dropdown-item"
+                                            <a class="dropdown-item" onclick="return confirm('ต้องการลบข้อมูล?');"
                                                 href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>

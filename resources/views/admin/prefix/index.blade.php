@@ -46,7 +46,8 @@
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item"
                                                 href="{{ url('/prefix/edit/'.$row->id) }}">แก้ไข</a>
-                                            <a class="dropdown-item" href="{{ url('/prefix/delete/'.$row->id) }}">ลบ</a>
+                                            <a class="dropdown-item" href="{{ url('/prefix/delete/'.$row->id) }}"
+                                                onclick="return confirm('ต้องการลบข้อมูล?');">ลบ</a>
                                         </div>
                                     </div>
                                 </td>
