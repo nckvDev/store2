@@ -189,55 +189,54 @@
                                     @endif
                                 @endforeach
                                 @foreach ($disposables as $item)
-                                    <tr>
-                                        <form action="{{ route('cart.store') }}" method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            <td><input type="text" value="{{ $item->disposable_num }}" name="id"
-                                                       readonly>
-                                            </td>
-                                            <td><input type="text" value="{{ $item->disposable_name }}" name="name"
-                                                       readonly>
-                                            </td>
-                                            <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
-                                            <input type="hidden" value="1" name="price" readonly>
-                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                            <input type="hidden" value="1" name="quantity" readonly>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm"
-                                                        data-toggle="modal"
-                                                        data-target="#exampleModal">เลือก
-                                                </button>
-                                            </td>
 
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="name">
-                                                                ระบุจำนวน</h3>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <input type="text" value="" name="quantity" id="name"
-                                                                   class="form-control form-control-muted"
-                                                                   placeholder="กรุณาใส่จำนวน">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">ปิด
-                                                            </button>
-                                                            <button class="btn btn-primary">ตกลง</button>
-                                                        </div>
+                                    <form action="{{ route('cart.store') }}" method="POST"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <td><input type="text" value="{{ $item->disposable_num }}" name="id"
+                                                   readonly>
+                                        </td>
+                                        <td><input type="text" value="{{ $item->disposable_name }}" name="name"
+                                                   readonly>
+                                        </td>
+                                        <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                        <input type="hidden" value="1" name="price" readonly>
+                                        <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                        <input type="hidden" value="1" name="quantity" readonly>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal">เลือก
+                                            </button>
+                                        </td>
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="name">
+                                                            ระบุจำนวน</h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="text" value="" name="quantity" id="name"
+                                                               class="form-control form-control-muted"
+                                                               placeholder="กรุณาใส่จำนวน">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">ปิด
+                                                        </button>
+                                                        <button class="btn btn-primary">ตกลง</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </tr>
+                                        </div>
+                                    </form>
                                 @endforeach
                                 </tbody>
                             </table>
