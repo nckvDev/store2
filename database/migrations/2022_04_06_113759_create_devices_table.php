@@ -17,7 +17,7 @@ class CreateDevicesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('device_num');
             $table->string('device_name');
-            $table->integer('device_status')->default(1);
+            $table->integer('device_status')->default(0);
             $table->unsignedBigInteger('type_id');
             $table->string('location');
             $table->string('image');

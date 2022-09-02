@@ -43,10 +43,18 @@
                             <tr>
                                 <td>{{ $row->device_num }}</td>
                                 <td>{{ $row->device_name }}</td>
-                                @if($row->device_status == 1)
+                                @if($row->device_status == 0)
                                 <td>
-                                    <div class="rounded text-white bg-green text-center" style="width:50%">ปกติ</div>
+                                    <div class="rounded text-white bg-green text-center" >พร้อมใช้งาน</div>
                                 </td>
+                                @elseif($row->device_status == 1)
+                                    <td>
+                                        <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
+                                    </td>
+                                @elseif($row->device_status == 2)
+                                    <td>
+                                        <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                    </td>
                                 @endif
                                 @if($row->image == 0)
                                 <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
@@ -73,9 +81,6 @@
                                         </div>
                                     </div>
                                 </td>
-
-
-
                             </tr>
                             @endforeach
                         </tbody>

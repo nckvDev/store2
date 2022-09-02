@@ -81,55 +81,71 @@
                                     <th>รหัสพัสดุ</th>
                                     <th>ชื่อพัสดุ</th>
                                     <th>รูปภาพ</th>
+                                    <th>จำนวน</th>
                                     <th>เลือก</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($devices as $item)
-                                    @if($addData)
-                                        @if(!in_array($item->device_num, $addData))
+                                    @if($item->device_status == 0)
+                                        @if($addData)
+                                            @if(!in_array($item->device_num, $addData))
+                                                <tr>
+                                                    <form action="{{ route('cart.store') }}" method="POST"
+                                                          enctype="multipart/form-data">
+                                                        @csrf
+                                                        <td><input type="text" value="{{ $item->device_num }}" name="id"
+                                                                   readonly style="width: 60px">
+                                                        </td>
+                                                        <td><input type="text" value="{{ $item->device_name }}"
+                                                                   name="name"
+                                                                   readonly style="width: 60px">
+                                                        </td>
+                                                        <td><img src="{{ $item->image }}" width="50" height="50"
+                                                                 readonly>
+                                                        </td>
+                                                        <input type="hidden" value="{{ $item->id }}" name="price"
+                                                               readonly>
+                                                        <input type="hidden" value="{{ $item->image }}" name="image"
+                                                               readonly>
+                                                        <input type="hidden" value="1" name="quantity" readonly>
+                                                        <td>
+                                                            <input type="text" value="1" name="price" readonly
+                                                                   style="width: 60px">
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-primary btn-sm">เลือก</button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                            @endif
+                                        @else
                                             <tr>
                                                 <form action="{{ route('cart.store') }}" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->device_num }}" name="id"
-                                                               readonly>
+                                                               readonly style="width: 60px">
                                                     </td>
                                                     <td><input type="text" value="{{ $item->device_name }}" name="name"
-                                                               readonly>
+                                                               readonly style="width: 60px">
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly>
+                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly>
                                                     </td>
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            readonly>
                                                     <input type="hidden" value="1" name="quantity" readonly>
                                                     <td>
+                                                        <input type="text" value="1" name="price" readonly
+                                                               style="width: 60px">
+                                                    </td>
+                                                    <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
                                                 </form>
                                             </tr>
                                         @endif
-                                    @else
-                                        <tr>
-                                            <form action="{{ route('cart.store') }}" method="POST"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                <td><input type="text" value="{{ $item->device_num }}" name="id"
-                                                           readonly>
-                                                </td>
-                                                <td><input type="text" value="{{ $item->device_name }}" name="name"
-                                                           readonly>
-                                                </td>
-                                                <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
-                                                <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                                <input type="hidden" value="1" name="quantity" readonly>
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm">เลือก</button>
-                                                </td>
-                                            </form>
-                                        </tr>
                                     @endif
                                 @endforeach
                                 @foreach ($stocks as $item)
@@ -141,11 +157,11 @@
                                                           enctype="multipart/form-data">
                                                         @csrf
                                                         <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                                   readonly>
+                                                                   readonly style="width: 60px">
                                                         </td>
                                                         <td><input type="text" value="{{ $item->stock_name }}"
                                                                    name="name"
-                                                                   readonly>
+                                                                   readonly style="width: 60px">
                                                         </td>
                                                         <td><img src="{{ $item->image }}" width="80" height="80"
                                                                  readonly>
@@ -153,8 +169,13 @@
                                                         <input type="hidden" value="{{ $item->id }}" name="price"
                                                                readonly>
                                                         <input type="hidden" value="{{ $item->image }}" name="image"
+                                                               width="50" height="50"
                                                                readonly>
                                                         <input type="hidden" value="1" name="quantity" readonly>
+                                                        <td>
+                                                            <input type="text" value="1" name="price"
+                                                                   readonly style="width: 60px">
+                                                        </td>
                                                         <td>
                                                             <button class="btn btn-primary btn-sm">เลือก</button>
                                                         </td>
@@ -167,19 +188,23 @@
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                               readonly>
+                                                               readonly style="width: 60px">
                                                     </td>
                                                     <td><input type="text" value="{{ $item->stock_name }}"
                                                                name="name"
-                                                               readonly>
+                                                               readonly style="width: 60px">
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80"
+                                                    <td><img src="{{ $item->image }}" width="50" height="50"
                                                              readonly>
                                                     </td>
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            readonly>
                                                     <input type="hidden" value="1" name="quantity" readonly>
+                                                    <td>
+                                                        <input type="text" value="1" name="price" readonly
+                                                               style="width: 60px">
+                                                    </td>
                                                     <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
@@ -194,15 +219,19 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <td><input type="text" value="{{ $item->disposable_num }}" name="id"
-                                                       readonly>
+                                                       readonly style="width: 60px">
                                             </td>
                                             <td><input type="text" value="{{ $item->disposable_name }}" name="name"
-                                                       readonly>
+                                                       readonly style="width: 60px">
                                             </td>
-                                            <td><img src="{{ $item->image }}" width="80" height="80" readonly></td>
+                                            <td><img src="{{ $item->image }}" width="50" height="50" readonly></td>
                                             <input type="hidden" value="1" name="price" readonly>
                                             <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                             <input type="hidden" value="1" name="quantity" readonly>
+                                            <td>
+                                                <input type="text" value="{{ $item->disposable_amount }}" name="price"
+                                                       readonly style="width: 60px">
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm"
                                                         data-toggle="modal"

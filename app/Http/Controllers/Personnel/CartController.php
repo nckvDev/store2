@@ -89,6 +89,12 @@ class CartController extends Controller
             ]);
         }
 
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
+                'device_status' => 1
+            ]);
+        }
+
         \Cart::clear();
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
