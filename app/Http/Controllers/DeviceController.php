@@ -51,7 +51,7 @@ class DeviceController extends Controller
             'device_num' => $request->device_num,
             'device_name' => $request->device_name,
             'type_id' => $request->type_id,
-            'location' => $request->location,
+            'device_amount' => $request->device_amount,
             'image' => $full_path,
             'device_year' => $request->device_year,
             'created_at' => Carbon::now()
@@ -95,7 +95,7 @@ class DeviceController extends Controller
                 'device_num' => $request->device_num,
                 'device_name' => $request->device_name,
                 'type_id' => $request->type_id,
-                'location' => $request->location,
+                'device_amount' => $request->device_amount,
                 'image' => $full_path,
                 'device_year' => $request->device_year,
                 'created_at' => Carbon::now()
@@ -120,7 +120,7 @@ class DeviceController extends Controller
                 'device_num' => $request->device_num,
                 'device_name' => $request->device_name,
                 'type_id' => $request->type_id,
-                'location' => $request->location,
+                'device_amount' => $request->device_amount,
                 'device_year' => $request->device_year,
                 'created_at' => Carbon::now()
             ]);

@@ -30,7 +30,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="device_num">{{ __('รหัสวัสดุ') }}</label>
                                         <input type="text" name="device_num" value="{{ $devices->device_num }}"
-                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }}  placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('รหัสวัสดุ') }}" autofocus>
                                         @if ($errors->has('device_num'))
                                         <span class="invalid-feedback" role="alert">
@@ -41,9 +42,11 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="device_name">{{ __('ชื่อวัสดุ') }}</label>
+                                        <label class="form-control-label"
+                                            for="device_name">{{ __('ชื่อวัสดุ') }}</label>
                                         <input type="text" name="device_name" value="{{ $devices->device_name }}"
-                                            class="form-control form-control-alternative{{ $errors->has('device_name') ? ' is-invalid' : '' }}  placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('device_name') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ชื่อวัสดุ') }}">
                                         @if ($errors->has('device_name'))
                                         <span class="invalid-feedback" role="alert">
@@ -58,7 +61,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
                                         <input type="file" name="image" value="{{ $devices->image }}"
-                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}  placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}">
                                         <input type="hidden" name="old_image" value="{{ $devices->image }}">
                                         @if ($errors->has('image'))
@@ -73,13 +77,15 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="location">{{ __('ตำแหน่ง') }}</label>
-                                        <input type="text" name="location" value="{{ $devices->location }}"
-                                            class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }}  placeholder="
+                                        <label class="form-control-label"
+                                            for="device_amount">{{ __('จำนวนทั้งหมด') }}</label>
+                                        <input type="text" name="device_amount" value="{{ $devices->device_amount }}"
+                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}">
-                                        @if ($errors->has('location'))
+                                        @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('location') }}</strong>
+                                            <strong>{{ $errors->first('device_amount') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -123,12 +129,12 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="device_year">{{ __('ตำแหน่ง') }}</label>
+                                        <label class="form-control-label" for="device_year">{{ __('ปี') }}</label>
                                         <input type="text" name="device_year" value="{{ $devices->device_year }}"
-                                               class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }}  placeholder="
-                                        {{ __('ประเภท') }}">
+                                            class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }}  placeholder="
+                                            {{ __('ประเภท') }}">
                                         @if ($errors->has('device_year'))
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_year') }}</strong>
                                         </span>
                                         @endif

@@ -19,8 +19,6 @@ class CreateStocksTable extends Migration
             $table->integer('stock_amount');
             $table->integer('stock_status')->default(0);
             $table->string('image');
-            $table->string('position');
-            $table->integer('amount_minimum');
             $table->unsignedBigInteger('type_id');
             $table->string('stock_num');
             $table->integer('defective_stock')->default(0);

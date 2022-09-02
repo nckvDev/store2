@@ -31,8 +31,8 @@
                                 <th>รหัสครุภัณฑ์</th>
                                 <th>ชื่อครุภัณฑ์</th>
                                 <th>สถานะ</th>
+                                <th class="text-center">จำนวนทั้งหมด</th>
                                 <th class="text-center">รูปภาพ</th>
-                                <th>ตำแหน่ง</th>
                                 <th>ปี</th>
                                 <th>ประเภท</th>
                                 <th class="text-center">จัดการข้อมูล</th>
@@ -56,6 +56,7 @@
                                         <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                     </td>
                                 @endif
+                                <td class="text-center">{{ $row->device_amount }}</td>
                                 @if($row->image == 0)
                                 <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
                                         width="80" height="80" /></td>
@@ -64,7 +65,6 @@
                                         height="80" />
                                     @endif
                                 </td>
-                                <td>{{ $row->location }}</td>
                                 <td>{{ $row->device_year }}</td>
                                 <td>{{ $row->device_type->type_detail }}</td>
                                 <td class="text-center">

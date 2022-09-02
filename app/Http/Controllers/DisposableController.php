@@ -78,8 +78,8 @@ class DisposableController extends Controller
     {
         $request->validate(
             [
-                'disposable_num'  => 'required|unique:stocks|max:5',
-                'disposable_name' => 'required|unique:stocks|max:255',
+                'disposable_num'  => 'required|max:5',
+                'disposable_name' => 'required|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],

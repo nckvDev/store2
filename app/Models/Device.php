@@ -14,7 +14,7 @@ class Device extends Model
       'device_name',
       'device_status',
       'type_id',
-      'location',
+      'device_amount',
       'image',
       'device_year',
       'defective_device'
