@@ -14,8 +14,6 @@ class Stock extends Model
         'stock_amount',
         'stock_status',
         'image',
-        'position',
-        'amount_minimum',
         'type_id',
         'stock_num',
         'defective_stock'

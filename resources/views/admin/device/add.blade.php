@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-5">
+                                <div class="col-xl-8">
                                     <div class="form-group">
                                         <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
                                         <input type="file" name="image" value="{{ old('image') }}"
@@ -85,14 +85,15 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-5">
+                                <div class="col-xl-2">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="location">{{ __('ตำแหน่ง') }}</label>
-                                        <input type="text" name="location" value="{{ old('location') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }} ">
-                                        @if ($errors->has('location'))
+                                        <label class="form-control-label"
+                                            for="device_amount">{{ __('จำนวนทั้งหมด') }}</label>
+                                        <input type="text" name="device_amount" value="{{ old('device_amount') }}"
+                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
+                                        @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('location') }}</strong>
+                                            <strong>{{ $errors->first('device_amount') }}</strong>
                                         </span>
                                         @endif
                                     </div>

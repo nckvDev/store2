@@ -93,21 +93,6 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="position">{{ __('ตำแหน่ง') }}</label>
-                                        <input type="text" name="position" value="{{ $disposables->position }}"
-                                            class="form-control form-control-alternative{{ $errors->has('position') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
-                                        @if ($errors->has('position'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('position') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4">
-                                    <div class="form-group">
                                         <label class="form-control-label"
                                             for="amount_minimum">{{ __('จำนวนน้อยสุด') }}</label>
                                         <input type="number" name="amount_minimum"
@@ -121,7 +106,9 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="type_id">{{ __('ประเภท') }}</label>
                                         <select

@@ -87,34 +87,22 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="position">{{ __('ตำแหน่ง') }}</label>
-                                        <input type="text" name="position" value="{{ $stocks->position }}"
-                                            class="form-control form-control-alternative{{ $errors->has('position') ? ' is-invalid' : '' }}  placeholder="
+                                        <label class="form-control-label"
+                                            for="defective_stock">{{ __('ชำรุด') }}</label>
+                                        <input type="number" name="defective_stock"
+                                            value="{{ $stocks->defective_stock }}"
+                                            class="form-control form-control-alternative{{ $errors->has('defective_stock') ? ' is-invalid' : '' }}  placeholder="
                                             {{ __('ประเภท') }}">
-                                        @if ($errors->has('position'))
+                                        @if ($errors->has('defective_stock'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('position') }}</strong>
+                                            <strong>{{ $errors->first('defective_stock') }}</strong>
                                         </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="amount_minimum">{{ __('จำนวนน้อยสุด') }}</label>
-                                        <input type="number" name="amount_minimum" value="{{ $stocks->amount_minimum }}"
-                                            class="form-control form-control-alternative{{ $errors->has('amount_minimum') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
-                                        @if ($errors->has('amount_minimum'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('amount_minimum') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
+                                <div class="col-xl-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="type_id">{{ __('ประเภท') }}</label>
                                         <select
@@ -130,21 +118,6 @@
                                         @if ($errors->has('type_id'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('type_id') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="defective_stock">{{ __('ชำรุด') }}</label>
-                                        <input type="number" name="defective_stock"
-                                            value="{{ $stocks->defective_stock }}"
-                                            class="form-control form-control-alternative{{ $errors->has('defective_stock') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
-                                        @if ($errors->has('defective_stock'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('defective_stock') }}</strong>
                                         </span>
                                         @endif
                                     </div>

@@ -60,8 +60,6 @@ class StockController extends Controller
             'stock_name' => $request->stock_name,
             'stock_amount' => $request->stock_amount,
             'image' => $full_path,
-            'position' => $request->position,
-            'amount_minimum' => $request->amount_minimum,
             'type_id' => $request->type_id,
             'stock_num' => $request->stock_num,
             'created_at' => Carbon::now()
@@ -108,8 +106,6 @@ class StockController extends Controller
                 'stock_name' => $request->stock_name,
                 'stock_amount' => $request->stock_amount,
                 'image' => $full_path,
-                'position' => $request->position,
-                'amount_minimum' => $request->amount_minimum,
                 'type_id' => $request->type_id,
                 'defective_stock' => $request->defective_stock,
                 'updated_at'    => Carbon::now()
@@ -134,8 +130,6 @@ class StockController extends Controller
                 'stock_num' => $request->stock_num,
                 'stock_name' => $request->stock_name,
                 'stock_amount' => $request->stock_amount,
-                'position' => $request->position,
-                'amount_minimum' => $request->amount_minimum,
                 'type_id' => $request->type_id,
                 'defective_stock' => $request->defective_stock,
                 'updated_at'    => Carbon::now()

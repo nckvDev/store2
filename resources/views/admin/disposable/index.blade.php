@@ -32,8 +32,8 @@
                             <tr>
                                 <th>รหัสวัสดุสิ้นเปลือง</th>
                                 <th>ชื่อวัสดุสิ้นเปลือง</th>
-                                <th>จำนวนทั้งหมด</th>
                                 <th class="text-center">สถานะ</th>
+                                <th class="text-center">จำนวนทั้งหมด</th>
                                 <th class="text-center">รูปภาพ</th>
                                 <th>ประเภท</th>
                                 <th class="text-center">จัดการข้อมูล</th>
@@ -44,12 +44,12 @@
                             <tr>
                                 <td>{{ $row->disposable_num }}</td>
                                 <td>{{ $row->disposable_name }}</td>
-                                <td>{{ $row->disposable_amount }}</td>
                                 @if($row->disposable_status == 1)
                                 <td>
                                     <div class="rounded text-white bg-green text-center">ปกติ</div>
                                 </td>
                                 @endif
+                                <td class="text-center">{{ $row->disposable_amount }}</td>
                                 @if($row->image == 0)
                                 <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
                                         width="80" height="80" /></td>
