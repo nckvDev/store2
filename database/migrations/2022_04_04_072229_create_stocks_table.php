@@ -15,12 +15,12 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('stock_num');
             $table->string('stock_name');
             $table->integer('stock_amount');
             $table->integer('stock_status')->default(0);
             $table->string('image');
             $table->unsignedBigInteger('type_id');
-            $table->string('stock_num');
             $table->integer('defective_stock')->default(0);
             $table->timestamps();
 

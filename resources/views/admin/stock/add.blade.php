@@ -31,7 +31,8 @@
                                         <label class="form-control-label" for="stock_num">{{ __('รหัสวัสดุ') }}</label>
                                         <input type="text" name="stock_num"
                                             value="{{ old('stock_num') ? old('stock_num') : '' }}"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }} placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}" autofocus>
                                         @if ($errors->has('stock_num'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +45,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="stock_name">{{ __('ชื่อวัสดุ') }}</label>
                                         <input type="text" name="stock_name" value="{{ old('stock_name') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }} placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}">
                                         @if ($errors->has('stock_name'))
                                         <span class="invalid-feedback" role="alert">
@@ -58,7 +60,8 @@
                                         <label class="form-control-label"
                                             for="stock_amount">{{ __('จำนวนทั้งหมด') }}</label>
                                         <input type="number" name="stock_amount" value="{{ old('stock_amount') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }} placeholder="
+                                            class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}">
                                         @if ($errors->has('stock_amount'))
                                         <span class="invalid-feedback" role="alert">
@@ -73,7 +76,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
                                         <input type="file" name="image" value="{{ old('image') }}"
-                                            class="form-control {{ $errors->has('image') ? ' is-invalid' : '' }} placeholder="
+                                            class="form-control {{ $errors->has('image') ? ' is-invalid' : '' }}"
+                                            placeholder="
                                             {{ __('ประเภท') }}">
                                         @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">

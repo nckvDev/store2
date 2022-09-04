@@ -27,6 +27,15 @@
         <div class="col-xl-12 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-body">
+                    <h3>ประเภท</h3>
+                    <div class="form-group">
+                        <select class="form-control type" style="width:13%" name="type" id="type">
+                            <option value="">เลือกประเภทวัสดุสิ้นเปลือง</option>
+                            @foreach($types as $row)
+                            <option value="{{$row->id}}">{{$row->type_detail}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <table id="table_id" class="">
                         <thead>
                             <tr>
@@ -39,14 +48,22 @@
                                 <th class="text-center">จัดการข้อมูล</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="datalist">
                             @foreach($disposables as $row)
                             <tr>
                                 <td>{{ $row->disposable_num }}</td>
                                 <td>{{ $row->disposable_name }}</td>
-                                @if($row->disposable_status == 1)
+                                @if($row->disposable_status == 0)
                                 <td>
-                                    <div class="rounded text-white bg-green text-center">ปกติ</div>
+                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
+                                </td>
+                                @elseif($row->disposable_status == 1)
+                                <td>
+                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
+                                </td>
+                                @elseif($row->disposable_status == 2)
+                                <td>
+                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                 </td>
                                 @endif
                                 <td class="text-center">{{ $row->disposable_amount }}</td>
@@ -88,13 +105,11 @@
                     })
                     </script>
                     @endif
-                    <div class="mt-4">
-                        {{ $disposables->links() }}
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+    {{csrf_field()}}
 </div>
 @endsection
 @push('js')
@@ -126,6 +141,28 @@ $(function() {
     $('#button').click(function() {
         alert(table.rows('.selected').data().length + ' row(s) selected');
     });
+});
+
+$('#type').change(function() {
+    if ($(this).val() != '') {
+        var select = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "{{route('disposable.fetch')}}",
+            method: "POST",
+            data: {
+                select: select,
+                _token: _token
+            },
+            success: function(result) {
+                // $('.stockname').html(result);
+                {
+                    $("#datalist").html(result)
+                }
+            }
+        })
+    }
+
 });
 </script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

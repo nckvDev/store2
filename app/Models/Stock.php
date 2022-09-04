@@ -10,12 +10,12 @@ class Stock extends Model
     use HasFactory;
 
     protected $fillable = [
+        'stock_num',
         'stock_name',
         'stock_amount',
         'stock_status',
         'image',
         'type_id',
-        'stock_num',
         'defective_stock'
     ];
 

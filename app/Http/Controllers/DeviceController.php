@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DevicesExport;
 use App\Models\Device;
 use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class DeviceController extends Controller
 {
     public function index()
     {
+        $types = Type::all();
+        $types = DB::table('types')
+        ->orderBy('type_detail','asc')
+        ->get();
         $devices = Device::paginate(5);
-        return view('admin.device.index', compact('devices'));
+        return view('admin.device.index', compact('devices','types'));
     }
 
     public function add()
@@ -135,5 +142,71 @@ class DeviceController extends Controller
 
         Device::destroy($id);
         return redirect()->route('device')->with('success', 'ลบข้อมูลเรียบร้อย');
+    }
+
+    public function exportXlsm()
+    {
+        return Excel::download(new DevicesExport(), 'devices.xlsx');
+    }
+
+    public function fetch(Request $request)
+    {
+        $id = $request->get('select');
+        $result = array();
+        $query = DB::table('types')
+        ->join('devices','types.id','=','devices.type_id')
+        ->select('devices.*')
+        ->where('types.id',$id)
+        ->get();
+        $output = 'ไม่มีข้อมูล';
+            foreach($query as $row){
+                // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
+                $img = asset($row->image);
+                $path_edit = url('/device/edit/'.$row->id);
+                $path_del = url('/device/delete/'.$row->id);
+                $status;
+                if($row->device_status == 0)
+                    $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
+                elseif($row->device_status == 1)
+                    $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
+                elseif($row->device_status == 2)
+                    $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
+                
+                echo "<tr>
+                        <td>
+                            {$row->device_num}
+                        </td> 
+                        <td>
+                            {$row->device_name}
+                        </td> 
+                        <td class='text-center'>
+                            {$status}
+                        </td> 
+                        <td class='text-center'>
+                         $row->device_amount 
+                        </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>   
+                        <td class='text-center'>
+                            {$row->device_year}
+                        </td> 
+                        <td class='text-center'>
+                                        <div class='dropdown'>
+                                            <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'
+                                                data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                                <i class='fas fa-ellipsis-v'></i>
+                                            </a>
+                                            <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
+                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                    href='$path_edit'>แก้ไขข้อมูล</a>
+                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                    href='$path_del'>ลบข้อมูล</a>
+                                            </div>
+                                        </div>
+                                    </td>     
+                    </tr>";
+            }
+        
+        
+        echo $output;
     }
 }

@@ -9,13 +9,18 @@ use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
     public function index()
     {
-        $stocks = Stock::paginate(5);
-        return view('admin.stock.index', compact('stocks'));
+        $types = Type::all();
+        $types = DB::table('types')
+        ->orderBy('type_detail','asc')
+        ->get();
+        $stocks = Stock::all();
+        return view('admin.stock.index', compact('stocks','types'));
     }
 
     public function add()
@@ -151,5 +156,63 @@ class StockController extends Controller
     public function exportXlsm()
     {
         return Excel::download(new StocksExport(), 'stocks.xlsx');
+    }
+
+    public function fetch(Request $request)
+    {
+        $id = $request->get('select');
+        $result = array();
+        $query = DB::table('types')
+        ->join('stocks','types.id','=','stocks.type_id')
+        ->select('stocks.*')
+        ->where('types.id',$id)
+        ->get();
+        $output = 'ไม่มีข้อมูล';
+            foreach($query as $row){
+                // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
+                $img = asset($row->image);
+                $path_edit = url('/stock/edit/'.$row->id);
+                $path_del = url('/stock/delete/'.$row->id);
+                $status;
+                if($row->stock_status == 0)
+                    $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
+                elseif($row->stock_status == 1)
+                    $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
+                elseif($row->stock_status == 2)
+                    $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
+                
+                echo "<tr>
+                        <td>
+                            {$row->stock_num}
+                        </td> 
+                        <td>
+                            {$row->stock_name}
+                        </td> 
+                        <td class='text-center'>
+                            {$row->stock_amount}
+                        </td> 
+                        <td>
+                            {$status}
+                        </td> 
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>   
+                        <td class='text-center'>
+                                        <div class='dropdown'>
+                                            <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'
+                                                data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                                <i class='fas fa-ellipsis-v'></i>
+                                            </a>
+                                            <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
+                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                    href='$path_edit'>แก้ไขข้อมูล</a>
+                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                    href='$path_del'>ลบข้อมูล</a>
+                                            </div>
+                                        </div>
+                                    </td>     
+                    </tr>";
+            }
+        
+        
+        echo $output;
     }
 }

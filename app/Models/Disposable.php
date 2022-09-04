@@ -10,13 +10,13 @@ class Disposable extends Model
     use HasFactory;
 
     protected $fillable = [
+        'disposable_num',
         'disposable_name',
         'disposable_amount',
         'disposable_status',
         'image',
         'amount_minimum',
         'type_id',
-        'disposable_num',
     ];
 
     public function disposable_type()

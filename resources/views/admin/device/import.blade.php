@@ -11,7 +11,7 @@
                             <h3 class="mb-0">นำเข้าข้อมูลครุภัณฑ์</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{asset('pdf/device.pdf')}}" target="_blank"
+                            <a href="{{ route('device_report_xlsm') }}"
                                 class="btn btn-sm btn-outline-danger">ตัวอย่างการนำเข้าข้อมูล</a>
                         </div>
                     </div>

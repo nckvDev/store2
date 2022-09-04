@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Stock;
+use App\Models\Device;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -14,14 +14,14 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class StocksExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Stock::all();
+        return Device::all();
     }
 
     public function headings(): array
@@ -29,12 +29,13 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
         // TODO: Implement headings() method.
         return [
             'id',
-            'stock_num',
-            'stock_name',
-            'stock_amount',
-            'stock_status',
-            'image',
+            'device_num',
+            'device_name',
+            'device_status',
             'type_id',
+            'device_amount',
+            'image',
+            'device_year',
             'defective_stock',
             'Created'
         ];
@@ -45,12 +46,13 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
         // TODO: Implement map() method.
         return [
             $row->invoice_number,
-            $row->stock_num,
-            $row->stock_name,
-            $row->stock_amount,
-            $row->stock_status,
+            $row->device_num,
+            $row->device_name,
+            $row->device_status,
+            $row->device_type->type_detail,
+            $row->device_amount,
             $row->image,
-            $row->stock_type->type_detail,
+            $row->device_year,
             $row->defective_stock,
             Date::dateTimeToExcel($row->created_at)
         ];
