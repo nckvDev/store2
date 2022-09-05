@@ -75,11 +75,12 @@ class CartController extends Controller
     public function saveCart(Request $request)
     {
         $user_id = Auth::user()['id'];
-
+//        dd($request['borrow_amount']);
         Borrow::create([
             'borrow_list_id' => $request['borrow_list_id'],
             'borrow_name' => $request['borrow_name'],
             'borrow_status' => $request['borrow_status'],
+            'borrow_amount' => $request['borrow_amount'],
             'user_id' => $user_id,
         ]);
 
@@ -94,6 +95,7 @@ class CartController extends Controller
                 'device_status' => 1
             ]);
         }
+
 
         \Cart::clear();
         session()->flash('success', 'All Item Cart Clear Successfully !');

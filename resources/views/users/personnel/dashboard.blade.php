@@ -66,8 +66,7 @@
                                         @endif
                                         <td>
                                             <form action="{{ url('/personnel_dashboard/update/'.$row->id) }}"
-                                                  method="post"
-                                                  class="disabled">
+                                                  method="post" >
                                                 @csrf
                                                 @foreach($row->borrow_list_id as $item)
                                                     <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
@@ -78,11 +77,11 @@
                                                         ส่งคืน
                                                     </button>
                                                 @endif
-                                                @if($row->borrow_status=="0")
-                                                    <button type="text" class="btn btn-primary btn-sm disabled">
-                                                        ส่งคืน
-                                                    </button>
-                                                @endif
+{{--                                                @if($row->borrow_status=="0")--}}
+{{--                                                    <button type="text" class="btn btn-primary btn-sm disabled">--}}
+{{--                                                        ส่งคืน--}}
+{{--                                                    </button>--}}
+{{--                                                @endif--}}
                                             </form>
                                         </td>
                                     </tr>
@@ -90,17 +89,17 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{--                    @if (session('delete'))--}}
-                        {{--                        <script>--}}
-                        {{--                            Swal.fire({--}}
-                        {{--                                position: 'center',--}}
-                        {{--                                icon: 'error',--}}
-                        {{--                                title: 'ลบข้อมูลเรียบร้อย',--}}
-                        {{--                                showConfirmButton: false,--}}
-                        {{--                                timer: 1500--}}
-                        {{--                            })--}}
-                        {{--                        </script>--}}
-                        {{--                    @endif--}}
+                        @if (session('success'))
+                            <script>
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'ส่งคืนเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>

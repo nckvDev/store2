@@ -20,48 +20,6 @@
                         @csrf
                         <div class="pl-lg-2">
                             <div class="row">
-                                <div class="col-xl-2">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="stock_num">{{ __('คำนำหน้า') }}</label>
-                                        <input type="text" name="stock_num" id="prefix"
-                                               value="{{ auth()->user()->user_prefix->prefix_name }}"
-                                               class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }} "
-                                               readonly>
-                                        @if ($errors->has('stock_num'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('stock_num') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-5">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="firstname">{{ __('ชื่อ') }}</label>
-                                        <input id="fname" type="text" name="firstname"
-                                               value="{{ auth()->user()->firstname }}"
-                                               class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }} "
-                                               readonly>
-                                        @if ($errors->has('firstname'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('firstname') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-5">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="lastname">{{ __('นามสกุล') }}</label>
-                                        <input id="lname" type="text" name="lastname"
-                                               value="{{ auth()->user()->lastname }}"
-                                               class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }} "
-                                               readonly>
-                                        @if ($errors->has('lastname'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('lastname') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
                             </div>
                             @php
                                 $addData = array();
@@ -87,7 +45,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($devices as $item)
-                                    @if($item->device_status == 0)
+                                    @if($item->device_status == 0 && $item->defective_device == 0)
                                         @if($addData)
                                             @if(!in_array($item->device_num, $addData))
                                                 <tr>
@@ -108,11 +66,13 @@
                                                                readonly>
                                                         <input type="hidden" value="{{ $item->image }}" name="image"
                                                                readonly>
-                                                        <input type="hidden" value="1" name="quantity" readonly>
                                                         <td>
-                                                            <input type="text" value="1" name="price" readonly
-                                                                   style="width: 60px">
+                                                            <input type="text" value="{{ $item->device_amount }}"
+                                                                   name="quantity" readonly>
                                                         </td>
+
+                                                        <input type="hidden" value="1" name="price" readonly
+                                                               style="width: 60px">
                                                         <td>
                                                             <button class="btn btn-primary btn-sm">เลือก</button>
                                                         </td>
@@ -124,22 +84,27 @@
                                                 <form action="{{ route('cart.store') }}" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
-                                                    <td><input type="text" value="{{ $item->device_num }}" name="id"
+                                                    <td>
+                                                        <input type="text" value="{{ $item->device_num }}" name="id"
                                                                readonly style="width: 60px">
                                                     </td>
-                                                    <td><input type="text" value="{{ $item->device_name }}" name="name"
+                                                    <td>
+                                                        <input type="text" value="{{ $item->device_name }}" name="name"
                                                                readonly style="width: 60px">
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly>
+                                                    <td>
+                                                        <img src="{{ $item->image }}" width="50" height="50" readonly>
                                                     </td>
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            readonly>
-                                                    <input type="hidden" value="1" name="quantity" readonly>
                                                     <td>
-                                                        <input type="text" value="1" name="price" readonly
-                                                               style="width: 60px">
+                                                        <input type="text" value="{{ $item->device_amount }}"
+                                                               name="quantity" readonly>
                                                     </td>
+
+                                                    <input type="hidden" value="1" name="price" readonly
+                                                           style="width: 60px">
                                                     <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
@@ -149,7 +114,7 @@
                                     @endif
                                 @endforeach
                                 @foreach ($stocks as $item)
-                                    @if($item->stock_status == 0)
+                                    @if($item->stock_status == 0 && $item->defective_stock == 0)
                                         @if($addData)
                                             @if(!in_array($item->stock_num, $addData))
                                                 <tr>
@@ -171,11 +136,13 @@
                                                         <input type="hidden" value="{{ $item->image }}" name="image"
                                                                width="50" height="50"
                                                                readonly>
-                                                        <input type="hidden" value="1" name="quantity" readonly>
                                                         <td>
-                                                            <input type="text" value="1" name="price"
-                                                                   readonly style="width: 60px">
+                                                            <input type="text" value="{{ $item->stock_amount }}"
+                                                                   name="quantity" readonly>
                                                         </td>
+
+                                                        <input type="hidden" value="1" name="price"
+                                                               readonly style="width: 60px">
                                                         <td>
                                                             <button class="btn btn-primary btn-sm">เลือก</button>
                                                         </td>
@@ -200,11 +167,13 @@
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            readonly>
-                                                    <input type="hidden" value="1" name="quantity" readonly>
                                                     <td>
-                                                        <input type="text" value="1" name="price" readonly
-                                                               style="width: 60px">
+                                                        <input type="text" value="{{ $item->stock_amount }}"
+                                                               name="quantity" readonly>
                                                     </td>
+
+                                                    <input type="hidden" value="1" name="price" readonly
+                                                           style="width: 60px">
                                                     <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
@@ -225,46 +194,48 @@
                                                        readonly style="width: 60px">
                                             </td>
                                             <td><img src="{{ $item->image }}" width="50" height="50" readonly></td>
-                                            <input type="hidden" value="1" name="price" readonly>
+                                            {{--                                            <input type="hidden" value="1" name="price" readonly>--}}
                                             <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                            <input type="hidden" value="1" name="quantity" readonly>
                                             <td>
-                                                <input type="text" value="{{ $item->disposable_amount }}" name="price"
-                                                       readonly style="width: 60px">
+                                                <input type="text" value="{{ $item->disposable_amount }}"
+                                                       name="quantity" readonly>
                                             </td>
+
+                                            <input type="hidden" value="1" name="price"
+                                                   readonly style="width: 60px">
                                             <td>
-                                                <button type="button" class="btn btn-primary btn-sm"
+                                                <button class="btn btn-primary btn-sm"
                                                         data-toggle="modal"
                                                         data-target="#exampleModal">เลือก
                                                 </button>
                                             </td>
 
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="name">
-                                                                ระบุจำนวน</h3>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <input type="text" value="" name="quantity" id="name"
-                                                                   class="form-control form-control-muted"
-                                                                   placeholder="กรุณาใส่จำนวน">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">ปิด
-                                                            </button>
-                                                            <button class="btn btn-primary">ตกลง</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {{--                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"--}}
+                                            {{--                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+                                            {{--                                                <div class="modal-dialog" role="document">--}}
+                                            {{--                                                    <div class="modal-content">--}}
+                                            {{--                                                        <div class="modal-header">--}}
+                                            {{--                                                            <h3 class="modal-title" id="name">--}}
+                                            {{--                                                                ระบุจำนวน</h3>--}}
+                                            {{--                                                            <button type="button" class="close" data-dismiss="modal"--}}
+                                            {{--                                                                    aria-label="Close">--}}
+                                            {{--                                                                <span aria-hidden="true">&times;</span>--}}
+                                            {{--                                                            </button>--}}
+                                            {{--                                                        </div>--}}
+                                            {{--                                                        <div class="modal-body">--}}
+                                            {{--                                                            <input type="text" value="" name="quantity" id="name"--}}
+                                            {{--                                                                   class="form-control form-control-muted"--}}
+                                            {{--                                                                   placeholder="กรุณาใส่จำนวน">--}}
+                                            {{--                                                        </div>--}}
+                                            {{--                                                        <div class="modal-footer">--}}
+                                            {{--                                                            <button type="button" class="btn btn-secondary"--}}
+                                            {{--                                                                    data-dismiss="modal">ปิด--}}
+                                            {{--                                                            </button>--}}
+                                            {{--                                                            <button class="btn btn-primary">ตกลง</button>--}}
+                                            {{--                                                        </div>--}}
+                                            {{--                                                    </div>--}}
+                                            {{--                                                </div>--}}
+                                            {{--                                            </div>--}}
                                         </form>
                                     </tr>
                                 @endforeach
@@ -278,7 +249,7 @@
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
-                            <h3 class="mb-4 ml-4">{{ __('รายการพัสดุ') }}</h3>
+                            <h3 class="mb-4 ml-4">{{ __('รายการยืม') }}</h3>
                         </div>
                         <div class="container">
                             <div class="card">
@@ -297,10 +268,10 @@
                                         @csrf
                                         <table id="myTable">
                                             <thead>
-                                            {{--                                           {{(dd(session('4yTlTDKu3oJOfzD_cart_items')) )}}--}}
+                                            {{--                                                                                       {{(dd(session('4yTlTDKu3oJOfzD_cart_items')) )}}--}}
                                             <tr>
-                                                <th>รหัสพัสดุ</th>
-                                                <th>ชื่อพัสดุ</th>
+                                                <th>รหัสรายการ</th>
+                                                <th>ชื่อรายการ</th>
                                                 <th>จำนวน</th>
                                                 <th>ลบ</th>
                                             </tr>
@@ -320,30 +291,26 @@
                                                            readonly>
                                                     <input type="hidden" value="1" name="borrow_status"
                                                            readonly>
-                                                    <td class="flex">
-                                                        <form action="{{ route('cart.update') }}" method="POST">
+                                                    <td>
+                                                        <input type="text" name="borrow_amount[]"
+                                                               value="1"
+                                                               class="w-10 text-center bg-gray-100"/>
+                                                        <form action="{{ route('cart.update') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
-                                                            <input type="hidden" name="id" value="{{ $item->id}}">
-                                                            <input type="number" name="quantity"
-                                                                   value="{{ $item->quantity }}"
-                                                                   class="w-6 text-center bg-gray-100"/>
-                                                            <button type="submit"
-                                                                    class="btn btn-warning btn-sm">แก้ไข
-                                                            </button>
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('cart.remove') }}" method="POST">
+                                                        <form action="{{ route('cart.remove') }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <input type="hidden" value="{{ $item->id }}" name="id">
-                                                            <button class="btn btn-danger btn-sm">ลบ</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
                                                         </form>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             @endforeach
                                         </table>
-                                        <button class="btn btn-success btn-sm mt-4">ยืนยัน</button>
+                                        <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                     </form>
 
                                     @if (session('successes'))
@@ -364,7 +331,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 

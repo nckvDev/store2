@@ -18,6 +18,7 @@ class CreateBorrowsTable extends Migration
             $table->string('borrow_list_id');
             $table->string('borrow_name');
             $table->integer('borrow_status')->default(0);
+            $table->string('borrow_amount');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

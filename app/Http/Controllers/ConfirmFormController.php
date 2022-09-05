@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrow;
-use App\Models\Stock;
 use Illuminate\Http\Request;
-use App\Models\Conform;
 use Illuminate\Support\Facades\DB;
 
 class ConfirmFormController extends Controller
@@ -42,6 +40,23 @@ class ConfirmFormController extends Controller
             DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
                 'stock_status' => $request['borrow_status']
             ]);
+        }
+
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
+                'device_status' => $request['borrow_status']
+            ]);
+        }
+
+        $borrow_id = Borrow::find($id);
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            $disposable = DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->get();
+            foreach ($disposable as $item) {
+                $dis_amount = $item->disposable_amount - intval($borrow_id['borrow_amount'][$i]);
+                DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->update([
+                    'disposable_amount' => $dis_amount
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');

@@ -14,12 +14,14 @@ class Borrow extends Model
         'borrow_list_id',
         'borrow_name',
         'borrow_status',
+        'borrow_amount',
         'user_id',
     ];
 
     protected $casts = [
         'borrow_list_id' => 'array',
         'borrow_name' => 'array',
+        'borrow_amount' => 'array'
     ];
 
     public function borrow_user()

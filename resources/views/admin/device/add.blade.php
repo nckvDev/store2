@@ -88,7 +88,7 @@
                                 <div class="col-xl-2">
                                     <div class="form-group">
                                         <label class="form-control-label"
-                                            for="device_amount">{{ __('จำนวนทั้งหมด') }}</label>
+                                            for="device_amount">{{ __('จำนวน') }}</label>
                                         <input type="text" name="device_amount" value="{{ old('device_amount') }}"
                                             class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_amount'))

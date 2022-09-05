@@ -46,7 +46,6 @@
                                         <th scope="col">ชื่อวัสดุ</th>
                                         <th scope="col" class="text-center">สถานะ</th>
                                         <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ตำแหน่ง</th>
                                         <th scope="col">ประเภท</th>
 {{--                                        <th scope="col"></th>--}}
                                     </tr>
@@ -73,7 +72,6 @@
                                             @endif
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80" height="80"/></td>
-                                            <td>{{ $row->position }}</td>
                                             <td>{{ $row->stock_type->type_detail }}</td>
                                         </tr>
                                     @endforeach
@@ -105,7 +103,6 @@
                                         <th scope="col">ชื่อคุรภัณฑ์</th>
                                         <th scope="col" class="text-center">สถานะ</th>
                                         <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ตำแหน่ง</th>
                                         <th scope="col">ประเภท</th>
 {{--                                        <th scope="col"></th>--}}
                                     </tr>
@@ -132,7 +129,6 @@
                                             @endif
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80" height="80"/></td>
-                                            <td>{{ $row->location }}</td>
                                             <td>{{ $row->device_type->type_detail }}</td>
                                         </tr>
                                     @endforeach
@@ -152,7 +148,6 @@
                                         <th scope="col">ชื่อวัสดุสิ้นเปลือง</th>
                                         <th scope="col" class="text-center">สถานะ</th>
                                         <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ตำแหน่ง</th>
                                         <th scope="col">ประเภท</th>
 {{--                                        <th scope="col"></th>--}}
                                     </tr>
@@ -179,7 +174,6 @@
                                             @endif
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80" height="80"/></td>
-                                            <td>{{ $row->position }}</td>
                                             <td>{{ $row->disposable_type->type_detail }}</td>
                                         </tr>
                                     @endforeach

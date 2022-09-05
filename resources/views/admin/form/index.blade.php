@@ -61,7 +61,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h3 class="modal-title" id="exampleModalLabel">รายการยืม</h3>
-                                                        <button type="button" class="close" data-dismiss="modal"
+                                                        <button class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -74,13 +74,18 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4">
-                                                                @foreach($row->borrow_list_id as $item)
-                                                                    <div class="mb-2 text-primary"> {{ $item }} </div>
+                                                                @foreach($row->borrow_list_id as $id)
+                                                                    <div class="mb-2 text-primary"> {{ $id }} </div>
                                                                 @endforeach
                                                             </div>
-                                                            <div class="col-lg-8">
-                                                                @foreach($row->borrow_name as $item)
-                                                                    <div class="mb-2"> {{ $item }} </div>
+                                                            <div class="col-lg-4">
+                                                                @foreach($row->borrow_name as $name)
+                                                                    <div class="mb-2"> {{ $name }} </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                @foreach($row->borrow_amount as $amount)
+                                                                    <div class="mb-2"> {{ $amount }} </div>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -93,15 +98,16 @@
                                                                 <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
                                                             @endforeach
                                                             <input type="hidden" name="borrow_status" value="2">
-                                                            <button type="submit"
-                                                                    class="btn btn-primary btn-sm">อนุมัติ
+                                                            <button class="btn btn-primary btn-sm">อนุมัติ
                                                             </button>
                                                         </form>
                                                         <form action="{{ url('/confirmform/update/'.$row->id) }}" method="POST">
                                                             @csrf
+                                                            @foreach($row->borrow_list_id as $item)
+                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
+                                                            @endforeach
                                                             <input type="hidden" name="borrow_status" value="0">
-                                                            <button type="submit"
-                                                                    class="btn btn-danger btn-sm">ไม่อนุมัติ
+                                                            <button class="btn btn-danger btn-sm">ไม่อนุมัติ
                                                             </button>
                                                         </form>
                                                     </div>
