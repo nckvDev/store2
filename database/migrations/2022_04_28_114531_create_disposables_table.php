@@ -18,7 +18,7 @@ class CreateDisposablesTable extends Migration
             $table->string('disposable_num');
             $table->string('disposable_name');
             $table->integer('disposable_amount');
-            $table->integer('disposable_status')->default(1);
+            $table->integer('disposable_status')->default(0);
             $table->string('image');
             $table->integer('amount_minimum');
             $table->unsignedBigInteger('type_id');
