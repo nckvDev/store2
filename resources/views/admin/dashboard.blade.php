@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-12">
+            <div class="col-xl-12 ">
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                         <li class="nav-item">
@@ -37,81 +37,116 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel"
                          aria-labelledby="tabs-icons-text-1-tab">
-                        <div class="card shadow mb-3">
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush">
-                                    <thead class="thead-light">
+                        <div class="card shadow p-4">
+                            <table id="table_stock">
+                                <thead>
+                                <tr>
+                                    <th>รหัสวัสดุ</th>
+                                    <th>ชื่อวัสดุ</th>
+                                    <th class="text-center">รูปภาพ</th>
+                                    <th class="text-center">จำนวน</th>
+                                    <th>ประเภท</th>
+                                    <th class="text-center">สถานะ</th>
+                                    <th class="text-center">จัดการ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($stocks as $row)
                                     <tr>
-                                        <th scope="col">รหัสวัสดุ</th>
-                                        <th scope="col">ชื่อวัสดุ</th>
-                                        <th scope="col" class="text-center">สถานะ</th>
-                                        <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ประเภท</th>
-{{--                                        <th scope="col"></th>--}}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($stocks as $row)
-                                        <tr>
-                                            <td>{{ $row->stock_num }}</td>
-                                            <td>{{ $row->stock_name }}</td>
+                                        <td>{{ $row->stock_num }}</td>
+                                        <td>{{ $row->stock_name }}</td>
+                                        @if($row->image == 0)
+                                            <td><img src="{{asset('images/imageNull/null.png')}}"
+                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                        @else
+                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                                     width="80"
+                                                     height="80"/>
+                                                @endif
+                                            </td>
+
+                                        <td class="text-center">{{ $row->stock_amount }}</td>
+
+                                        <td>{{ $row->stock_type->type_detail }}</td>
                                             @if($row->stock_status == 0)
                                                 <td>
-                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
-                                                    </div>
+                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
                                                 </td>
                                             @elseif($row->stock_status == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center"> รออนุมัติ
-                                                    </div>
+                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
                                                 </td>
                                             @elseif($row->stock_status == 2)
                                                 <td>
-                                                    <div class="rounded text-white bg-red text-center"> ถูกยืม</div>
+                                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                                 </td>
                                             @endif
-                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
-                                                     width="80" height="80"/></td>
-                                            <td>{{ $row->stock_type->type_detail }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    <a class="dropdown-item"
+                                                       href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                    <a class="dropdown-item"
+                                                       href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            @if (session('delete'))
+                                <script>
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'ลบข้อมูลเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                </script>
+                            @endif
 
-                                @if (session('delete'))
-                                    <script>
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'error',
-                                            title: 'ลบข้อมูลเรียบร้อย',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    </script>
-                                @endif
-                            </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel"
                          aria-labelledby="tabs-icons-text-2-tab">
-                        <div class="card shadow mb-3">
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush">
-                                    <thead class="thead-light">
+                        <div class="card shadow p-4">
+                            <table id="table_device">
+                                <thead>
+                                <tr>
+                                    <th>รหัสครุภัณฑ์</th>
+                                    <th>ชื่อครุภัณฑ์</th>
+                                    <th class="text-center">รูปภาพ</th>
+                                    <th class="text-center">จำนวน</th>
+                                    <th>ปี</th>
+                                    <th>ประเภท</th>
+                                    <th>สถานะ</th>
+                                    <th class="text-center">จัดการข้อมูล</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($devices as $row)
                                     <tr>
-                                        <th scope="col">รหัสคุรภัณฑ์</th>
-                                        <th scope="col">ชื่อคุรภัณฑ์</th>
-                                        <th scope="col" class="text-center">สถานะ</th>
-                                        <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ประเภท</th>
-{{--                                        <th scope="col"></th>--}}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($devices as $row)
-                                        <tr>
-                                            <td>{{ $row->device_num }}</td>
-                                            <td>{{ $row->device_name }}</td>
+                                        <td>{{ $row->device_num }}</td>
+                                        <td>{{ $row->device_name }}</td>
+                                        @if($row->image == 0)
+                                            <td><img src="{{asset('images/imageNull/null.png')}}"
+                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                        @else
+                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                                     width="80"
+                                                     height="80"/>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{ $row->device_amount }}</td>
+                                            <td>{{ $row->device_year }}</td>
+                                            <td>{{ $row->device_type->type_detail }}</td>
                                             @if($row->device_status == 0)
                                                 <td>
                                                     <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
@@ -119,44 +154,80 @@
                                                 </td>
                                             @elseif($row->device_status == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center"> รออนุมัติ
+                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ
                                                     </div>
                                                 </td>
                                             @elseif($row->device_status == 2)
                                                 <td>
-                                                    <div class="rounded text-white bg-red text-center"> ถูกยืม</div>
+                                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                                 </td>
                                             @endif
-                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
-                                                     width="80" height="80"/></td>
-                                            <td>{{ $row->device_type->type_detail }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#"
+                                                       role="button"
+                                                       data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div
+                                                        class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item"
+                                                           href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                        <a class="dropdown-item"
+                                                           onclick="return confirm('ต้องการลบข้อมูล?');"
+                                                           href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            @if (session('delete'))
+                                <script>
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'ลบข้อมูลเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                </script>
+                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel"
                          aria-labelledby="tabs-icons-text-3-tab">
-                        <div class="card shadow mb-3">
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush">
-                                    <thead class="thead-light">
+                        <div class="card shadow p-4">
+                            <table id="table_disposable">
+                                <thead>
+                                <tr>
+                                    <th>รหัสวัสดุสิ้นเปลือง</th>
+                                    <th>ชื่อวัสดุสิ้นเปลือง</th>
+                                    <th class="text-center">รูปภาพ</th>
+                                    <th class="text-center">จำนวน</th>
+                                    <th>ประเภท</th>
+                                    <th class="text-center">สถานะ</th>
+                                    <th class="text-center">จัดการข้อมูล</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($disposables as $row)
                                     <tr>
-                                        <th scope="col">รหัสวัสดุสิ้นเปลือง</th>
-                                        <th scope="col">ชื่อวัสดุสิ้นเปลือง</th>
-                                        <th scope="col" class="text-center">สถานะ</th>
-                                        <th scope="col" class="text-center">รูปภาพ</th>
-                                        <th scope="col">ประเภท</th>
-{{--                                        <th scope="col"></th>--}}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($disposables as $row)
-                                        <tr>
-                                            <td>{{ $row->disposable_num }}</td>
-                                            <td>{{ $row->disposable_name }}</td>
+                                        <td>{{ $row->disposable_num }}</td>
+                                        <td>{{ $row->disposable_name }}</td>
+                                        @if($row->image == 0)
+                                            <td><img src="{{asset('images/imageNull/null.png')}}"
+                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                        @else
+                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                                     width="80"
+                                                     height="80"/>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{ $row->disposable_amount }}</td>
+                                            <td>{{ $row->disposable_type->type_detail }}</td>
                                             @if($row->disposable_status == 0)
                                                 <td>
                                                     <div class="rounded text-white bg-green text-center"> พร้อมใช้งาน
@@ -172,36 +243,115 @@
                                                     <div class="rounded text-white bg-red text-center"> ถูกยืม</div>
                                                 </td>
                                             @endif
-                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
-                                                     width="80" height="80"/></td>
-                                            <td>{{ $row->disposable_type->type_detail }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-
-                                @if (session('delete'))
-                                    <script>
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'error',
-                                            title: 'ลบข้อมูลเรียบร้อย',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    </script>
-                                @endif
-                            </div>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#"
+                                                       role="button"
+                                                       data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div
+                                                        class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item"
+                                                           href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                        <a class="dropdown-item"
+                                                           onclick="return confirm('ต้องการลบข้อมูล?');"
+                                                           href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            @if (session('delete'))
+                                <script>
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'ลบข้อมูลเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                </script>
+                            @endif
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
     </div>
 @endsection
 
 @push('js')
+    <script>
+        $(function () {
+            $.extend($.fn.dataTableExt.oStdClasses, {
+                "sFilterInput": "form-control form-control-sm",
+                "sLengthSelect": "form-control form-control-sm"
+            });
+            $('#table_stock').dataTable({
+                "responsive": true,
+                "language": {
+                    "search": "ค้นหา ",
+                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+                    "infoEmpty": "ไม่มีข้อมูล",
+                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+                    "paginate": {
+                        "previous": "ปัจจุบัน",
+                        "next": "หน้า"
+                    }
+                }
+            });
+            $('#table_device').dataTable({
+                "responsive": true,
+                "language": {
+                    "search": "ค้นหา ",
+                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+                    "infoEmpty": "ไม่มีข้อมูล",
+                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+                    "paginate": {
+                        "previous": "ปัจจุบัน",
+                        "next": "หน้า"
+                    }
+                }
+            });
+            $('#table_disposable').dataTable({
+                "responsive": true,
+                "language": {
+                    "search": "ค้นหา ",
+                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+                    "infoEmpty": "ไม่มีข้อมูล",
+                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+                    "paginate": {
+                        "previous": "ปัจจุบัน",
+                        "next": "หน้า"
+                    }
+                }
+            });
+            $('[type=search]').each(function () {
+                +
+                    $(this).attr("placeholder", "Search...");
+                $(this).before('<span class="fa fa-search"></span>');
+            });
+            $('#button').click(function () {
+                alert(table.rows('.selected').data().length + ' row(s) selected');
+            });
+        });
+    </script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 @endpush

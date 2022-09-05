@@ -127,9 +127,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Stock
         Route::get('stock', [StockController::class, 'index'])->name('stock');
-        Route::post('stock/add', [StockController::class, 'store'])->name('addStock'); // create stock
-
-        Route::get('stock/add_stock', [StockController::class, 'add'])->name('add_stock'); // form add stock
+        Route::post('stock/add', [StockController::class, 'store'])->name('addStock');
+        
+        Route::post('stock/fetch', [StockController::class, 'fetch'])->name('stock.fetch');
+        Route::get('stock/add_stock', [StockController::class, 'add'])->name('add_stock');
         Route::get('stock/edit/{id}', [StockController::class, 'edit']); // show data edit
         Route::post('stock/update/{id}', [StockController::class, 'update']); // edit data
         Route::get('stock/delete/{id}', [StockController::class, 'delete']);
@@ -138,6 +139,7 @@ Route::group(['middleware' => 'auth'], function () {
          Route::get('disposable', [DisposableController::class, 'index'])->name('disposable');
          Route::post('disposable/add', [DisposableController::class, 'store'])->name('addDisposable');
 
+         Route::post('disposable/fetch', [DisposableController::class, 'fetch'])->name('disposable.fetch');
          Route::get('disposable/add_disposable', [DisposableController::class, 'add'])->name('add_disposable');
          Route::get('disposable/edit/{id}', [DisposableController::class, 'edit']);
          Route::post('disposable/update/{id}', [DisposableController::class, 'update']);
@@ -147,13 +149,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('device', [DeviceController::class, 'index'])->name('device');
         Route::post('device', [DeviceController::class, 'store'])->name('addDevice');
 
+        Route::post('device/fetch', [DeviceController::class, 'fetch'])->name('device.fetch');
         Route::get('device/add_device', [DeviceController::class, 'add'])->name('add_device');
         Route::get('device/edit/{id}', [DeviceController::class, 'edit']); // show data edit
         Route::post('device/update/{id}', [DeviceController::class, 'update']); // edit data
         Route::get('device/delete/{id}', [DeviceController::class, 'delete']);
+
          // Export
-//         Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('report');
-         Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('report_xlsm');
+         Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('stock_report_xlsm');
+         Route::get('/device/export-xlsm', [\App\Http\Controllers\DeviceController::class,'exportXlsm'])->name('device_report_xlsm');
+         Route::get('/disposable/export-xlsm', [\App\Http\Controllers\DisposableController::class,'exportXlsm'])->name('disposable_report_xlsm');
+         Route::get('/dataimport/export-xlsm', [\App\Http\Controllers\Admin\DataImportController::class,'exportXlsm'])->name('user_report_xlsm');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {

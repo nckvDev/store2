@@ -11,7 +11,7 @@
                             <h3 class="mb-0">นำเข้าข้อมูลวัสดุสิ้นเปลือง</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{asset('pdf/disposable.pdf')}}" target="_blank"
+                            <a href="{{ route('disposable_report_xlsm') }}"
                                 class="btn btn-sm btn-outline-danger">ตัวอย่างการนำเข้าข้อมูล</a>
                         </div>
                     </div>

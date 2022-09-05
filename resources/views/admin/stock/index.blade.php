@@ -1,6 +1,7 @@
 @extends('layouts.app', ['class' => 'bg-neutral'])
 
 @section('content')
+
     @include('layouts.headers.cards')
     <div class="container-fluid mt--9">
         <div class="row">
@@ -14,8 +15,6 @@
                             <div class="col-8 text-right">
                                 <a href="{{ route('stock-import') }}" class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
                                     XLSX & CSV</a>
-                                <a href="{{ route('report_xlsm') }}" class="btn btn-sm btn-outline-danger">รายงาน XLSX &
-                                    CSV</a>
                                 <a href="{{ route('add_stock') }}" class="btn btn-sm btn-primary">เพิ่มวัสดุ</a>
                             </div>
                         </div>
@@ -28,28 +27,34 @@
             <div class="col-xl-12 mb-4">
                 <div class="card bg-secondary shadow">
                     <div class="card-body">
+                        <h3>ประเภท</h3>
+                        <div class="form-group">
+                            <select class="form-control type" style="width:10%" name="type" id="type">
+                                <option value="">เลือกประเภทพัสดุ</option>
+                                @foreach($types as $row)
+                                    <option value="{{$row->id}}">{{$row->type_detail}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <table id="table_id" class="">
                             <thead>
                             <tr>
                                 <th>รหัสวัสดุ</th>
                                 <th>ชื่อวัสดุ</th>
                                 <th class="text-center">รูปภาพ</th>
-                                <th class="text-center">ประเภท</th>
                                 <th class="text-center">จำนวน</th>
                                 <th class="text-center">สถานะ</th>
                                 <th class="text-center">จัดการ</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="datalist">
                             @foreach($stocks as $row)
                                 <tr>
                                     <td>{{ $row->stock_num }}</td>
                                     <td>{{ $row->stock_name }}</td>
-                                    <td>
-                                        <img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80"
-                                             height="80"/>
-                                    </td>
-                                    <td>{{ $row->stock_type->type_detail }}</td>
+                                    <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                             width="80"
+                                             height="80"/></td>
                                     <td class="text-center">{{ $row->stock_amount }}</td>
                                     @if($row->stock_status == 0)
                                         <td>
@@ -64,7 +69,7 @@
                                             <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                         </td>
                                     @endif
-                                    <td class="text-right">
+                                    <td class="text-center">
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,6 +79,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                 <a class="dropdown-item"
+                                                   onclick="return confirm('ต้องการลบข้อมูล?');"
                                                    href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
@@ -93,13 +99,11 @@
                                 })
                             </script>
                         @endif
-                        <div class="mt-4">
-                            {{ $stocks->links() }}
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{csrf_field()}}
     </div>
 @endsection
 @push('js')
@@ -110,6 +114,11 @@
                 "sLengthSelect": "form-control form-control-sm"
             });
             $('#table_id').dataTable({
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'ทั้งหมด'],
+                ],
+                "responsive": true,
                 "language": {
                     "search": "ค้นหา ",
                     "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
@@ -131,6 +140,27 @@
             $('#button').click(function () {
                 alert(table.rows('.selected').data().length + ' row(s) selected');
             });
+        });
+
+        $('#type').change(function () {
+            if ($(this).val() != '') {
+                var select = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{route('stock.fetch')}}",
+                    method: "POST",
+                    data: {
+                        select: select,
+                        _token: _token
+                    },
+                    success: function (result) {
+                        // $('.stockname').html(result);
+                        {
+                            $("#datalist").html(result)
+                        }
+                    }
+                })
+            }
         });
     </script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

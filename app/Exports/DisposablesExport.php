@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Stock;
+use App\Models\Disposable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -14,14 +14,14 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class StocksExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class DisposablesExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Stock::all();
+        return Disposable::all();
     }
 
     public function headings(): array
@@ -29,13 +29,13 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
         // TODO: Implement headings() method.
         return [
             'id',
-            'stock_num',
-            'stock_name',
-            'stock_amount',
-            'stock_status',
+            'disposable_num',
+            'disposable_name',
+            'disposable_amount',
+            'disposable_status',
             'image',
+            'amount_minimum',
             'type_id',
-            'defective_stock',
             'Created'
         ];
     }
@@ -45,13 +45,13 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
         // TODO: Implement map() method.
         return [
             $row->invoice_number,
-            $row->stock_num,
-            $row->stock_name,
-            $row->stock_amount,
-            $row->stock_status,
+            $row->disposable_num,
+            $row->disposable_name,
+            $row->disposable_amount,
+            $row->disposable_status,
             $row->image,
-            $row->stock_type->type_detail,
-            $row->defective_stock,
+            $row->amount_minimum,
+            $row->disposable_type->type_detail,
             Date::dateTimeToExcel($row->created_at)
         ];
     }
