@@ -120,6 +120,11 @@ $(function() {
         "sLengthSelect": "form-control form-control-sm"
     });
     $('#table_id').dataTable({
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, 'ทั้งหมด'],
+        ],
+        "responsive": true,
         "language": {
             "search": "ค้นหา ",
             "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
