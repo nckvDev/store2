@@ -3,12 +3,18 @@
 @include('layouts.headers.cards')
 <div class="container-fluid mt--9">
     <div class="row">
-        <div class="col-xl-12">
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">นำเข้าข้อมูลผู้ใช้งาน</li>
-                </ol>
-            </nav>
+        <div class="col-xl-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col-7">
+                            <h3 class="mb-0">นำเข้าข้อมูลวผู้ใช้งาน</h3>
+                        </div>
+                        <div class="col-5 text-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\StocksExport;
-use App\Exports\UsersExport;
 use App\Models\Stock;
 use App\Models\Type;
 use Carbon\Carbon;

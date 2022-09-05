@@ -159,6 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
          Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('stock_report_xlsm');
          Route::get('/device/export-xlsm', [\App\Http\Controllers\DeviceController::class,'exportXlsm'])->name('device_report_xlsm');
          Route::get('/disposable/export-xlsm', [\App\Http\Controllers\DisposableController::class,'exportXlsm'])->name('disposable_report_xlsm');
+         Route::get('/dataimport/export-xlsm', [\App\Http\Controllers\Admin\DataImportController::class,'exportXlsm'])->name('user_report_xlsm');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
