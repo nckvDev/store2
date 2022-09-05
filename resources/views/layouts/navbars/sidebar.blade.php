@@ -7,18 +7,18 @@
         </button>
         <!-- Brand -->
         @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
-        <a class="navbar-brand pt-0" href="{{ url('admin_dashboard') }}">
-            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png" class="navbar-brand-img" alt="...">
+        <a class="navbar-brand pt-0 pb-0" href="{{ url('admin_dashboard') }}">
+            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" class="navbar-brand-img" alt="...">
         </a>
         @endif
         @if(\Illuminate\Support\Facades\Auth::user()->role == 'personnel')
         <a class="navbar-brand pt-0" href="{{ route('personnel_dashboard') }}">
-            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png" class="navbar-brand-img" alt="...">
+            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" class="navbar-brand-img" alt="...">
         </a>
         @endif
         @if(\Illuminate\Support\Facades\Auth::user()->role == 'student')
         <a class="navbar-brand pt-0" href="{{ route('student_dashboard') }}">
-            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png" class="navbar-brand-img" alt="...">
+            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" class="navbar-brand-img" alt="...">
         </a>
         @endif
         {{--        <a class="navbar-brand pt-0" href="{{ route('stock') }}">--}}
