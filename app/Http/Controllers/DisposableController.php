@@ -157,7 +157,7 @@ class DisposableController extends Controller
         unlink($img);
 
         Disposable::destroy($id);
-        return redirect()->route('disposable')->with('delete', 'ลบข้อมุลเรียบร้อย');
+        return redirect()->back()->with('delete', 'ลบข้อมุลเรียบร้อย');
     }
 
     public function exportXlsm()
@@ -187,22 +187,22 @@ class DisposableController extends Controller
                     $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
                 elseif($row->disposable_status == 2)
                     $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
-                
+
                 echo "<tr>
                         <td>
                             {$row->disposable_num }
-                        </td> 
+                        </td>
                         <td>
                             {$row->disposable_name}
-                        </td> 
+                        </td>
                         <td>
                             {$status}
-                        </td> 
+                        </td>
                         <td class='text-center'>
                             {$row->disposable_amount}
-                        </td> 
-                        
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>   
+                        </td>
+
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                                         <div class='dropdown'>
                                             <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'
@@ -216,11 +216,11 @@ class DisposableController extends Controller
                                                     href='$path_del'>ลบข้อมูล</a>
                                             </div>
                                         </div>
-                                    </td>     
+                                    </td>
                     </tr>";
             }
-        
-        
+
+
         echo $output;
     }
 }

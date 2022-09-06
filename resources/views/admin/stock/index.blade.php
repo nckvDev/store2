@@ -1,7 +1,6 @@
 @extends('layouts.app', ['class' => 'bg-neutral'])
 
 @section('content')
-
     @include('layouts.headers.cards')
     <div class="container-fluid mt--9">
         <div class="row">
@@ -9,10 +8,10 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <h3 class="mb-0">รายการวัสดุ</h3>
                             </div>
-                            <div class="col-8 text-right">
+                            <div class="col-6 text-right">
                                 <a href="{{ route('stock-import') }}" class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
                                     XLSX & CSV</a>
                                 <a href="{{ route('add_stock') }}" class="btn btn-sm btn-primary">เพิ่มวัสดุ</a>
@@ -28,8 +27,8 @@
                 <div class="card bg-secondary shadow">
                     <div class="card-body">
                         <h3>ประเภท</h3>
-                        <div class="form-group">
-                            <select class="form-control type" style="width:10%" name="type" id="type">
+                        <div class="mb-3">
+                            <select class="form-control type" name="type" id="type">
                                 <option value="">เลือกประเภทพัสดุ</option>
                                 @foreach($types as $row)
                                     <option value="{{$row->id}}">{{$row->type_detail}}</option>
@@ -76,11 +75,9 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item"
-                                                   href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                <a class="dropdown-item"
-                                                   onclick="return confirm('ต้องการลบข้อมูล?');"
-                                                   href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                <a class="dropdown-item" href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                <a class="dropdown-item delete-confirm"
+                                                   href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>
@@ -88,17 +85,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        @if (session('delete'))
-                            <script>
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'error',
-                                    title: 'ลบข้อมูลเรียบร้อย',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                            </script>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -143,9 +129,9 @@
         });
 
         $('#type').change(function () {
-            if ($(this).val() != '') {
-                var select = $(this).val();
-                var _token = $('input[name="_token"]').val();
+            if ($(this).val() !== '') {
+                const select = $(this).val();
+                const _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{route('stock.fetch')}}",
                     method: "POST",
@@ -162,12 +148,34 @@
                 })
             }
         });
+
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            Swal.fire({
+                title: 'คุณแน่ใจ?',
+                text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#dc3545',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'ลบข้อมูลเรียบร้อย',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+        });
+
     </script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 @endpush

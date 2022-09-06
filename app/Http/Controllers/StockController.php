@@ -16,10 +16,10 @@ class StockController extends Controller
     {
         $types = Type::all();
         $types = DB::table('types')
-        ->orderBy('type_detail','asc')
-        ->get();
+            ->orderBy('type_detail', 'asc')
+            ->get();
         $stocks = Stock::all();
-        return view('admin.stock.index', compact('stocks','types'));
+        return view('admin.stock.index', compact('stocks', 'types'));
     }
 
     public function add()
@@ -33,20 +33,20 @@ class StockController extends Controller
     {
         $request->validate(
             [
-                'stock_num'  => 'required|unique:stocks|max:5',
+                'stock_num' => 'required|unique:stocks|max:5',
                 'stock_name' => 'required|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'stock_num.required'     => "กรุณาป้อนรหัสด้วยครับ",
-                'stock_num.max'          => "ห้ามป้อนเกิน 5 ตัว",
-                'stock_num.unique'       => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
-                'stock_name.required'     => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
-                'stock_name.max'          => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'stock_num.required' => "กรุณาป้อนรหัสด้วยครับ",
+                'stock_num.max' => "ห้ามป้อนเกิน 5 ตัว",
+                'stock_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
+                'stock_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
+                'stock_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
 //                'stock_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
-                'image.required'    => "กรุณาใส่ภาพด้วยครับ",
-                'image.mimes'       => "ประเภทไฟล์ไม่ถูกต้อง"
+                'image.required' => "กรุณาใส่ภาพด้วยครับ",
+                'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
 
@@ -112,11 +112,11 @@ class StockController extends Controller
                 'image' => $full_path,
                 'type_id' => $request->type_id,
                 'defective_stock' => $request->defective_stock,
-                'updated_at'    => Carbon::now()
+                'updated_at' => Carbon::now()
             ]);
 
             $old_image = $request->old_image;
-            if($old_image == null){
+            if ($old_image == null) {
                 $upload_location = 'images/stocks/';
                 $full_path = $upload_location . $imgName;
                 Stock::find($id)->update([
@@ -136,7 +136,7 @@ class StockController extends Controller
                 'stock_amount' => $request->stock_amount,
                 'type_id' => $request->type_id,
                 'defective_stock' => $request->defective_stock,
-                'updated_at'    => Carbon::now()
+                'updated_at' => Carbon::now()
             ]);
         }
 
@@ -149,7 +149,7 @@ class StockController extends Controller
         unlink($img);
 
         Stock::destroy($id);
-        return redirect()->route('stock')->with('delete', 'ลบข้อมุลเรียบร้อย');
+        return redirect()->back()->with('delete', 'ลบข้อมุลเรียบร้อย');
     }
 
     public function exportXlsm()
@@ -162,38 +162,37 @@ class StockController extends Controller
         $id = $request->get('select');
         $result = array();
         $query = DB::table('types')
-        ->join('stocks','types.id','=','stocks.type_id')
-        ->select('stocks.*')
-        ->where('types.id',$id)
-        ->get();
+            ->join('stocks', 'types.id', '=', 'stocks.type_id')
+            ->select('stocks.*')
+            ->where('types.id', $id)
+            ->get();
         $output = 'ไม่มีข้อมูล';
-            foreach($query as $row){
-                // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
-                $img = asset($row->image);
-                $path_edit = url('/stock/edit/'.$row->id);
-                $path_del = url('/stock/delete/'.$row->id);
-                $status;
-                if($row->stock_status == 0)
-                    $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
-                elseif($row->stock_status == 1)
-                    $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
-                elseif($row->stock_status == 2)
-                    $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
-                
-                echo "<tr>
+        foreach ($query as $row) {
+            // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
+            $img = asset($row->image);
+            $path_edit = url('/stock/edit/' . $row->id);
+            $path_del = url('/stock/delete/' . $row->id);
+            if ($row->stock_status == 0)
+                $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
+            elseif ($row->stock_status == 1)
+                $status = "<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
+            elseif ($row->stock_status == 2)
+                $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
+
+            echo "<tr>
                         <td>
                             {$row->stock_num}
-                        </td> 
+                        </td>
                         <td>
                             {$row->stock_name}
-                        </td> 
+                        </td>
                         <td class='text-center'>
                             {$row->stock_amount}
-                        </td> 
+                        </td>
                         <td>
                             {$status}
-                        </td> 
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>   
+                        </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                                         <div class='dropdown'>
                                             <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'
@@ -201,17 +200,16 @@ class StockController extends Controller
                                                 <i class='fas fa-ellipsis-v'></i>
                                             </a>
                                             <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                <a class='dropdown-item''
                                                     href='$path_edit'>แก้ไขข้อมูล</a>
                                                 <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
                                                     href='$path_del'>ลบข้อมูล</a>
                                             </div>
                                         </div>
-                                    </td>     
+                                    </td>
                     </tr>";
-            }
-        
-        
+        }
+
         echo $output;
     }
 }

@@ -15,6 +15,9 @@
     <!-- Data Table -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Icon -->
     <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 

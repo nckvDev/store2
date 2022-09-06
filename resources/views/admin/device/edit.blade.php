@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('stock') }}">วัสดุ</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('stock') }}">ครุภัณฑ์</a></li>
                     <li class="breadcrumb-item active" aria-current="page">แก้ไข</li>
                 </ol>
             </nav>
@@ -17,7 +17,7 @@
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
-                        <h3 class="mb-0 ml-4">{{ __('เพิ่มวัสดุ') }}</h3>
+                        <h3 class="mb-0 ml-4">{{ __('แก้ไขครุภัณฑ์') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -28,11 +28,11 @@
                             <div class="row">
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="device_num">{{ __('รหัสวัสดุ') }}</label>
+                                        <label class="form-control-label" for="device_num">{{ __('รหัสครุภัณฑ์') }}</label>
                                         <input type="text" name="device_num" value="{{ $devices->device_num }}"
                                             class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }}"
                                             placeholder="
-                                            {{ __('รหัสวัสดุ') }}" autofocus>
+                                            {{ __('รหัสครุภัณฑ์') }}" autofocus>
                                         @if ($errors->has('device_num'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_num') }}</strong>
@@ -43,11 +43,11 @@
                                 <div class="col-xl-6">
                                     <div class="form-group">
                                         <label class="form-control-label"
-                                            for="device_name">{{ __('ชื่อวัสดุ') }}</label>
+                                            for="device_name">{{ __('ชื่อครุภัณฑ์') }}</label>
                                         <input type="text" name="device_name" value="{{ $devices->device_name }}"
                                             class="form-control form-control-alternative{{ $errors->has('device_name') ? ' is-invalid' : '' }}"
                                             placeholder="
-                                            {{ __('ชื่อวัสดุ') }}">
+                                            {{ __('ชื่อครุภัณฑ์') }}">
                                         @if ($errors->has('device_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_name') }}</strong>
@@ -78,11 +78,11 @@
                                 <div class="col-xl-4">
                                     <div class="form-group">
                                         <label class="form-control-label"
-                                            for="device_amount">{{ __('จำนวนทั้งหมด') }}</label>
+                                            for="device_amount">{{ __('จำนวน') }}</label>
                                         <input type="text" name="device_amount" value="{{ $devices->device_amount }}"
                                             class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }}"
                                             placeholder="
-                                            {{ __('ประเภท') }}">
+                                            {{ __('จำนวน') }}">
                                         @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_amount') }}</strong>

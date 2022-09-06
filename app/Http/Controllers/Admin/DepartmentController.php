@@ -63,7 +63,7 @@ class DepartmentController extends Controller
     public function delete($id)
     {
         Department::destroy($id);
-        return redirect()->route('department')->with('delete', 'ลบข้อมูลเรียบร้อย');
+        return redirect()->back()->with('delete', 'ลบข้อมูลเรียบร้อย');
     }
-    
+
 }

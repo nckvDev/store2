@@ -141,7 +141,7 @@ class DeviceController extends Controller
         unlink($img);
 
         Device::destroy($id);
-        return redirect()->route('device')->with('success', 'ลบข้อมูลเรียบร้อย');
+        return redirect()->back()->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 
     public function exportXlsm()
@@ -171,24 +171,24 @@ class DeviceController extends Controller
                     $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
                 elseif($row->device_status == 2)
                     $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
-                
+
                 echo "<tr>
                         <td>
                             {$row->device_num}
-                        </td> 
+                        </td>
                         <td>
                             {$row->device_name}
-                        </td> 
+                        </td>
                         <td class='text-center'>
                             {$status}
-                        </td> 
-                        <td class='text-center'>
-                         $row->device_amount 
                         </td>
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>   
+                        <td class='text-center'>
+                         $row->device_amount
+                        </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                             {$row->device_year}
-                        </td> 
+                        </td>
                         <td class='text-center'>
                                         <div class='dropdown'>
                                             <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'
@@ -202,11 +202,11 @@ class DeviceController extends Controller
                                                     href='$path_del'>ลบข้อมูล</a>
                                             </div>
                                         </div>
-                                    </td>     
+                                    </td>
                     </tr>";
             }
-        
-        
+
+
         echo $output;
     }
 }

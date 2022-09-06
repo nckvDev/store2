@@ -90,8 +90,8 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <a class="dropdown-item"
                                                        href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                    <a class="dropdown-item"
-                                                       href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                    <a class="dropdown-item delete-confirm"
+                                                       href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -99,18 +99,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            @if (session('delete'))
-                                <script>
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'error',
-                                        title: 'ลบข้อมูลเรียบร้อย',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    })
-                                </script>
-                            @endif
-
                         </div>
                     </div>
 
@@ -174,9 +162,8 @@
                                                         class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                         <a class="dropdown-item"
                                                            href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                        <a class="dropdown-item"
-                                                           onclick="return confirm('ต้องการลบข้อมูล?');"
-                                                           href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                        <a class="dropdown-item delete-confirm"
+                                                           href="/device/delete/{{$row->id}}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -184,17 +171,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            @if (session('delete'))
-                                <script>
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'error',
-                                        title: 'ลบข้อมูลเรียบร้อย',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    })
-                                </script>
-                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel"
@@ -255,9 +231,8 @@
                                                         class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                         <a class="dropdown-item"
                                                            href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                        <a class="dropdown-item"
-                                                           onclick="return confirm('ต้องการลบข้อมูล?');"
-                                                           href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                        <a class="dropdown-item delete-confirm"
+                                                           href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -265,17 +240,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            @if (session('delete'))
-                                <script>
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'error',
-                                        title: 'ลบข้อมูลเรียบร้อย',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    })
-                                </script>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -346,8 +310,33 @@
                 alert(table.rows('.selected').data().length + ' row(s) selected');
             });
         });
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            Swal.fire({
+                title: 'คุณแน่ใจ?',
+                text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#dc3545',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'ลบข้อมูลเรียบร้อย',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+        });
     </script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/vendor/select2/dist/js/select2.min.js"></script>

@@ -39,7 +39,7 @@ class ManageRoleController extends Controller
     public function delete($id)
     {
         User::destroy($id);
-        return redirect()->route('manage-role')->with('delete', 'ลบข้อมุลเรียบร้อย');
+        return redirect()->back()->with('delete', 'ลบข้อมุลเรียบร้อย');
     }
 
 }

@@ -28,13 +28,13 @@ class GroupController extends Controller
                 'group_name.unique'   => 'มีข้อมูลชื่อบริการนี้ในฐานข้อมูลแล้ว',
             ]
         );
-        
+
         Group::insert([
            'group_name' => $request->group_name,
            'department_name' => $request->input('department_name'),
            'created_at'  => Carbon::now()
         ]);
-        
+
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
 
@@ -56,12 +56,12 @@ class GroupController extends Controller
                 'group_name.max'      => "ห้ามป้อนเกิน 255 ตัวอักษร",
             ]
         );
-        
+
         Group::find($id)->update([
             'group_name' => $request->group_name,
             'department_name' => $request->department_name,
         ]);
-        
+
 
         return redirect()->route('group')->with('update', 'อัพเดทเรียบร้อย');
     }
@@ -69,6 +69,6 @@ class GroupController extends Controller
     public function delete($id)
     {
         Group::destroy($id);
-        return redirect()->route('group')->with('delete', 'ลบข้อมูลเรียบร้อย');
+        return redirect()->back()->with('delete', 'ลบข้อมูลเรียบร้อย');
     }
 }
