@@ -157,6 +157,7 @@
                 title: 'คุณแน่ใจ?',
                 text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
                 icon: 'warning',
+                focusCancel: true,
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
                 cancelButtonColor: '#dc3545',
