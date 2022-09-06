@@ -36,7 +36,8 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
             'image',
             'type_id',
             'defective_stock',
-            'Created'
+            'created_at',
+            'updated_at',
         ];
     }
 
@@ -52,7 +53,6 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
             $row->image,
             $row->stock_type->type_detail,
             $row->defective_stock,
-            Date::dateTimeToExcel($row->created_at)
         ];
     }
 

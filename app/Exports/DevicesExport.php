@@ -37,7 +37,8 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
             'image',
             'device_year',
             'defective_stock',
-            'Created'
+            'created_at',
+            'updated_at',
         ];
     }
 
@@ -54,7 +55,6 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
             $row->image,
             $row->device_year,
             $row->defective_stock,
-            Date::dateTimeToExcel($row->created_at)
         ];
     }
 
