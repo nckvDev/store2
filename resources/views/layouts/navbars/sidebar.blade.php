@@ -309,8 +309,8 @@
             <h6 class="navbar-heading text-muted">Student</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('student_borrow*') ? 'active text-orange' : '' }}"
-                        href="{{ route('student_borrow') }}">
+                    <a class="nav-link {{ request()->is('cart.list*') ? 'active text-orange' : '' }}"
+                        href="{{ route('cart.list') }}">
                         <i class="ni ni-archive-2 text-orange"></i> {{ __('ยืมวัสดุ') }}
                     </a>
                 </li>

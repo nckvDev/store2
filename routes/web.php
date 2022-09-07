@@ -13,7 +13,6 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageLocationController;
 use App\Http\Controllers\ManageUserController;
-use App\Http\Controllers\Personnel\DashboardController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\DisposableController;
@@ -128,7 +127,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Stock
         Route::get('stock', [StockController::class, 'index'])->name('stock');
         Route::post('stock/add', [StockController::class, 'store'])->name('addStock');
-        
+
         Route::post('stock/fetch', [StockController::class, 'fetch'])->name('stock.fetch');
         Route::get('stock/add_stock', [StockController::class, 'add'])->name('add_stock');
         Route::get('stock/edit/{id}', [StockController::class, 'edit']); // show data edit
@@ -163,12 +162,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
-        Route::get('personnel_dashboard', [DashboardController::class, 'index'])->name('personnel_dashboard');
-        Route::post('personnel_dashboard/update/{id}', [DashboardController::class, 'update']);
+        Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
+        Route::post('personnel_dashboard/update/{id}', [\App\Http\Controllers\Personnel\DashboardController::class, 'update']);
 
         Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
         Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
-        Route::post('update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('cart.update');
+        Route::post('personnel_borrow/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('cart.update');
         Route::post('remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('cart.clear');
         Route::post('save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('cart.save');
@@ -176,8 +175,16 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');
-        Route::get('student_borrow', [\App\Http\Controllers\Student\BorrowController::class, 'index'])->name('student_borrow');
-        Route::get('student_borrow/select/{id}', [\App\Http\Controllers\Student\BorrowController::class, 'filters'])->name('student_borrow_select');
+        Route::post('student_dashboard/update/{id}', [\App\Http\Controllers\Student\DashboardController::class, 'update']);
+
+        Route::get('student_borrow', [\App\Http\Controllers\Student\CartController::class, 'cartList'])->name('cart.list');
+        Route::post('student_borrow/borrow', [\App\Http\Controllers\Student\CartController::class, 'addToCart'])->name('cart.store');
+        Route::post('student_borrow/update-cart', [\App\Http\Controllers\Student\CartController::class, 'updateCart'])->name('cart.update');
+        Route::post('remove', [\App\Http\Controllers\Student\CartController::class, 'removeCart'])->name('cart.remove');
+        Route::post('clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('cart.clear');
+        Route::post('save', [\App\Http\Controllers\Student\CartController::class, 'saveCart'])->name('cart.save');
+        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('personnel.fetch');
+
     });
 
     // Search

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Borrow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -11,7 +14,31 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
-        return view('users.student.dashboard');
+    public function index()
+    {
+        $user = Auth::user()->id;
+        $borrowList = Borrow::where(['user_id' => $user])->get();
+        return view('users.student.dashboard', compact('borrowList'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        Borrow::find($id)->update([
+            'borrow_status' => $request['borrow_status'],
+        ]);
+
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
+                'stock_status' => $request['borrow_status']
+            ]);
+        }
+
+        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
+                'device_status' => $request['borrow_status']
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'ส่งคืนรายการเรียบร้อย');
     }
 }

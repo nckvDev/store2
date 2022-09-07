@@ -1,42 +1,105 @@
-@extends('layouts.app', ['class' => 'bg-neutral'])
+@extends('layouts.app', ['class' => 'bg-gradient-neutral'])
 
 @section('content')
     @include('layouts.headers.cards')
 
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--9">
+        <div class="row">
+            <div class="col-xl-12">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"> รายการยืม</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card bg-gradient-dark shadow">
-                    <div class="card-header bg-transparent">
+                <div class="card shadow">
+                    <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-uppercase text-light ls-1 mb-1">Overview Student</h6>
-                                <h2 class="text-white mb-0">Sales value</h2>
-                            </div>
-                            <div class="col">
-                                <ul class="nav nav-pills justify-content-end">
-                                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
-                                        <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                            <span class="d-none d-md-block">Month</span>
-                                            <span class="d-md-none">M</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
-                                        <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                                            <span class="d-none d-md-block">Week</span>
-                                            <span class="d-md-none">W</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div class="col-8">
+                                <h3 class="mb-0">รายการยืม</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <!-- Chart -->
-                        <div class="chart">
-                            <!-- Chart wrapper -->
-                            <canvas id="chart-sales" class="chart-canvas"></canvas>
-                        </div>
+
+                    <div class="col-12">
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">รหัส</th>
+                                <th scope="col">รายการ</th>
+                                <th scope="col">เวลา</th>
+                                <th scope="col">สถานะ</th>
+                                <th scope="col">ส่งคืน</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($borrowList as $row)
+                                @if($row->borrow_status == 1 || $row->borrow_status == 2)
+                                    <tr>
+                                        <td>
+                                            @foreach($row->borrow_list_id as $item)
+                                                {{ $item }}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach($row->borrow_name as $item)
+                                                {{ $item }}
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $row->created_at }}</td>
+                                        @if($row->borrow_status=="2")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="1")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        <td>
+                                            <form action="{{ url('/student_dashboard/update/'.$row->id) }}"
+                                                  method="post" >
+                                                @csrf
+                                                @foreach($row->borrow_list_id as $item)
+                                                    <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
+                                                @endforeach
+                                                <input type="hidden" name="borrow_status" value="0">
+                                                @if($row->borrow_status=="2")
+                                                    <button type="submit" class="btn btn-primary btn-sm ">
+                                                        ส่งคืน
+                                                    </button>
+                                                @endif
+{{--                                                @if($row->borrow_status=="0")--}}
+{{--                                                    <button type="text" class="btn btn-primary btn-sm disabled">--}}
+{{--                                                        ส่งคืน--}}
+{{--                                                    </button>--}}
+{{--                                                @endif--}}
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                        @if (session('success'))
+                            <script>
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'ส่งคืนเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>
