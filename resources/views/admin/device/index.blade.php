@@ -45,24 +45,32 @@
                                 <th>สถานะ</th>
                                 <th class="text-center">จัดการข้อมูล</th>
                             </tr>
-                            </thead>
-                            <tbody id="datalist">
+                        </thead>
+                        <tbody id="datalist">
                             @foreach($devices as $row)
-                                <tr>
-                                    <td>{{ $row->device_num }}</td>
-                                    <td>{{ $row->device_name }}</td>
-                                    @if($row->device_status == 0)
-                                        <td>
-                                            <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
-                                        </td>
-                                    @elseif($row->device_status == 1)
-                                        <td>
-                                            <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
-                                        </td>
-                                    @elseif($row->device_status == 2)
-                                        <td>
-                                            <div class="rounded text-white bg-red text-center">ถูกยืม</div>
-                                        </td>
+                            <tr>
+                                <td>{{ $row->device_num }}</td>
+                                <td>{{ $row->device_name }}</td>
+                                @if($row->device_status == 0)
+                                <td>
+                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
+                                </td>
+                                @elseif($row->device_status == 1)
+                                <td>
+                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
+                                </td>
+                                @elseif($row->device_status == 2)
+                                <td>
+                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                </td>
+                                @endif
+                                <td class="text-center">{{ $row->device_amount }}</td>
+                                @if($row->image == 0)
+                                <td><img src="{{asset('images/imageNull/null.png')}}" class="rounded mx-auto d-block "
+                                        width="80" height="80" /></td>
+                                @else
+                                <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block " width="80"
+                                        height="80" />
                                     @endif
                                     <td class="text-center">{{ $row->device_amount }}</td>
                                     @if($row->image == 0)
@@ -98,63 +106,33 @@
             </div>
         </div>
     </div>
-    {{csrf_field()}}
-    </div>
+</div>
+{{csrf_field()}}
+</div>
 @endsection
 @push('js')
-    <script>
-        $(function () {
-            $.extend($.fn.dataTableExt.oStdClasses, {
-                "sFilterInput": "form-control form-control-sm",
-                "sLengthSelect": "form-control form-control-sm"
-            });
-            $('#table_id').dataTable({
-                lengthMenu: [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, 'ทั้งหมด'],
-                ],
-                "responsive": true,
-                "language": {
-                    "search": "ค้นหา ",
-                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
-                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
-                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
-                    "infoEmpty": "ไม่มีข้อมูล",
-                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
-                    "paginate": {
-                        "previous": "ปัจจุบัน",
-                        "next": "หน้า"
-                    }
-                }
-            });
-            $('[type=search]').each(function () {
-                +
-                    $(this).attr("placeholder", "Search...");
-                $(this).before('<span class="fa fa-search"></span>');
-            });
-            $('#button').click(function () {
-                alert(table.rows('.selected').data().length + ' row(s) selected');
-            });
-        });
-
-        $('#type').change(function () {
-            if ($(this).val() != '') {
-                var select = $(this).val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{route('device.fetch')}}",
-                    method: "POST",
-                    data: {
-                        select: select,
-                        _token: _token
-                    },
-                    success: function (result) {
-                        // $('.stockname').html(result);
-                        {
-                            $("#datalist").html(result)
-                        }
-                    }
-                })
+<script>
+$(function() {
+    $.extend($.fn.dataTableExt.oStdClasses, {
+        "sFilterInput": "form-control form-control-sm",
+        "sLengthSelect": "form-control form-control-sm"
+    });
+    $('#table_id').dataTable({
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, 'ทั้งหมด'],
+        ],
+        "responsive": true,
+        "language": {
+            "search": "ค้นหา ",
+            "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+            "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+            "infoEmpty": "ไม่มีข้อมูล",
+            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+            "paginate": {
+                "previous": "ปัจจุบัน",
+                "next": "หน้า"
             }
         });
 

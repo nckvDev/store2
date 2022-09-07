@@ -172,6 +172,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('cart.remove');
         Route::post('clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('cart.clear');
         Route::post('save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('cart.save');
+        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel.fetch');
     });
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');

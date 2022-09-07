@@ -28,8 +28,9 @@
                                 @endphp
                             @endforeach
                         @endif
+                        <input id="search" placeholder="ค้นหา" class="form-control form-control-sm" style="width:30%">
 
-                        <table id="example" class="table align-items-center">
+                        <table id="example" class="mt-3">
                             <thead class="thead-light">
                             <tr>
                                 <th>รหัสพัสดุ</th>
@@ -39,7 +40,7 @@
                                 <th>เลือก</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="datalist">
                             @foreach ($devices as $item)
                                 @if($item->device_status == 0 && $item->defective_device == 0)
                                     @if($addData)
@@ -49,26 +50,23 @@
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->device_num }}" name="id"
-                                                               readonly style="width: 60px">
+                                                               readonly
+                                                               style="width: 60px">
                                                     </td>
-                                                    <td><input type="text" value="{{ $item->device_name }}"
-                                                               name="name"
-                                                               readonly style="width: 60px">
+                                                    <td><input type="text" value="{{ $item->device_name }}" name="name"
+                                                               readonly>
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="50" height="50"
-                                                             readonly>
+                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly>
                                                     </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price"
-                                                           readonly>
+                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            readonly>
                                                     <td>
                                                         <input type="text" value="{{ $item->device_amount }}"
-                                                               name="quantity" readonly>
+                                                               name="quantity" readonly style="width: 60px">
                                                     </td>
 
-                                                    <input type="hidden" value="1" name="price" readonly
-                                                           style="width: 60px">
+                                                    <input type="hidden" value="1" name="price" readonly>
                                                     <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
@@ -86,21 +84,19 @@
                                                 </td>
                                                 <td>
                                                     <input type="text" value="{{ $item->device_name }}" name="name"
-                                                           readonly style="width: 60px">
+                                                           readonly>
                                                 </td>
                                                 <td>
                                                     <img src="{{ $item->image }}" width="50" height="50" readonly>
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image"
-                                                       readonly>
+                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                                 <td>
                                                     <input type="text" value="{{ $item->device_amount }}"
-                                                           name="quantity" readonly>
+                                                           name="quantity" readonly style="width: 60px">
                                                 </td>
 
-                                                <input type="hidden" value="1" name="price" readonly
-                                                       style="width: 60px">
+                                                <input type="hidden" value="1" name="price" readonly>
                                                 <td>
                                                     <button class="btn btn-primary btn-sm">เลือก</button>
                                                 </td>
@@ -118,27 +114,24 @@
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                               readonly style="width: 60px">
+                                                               readonly
+                                                               style="width: 60px">
                                                     </td>
-                                                    <td><input type="text" value="{{ $item->stock_name }}"
-                                                               name="name"
-                                                               readonly style="width: 60px">
+                                                    <td><input type="text" value="{{ $item->stock_name }}" name="name"
+                                                               readonly>
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80"
-                                                             readonly>
+                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly>
                                                     </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price"
-                                                           readonly>
+                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
                                                            width="50" height="50"
                                                            readonly>
                                                     <td>
                                                         <input type="text" value="{{ $item->stock_amount }}"
-                                                               name="quantity" readonly>
+                                                               name="quantity" readonly style="width: 60px">
                                                     </td>
 
-                                                    <input type="hidden" value="1" name="price"
-                                                           readonly style="width: 60px">
+                                                    <input type="hidden" value="1" name="price" readonly>
                                                     <td>
                                                         <button class="btn btn-primary btn-sm">เลือก</button>
                                                     </td>
@@ -150,26 +143,23 @@
                                             <form action="{{ route('cart.store') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
-                                                <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                           readonly style="width: 60px">
+                                                <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
+                                                           style="width: 60px">
                                                 </td>
-                                                <td><input type="text" value="{{ $item->stock_name }}"
-                                                           name="name"
-                                                           readonly style="width: 60px">
+                                                <td><input type="text" value="{{ $item->stock_name }}" name="name"
+                                                           readonly>
                                                 </td>
-                                                <td><img src="{{ $item->image }}" width="50" height="50"
-                                                         readonly>
+                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly>
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image"
-                                                       readonly>
+                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                                 <td>
-                                                    <input type="text" value="{{ $item->stock_amount }}"
-                                                           name="quantity" readonly>
+                                                    <input type="text" value="{{ $item->stock_amount }}" name="quantity"
+                                                           readonly style="width: 60px">
                                                 </td>
 
                                                 <input type="hidden" value="1" name="price" readonly
-                                                       style="width: 60px">
+                                                       style="width: max-content">
                                                 <td>
                                                     <button class="btn btn-primary btn-sm">เลือก</button>
                                                 </td>
@@ -187,51 +177,22 @@
                                                    readonly style="width: 60px">
                                         </td>
                                         <td><input type="text" value="{{ $item->disposable_name }}" name="name"
-                                                   readonly style="width: 60px">
+                                                   readonly>
                                         </td>
                                         <td><img src="{{ $item->image }}" width="50" height="50" readonly></td>
                                         {{--                                            <input type="hidden" value="1" name="price" readonly>--}}
                                         <input type="hidden" value="{{ $item->image }}" name="image" readonly>
                                         <td>
-                                            <input type="text" value="{{ $item->disposable_amount }}"
-                                                   name="quantity" readonly>
+                                            <input type="text" value="{{ $item->disposable_amount }}" name="quantity"
+                                                   readonly style="width: 60px">
                                         </td>
 
-                                        <input type="hidden" value="1" name="price"
-                                               readonly style="width: 60px">
+                                        <input type="hidden" value="1" name="price" readonly style="width: max-content">
                                         <td>
-                                            <button class="btn btn-primary btn-sm"
-                                                    data-toggle="modal"
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                     data-target="#exampleModal">เลือก
                                             </button>
                                         </td>
-
-                                        {{--                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"--}}
-                                        {{--                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-                                        {{--                                                <div class="modal-dialog" role="document">--}}
-                                        {{--                                                    <div class="modal-content">--}}
-                                        {{--                                                        <div class="modal-header">--}}
-                                        {{--                                                            <h3 class="modal-title" id="name">--}}
-                                        {{--                                                                ระบุจำนวน</h3>--}}
-                                        {{--                                                            <button type="button" class="close" data-dismiss="modal"--}}
-                                        {{--                                                                    aria-label="Close">--}}
-                                        {{--                                                                <span aria-hidden="true">&times;</span>--}}
-                                        {{--                                                            </button>--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                        <div class="modal-body">--}}
-                                        {{--                                                            <input type="text" value="" name="quantity" id="name"--}}
-                                        {{--                                                                   class="form-control form-control-muted"--}}
-                                        {{--                                                                   placeholder="กรุณาใส่จำนวน">--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                        <div class="modal-footer">--}}
-                                        {{--                                                            <button type="button" class="btn btn-secondary"--}}
-                                        {{--                                                                    data-dismiss="modal">ปิด--}}
-                                        {{--                                                            </button>--}}
-                                        {{--                                                            <button class="btn btn-primary">ตกลง</button>--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                    </div>--}}
-                                        {{--                                                </div>--}}
-                                        {{--                                            </div>--}}
                                     </form>
                                 </tr>
                             @endforeach
@@ -250,8 +211,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="flex flex-col sm:flex-row">
-                                        <svg class="w-5 h-5" fill="none" stroke-linecap="round"
-                                             stroke-linejoin="round"
+                                        <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                              stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                             <path
                                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
@@ -283,14 +243,11 @@
                                                     <td><input type="text" value="{{ $item->name }}"
                                                                name="borrow_name[]"
                                                                readonly style="width: 60px"></td>
-                                                    <input type="hidden" value="{{ $item->price }}"
-                                                           name="borrow_id[]"
+                                                    <input type="hidden" value="{{ $item->price }}" name="borrow_id[]"
                                                            readonly>
-                                                    <input type="hidden" value="1" name="borrow_status"
-                                                           readonly>
+                                                    <input type="hidden" value="1" name="borrow_status" readonly>
                                                     <td>
-                                                        <input type="text" name="borrow_amount[]"
-                                                               value="1"
+                                                        <input type="text" name="borrow_amount[]" value="1"
                                                                class="w-10 text-center bg-gray-100"/>
                                                         <form action="{{ route('cart.update') }}" method="POST"
                                                               enctype="multipart/form-data">
@@ -331,7 +288,7 @@
                 </div>
             </div>
         </div>
-
+        {{csrf_field()}}
     </div>
 @endsection
 
@@ -341,26 +298,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-        $(function () {
-            $('#myTable').dataTable({
-                "searching": false,
-                "lengthChange": false,
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bInfo": false,
-                "bAutoWidth": false,
-                ajax: "",
-                columns: [{
-                    data: 'DT_RowIndex'
-                },
-                    {
-                        data: 'name'
-                    },
-                ]
+        $(document).ready(function () {
+            var notFoundCount = -7;
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase(),
+                    $tr = $("#example tbody tr");
+                $tr.each(function () {
+                    var found = 0;
+                    $(this).find("input").each(function () {
+                        found += $(this).val().indexOf(value)
+                    });
+                    if (found > notFoundCount) {
+                        $(this).closest('tr').show();
+                    } else {
+                        $(this).closest('tr').hide();
+                    }
+                });
             });
         });
-
 
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
@@ -368,6 +323,8 @@
                 "sLengthSelect": "form-control form-control-sm"
             });
             $('#example').dataTable({
+                "searching": false,
+                "lengthChange": false,
                 "language": {
                     "search": "ค้นหา ",
                     "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
@@ -389,12 +346,45 @@
             $('#button').click(function () {
                 alert(table.rows('.selected').data().length + ' row(s) selected');
             });
+
+            $('#myTable').dataTable({
+                "searching": false,
+                "lengthChange": false,
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bInfo": false,
+                "bAutoWidth": false,
+                ajax: "",
+                columns: [{
+                    data: 'DT_RowIndex'
+                },
+                    {
+                        data: 'name'
+                    },
+                ]
+            });
+        });
+
+        $('#type').change(function () {
+            if ($(this).val() != '') {
+                var select = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{route('personnel.fetch')}}",
+                    method: "POST",
+                    data: {
+                        select: select,
+                        _token: _token
+                    },
+                    success: function (result) {
+                        // $('.stockname').html(result);
+                        {
+                            $("#datalist").html(result)
+                        }
+                    }
+                })
+            }
         });
     </script>
-
-
-    <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 @endpush

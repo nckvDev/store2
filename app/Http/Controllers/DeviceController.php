@@ -18,7 +18,7 @@ class DeviceController extends Controller
         $types = DB::table('types')
         ->orderBy('type_detail','asc')
         ->get();
-        $devices = Device::paginate(5);
+        $devices = Device::all();
         return view('admin.device.index', compact('devices','types'));
     }
 

@@ -45,8 +45,8 @@
                                 <th class="text-center">สถานะ</th>
                                 <th class="text-center">จัดการ</th>
                             </tr>
-                            </thead>
-                            <tbody id="datalist">
+                        </thead>
+                        <tbody id="datalist">
                             @foreach($stocks as $row)
                                 <tr>
                                     <td>{{ $row->stock_num }}</td>
@@ -80,8 +80,8 @@
                                                    href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -89,8 +89,8 @@
                 </div>
             </div>
         </div>
-        {{csrf_field()}}
-    </div>
+    {{csrf_field()}}
+</div>
 @endsection
 @push('js')
     <script>
