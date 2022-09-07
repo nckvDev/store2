@@ -53,7 +53,7 @@
                             Swal.fire({
                                 position: 'center',
                                 icon: 'error',
-                                title: 'Email-Address And Password Are Wrong.',
+                                title: 'อีเมล์และรหัสผ่านไม่ถูกต้อง!',
                                 confirmButtonText: 'ตกลง'
                             })
                         </script>

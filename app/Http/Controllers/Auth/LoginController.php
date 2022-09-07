@@ -24,7 +24,8 @@ class LoginController extends Controller
 
 //    use AuthenticatesUsers;
 
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
         return view('auth.login');
     }
 
@@ -32,13 +33,18 @@ class LoginController extends Controller
     {
         $input = $request->all();
 
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+            ],
+            [
+                'email.required' => "กรุณาป้อนอีเมล์ด้วยครับ",
+                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ",
+            ]
+        );
 
-        if(Auth::attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
+        if (Auth::attempt(array('email' => $input['email'], 'password' => $input['password']))) {
             $role = Auth::user()->role;
             switch ($role) {
                 case 'admin':
@@ -54,14 +60,15 @@ class LoginController extends Controller
                     return redirect()->route('home');
                     break;
             }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+        } else {
+            return redirect()->back()
+                ->with('error', 'Email-Address And Password Are Wrong.');
         }
 
     }
 
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
 
@@ -76,24 +83,24 @@ class LoginController extends Controller
      */
 //    protected $redirectTo = RouteServiceProvider::HOME;
 
-   /* public function redirectTo()
-    {
-        $role = Auth::user()->role;
-        switch ($role) {
-            case 'admin':
-                return '/admin_dashboard';
-                break;
-            case 'personnel':
-                return '/personnel_dashboard';
-                break;
-            case 'student':
-                return '/student_dashboard';
-                break;
-            default:
-                return '/home';
-                break;
-        }
-    }*/
+    /* public function redirectTo()
+     {
+         $role = Auth::user()->role;
+         switch ($role) {
+             case 'admin':
+                 return '/admin_dashboard';
+                 break;
+             case 'personnel':
+                 return '/personnel_dashboard';
+                 break;
+             case 'student':
+                 return '/student_dashboard';
+                 break;
+             default:
+                 return '/home';
+                 break;
+         }
+     }*/
     /**
      * Create a new controller instance.
      *
