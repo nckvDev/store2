@@ -298,8 +298,8 @@
             <h6 class="navbar-heading text-muted">Personnel</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
-                        href="{{ route('cart.list') }}">
+                    <a class="nav-link {{ request()->is('personnel_borrow*') ? 'active text-green' : '' }}"
+                        href="{{ route('personnel_borrow.list') }}">
                         <i class="ni ni-archive-2 text-green"></i> {{ __('ยืม/เบิกวัสดุ-พัสดุ') }}
                     </a>
                 </li>
@@ -309,8 +309,8 @@
             <h6 class="navbar-heading text-muted">Student</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('cart.list*') ? 'active text-orange' : '' }}"
-                        href="{{ route('cart.list') }}">
+                    <a class="nav-link {{ request()->is('student_borrow*') ? 'active text-orange' : '' }}"
+                        href="{{ url('student_borrow') }}">
                         <i class="ni ni-archive-2 text-orange"></i> {{ __('ยืมวัสดุ') }}
                     </a>
                 </li>

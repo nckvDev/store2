@@ -49,7 +49,7 @@ Route::get('register', [RegistersController::class, 'showRegistrationForm'])->na
 Route::post('register', [RegistersController::class, 'registers']);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+//    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
     // Admin
 //    Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->middleware('role:admin');
@@ -165,25 +165,25 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
         Route::post('personnel_dashboard/update/{id}', [\App\Http\Controllers\Personnel\DashboardController::class, 'update']);
 
-        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('cart.list');
-        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('cart.store');
-        Route::post('personnel_borrow/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('cart.update');
-        Route::post('remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('cart.remove');
-        Route::post('clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('cart.clear');
-        Route::post('save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('cart.save');
-        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel.fetch');
+        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('personnel_borrow.list');
+        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('personnel_borrow.add');
+        Route::post('personnel_borrow/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('personnel_borrow.update');
+        Route::post('personnel_borrow/remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('personnel_borrow.remove');
+        Route::post('personnel_borrow/clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('personnel_borrow.clear');
+        Route::post('personnel_borrow/save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('personnel_borrow.save');
+        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel_borrow.fetch');
     });
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');
         Route::post('student_dashboard/update/{id}', [\App\Http\Controllers\Student\DashboardController::class, 'update']);
 
-        Route::get('student_borrow', [\App\Http\Controllers\Student\CartController::class, 'cartList'])->name('cart.list');
-        Route::post('student_borrow/borrow', [\App\Http\Controllers\Student\CartController::class, 'addToCart'])->name('cart.store');
-        Route::post('student_borrow/update-cart', [\App\Http\Controllers\Student\CartController::class, 'updateCart'])->name('cart.update');
-        Route::post('remove', [\App\Http\Controllers\Student\CartController::class, 'removeCart'])->name('cart.remove');
-        Route::post('clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('cart.clear');
-        Route::post('save', [\App\Http\Controllers\Student\CartController::class, 'saveCart'])->name('cart.save');
-        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('personnel.fetch');
+        Route::get('student_borrow', [\App\Http\Controllers\Student\CartController::class, 'cartList'])->name('student_borrow.list');
+        Route::post('student_borrow/borrow', [\App\Http\Controllers\Student\CartController::class, 'addToCart'])->name('student_borrow.add');
+        Route::post('student_borrow/update-cart', [\App\Http\Controllers\Student\CartController::class, 'updateCart'])->name('student_borrow.update');
+        Route::post('student_borrow/remove', [\App\Http\Controllers\Student\CartController::class, 'removeCart'])->name('student_borrow.remove');
+        Route::post('student_borrow/clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('student_borrow.clear');
+        Route::post('student_borrow/save', [\App\Http\Controllers\Student\CartController::class, 'saveCart'])->name('student_borrow.save');
+        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('student_borrow.fetch');
 
     });
 

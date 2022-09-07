@@ -16,10 +16,10 @@ class DeviceController extends Controller
     {
         $types = Type::all();
         $types = DB::table('types')
-        ->orderBy('type_detail','asc')
-        ->get();
+            ->orderBy('type_detail', 'asc')
+            ->get();
         $devices = Device::all();
-        return view('admin.device.index', compact('devices','types'));
+        return view('admin.device.index', compact('devices', 'types'));
     }
 
     public function add()
@@ -36,13 +36,13 @@ class DeviceController extends Controller
             'device_name' => 'required|max:255',
             'image' => 'required|mimes:jpg,jpeg,png'
         ],
-        [
-            'device_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
-            'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+            [
+                'device_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
+                'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
 //            'device_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
-            'image.required' => "กรุณาใส่ภาพด้วยครับ",
-            'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
-        ]);
+                'image.required' => "กรุณาใส่ภาพด้วยครับ",
+                'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
+            ]);
 
         $deviceImage = $request->file('image');
 
@@ -78,14 +78,14 @@ class DeviceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-           'device_name' => 'required|max:255',
-           'image' => 'mimes:jpg,jpeg,png'
+            'device_name' => 'required|max:255',
+            'image' => 'mimes:jpg,jpeg,png'
         ],
-        [
-            'device_name.required' => "กรุณาป้อนชื่อภาพด้วยครับ",
-            'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
-            'image.mimes' => "นามสกุลไฟล์ต้องเป็น jpg jpeg png"
-        ]);
+            [
+                'device_name.required' => "กรุณาป้อนชื่อภาพด้วยครับ",
+                'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'image.mimes' => "นามสกุลไฟล์ต้องเป็น jpg jpeg png"
+            ]);
 
         $deviceImage = $request->file('image');
 
@@ -109,7 +109,7 @@ class DeviceController extends Controller
             ]);
 
             $old_image = $request->old_image;
-            if($old_image == null){
+            if ($old_image == null) {
                 $upload_location = 'images/devices/';
                 $full_path = $upload_location . $imgName;
                 Device::find($id)->update([
@@ -164,7 +164,6 @@ class DeviceController extends Controller
                 $img = asset($row->image);
                 $path_edit = url('/device/edit/'.$row->id);
                 $path_del = url('/device/delete/'.$row->id);
-                $status;
                 if($row->device_status == 0)
                     $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
                 elseif($row->device_status == 1)
@@ -172,22 +171,22 @@ class DeviceController extends Controller
                 elseif($row->device_status == 2)
                     $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
 
-                echo "<tr>
+            echo "<tr>
                         <td>
                             {$row->device_num}
                         </td>
                         <td>
                             {$row->device_name}
                         </td>
-                        <td class='text-center'>
-                            {$status}
-                        </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                          $row->device_amount
                         </td>
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                             {$row->device_year}
+                        </td>
+                        <td class='text-center'>
+                            {$status}
                         </td>
                         <td class='text-center'>
                                         <div class='dropdown'>
@@ -196,7 +195,7 @@ class DeviceController extends Controller
                                                 <i class='fas fa-ellipsis-v'></i>
                                             </a>
                                             <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                <a class='dropdown-item'
                                                     href='$path_edit'>แก้ไขข้อมูล</a>
                                                 <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
                                                     href='$path_del'>ลบข้อมูล</a>
@@ -204,9 +203,7 @@ class DeviceController extends Controller
                                         </div>
                                     </td>
                     </tr>";
-            }
-
-
+        }
         echo $output;
     }
 }

@@ -46,7 +46,7 @@
                                     @if($addData)
                                         @if(!in_array($item->stock_num, $addData))
                                             <tr>
-                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                <form action="{{ route('student_borrow.add') }}" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->stock_num }}" name="id"
@@ -76,7 +76,7 @@
                                         @endif
                                     @else
                                         <tr>
-                                            <form action="{{ route('cart.store') }}" method="POST"
+                                            <form action="{{ route('student_borrow.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
@@ -106,7 +106,7 @@
                             @endforeach
                             @foreach ($disposables as $item)
                                 <tr>
-                                    <form action="{{ route('cart.store') }}" method="POST"
+                                    <form action="{{ route('student_borrow.add') }}" method="POST"
                                           enctype="multipart/form-data">
                                         @csrf
                                         <td><input type="text" value="{{ $item->disposable_num }}" name="id"
@@ -156,7 +156,7 @@
                                         {{ Cart::getTotalQuantity()}}
                                         </a>
                                     </div>
-                                    <form action="{{ route('cart.save') }}" method="post">
+                                    <form action="{{ route('student_borrow.save') }}" method="post">
                                         @csrf
                                         <table id="myTable">
                                             <thead>
@@ -185,13 +185,13 @@
                                                     <td>
                                                         <input type="text" name="borrow_amount[]" value="1"
                                                                class="w-10 text-center bg-gray-100"/>
-                                                        <form action="{{ route('cart.update') }}" method="POST"
+                                                        <form action="{{ route('student_borrow.update') }}" method="POST"
                                                               enctype="multipart/form-data">
                                                             @csrf
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('cart.remove') }}" method="POST"
+                                                        <form action="{{ route('student_borrow.remove') }}" method="POST"
                                                               enctype="multipart/form-data">
                                                             @csrf
                                                             <input type="hidden" value="{{ $item->id }}" name="id">
@@ -212,8 +212,29 @@
                                                 position: 'center',
                                                 icon: 'success',
                                                 title: 'ยืนยันรายการยืมสำเร็จ',
-                                                showConfirmButton: false,
-                                                timer: 1500
+                                                showConfirmButton: true,
+                                            })
+                                        </script>
+                                    @endif
+                                    @if (session('warning'))
+                                        <script>
+                                            Swal.fire({
+                                                position: 'center',
+                                                icon: 'warning',
+                                                title: 'จำนวนวัสดุไม่เพียงพอ!',
+                                                showConfirmButton: true,
+                                                confirmButtonText: 'ตกลง'
+                                            })
+                                        </script>
+                                    @endif
+                                    @if (session('error'))
+                                        <script>
+                                            Swal.fire({
+                                                position: 'center',
+                                                icon: 'error',
+                                                title: 'ไม่มีรายการที่เลือก!',
+                                                showConfirmButton: true,
+                                                confirmButtonText: 'ตกลง'
                                             })
                                         </script>
                                     @endif
@@ -307,7 +328,7 @@
                 var select = $(this).val();
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: "{{route('personnel.fetch')}}",
+                    url: "{{route('student_borrow.fetch')}}",
                     method: "POST",
                     data: {
                         select: select,

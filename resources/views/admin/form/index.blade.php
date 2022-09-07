@@ -92,19 +92,23 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}" method="POST">
+                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}"
+                                                              method="POST">
                                                             @csrf
                                                             @foreach($row->borrow_list_id as $item)
-                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
+                                                                <input type="hidden" name="borrow_list_id[]"
+                                                                       value="{{ $item }}">
                                                             @endforeach
                                                             <input type="hidden" name="borrow_status" value="2">
                                                             <button class="btn btn-primary btn-sm">อนุมัติ
                                                             </button>
                                                         </form>
-                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}" method="POST">
+                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}"
+                                                              method="POST">
                                                             @csrf
                                                             @foreach($row->borrow_list_id as $item)
-                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
+                                                                <input type="hidden" name="borrow_list_id[]"
+                                                                       value="{{ $item }}">
                                                             @endforeach
                                                             <input type="hidden" name="borrow_status" value="0">
                                                             <button class="btn btn-danger btn-sm">ไม่อนุมัติ
@@ -119,59 +123,77 @@
                             @endforeach
                             </tbody>
                         </table>
+                        @if (session('success'))
+                            <script>
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'ยืนยันรายการยืมสำเร็จ',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            </script>
+                        @endif
+                        @if (session('error'))
+                            <script>
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: 'ยกเลิกรายการยืมสำเร็จ',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-        @endsection
+    </div>
+@endsection
 
-        @push('js')
-            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-            <script src="{{ asset('js/app.js') }}"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+@push('js')
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-            <script>
-                $(function () {
-                    $.extend($.fn.dataTableExt.oStdClasses, {
-                        "sFilterInput": "form-control form-control-sm",
-                        "sLengthSelect": "form-control form-control-sm"
-                    });
-                    $('#table_id').dataTable({
-                        "language": {
-                            "search": "ค้นหา ",
-                            "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
-                            "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
-                            "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
-                            "infoEmpty": "ไม่มีข้อมูล",
-                            "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
-                            "paginate": {
-                                "previous": "ปัจจุบัน",
-                                "next": "หน้า"
-                            }
-                        }
-                    });
-                    $('[type=search]').each(function () {
-                        +
-                            $(this).attr("placeholder", "Search...");
-                        $(this).before('<span class="fa fa-search"></span>');
-                    });
-                    $('#button').click(function () {
-                        alert(table.rows('.selected').data().length + ' row(s) selected');
-                    });
-                });
-
-                function submitButton() {
-
+    <script>
+        $(function () {
+            $.extend($.fn.dataTableExt.oStdClasses, {
+                "sFilterInput": "form-control form-control-sm",
+                "sLengthSelect": "form-control form-control-sm"
+            });
+            $('#table_id').dataTable({
+                "language": {
+                    "search": "ค้นหา ",
+                    "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
+                    "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
+                    "info": "หน้าที่ _PAGE_ ถึง _PAGES_",
+                    "infoEmpty": "ไม่มีข้อมูล",
+                    "infoFiltered": "(ค้นหาจาก _MAX_ ข้อมูลทั้งหมด)",
+                    "paginate": {
+                        "previous": "ปัจจุบัน",
+                        "next": "หน้า"
+                    }
                 }
+            });
+            $('[type=search]').each(function () {
+                +
+                    $(this).attr("placeholder", "Search...");
+                $(this).before('<span class="fa fa-search"></span>');
+            });
+            $('#button').click(function () {
+                alert(table.rows('.selected').data().length + ' row(s) selected');
+            });
+        });
 
-                function submitCheckbox() {
-                    checkbox.checked = true;
-                }
-            </script>
+        function submitButton() {
 
+        }
 
-            <script src="assets/vendor/select2/dist/js/select2.min.js"></script>
-            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
-            <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-            <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    @endpush
+        function submitCheckbox() {
+            checkbox.checked = true;
+        }
+    </script>
+
+@endpush

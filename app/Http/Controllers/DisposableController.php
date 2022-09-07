@@ -195,14 +195,14 @@ class DisposableController extends Controller
                         <td>
                             {$row->disposable_name}
                         </td>
-                        <td>
-                            {$status}
-                        </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
+
                         <td class='text-center'>
                             {$row->disposable_amount}
                         </td>
-
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
+                         <td>
+                            {$status}
+                        </td>
                         <td class='text-center'>
                                         <div class='dropdown'>
                                             <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'

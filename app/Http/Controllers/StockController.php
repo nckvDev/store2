@@ -122,7 +122,7 @@ class StockController extends Controller
                 Stock::find($id)->update([
                     'image' => $full_path,
                 ]);
-                $deviceImage->move($upload_location, $imgName);
+                $stockImage->move($upload_location, $imgName);
                 return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
             }
             unlink($old_image);
@@ -186,13 +186,13 @@ class StockController extends Controller
                         <td>
                             {$row->stock_name}
                         </td>
+                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                             {$row->stock_amount}
                         </td>
                         <td>
                             {$status}
                         </td>
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
                         <td class='text-center'>
                                         <div class='dropdown'>
                                             <a class='btn btn-sm btn-icon-only text-light' href='#' role='button'

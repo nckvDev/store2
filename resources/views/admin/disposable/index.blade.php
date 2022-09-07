@@ -8,10 +8,10 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col-6">
                                 <h3 class="mb-0">รายการวัสดุสิ้นเปลือง</h3>
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="col-6 text-right">
                                 <a href="{{ route('disposable-import') }}"
                                    class="btn btn-sm btn-outline-success">นำเข้าข้อมูล
                                     XLSX & CSV</a>
@@ -42,9 +42,9 @@
                             <tr>
                                 <th>รหัสวัสดุสิ้นเปลือง</th>
                                 <th>ชื่อวัสดุสิ้นเปลือง</th>
-                                <th class="text-center"> สถานะ</th>
-                                <th>จำนวน</th>
                                 <th class="text-center">รูปภาพ</th>
+                                <th>จำนวน</th>
+                                <th class="text-center">สถานะ</th>
                                 <th class="text-center">จัดการข้อมูล</th>
                             </tr>
                             </thead>
@@ -53,6 +53,16 @@
                                 <tr>
                                     <td>{{ $row->disposable_num }}</td>
                                     <td>{{ $row->disposable_name }}</td>
+                                    @if($row->image == 0)
+                                        <td><img src="{{asset('images/imageNull/null.png')}}"
+                                                 class="rounded mx-auto d-block "
+                                                 width="80" height="80"/></td>
+                                    @else
+                                        <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                                 width="80"
+                                                 height="80"/></td>
+                                    @endif
+                                    <td class="text-center">{{ $row->disposable_amount }}</td>
                                     @if($row->disposable_status == 0)
                                         <td>
                                             <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
@@ -66,31 +76,20 @@
                                             <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                         </td>
                                     @endif
-                                    <td class="text-center">{{ $row->disposable_amount }}</td>
-                                    @if($row->image == 0)
-                                        <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                 class="rounded mx-auto d-block "
-                                                 width="80" height="80"/></td>
-                                    @else
-                                        <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
-                                                 width="80"
-                                                 height="80"/>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item"
-                                                       href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                    <a class="dropdown-item delete-confirm"
-                                                       href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
-                                                </div>
+                                    <td class="text-center">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item"
+                                                   href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                <a class="dropdown-item delete-confirm"
+                                                   href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
                                             </div>
-                                        </td>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

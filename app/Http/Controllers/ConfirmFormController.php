@@ -48,17 +48,20 @@ class ConfirmFormController extends Controller
             ]);
         }
 
-        $borrow_id = Borrow::find($id);
-        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
-            $disposable = DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->get();
-            foreach ($disposable as $item) {
-                $dis_amount = $item->disposable_amount - intval($borrow_id['borrow_amount'][$i]);
-                DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->update([
-                    'disposable_amount' => $dis_amount
-                ]);
+        if ($request['borrow_status'] == 2) {
+            $borrow_id = Borrow::find($id);
+            for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+                $disposable = DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->get();
+                foreach ($disposable as $item) {
+                    $dis_amount = $item->disposable_amount - intval($borrow_id['borrow_amount'][$i]);
+                    DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->update([
+                        'disposable_amount' => $dis_amount
+                    ]);
+                }
             }
+            return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
         }
+        return redirect()->back()->with('error', 'ไม่อนุมัติ');
 
-        return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
 }
