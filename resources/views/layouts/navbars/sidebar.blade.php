@@ -31,9 +31,7 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle">
-                            {{--                            <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/icons-user-clip.jpg">--}}
-                            <i class="ni ni-single-02"></i>
+                        <span class="badge badge-md badge-circle badge-floating badge-primary border-white ni ni-single-02">
                         </span>
                         {{--                        <div class="media-body ml-2 d-none d-lg-block">--}}
                         {{--                            <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>--}}
@@ -41,8 +39,8 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
+                    <div class="dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}  {{ auth()->user()->firstname }}</h6>
                     </div>
                     {{--                    <a href="{{ route('profile.edit') }}" class="dropdown-item">--}}
                     {{--                        <i class="ni ni-single-02"></i>--}}
@@ -79,22 +77,19 @@
                     <div class="col-6 collapse-brand">
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
                         <a href="{{ route('stock') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
                         </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'personnel')
                         <a href="{{ route('personnel_dashboard') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
                         </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'student')
                         <a href="{{ route('student_dashboard') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
                         </a>
                         @endif
-                        {{--                        <a href="{{ route('stock') }}">--}}
-                        {{--                            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png">--}}
-                        {{--                        </a>--}}
                     </div>
                     <div class="col-6 collapse-close">
                         <button type="button" class="navbar-toggler" data-toggle="collapse"
@@ -256,6 +251,9 @@
                     <a class="nav-link {{ request()->is('disposable*') ? 'active text-red' : '' }}"
                         href="{{ route('disposable') }}">
                         <i class="ni ni-bulb-61 text-red "> </i> {{ __('วัสดุสิ้นเปลือง') }}
+                        @if(Session::has('list'))
+                            <span class="badge badge-md badge-circle badge-floating badge-danger border-white ml-5 ni ni-bell-55" > </span>
+                        @endif
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -270,27 +268,6 @@
                         <i class="ni ni-curved-next text-gray"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>
                 </li>
-                {{--                <li class="nav-item ">--}}
-                {{--                    <a class="nav-link {{ request()->is('report*') ? 'active text-blue' : '' }}"--}}
-                {{--                       href="{{ route('report') }}">--}}
-                {{--                        <i class="ni ni-single-copy-04 text-blue"> </i> {{ __('รายงาน') }}--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/getting-started/overview.html">--}}
-                {{--                        <i class="ni ni-spaceship"></i> Getting started--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/foundation/colors.html">--}}
-                {{--                        <i class="ni ni-palette"></i> Foundation--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link" href="https://argon-dashboard-laravel.creative-tim.com/docs/components/alerts.html">--}}
-                {{--                        <i class="ni ni-ui-04"></i> Components--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
             </ul>
             @endif
 
@@ -305,6 +282,7 @@
                 </li>
             </ul>
             @endif
+
             @if(\Illuminate\Support\Facades\Auth::user()->role == 'student')
             <h6 class="navbar-heading text-muted">Student</h6>
             <ul class="navbar-nav mb-md-3">

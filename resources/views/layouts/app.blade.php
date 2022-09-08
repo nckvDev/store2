@@ -21,9 +21,9 @@
     <!-- Icon -->
     <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 
-    <title>{{ config('app.name', 'Store') }}</title>
+    <title>{{ config('app.name', 'ระบบจัดการห้องพัสดุ') }}</title>
     <!-- Favicon -->
-    <link href="{{ asset('argon') }}/img/brand/logo-2.png" rel="icon" type="image/png">
+    <link href="{{ asset('argon') }}/img/brand/favicon-1.ico" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Extra details for Live View on GitHub Pages -->

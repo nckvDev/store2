@@ -197,12 +197,40 @@ class DeviceController extends Controller
                                             <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
                                                 <a class='dropdown-item'
                                                     href='$path_edit'>แก้ไขข้อมูล</a>
-                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                <a class='dropdown-item delete-confirm'
                                                     href='$path_del'>ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>
                     </tr>";
+                echo " <script>
+                     $('.delete-confirm').on('click', function (event) {
+                                event.preventDefault();
+                                const url = $(this).attr('href');
+                                Swal.fire({
+                                    title: 'คุณแน่ใจ?',
+                                    text: 'คุณต้องการลบข้อมูลนี้หรือไม่!',
+                                    icon: 'warning',
+                                    focusCancel: true,
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#007bff',
+                                    cancelButtonColor: '#dc3545',
+                                    confirmButtonText: 'ตกลง',
+                                    cancelButtonText: 'ยกเลิก'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = url;
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'ลบข้อมูลเรียบร้อย',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                });
+                            });
+                    </script>";
         }
         echo $output;
     }

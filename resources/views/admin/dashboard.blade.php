@@ -2,12 +2,20 @@
 
 @section('content')
     @include('layouts.headers.cards')
-
     <div class="container-fluid mt--9">
+        @if(Session::has('message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-bell-55"></i></span>
+                <span class="alert-text font-weight-500"><strong> {{ Session::get('message') }} </strong></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
+                    <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item active" aria-current="page">พัสดุทั้งหมด</li>
                     </ol>
                 </nav>
@@ -65,36 +73,40 @@
                                                 @endif
                                             </td>
 
-                                        <td class="text-center">{{ $row->stock_amount }}</td>
+                                            <td class="text-center">{{ $row->stock_amount }}</td>
 
-                                        <td>{{ $row->stock_type->type_detail }}</td>
+                                            <td>{{ $row->stock_type->type_detail }}</td>
                                             @if($row->stock_status == 0)
                                                 <td>
-                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
+                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
+                                                    </div>
                                                 </td>
                                             @elseif($row->stock_status == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
+                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ
+                                                    </div>
                                                 </td>
                                             @elseif($row->stock_status == 2)
                                                 <td>
                                                     <div class="rounded text-white bg-red text-center">ถูกยืม</div>
                                                 </td>
                                             @endif
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item"
-                                                       href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                    <a class="dropdown-item delete-confirm"
-                                                       href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#"
+                                                       role="button"
+                                                       data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item"
+                                                           href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                        <a class="dropdown-item delete-confirm"
+                                                           href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -204,19 +216,16 @@
                                             </td>
                                             <td class="text-center">{{ $row->disposable_amount }}</td>
                                             <td>{{ $row->disposable_type->type_detail }}</td>
-                                            @if($row->disposable_status == 0)
+                                            @if($row->disposable_amount <= $row->amount_minimum)
                                                 <td>
-                                                    <div class="rounded text-white bg-green text-center"> พร้อมใช้งาน
+                                                    <div class="rounded text-white bg-danger text-center">
+                                                        {{Session::get('status')}}
                                                     </div>
                                                 </td>
-                                            @elseif($row->disposable_status == 1)
+                                            @else
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center"> รออนุมัติ
+                                                    <div class="rounded text-white bg-success text-center">พร้อมใช้งาน
                                                     </div>
-                                                </td>
-                                            @elseif($row->disposable_status == 2)
-                                                <td>
-                                                    <div class="rounded text-white bg-red text-center"> ถูกยืม</div>
                                                 </td>
                                             @endif
                                             <td class="text-center">

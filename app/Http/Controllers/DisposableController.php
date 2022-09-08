@@ -7,6 +7,7 @@ use App\Models\Disposable;
 use App\Models\Type;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
@@ -17,9 +18,17 @@ class DisposableController extends Controller
         $disposables = Disposable::all();
         $types = Type::all();
         $types = DB::table('types')
-        ->orderBy('type_detail','asc')
-        ->get();
-        return view('admin.disposable.index', compact('disposables','types'));
+            ->orderBy('type_detail', 'asc')
+            ->get();
+
+        foreach ($disposables as $item) {
+            if ($item->disposable_amount <= $item->amount_minimum) {
+                Session::flash('message', "จำนวน {$item->disposable_name} เหลือน้อยแล้ว!!");
+                Session::flash('status', 'เหลือน้อย');
+                Session::flash('list', '1');
+            }
+        }
+        return view('admin.disposable.index', compact('disposables', 'types'));
     }
 
     public function add()
@@ -33,20 +42,20 @@ class DisposableController extends Controller
     {
         $request->validate(
             [
-                'disposable_num'  => 'required|unique:disposables|max:5',
+                'disposable_num' => 'required|unique:disposables|max:5',
                 'disposable_name' => 'required|unique:disposables|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'disposable_num.required'     => "กรุณาป้อนรหัสด้วยครับ",
-                'disposable_num.max'          => "ห้ามป้อนเกิน 5 ตัว",
-                'disposable_num.unique'       => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
-                'disposable_name.required'     => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
-                'disposablek_name.max'          => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'disposable_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
-                'image.required'    => "กรุณาใส่ภาพด้วยครับ",
-                'image.mimes'       => "ประเภทไฟล์ไม่ถูกต้อง"
+                'disposable_num.required' => "กรุณาป้อนรหัสด้วยครับ",
+                'disposable_num.max' => "ห้ามป้อนเกิน 5 ตัว",
+                'disposable_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
+                'disposable_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
+                'disposable_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'disposable_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
+                'image.required' => "กรุณาใส่ภาพด้วยครับ",
+                'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
 
@@ -85,20 +94,20 @@ class DisposableController extends Controller
     {
         $request->validate(
             [
-                'disposable_num'  => 'required|max:5',
+                'disposable_num' => 'required|max:5',
                 'disposable_name' => 'required|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'disposable_num.required'     => "กรุณาป้อนรหัสด้วยครับ",
-                'disposable_num.max'          => "ห้ามป้อนเกิน 5 ตัว",
-                'disposable_num.unique'       => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
-                'disposable_name.required'     => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
-                'disposable_name.max'          => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'disposable_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
-                'image.required'    => "กรุณาใส่ภาพด้วยครับ",
-                'image.mimes'       => "ประเภทไฟล์ไม่ถูกต้อง"
+                'disposable_num.required' => "กรุณาป้อนรหัสด้วยครับ",
+                'disposable_num.max' => "ห้ามป้อนเกิน 5 ตัว",
+                'disposable_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
+                'disposable_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
+                'disposable_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'disposable_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
+                'image.required' => "กรุณาใส่ภาพด้วยครับ",
+                'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
 
@@ -120,17 +129,17 @@ class DisposableController extends Controller
                 'image' => $full_path,
                 'amount_minimum' => $request->amount_minimum,
                 'type_id' => $request->type_id,
-                'updated_at'    => Carbon::now()
+                'updated_at' => Carbon::now()
             ]);
 
             $old_image = $request->old_image;
-            if($old_image == null){
+            if ($old_image == null) {
                 $upload_location = 'images/disposables/';
                 $full_path = $upload_location . $imgName;
                 Disposable::find($id)->update([
                     'image' => $full_path,
                 ]);
-                $deviceImage->move($upload_location, $imgName);
+                $disposableImage->move($upload_location, $imgName);
                 return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
             }
             unlink($old_image);
@@ -144,7 +153,7 @@ class DisposableController extends Controller
                 'disposable_amount' => $request->disposable_amount,
                 'amount_minimum' => $request->amount_minimum,
                 'type_id' => $request->type_id,
-                'updated_at'    => Carbon::now()
+                'updated_at' => Carbon::now()
             ]);
         }
 
@@ -170,25 +179,22 @@ class DisposableController extends Controller
         $id = $request->get('select');
         $result = array();
         $query = DB::table('types')
-        ->join('disposables','types.id','=','disposables.type_id')
-        ->select('disposables.*')
-        ->where('types.id',$id)
-        ->get();
+            ->join('disposables', 'types.id', '=', 'disposables.type_id')
+            ->select('disposables.*')
+            ->where('types.id', $id)
+            ->get();
         $output = 'ไม่มีข้อมูล';
-            foreach($query as $row){
-                // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
-                $img = asset($row->image);
-                $path_edit = url('/disposable/edit/'.$row->id);
-                $path_del = url('/disposable/delete/'.$row->id);
-                $status;
-                if($row->disposable_status == 0)
-                    $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
-                elseif($row->disposable_status == 1)
-                    $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
-                elseif($row->disposable_status == 2)
-                    $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
+        foreach ($query as $row) {
+            // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
+            $img = asset($row->image);
+            $path_edit = url('/disposable/edit/' . $row->id);
+            $path_del = url('/disposable/delete/' . $row->id);
 
-                echo "<tr>
+            if ($row->disposable_amount <= $row->amount_minimum)
+                $status = "<div class='rounded text-white bg-danger text-center'> เหลือน้อย </div>";
+            else
+                $status = "<div class='rounded text-white bg-success text-center'> พร้อมใช้งาน </div>";
+            echo "<tr>
                         <td>
                             {$row->disposable_num }
                         </td>
@@ -210,15 +216,44 @@ class DisposableController extends Controller
                                                 <i class='fas fa-ellipsis-v'></i>
                                             </a>
                                             <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                <a class='dropdown-item'
                                                     href='$path_edit'>แก้ไขข้อมูล</a>
-                                                <a class='dropdown-item' onclick='return confirm('ต้องการลบข้อมูล?');'
+                                                <a class='dropdown-item delete-confirm'
                                                     href='$path_del'>ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>
-                    </tr>";
-            }
+                    </tr
+                    >";
+            echo " <script>
+                     $('.delete-confirm').on('click', function (event) {
+                                event.preventDefault();
+                                const url = $(this).attr('href');
+                                Swal.fire({
+                                    title: 'คุณแน่ใจ?',
+                                    text: 'คุณต้องการลบข้อมูลนี้หรือไม่!',
+                                    icon: 'warning',
+                                    focusCancel: true,
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#007bff',
+                                    cancelButtonColor: '#dc3545',
+                                    confirmButtonText: 'ตกลง',
+                                    cancelButtonText: 'ยกเลิก'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = url;
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'ลบข้อมูลเรียบร้อย',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                });
+                            });
+                    </script>";
+        }
 
 
         echo $output;

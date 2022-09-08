@@ -3,6 +3,15 @@
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--9">
+        @if(Session::has('message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-bell-55"></i></span>
+                <span class="alert-text font-weight-500"><strong> {{ Session::get('message') }}</strong></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-xl-12 mb-4">
                 <div class="card shadow">
@@ -63,17 +72,16 @@
                                                  height="80"/></td>
                                     @endif
                                     <td class="text-center">{{ $row->disposable_amount }}</td>
-                                    @if($row->disposable_status == 0)
+
+                                    @if($row->disposable_amount <= $row->amount_minimum)
                                         <td>
-                                            <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
+                                            <div class="rounded text-white bg-danger text-center">
+                                                {{Session::get('status')}}
+                                            </div>
                                         </td>
-                                    @elseif($row->disposable_status == 1)
+                                    @else
                                         <td>
-                                            <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
-                                        </td>
-                                    @elseif($row->disposable_status == 2)
-                                        <td>
-                                            <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                            <div class="rounded text-white bg-success text-center">พร้อมใช้งาน</div>
                                         </td>
                                     @endif
                                     <td class="text-center">
