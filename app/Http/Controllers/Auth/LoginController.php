@@ -57,7 +57,7 @@ class LoginController extends Controller
                     return redirect()->route('student_dashboard');
                     break;
                 default:
-                    return redirect()->route('home');
+                    return redirect()->route('login');
                     break;
             }
         } else {

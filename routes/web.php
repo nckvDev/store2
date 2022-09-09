@@ -49,7 +49,7 @@ Route::get('register', [RegistersController::class, 'showRegistrationForm'])->na
 Route::post('register', [RegistersController::class, 'registers']);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+//    Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
     // Admin
 //    Route::get('admin_dashboard', [\App\Http\Controllers\Admin\DashboardControlle::class, 'index'])->middleware('role:admin');
