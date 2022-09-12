@@ -11,7 +11,7 @@
                             <h3 class="mb-0">รายงานข้อมูลรายภาคเรียน</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('report_term_xlsm') }}" class="btn btn-sm btn-outline-danger">Export
+                            <a href="{{route('report_term_xlsm')}}" class="btn btn-sm btn-outline-danger">Export
                                 Excel</a>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <form action="{{route('report-terms')}}" enctype="multipart/form-data" method="get">
                         <div class="mb-2">
-                            <h4 for="fromDate">เลือกระยะเวลา</h4>
+                            <h4 for="fromDate">ระบุระยะเวลา</h4>
                             <input type="date" id="fromDate" name="fromDate">
                             <i class="ni ni-fat-delete"></i>
                             <input type="date" id="toDate" name="toDate">
