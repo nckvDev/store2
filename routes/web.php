@@ -96,6 +96,10 @@ Route::group(['middleware' => 'auth'], function () {
         // Import Data Excel&Csv
         Route::get('dataimport', [\App\Http\Controllers\Admin\DataImportController::class, 'index'])->name('data-import');
         Route::post('import', [\App\Http\Controllers\Admin\DataImportController::class, 'import'])->name('import-list');
+        Route::post('dataimport/add', [\App\Http\Controllers\Admin\DataImportController::class, 'store'])->name('addUserData');
+        Route::get('dataimport/edit/{id}', [\App\Http\Controllers\Admin\DataImportController::class, 'edit']);
+        Route::post('dataimport/update/{id}', [\App\Http\Controllers\Admin\DataImportController::class, 'update']);
+        Route::get('dataimport/delete/{id}', [\App\Http\Controllers\Admin\DataImportController::class, 'delete']);
 
         // Import Device Excel&Csv
         Route::get('device/import', [\App\Http\Controllers\Admin\DeviceImportController::class, 'index'])->name('device-import');
@@ -116,6 +120,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('confirmform/add', [ConfirmFormController::class, 'create'])->name('form-add');
 
         Route::get('confirmuser', [ConfirmUserController::class, 'index'])->name('form-detail');
+
+        // Report All
+        Route::get('reportAll', [\App\Http\Controllers\Admin\reportAllController::class, 'index'])->name('reportAll');
+        Route::get('reportAll/report_days', [\App\Http\Controllers\Admin\reportAllController::class, 'reportDays'])->name('report-days');
+        Route::get('reportAll/report_months', [\App\Http\Controllers\Admin\reportAllController::class, 'reportMonths'])->name('report-months');
+        Route::get('reportAll/report_terms', [\App\Http\Controllers\Admin\reportAllController::class, 'reportTerms'])->name('report-terms');
 
         // Type
         Route::get('type', [TypeController::class, 'index'])->name('type');
@@ -159,6 +169,9 @@ Route::group(['middleware' => 'auth'], function () {
          Route::get('/device/export-xlsm', [\App\Http\Controllers\DeviceController::class,'exportXlsm'])->name('device_report_xlsm');
          Route::get('/disposable/export-xlsm', [\App\Http\Controllers\DisposableController::class,'exportXlsm'])->name('disposable_report_xlsm');
          Route::get('/dataimport/export-xlsm', [\App\Http\Controllers\Admin\DataImportController::class,'exportXlsm'])->name('user_report_xlsm');
+         Route::get('/reportAll/export-day', [\App\Http\Controllers\Admin\reportAllController::class, 'exportDay'])->name('report_day_xlsm');
+         Route::get('/reportAll/export-month', [\App\Http\Controllers\Admin\reportAllController::class, 'exportMonth'])->name('report_month_xlsm');
+         Route::get('/reportAll/export-term', [\App\Http\Controllers\Admin\reportAllController::class, 'exportTerm'])->name('report_term_xlsm');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
@@ -183,7 +196,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('student_borrow/remove', [\App\Http\Controllers\Student\CartController::class, 'removeCart'])->name('student_borrow.remove');
         Route::post('student_borrow/clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('student_borrow.clear');
         Route::post('student_borrow/save', [\App\Http\Controllers\Student\CartController::class, 'saveCart'])->name('student_borrow.save');
-        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('student_borrow.fetch');
+        Route::post('student_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('student_borrow.fetch');
 
     });
 

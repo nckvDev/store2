@@ -11,7 +11,7 @@ use App\Models\Department;
 class GroupController extends Controller
 {
     public function index(){
-        $groups = Group::paginate(10);
+        $groups = Group::paginate(100);
         $departments = Department::all();
         return view('admin.group.index', compact('groups','departments'));
     }

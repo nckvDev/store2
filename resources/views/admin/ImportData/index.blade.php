@@ -7,10 +7,12 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
-                        <div class="col-7">
-                            <h3 class="mb-0">นำเข้าข้อมูลวผู้ใช้งาน</h3>
+                        <div class="col-8">
+                            <h3 class="mb-0">นำเข้าข้อมูลผู้ใช้งาน</h3>
                         </div>
-                        <div class="col-5 text-right">
+                        <div class="col-4 text-right">
+                            <a href="{{ route('user_report_xlsm') }}"
+                                class="btn btn-sm btn-outline-danger">ตัวอย่างการนำเข้าข้อมูล</a>
                         </div>
                     </div>
                 </div>
@@ -18,7 +20,62 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-12 mb-4">
+        <div class="col-xl-6 mb-3">
+            <div class="card bg-secondary shadow">
+                <div class="card-body">
+                    <form method="post" action="{{ route('addUserData') }}" autocomplete="off">
+                        @csrf
+                        <h3>เพิ่มข้อมูลผู้ใช้งาน</h3>
+                        <div class="pl-lg-2">
+                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-name">{{ __('รหัสผู้ใช้งาน') }}</label>
+                                <input type="text" name="user_id" id="input-name"
+                                    class="form-control form-control-alternative{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('รหัสผู้ใช้งาน') }}" autofocus>
+
+                                @if ($errors->has('user_id'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('user_id') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('ชื่อ') }}</label>
+                                        <input type="text" name="firstname" id="input-name"
+                                            class="form-control form-control-alternative{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('ชื่อจริง') }}" autofocus>
+                                        @if ($errors->has('firstname'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('firstname') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('นามสกุล') }}</label>
+                                        <input type="text" name="lastname" id="input-name"
+                                            class="form-control form-control-alternative{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
+                                            placeholder="{{ __('นามสกุล') }}" autofocus>
+                                        @if ($errors->has('lastname'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('lastname') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success mt-2">{{ __('บันทึก') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 mb-3">
             <div class="card bg-secondary shadow">
                 <div class="card-body">
                     <form action="{{route('import-list')}}" enctype="multipart/form-data" method="post">
@@ -34,71 +91,88 @@
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">ยืนยัน</button>
                     </form>
-                    @if (session('success'))
-                    <script>
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'บันทึกข้อมูลเรียบร้อย',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    </script>
-                    @endif
-                    @if (session('delete'))
-                    <script>
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'ลบข้อมูลเรียบร้อย',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    </script>
-                    @endif
-                    @if (session('update'))
-                    <script>
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'แก้ไขข้อมูลเรียบร้อย',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    </script>
-                    @endif
-                    <div class="row">
-                        <div class="col-xl-12 mb-4">
-                            <div class="card bg-secondary shadow">
-                                <div class="card-body">
-                                    <table id="table_id" class="">
-                                        <thead>
-                                            <tr>
-                                                <th>ลำดับ</th>
-                                                <th>รหัสผู้ใช้งาน</th>
-                                                <th>ชื่อ</th>
-                                                <th>นามสกุล</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($masterusers as $row)
-                                            <tr>
-                                                <td>{{ $row->id}}</td>
-                                                <td>{{ $row->user_id}}</td>
-                                                <td>{{ $row->firstname}}</td>
-                                                <td>{{ $row->lastname}}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @if (session('success'))
+    <script>
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'บันทึกข้อมูลเรียบร้อย',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    </script>
+    @endif
+    @if (session('delete'))
+    <script>
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'ลบข้อมูลเรียบร้อย',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    </script>
+    @endif
+    @if (session('update'))
+    <script>
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'แก้ไขข้อมูลเรียบร้อย',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    </script>
+    @endif
+    <div class="row">
+        <div class="col-xl-12 mb-4">
+            <div class="card bg-secondary shadow">
+                <div class="card-body">
+                    <table id="table_id" class="">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รหัสผู้ใช้งาน</th>
+                                <th>ชื่อ</th>
+                                <th>นามสกุล</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($masterusers as $row)
+                            <tr>
+                                <td>{{ $row->id}}</td>
+                                <td>{{ $row->user_id}}</td>
+                                <td>{{ $row->firstname}}</td>
+                                <td>{{ $row->lastname}}</td>
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <a class="dropdown-item"
+                                                href="{{ url('/dataimport/edit/'.$row->id) }}">แก้ไข</a>
+                                            <a class="dropdown-item delete-confirm"
+                                                href="/dataimport/delete/{{$row->id}}">ลบข้อมูล</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 @endsection

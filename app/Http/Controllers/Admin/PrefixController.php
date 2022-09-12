@@ -10,7 +10,7 @@ use App\Models\Prefix;
 class PrefixController extends Controller
 {
     public function index(){
-        $prefixs = Prefix::paginate(10);
+        $prefixs = Prefix::paginate(100);
         return view('admin.prefix.index', compact('prefixs'));
     }
 

@@ -8,7 +8,8 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--Select2-->
-
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@600&display=swap" rel="stylesheet">
     <!-- Cart -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 

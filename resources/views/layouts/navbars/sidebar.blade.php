@@ -31,7 +31,8 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
-                        <span class="badge badge-md badge-circle badge-floating badge-primary border-white ni ni-single-02">
+                        <span
+                            class="badge badge-md badge-circle badge-floating badge-primary border-white ni ni-single-02">
                         </span>
                         {{--                        <div class="media-body ml-2 d-none d-lg-block">--}}
                         {{--                            <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>--}}
@@ -40,7 +41,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}  {{ auth()->user()->firstname }}</h6>
+                        <h6 class="text-overflow m-0">{{ __('Welcome!') }} {{ auth()->user()->firstname }}</h6>
                     </div>
                     {{--                    <a href="{{ route('profile.edit') }}" class="dropdown-item">--}}
                     {{--                        <i class="ni ni-single-02"></i>--}}
@@ -214,7 +215,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
                         href="{{ route('type') }}">
-                        <i class="ni ni-archive-2 text-green"></i> {{ __('ประเภท') }}
+                        <i class="ni ni-archive-2 text-dark"></i> {{ __('ประเภท') }}
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -252,7 +253,9 @@
                         href="{{ route('disposable') }}">
                         <i class="ni ni-bulb-61 text-red "> </i> {{ __('วัสดุสิ้นเปลือง') }}
                         @if(Session::has('list'))
-                            <span class="badge badge-md badge-circle badge-floating badge-danger border-white ml-5 ni ni-bell-55" > </span>
+                        <span
+                            class="badge badge-md badge-circle badge-floating badge-danger border-white ml-5 ni ni-bell-55">
+                        </span>
                         @endif
                     </a>
                 </li>
@@ -268,12 +271,24 @@
                         <i class="ni ni-curved-next text-gray"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('reportAll*') ?  'active text-black' : '' }}"
+                        href="{{ route('reportAll') }}">
+                        <i class="ni ni-collection text-green"> </i> {{ __('รายงาน') }}
+                    </a>
+                </li>
             </ul>
             @endif
 
             @if(\Illuminate\Support\Facades\Auth::user()->role == 'personnel')
             <h6 class="navbar-heading text-muted">Personnel</h6>
             <ul class="navbar-nav mb-md-3">
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('personnel_dashboard*') ? 'active text-orange' : '' }}"
+                        href="{{ url('personnel_dashboard') }}">
+                        <i class="ni ni-archive-2 text-orange"></i> {{ __('หน้าแรก') }}
+                    </a>
+                </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('personnel_borrow*') ? 'active text-green' : '' }}"
                         href="{{ route('personnel_borrow.list') }}">
@@ -287,9 +302,15 @@
             <h6 class="navbar-heading text-muted">Student</h6>
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('student_borrow*') ? 'active text-orange' : '' }}"
+                    <a class="nav-link {{ request()->is('student_dashboard*') ? 'active text-orange' : '' }}"
+                        href="{{ url('student_dashboard') }}">
+                        <i class="ni ni-archive-2 text-orange"></i> {{ __('หน้าแรก') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('student_borrow*') ? 'active text-green' : '' }}"
                         href="{{ url('student_borrow') }}">
-                        <i class="ni ni-archive-2 text-orange"></i> {{ __('ยืมวัสดุ') }}
+                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืมวัสดุ') }}
                     </a>
                 </li>
             </ul>
