@@ -57,7 +57,7 @@ class LoginController extends Controller
                     return redirect()->route('student_dashboard');
                     break;
                 default:
-                    return redirect()->route('home');
+                    return redirect()->route('/');
                     break;
             }
         } else {
@@ -81,25 +81,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-//    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /* public function redirectTo()
      {
-         $role = Auth::user()->role;
-         switch ($role) {
-             case 'admin':
-                 return '/admin_dashboard';
-                 break;
-             case 'personnel':
-                 return '/personnel_dashboard';
-                 break;
-             case 'student':
-                 return '/student_dashboard';
-                 break;
-             default:
-                 return '/home';
-                 break;
-         }
+        //
      }*/
     /**
      * Create a new controller instance.

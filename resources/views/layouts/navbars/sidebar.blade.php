@@ -7,7 +7,7 @@
         </button>
         <!-- Brand -->
         @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
-        <a class="navbar-brand pt-0 pb-0" href="{{ url('admin_dashboard') }}">
+        <a class="navbar-brand pt-0 pb-0" href="{{ route('admin_dashboard') }}">
             <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" class="navbar-brand-img" alt="...">
         </a>
         @endif
@@ -21,10 +21,7 @@
             <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" class="navbar-brand-img" alt="...">
         </a>
         @endif
-        {{--        <a class="navbar-brand pt-0" href="{{ route('stock') }}">--}}
-        {{--            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png" class="navbar-brand-img" alt="..."
-        >--}}
-        {{--        </a>--}}
+
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
@@ -34,31 +31,12 @@
                         <span
                             class="badge badge-md badge-circle badge-floating badge-primary border-white ni ni-single-02">
                         </span>
-                        {{--                        <div class="media-body ml-2 d-none d-lg-block">--}}
-                        {{--                            <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>--}}
-                        {{--                        </div>--}}
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }} {{ auth()->user()->firstname }}</h6>
                     </div>
-                    {{--                    <a href="{{ route('profile.edit') }}" class="dropdown-item">--}}
-                    {{--                        <i class="ni ni-single-02"></i>--}}
-                    {{--                        <span>{{ __('My profile') }}</span>--}}
-                    {{--                    </a>--}}
-                    {{--                    <a href="#" class="dropdown-item">--}}
-                    {{--                        <i class="ni ni-settings-gear-65"></i>--}}
-                    {{--                        <span>{{ __('Settings') }}</span>--}}
-                    {{--                    </a>--}}
-                    {{--                    <a href="#" class="dropdown-item">--}}
-                    {{--                        <i class="ni ni-calendar-grid-58"></i>--}}
-                    {{--                        <span>{{ __('Activity') }}</span>--}}
-                    {{--                    </a>--}}
-                    {{--                    <a href="#" class="dropdown-item">--}}
-                    {{--                        <i class="ni ni-support-16"></i>--}}
-                    {{--                        <span>{{ __('Support') }}</span>--}}
-                    {{--                    </a>--}}
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
