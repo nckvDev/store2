@@ -168,14 +168,18 @@ class CartController extends Controller
         $result = array();
         $query = DB::table('types')
             ->join('devices', 'types.id', '=', 'devices.type_id')
-            ->select('devices.*')
+            ->join('stocks', 'types.id', '=', 'stocks.type_id')
+            ->join('disposables', 'types.id', '=', 'disposables.type_id')
+            ->select('devices.*','stocks.*','disposables.*')
             ->where('types.id', $id)
             ->get();
         $output = 'ไม่มีข้อมูล';
         foreach ($query as $item) {
             $img = asset($item->image);   
+            $path_del = url('personnel_borrow/borrow'); 
+            $data = url('personnel_borrow/borrow');   
             echo "<tr>
-                <form action='url('personnel_borrow.add')' method='POST' enctype='multipart/form-data'>
+                
                         <td>
                             <input type='text' value=' $item->device_num ' name='id' readonly>
                         </td>
@@ -187,9 +191,35 @@ class CartController extends Controller
                             <input type='text' value='$item->device_amount' name='quantity' readonly>
                         </td>
                         <td>
-                            <button type='submit' class='btn btn-primary btn-sm'>เลือก</button>
+                        <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModalCenter'>
+                        Launch demo modal
+                      </button>
+                      
+
+                      <div class='modal fade' id='exampleModalCenter' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                          <div class='modal-content'>
+                          <form action='$path_del' method='POST'enctype='multipart/form-data'>
+                          csrf_token();
+                            <div class='modal-header'>
+                              <h5 class='modal-title' id='exampleModalLongTitle'>Modal title</h5>
+                              <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                              </button>
+                            </div>
+                            <div class='modal-body'>
+                              ...
+                            </div>
+                            <div class='modal-footer'>
+                              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                              <button type='submit' class='btn btn-primary'>Save changes</button>
+                            </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
                         </td>
-                        </form>
+                        
                     </tr>";
         }
 

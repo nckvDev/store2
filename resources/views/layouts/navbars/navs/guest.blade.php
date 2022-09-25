@@ -31,13 +31,13 @@
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('register') }}">
                         <i class="ni ni-circle-08"></i>
-                        <span class="nav-link-inner--text">{{ __('Register') }}</span>
+                        <span class="nav-link-inner--text">{{ __('สมัครสมาชิก') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="{{ route('login') }}">
                         <i class="ni ni-key-25"></i>
-                        <span class="nav-link-inner--text">{{ __('Login') }}</span>
+                        <span class="nav-link-inner--text">{{ __('เข้าสู่ระบบ') }}</span>
                     </a>
                 </li>
             </ul>
