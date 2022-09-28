@@ -264,8 +264,15 @@
                                         </tbody>
                                         @endforeach
                                     </table>
+                                    <div>
+                                        <form action="{{ route('personnel_borrow.clear') }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm mt-4">ลบทั้งหมด</button>
+                                        </form>
+                                    </div>
                                     <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                 </form>
+
 
                                 @if (session('successes'))
                                 <script>
@@ -336,14 +343,16 @@ $(document).ready(function() {
     });
 });
 
-$(function() {
+$(document).ready(function() {
+
     $.extend($.fn.dataTableExt.oStdClasses, {
         "sFilterInput": "form-control form-control-sm",
         "sLengthSelect": "form-control form-control-sm"
     });
-    $('#example').dataTable({
-        "responsive": true,
+
+    var table = $('#example').dataTable({
         "searching": false,
+        "responsive": true,
         "lengthChange": false,
         "language": {
             "search": "ค้นหา ",
@@ -358,6 +367,7 @@ $(function() {
             }
         }
     });
+
     $('[type=search]').each(function() {
         +
         $(this).attr("placeholder", "Search...");

@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-8">
+                                <div class="col-xl-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="email">{{ __('อีเมล') }}</label>
                                         <input type="text" name="email" value="{{ $users->email }}"
@@ -92,8 +92,31 @@
                                         @endif
                                     </div>
                                 </div>
-
-                                <div class="col-xl-4">
+                                <div class="col-xl-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="department">{{ __('แผนก') }}</label>
+                                        <input type="text" name="department" value="{{ $users->department }}"
+                                            class="form-control">
+                                        @if ($errors->has('department'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('department') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xl-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="group">{{ __('กลุ่มเรียน') }}</label>
+                                        <input type="text" name="group" value="{{ $users->group }}"
+                                            class="form-control">
+                                        @if ($errors->has('group'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('group') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xl-2">
                                     <div class="form-group">
                                         <label class="form-control-label" for="role">{{ __('สิทธิ์') }}</label>
                                         <select class="form-control" data-toggle="select" title="Simple select"

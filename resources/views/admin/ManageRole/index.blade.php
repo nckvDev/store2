@@ -31,6 +31,8 @@
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
                                 <th>อีเมล</th>
+                                <th>แผนก</th>
+                                <th>กลุ่ม</th>
                                 <th>สิทธิ์ปัจจุบัน</th>
                                 <th>จัดการข้อมูล</th>
                             </tr>
@@ -44,6 +46,8 @@
                                 <td>{{ $row->firstname}}</td>
                                 <td>{{ $row->lastname}}</td>
                                 <td>{{ $row->email}}</td>
+                                <td>{{ $row->department}}</td>
+                                <td>{{ $row->group}}</td>
                                 <td>{{ $row->role}}</td>
                                 <td class="text-center">
                                     <div class="dropdown">

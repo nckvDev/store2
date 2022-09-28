@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterUser;
 use App\Models\Prefix;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +34,9 @@ class RegistersController extends Controller
     public function showRegistrationForm()
     {
         $prefixs = Prefix::all();
-        return view('auth.register', compact('prefixs'));
+        $departments = Department::all();
+        $groups = Group::all();
+        return view('auth.register', compact('prefixs','departments','groups'));
     }
 
     /**
@@ -60,6 +64,8 @@ class RegistersController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'role' => ['required', 'string', 'max:255'],
+            'department' => ['required', 'string', 'max:255'],
+            'group' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -72,6 +78,8 @@ class RegistersController extends Controller
                 'lastname' => $request->input('lastname'),
                 'email' => strtolower($request->input('email')),
                 'role' => $request->input('role'),
+                'department' => $request->input('department'),
+                'group' => $request->input('group'),
                 'password' => bcrypt($request->input('password')),
             ]);
 
