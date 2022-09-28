@@ -82,6 +82,8 @@ class CartController extends Controller
         $amount_borrow = 0;
         $num = 0;
 
+        dd($request['started_at'] ,$request['end_at']);
+
         if ($request['borrow_list_id']) {
             for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
                 $stock_borrow = DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
