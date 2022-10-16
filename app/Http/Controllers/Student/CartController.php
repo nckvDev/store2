@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Models\Stock;
@@ -82,7 +83,8 @@ class CartController extends Controller
         $amount_borrow = 0;
         $num = 0;
 
-        dd($request['started_at'] ,$request['end_at']);
+        $formatTimeStart = strftime('%Y-%m-%d %H:%M', strtotime($request['started_at']));
+        $formatTimeEnd = strftime('%Y-%m-%d %H:%M', strtotime($request['end_at']));
 
         if ($request['borrow_list_id']) {
             for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
@@ -112,6 +114,8 @@ class CartController extends Controller
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
+                    'started_at' => $formatTimeStart,
+                    'end_at' => $formatTimeEnd,
                 ]);
 
                 \Cart::clear();
@@ -125,6 +129,8 @@ class CartController extends Controller
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
+                    'started_at' => $formatTimeStart,
+                    'end_at' => $formatTimeEnd,
                 ]);
 
                 \Cart::clear();
