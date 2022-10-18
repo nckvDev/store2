@@ -21,7 +21,7 @@ class ReportTermExport implements FromCollection, WithHeadings, WithMapping, Wit
     */
     public function collection()
     {
-        return Borrow::all(); 
+        return Borrow::all();
     }
 
     public function headings(): array

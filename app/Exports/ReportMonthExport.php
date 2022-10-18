@@ -23,7 +23,7 @@ class ReportMonthExport implements FromCollection, WithHeadings, WithMapping, Wi
     {
         return Borrow::whereYear('created_at',now()->year)
         ->whereMonth('created_at',now()->month)
-        ->get();  
+        ->get();
     }
 
     public function headings(): array
