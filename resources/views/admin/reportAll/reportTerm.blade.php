@@ -11,8 +11,13 @@
                             <h3 class="mb-0">รายงานข้อมูลรายภาคเรียน</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{route('report_term_xlsm')}}" class="btn btn-sm btn-outline-danger">Export
-                                Excel</a>
+                            <form action="{{route('report_term_xlsm')}}" enctype="multipart/form-data" method="get">
+                                <input type="hidden" name="fromDate" value="{{$fromDate}}">
+                                <input type="hidden" name="toDate" value="{{$toDate}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    Export Excel
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -26,10 +31,17 @@
                     <form action="{{route('report-terms')}}" enctype="multipart/form-data" method="get">
                         <div class="mb-2">
                             <h4 for="fromDate">ระบุระยะเวลา</h4>
-                            <input type="date" id="fromDate" name="fromDate">
-                            <i class="ni ni-fat-delete"></i>
-                            <input type="date" id="toDate" name="toDate">
-                            <input class="btn btn-primary btn-sm" type="submit">
+                            <div class="row gaps">
+                                <div class="col-lg-5 to-date">
+                                    <input type="date" id="fromDate" name="fromDate" class="form-control ">
+                                </div>
+                                <div class="col-lg-5">
+                                    <input type="date" id="toDate" name="toDate" class="form-control">
+                                </div>
+                                <div class="col-lg-2 text-aligns">
+                                    <input class="btn btn-primary btn" type="submit">
+                                </div>
+                            </div>
                         </div>
                     </form>
                     <table id="table_id" class="">

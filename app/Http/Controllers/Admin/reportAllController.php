@@ -19,7 +19,7 @@ class reportAllController extends Controller
 
     public function reportDays()
     {
-        $report_days = Borrow::whereDay('created_at',now()->day)->get();        
+        $report_days = Borrow::whereDay('created_at',now()->day)->get();
         return view('admin.reportAll.reportDay', compact('report_days'));
     }
 
@@ -27,7 +27,7 @@ class reportAllController extends Controller
     {
         $report_months = Borrow::whereYear('created_at',now()->year)
         ->whereMonth('created_at',now()->month)
-        ->get();        
+        ->get();
         return view('admin.reportAll.reportMonth', compact('report_months'));
     }
 
@@ -35,23 +35,26 @@ class reportAllController extends Controller
     {
         $fromDate = $request->input('fromDate');
         $toDate = $request->input('toDate');
-        $report_terms = Borrow::whereBetween('created_at', [$fromDate, $toDate])->get();  
-        return view('admin.reportAll.reportTerm', compact('report_terms'));
+        $report_terms = Borrow::whereBetween('created_at', [$fromDate, $toDate])->get();
+        return view('admin.reportAll.reportTerm', compact('report_terms', 'fromDate', 'toDate'));
     }
 
     public function exportDay()
     {
-        return Excel::download(new ReportDayExport(), 'report_day.xlsx');
+        return Excel::download(new ReportDayExport::class, 'report_day.xlsx');
     }
 
     public function exportMonth()
     {
-        return Excel::download(new ReportMonthExport(), 'report_month.xlsx');
+        return Excel::download(new ReportMonthExport::class, 'report_month.xlsx');
     }
 
-    public function exportTerm()
+    public function exportTerm(Request $request)
     {
-        return Excel::download(new ReportTermExport(), 'report_term.xlsx');
+//        dd($request->input('fromDate'));
+        $fromDate = $request->input('fromDate');
+        $toDate = $request->input('toDate');
+        return Excel::download(new ReportTermExport($fromDate, $toDate), 'report_term.xlsx');
     }
-    
+
 }

@@ -3,7 +3,13 @@
 namespace App\Exports;
 
 use App\Models\Borrow;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
@@ -14,15 +20,31 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ReportTermExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    use Exportable;
+
+    public function forTerm(string $fromDate, string $toDate)
     {
-        return Borrow::all();
+        $this->fromDate = $fromDate;
+        $this->toDate = $toDate;
+
+        return $this;
     }
+
+    public function query()
+    {
+        // TODO: Implement query() method.
+        return Borrow::query()->whereBetween('created_at', [$this->fromDate, $this->toDate ]);
+    }
+
+//    public function collection()
+//    {
+//        return Borrow::all();
+//    }
 
     public function headings(): array
     {

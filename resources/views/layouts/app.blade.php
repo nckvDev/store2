@@ -41,6 +41,8 @@
     <!-- CheckBox -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 </head>
 
 <body class="{{ $class ?? '' }}">
