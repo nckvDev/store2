@@ -3,7 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Borrow;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
@@ -14,14 +18,26 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ReportDayExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class ReportDayExport implements FromQuery, FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Borrow::whereDay('created_at',now()->day)->get(); 
+        return Borrow::whereDay('created_at',now()->day)->get();
+    }
+
+    public function forDate(string $date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function query()
+    {
+        // TODO: Implement query() method.
     }
 
     public function headings(): array

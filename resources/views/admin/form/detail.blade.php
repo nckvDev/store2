@@ -22,7 +22,7 @@
                                 <th>รหัสผู้ใช้งาน</th>
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
-                                <th>วันที่</th>
+                                <th>วันที่คืน</th>
                                 <th>สถานะ</th>
                                 <th>อนุมัติ</th>
                             </tr>
@@ -34,8 +34,9 @@
                                     <td>{{ $row->borrow_user->user_id}}</td>
                                     <td>{{ $row->borrow_user->firstname}}</td>
                                     <td>{{ $row->borrow_user->lastname}}</td>
-                                    <td>{{ $row->created_at }}</td>
-                                    {{--                                <td>{{ \Carbon\Carbon::parse($row->created_at )->format('d/m/Y') }}</td>--}}
+                                    <td>
+                                        {{\Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('L - LT')}}
+                                    </td>
                                     @if($row->borrow_status=="2")
                                         <td class="align-middle text-sm">
                                             <span class="badge text-white bg-gradient-success">อนุมัติ</span>

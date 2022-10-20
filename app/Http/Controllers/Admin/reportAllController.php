@@ -41,20 +41,20 @@ class reportAllController extends Controller
 
     public function exportDay()
     {
-        return Excel::download(new ReportDayExport::class, 'report_day.xlsx');
+        return Excel::download(new ReportDayExport, 'report_day.xlsx');
     }
 
     public function exportMonth()
     {
-        return Excel::download(new ReportMonthExport::class, 'report_month.xlsx');
+        return Excel::download(new ReportMonthExport, 'report_month.xlsx');
     }
 
     public function exportTerm(Request $request)
     {
-//        dd($request->input('fromDate'));
         $fromDate = $request->input('fromDate');
         $toDate = $request->input('toDate');
-        return Excel::download(new ReportTermExport($fromDate, $toDate), 'report_term.xlsx');
+        $nowDay = now()->day;
+        return (new ReportTermExport)->forTerm($fromDate ,$toDate)->download("report_term_$nowDay.xlsx");
     }
 
 }
