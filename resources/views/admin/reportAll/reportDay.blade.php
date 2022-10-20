@@ -11,8 +11,12 @@
                             <h3 class="mb-0">รายงานข้อมูลรายวัน</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('report_day_xlsm') }}" class="btn btn-sm btn-outline-danger">Export
-                                Excel</a>
+                            <form action="{{route('report_day_xlsm')}}" enctype="multipart/form-data" method="get">
+                                <input type="hidden" name="fromDay" value="{{$fromDay}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    Export Excel
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -23,6 +27,26 @@
         <div class="col-xl-12 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-body">
+                    <form action="{{route('report-days')}}" enctype="multipart/form-data" method="get">
+                        <div class="mb-2">
+                            <h4>ระบุระยะเวลา</h4>
+                            <div class="row gaps">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                            </div>
+                                            <input class="form-control datepicker" placeholder="Select date" name="fromDay" type="date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-primary btn" type="submit">ตกลง</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <table id="table_id" class="">
                         <thead>
                             <tr>
@@ -41,7 +65,9 @@
                                 <td>{{ $row->borrow_user->user_id}}</td>
                                 <td>{{ $row->borrow_user->firstname}}</td>
                                 <td>{{ $row->borrow_user->lastname}}</td>
-                                <td>{{ $row->created_at }}</td>
+                                <td>
+                                    {{ \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('L - LT') }}
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#Modal{{($row->id)}}">
@@ -125,6 +151,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
 <script>
 $(function() {

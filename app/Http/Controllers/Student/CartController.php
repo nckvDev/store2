@@ -107,7 +107,7 @@ class CartController extends Controller
                 }
             }
 
-            if($stock_borrow) {
+            if ($stock_borrow) {
                 Borrow::create([
                     'borrow_list_id' => $request['borrow_list_id'],
                     'borrow_name' => $request['borrow_name'],
@@ -157,22 +157,26 @@ class CartController extends Controller
         foreach ($query as $item) {
             // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
             $img = asset($item->image);
-            echo "<tr>
-                <form action='{{ route('cart.store') }}' method='POST' enctype='multipart/form-data'>
-                                    @csrf
-                                    <td><input type='text' value='{{ $item->device_num }}' name='id' readonly>
-                            </td>
-                            <td><input type='text' value='{{ $item->device_name }}' name='name' readonly>
-                            </td>
-                        <td><img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
+            echo "
+                <tr>
+                    <form action='{{ route('cart.store') }}' method='POST' enctype='multipart/form-data'>
+                        @csrf
                         <td>
-                                        <input type='text' value='{{ $item->device_amount }}' name='quantity' readonly>
-                                    </td>
+                            <input type='text' value='{{ $item->device_num }}' name='id' readonly>
+                        </td>
+                        <td>
+                            <input type='text' value='{{ $item->device_name }}' name='name' readonly>
+                        </td>
+                        <td>
+                            <img src='$img' class='rounded mx-auto d-block' width='80' height='80' /></td>
+                        <td>
+                            <input type='text' value='{{ $item->device_amount }}' name='quantity' readonly>
+                        </td>
                         <td>
                             <button class='btn btn-primary btn-sm'>เลือก</button>
                         </td>
-                        </form>
-                    </tr>";
+                    </form>
+                </tr>";
         }
 
         echo $output;

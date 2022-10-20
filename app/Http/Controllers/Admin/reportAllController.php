@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ReportDayExport;
 use App\Exports\ReportMonthExport;
 use App\Exports\ReportTermExport;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ class reportAllController extends Controller
         return view('admin.reportAll.index');
     }
 
-    public function reportDays()
+    public function reportDays(Request $request)
     {
-        $report_days = Borrow::whereDay('created_at',now()->day)->get();
-        return view('admin.reportAll.reportDay', compact('report_days'));
+        $fromDay = $request->input('fromDay');
+        $report_days = Borrow::whereDate('created_at', $fromDay)->get();
+        return view('admin.reportAll.reportDay', compact('report_days', 'fromDay'));
     }
 
     public function reportMonths()
@@ -39,9 +41,11 @@ class reportAllController extends Controller
         return view('admin.reportAll.reportTerm', compact('report_terms', 'fromDate', 'toDate'));
     }
 
-    public function exportDay()
+    public function exportDay(Request $request)
     {
-        return Excel::download(new ReportDayExport, 'report_day.xlsx');
+        $fromDay = $request->input('fromDay');
+        $nowDay = Carbon::now();
+        return (new ReportDayExport)->forDate($fromDay)->download("report_day_{$nowDay}.xlsx");
     }
 
     public function exportMonth()
@@ -53,8 +57,7 @@ class reportAllController extends Controller
     {
         $fromDate = $request->input('fromDate');
         $toDate = $request->input('toDate');
-        $nowDay = now()->day;
-        return (new ReportTermExport)->forTerm($fromDate ,$toDate)->download("report_term_$nowDay.xlsx");
+        $nowDay = Carbon::now();
+        return (new ReportTermExport)->forTerm($fromDate ,$toDate)->download("report_term_{$nowDay}.xlsx");
     }
-
 }
