@@ -11,8 +11,12 @@
                             <h3 class="mb-0">รายงานข้อมูลรายเดือน</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('report_month_xlsm') }}" class="btn btn-sm btn-outline-danger">Export
-                                Excel</a>
+                            <form action="{{route('report_month_xlsm')}}" enctype="multipart/form-data" method="get">
+                                <input type="hidden" name="fromMonth" value="{{$regMonth}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" {{$regMonth !== null ? '' : 'disabled'}}>
+                                    Export Excel
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -23,7 +27,27 @@
         <div class="col-xl-12 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-body">
-                    <table id="table_id" class="">
+                    <form action="{{route('report-months')}}" enctype="multipart/form-data" method="get">
+                        <div class="mb-2">
+                            <h4>ระบุระยะเวลา</h4>
+                            <div class="row gaps">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                            </div>
+                                            <input class="form-control datepicker" placeholder="Select date" name="fromMonth" type="month">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-primary btn" type="submit">ตกลง</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <table id="table_id">
                         <thead>
                             <tr>
                                 <th>ลำดับ</th>

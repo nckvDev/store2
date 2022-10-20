@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </form>
-                    <table id="table_id" class="">
+                    <table id="table_id">
                         <thead>
                             <tr>
                                 <th>ลำดับ</th>

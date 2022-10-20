@@ -3,7 +3,12 @@
 namespace App\Exports;
 
 use App\Models\Borrow;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
@@ -14,16 +19,23 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ReportMonthExport implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+
+    use Exportable;
+
+    public function forMonth(string $fromMonth) {
+        $this->fromMonth = $fromMonth;
+        return $this;
+    }
+
+    public function query()
     {
-        return Borrow::whereYear('created_at',now()->year)
-        ->whereMonth('created_at',now()->month)
-        ->get();
+        // TODO: Implement query() method.
+        return Borrow::whereMonth('created_at', $this->fromMonth)->get();
     }
 
     public function headings(): array
