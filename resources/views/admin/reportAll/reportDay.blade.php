@@ -11,9 +11,13 @@
                             <h3 class="mb-0">รายงานข้อมูลรายวัน</h3>
                         </div>
                         <div class="col-4 text-right">
+                            {{dd($fromDay)}}
+                            @foreach($report_days as $row)
+                               {{dd($row)}}f
+                            @endforeach
                             <form action="{{route('report_day_xlsm')}}" enctype="multipart/form-data" method="get">
                                 <input type="hidden" name="fromDay" value="{{$fromDay}}">
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" {{$fromDay !== null ? '' : 'disabled'}}>
                                     Export Excel
                                 </button>
                             </form>
