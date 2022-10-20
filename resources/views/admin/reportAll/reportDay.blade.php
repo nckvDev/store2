@@ -13,7 +13,7 @@
                         <div class="col-4 text-right">
                             {{dd($fromDay)}}
                             @foreach($report_days as $row)
-                               {{dd($row)}}f
+                               {{dd($row)}}
                             @endforeach
                             <form action="{{route('report_day_xlsm')}}" enctype="multipart/form-data" method="get">
                                 <input type="hidden" name="fromDay" value="{{$fromDay}}">
