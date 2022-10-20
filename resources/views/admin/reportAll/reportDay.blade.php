@@ -11,10 +11,6 @@
                             <h3 class="mb-0">รายงานข้อมูลรายวัน</h3>
                         </div>
                         <div class="col-4 text-right">
-                            {{dd($fromDay)}}
-                            @foreach($report_days as $row)
-                               {{dd($row)}}
-                            @endforeach
                             <form action="{{route('report_day_xlsm')}}" enctype="multipart/form-data" method="get">
                                 <input type="hidden" name="fromDay" value="{{$fromDay}}">
                                 <button type="submit" class="btn btn-sm btn-outline-danger" {{$fromDay !== null ? '' : 'disabled'}}>
@@ -51,7 +47,7 @@
                             </div>
                         </div>
                     </form>
-                    <table id="table_id" class="">
+                    <table id="table_id">
                         <thead>
                             <tr>
                                 <th>ลำดับ</th>

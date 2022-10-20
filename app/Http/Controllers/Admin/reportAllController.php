@@ -25,12 +25,13 @@ class reportAllController extends Controller
         return view('admin.reportAll.reportDay', compact('report_days', 'fromDay'));
     }
 
-    public function reportMonths()
+    public function reportMonths(Request $request)
     {
-        $report_months = Borrow::whereYear('created_at',now()->year)
-        ->whereMonth('created_at',now()->month)
-        ->get();
-        return view('admin.reportAll.reportMonth', compact('report_months'));
+        $fromMonth = $request->input('fromMonth');
+//        dd($fromMonth);
+        $regMonth = preg_replace("/^\d+-/", '', $fromMonth);
+        $report_months = Borrow::whereMonth('created_at', $regMonth)->get();
+        return view('admin.reportAll.reportMonth', compact('report_months', 'regMonth'));
     }
 
     public function reportTerms(Request $request)
@@ -48,9 +49,12 @@ class reportAllController extends Controller
         return (new ReportDayExport)->forDate($fromDay)->download("report_day_{$nowDay}.xlsx");
     }
 
-    public function exportMonth()
+    public function exportMonth(Request $request)
     {
-        return Excel::download(new ReportMonthExport, 'report_month.xlsx');
+        $fromMonth = $request->input('fromMonth');
+        $nowDay = Carbon::now();
+        $regMonth = preg_replace("/^\d+-/", '', $fromMonth);
+        return (new ReportMonthExport)->forMonth($regMonth)->download("report_month_{$nowDay}.xlsx");
     }
 
     public function exportTerm(Request $request)
