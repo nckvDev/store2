@@ -51,9 +51,9 @@ class reportAllController extends Controller
 
     public function exportMonth(Request $request)
     {
-        $fromMonth = $request->input('fromMonth');
+        $regMonth = $request->input('regMonth');
+//        dd($regMonth);
         $nowDay = Carbon::now();
-        $regMonth = preg_replace("/^\d+-/", '', $fromMonth);
         return (new ReportMonthExport)->forMonth($regMonth)->download("report_month_{$nowDay}.xlsx");
     }
 
