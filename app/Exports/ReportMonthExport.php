@@ -27,15 +27,16 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
 
     use Exportable;
 
-    public function forMonth(string $fromMonth) {
-        $this->fromMonth = $fromMonth;
+    public function forMonth(string $month) {
+        $this->month = $month;
+
         return $this;
     }
 
     public function query()
     {
         // TODO: Implement query() method.
-        return Borrow::whereMonth('created_at', $this->fromMonth)->get();
+        return Borrow::query()->whereMonth('created_at', $this->month);
     }
 
     public function headings(): array

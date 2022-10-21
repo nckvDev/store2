@@ -11,9 +11,10 @@
                             <h3 class="mb-0">รายงานข้อมูลรายเดือน</h3>
                         </div>
                         <div class="col-4 text-right">
+{{--                            {{dd($regMonth)}}--}}
                             <form action="{{route('report_month_xlsm')}}" enctype="multipart/form-data" method="get">
-                                <input type="hidden" name="fromMonth" value="{{$regMonth}}">
-                                <button type="submit" class="btn btn-sm btn-outline-danger" {{$regMonth !== null ? '' : 'disabled'}}>
+                                <input type="hidden" name="regMonth" value="{{$regMonth}}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" {{$regMonth !== '' ? '' : 'disabled'}}>
                                     Export Excel
                                 </button>
                             </form>

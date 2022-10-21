@@ -65,10 +65,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('prefix/delete/{id}', [PrefixController::class, 'delete']);
 
         // Manage Role
-        Route::get('managerole', [ManageRoleController::class, 'index'])->name('manage-role');
-        Route::post('managerole/update/{id}', [ManageRoleController::class, 'update']);
-        Route::get('managerole/edit/{id}', [ManageRoleController::class, 'edit']);
-        Route::get('managerole/delete/{id}', [ManageRoleController::class, 'delete']);
+        Route::get('manage-role', [ManageRoleController::class, 'index'])->name('manage-role');
+        Route::post('manage-role/update/{id}', [ManageRoleController::class, 'update']);
+        Route::get('manage-role/edit/{id}', [ManageRoleController::class, 'edit']);
+        Route::get('manage-role/delete/{id}', [ManageRoleController::class, 'delete']);
 
         // Department
         Route::get('department', [DepartmentController::class, 'index'])->name('department');
@@ -85,38 +85,38 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('group/delete/{id}', [GroupController::class, 'delete']);
 
         // Import Data Excel&Csv
-        Route::get('dataimport', [DataImportController::class, 'index'])->name('data-import');
+        Route::get('data-import', [DataImportController::class, 'index'])->name('data-import');
         Route::post('import', [DataImportController::class, 'import'])->name('import-list');
-        Route::post('dataimport/add', [DataImportController::class, 'store'])->name('addUserData');
-        Route::get('dataimport/edit/{id}', [DataImportController::class, 'edit']);
-        Route::post('dataimport/update/{id}', [DataImportController::class, 'update']);
-        Route::get('dataimport/delete/{id}', [DataImportController::class, 'delete']);
+        Route::post('data-import/add', [DataImportController::class, 'store'])->name('addUserData');
+        Route::get('data-import/edit/{id}', [DataImportController::class, 'edit']);
+        Route::post('data-import/update/{id}', [DataImportController::class, 'update']);
+        Route::get('data-import/delete/{id}', [DataImportController::class, 'delete']);
 
         // Import Device Excel&Csv
         Route::get('device/import', [DeviceImportController::class, 'index'])->name('device-import');
-        Route::post('importdevice', [DeviceImportController::class, 'import'])->name('import-device');
+        Route::post('import-device', [DeviceImportController::class, 'import'])->name('import-device');
 
         // Import Stock Excel&Csv
         Route::get('stock/import', [StockImportController::class, 'index'])->name('stock-import');
-        Route::post('importstock', [StockImportController::class, 'import'])->name('import-stock');
+        Route::post('import-stock', [StockImportController::class, 'import'])->name('import-stock');
 
         // Import Disposable Excel&Csv
         Route::get('disposable/import', [DisposableImportController::class, 'index'])->name('disposable-import');
-        Route::post('importdisposable', [DisposableImportController::class, 'import'])->name('import-disposable');
+        Route::post('import-disposable', [DisposableImportController::class, 'import'])->name('import-disposable');
 
 
         // Form
-        Route::get('confirmform', [ConfirmFormController::class, 'index'])->name('confirmform');
-        Route::post('confirmform/update/{id}', [ConfirmFormController::class, 'update']);
-        Route::post('confirmform/add', [ConfirmFormController::class, 'create'])->name('form-add');
+        Route::get('confirm-form', [ConfirmFormController::class, 'index'])->name('confirmform');
+        Route::post('confirm-form/update/{id}', [ConfirmFormController::class, 'update']);
+        Route::post('confirm-form/add', [ConfirmFormController::class, 'create'])->name('form-add');
 
-        Route::get('confirmuser', [ConfirmUserController::class, 'index'])->name('form-detail');
+        Route::get('confirm-user', [ConfirmUserController::class, 'index'])->name('form-detail');
 
         // Report All
-        Route::get('reportAll', [reportAllController::class, 'index'])->name('reportAll');
-        Route::get('reportAll/report_days', [reportAllController::class, 'reportDays'])->name('report-days');
-        Route::get('reportAll/report_months', [reportAllController::class, 'reportMonths'])->name('report-months');
-        Route::get('reportAll/report_terms', [reportAllController::class, 'reportTerms'])->name('report-terms');
+        Route::get('report-all', [reportAllController::class, 'index'])->name('reportAll');
+        Route::get('report-all/report_days', [reportAllController::class, 'reportDays'])->name('report-days');
+        Route::get('report-all/report_months', [reportAllController::class, 'reportMonths'])->name('report-months');
+        Route::get('report-all/report_terms', [reportAllController::class, 'reportTerms'])->name('report-terms');
 
         // Type
         Route::get('type', [TypeController::class, 'index'])->name('type');
@@ -159,10 +159,10 @@ Route::group(['middleware' => 'auth'], function () {
          Route::get('/stock/export-xlsm', [\App\Http\Controllers\StockController::class,'exportXlsm'])->name('stock_report_xlsm');
          Route::get('/device/export-xlsm', [\App\Http\Controllers\DeviceController::class,'exportXlsm'])->name('device_report_xlsm');
          Route::get('/disposable/export-xlsm', [\App\Http\Controllers\DisposableController::class,'exportXlsm'])->name('disposable_report_xlsm');
-         Route::get('/dataimport/export-xlsm', [DataImportController::class,'exportXlsm'])->name('user_report_xlsm');
-         Route::get('/reportAll/export-day', [reportAllController::class, 'exportDay'])->name('report_day_xlsm');
-         Route::get('/reportAll/export-month', [reportAllController::class, 'exportMonth'])->name('report_month_xlsm');
-         Route::get('/reportAll/export-term', [reportAllController::class, 'exportTerm'])->name('report_term_xlsm');
+         Route::get('/data-import/export-xlsm', [DataImportController::class,'exportXlsm'])->name('user_report_xlsm');
+         Route::get('/report-all/export-day', [reportAllController::class, 'exportDay'])->name('report_day_xlsm');
+         Route::get('/report-all/export-month', [reportAllController::class, 'exportMonth'])->name('report_month_xlsm');
+         Route::get('/report-all/export-term', [reportAllController::class, 'exportTerm'])->name('report_term_xlsm');
     });
 
     Route::group(['middleware' => 'role:personnel'], function () {
