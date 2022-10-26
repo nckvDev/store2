@@ -173,7 +173,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('personnel_borrow.add');
         Route::post('personnel_borrow/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('personnel_borrow.update');
         Route::post('personnel_borrow/remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('personnel_borrow.remove');
-        Route::post('personnel_borrow/clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('personnel_borrow.clear');
+        Route::get('personnel_borrow/clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('personnel_borrow.clear');
         Route::post('personnel_borrow/save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('personnel_borrow.save');
         Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel_borrow.fetch');
     });

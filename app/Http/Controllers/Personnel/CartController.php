@@ -86,6 +86,20 @@ class CartController extends Controller
         $amount_borrow = 0;
         $num = 0;
 
+        $request->validate(
+            [
+                'started_at' => ['required'],
+                'end_at' => ['required'],
+            ],
+            [
+                'started_at.required' => "กรุณาป้อนวันที่ยืมด้วยครับ",
+                'end_at.required' => "กรุณาป้อนวันที่คืนด้วยครับ",
+            ]
+        );
+
+        $formatTimeStart = strftime('%Y-%m-%d %H:%M', strtotime($request['started_at']));
+        $formatTimeEnd = strftime('%Y-%m-%d %H:%M', strtotime($request['end_at']));
+
         if ($request['borrow_list_id']) {
 
             for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
@@ -122,6 +136,8 @@ class CartController extends Controller
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
+                    'started_at' => $formatTimeStart,
+                    'end_at' => $formatTimeEnd,
                 ]);
 
                 \Cart::clear();
@@ -135,6 +151,8 @@ class CartController extends Controller
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
+                    'started_at' => $formatTimeStart,
+                    'end_at' => $formatTimeEnd,
                 ]);
 
                 \Cart::clear();
@@ -148,6 +166,8 @@ class CartController extends Controller
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
+                    'started_at' => $formatTimeStart,
+                    'end_at' => $formatTimeEnd,
                 ]);
 
                 \Cart::clear();
@@ -175,11 +195,11 @@ class CartController extends Controller
             ->get();
         $output = 'ไม่มีข้อมูล';
         foreach ($query as $item) {
-            $img = asset($item->image);   
-            $path_del = url('personnel_borrow/borrow'); 
-            $data = url('personnel_borrow/borrow');   
+            $img = asset($item->image);
+            $path_del = url('personnel_borrow/borrow');
+            $data = url('personnel_borrow/borrow');
             echo "<tr>
-                
+
                         <td>
                             <input type='text' value=' $item->device_num ' name='id' readonly>
                         </td>
@@ -194,7 +214,7 @@ class CartController extends Controller
                         <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModalCenter'>
                         Launch demo modal
                       </button>
-                      
+
 
                       <div class='modal fade' id='exampleModalCenter' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
                         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -219,7 +239,7 @@ class CartController extends Controller
                         </div>
                       </div>
                         </td>
-                        
+
                     </tr>";
         }
 
