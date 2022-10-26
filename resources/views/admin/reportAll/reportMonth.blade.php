@@ -61,7 +61,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach($report_months as $row)
                             <tr>
                                 <td>{{ $row->id}}</td>
