@@ -49,7 +49,7 @@ class ReportDayExport implements FromQuery, WithHeadings, WithMapping, WithColum
             'borrow_name',
             'borrow_status',
             'borrow_amount',
-            'user_id',
+            'user_borrow',
             'created_at',
             'updated_at',
         ];
@@ -73,7 +73,7 @@ class ReportDayExport implements FromQuery, WithHeadings, WithMapping, WithColum
             $newName,
             $row->borrow_status,
             $row->borrow_amount,
-            $row->borrow_user->user_id,
+            $row->borrow_user->firstname,
         ];
     }
 

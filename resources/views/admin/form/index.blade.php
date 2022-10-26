@@ -109,7 +109,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}"
+                                                        <form action="{{ url('/confirm-form/update/'.$row->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @foreach($row->borrow_list_id as $item)
@@ -120,7 +120,7 @@
                                                             <button class="btn btn-primary btn-sm">อนุมัติ
                                                             </button>
                                                         </form>
-                                                        <form action="{{ url('/confirmform/update/'.$row->id) }}"
+                                                        <form action="{{ url('/confirm-form/update/'.$row->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @foreach($row->borrow_list_id as $item)

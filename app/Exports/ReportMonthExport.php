@@ -48,7 +48,7 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
             'borrow_name',
             'borrow_status',
             'borrow_amount',
-            'user_id',
+            'user_borrow',
             'created_at',
             'updated_at',
         ];
@@ -63,7 +63,7 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
             $row->borrow_name,
             $row->borrow_status,
             $row->borrow_amount,
-            $row->borrow_user->user_id,
+            $row->borrow_user->firstname,
         ];
     }
 
