@@ -49,21 +49,50 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
             'borrow_status',
             'borrow_amount',
             'user_borrow',
+            'description',
             'created_at',
-            'updated_at',
         ];
     }
 
     public function map($row): array
     {
         // TODO: Implement map() method.
+        $name = [];
+        $newName = "";
+        $status = "";
+        $description = "";
+        $listId = "";
+        $amount = "";
+
+        if($row) {
+            foreach ($row->borrow_name as $item) {
+                $name[] = json_decode('"'.$item.'"');
+            }
+        }
+        $newName = join(", ", $name);
+        $listId = join(", ", $row->borrow_list_id);
+        $amount = join(", ", $row->borrow_amount);
+
+        switch ($row->borrow_status) {
+            case 1:
+                $status = "รออนุมัติ";
+                break;
+            case 2:
+                $status = "อนุมัติ";
+                break;
+            default:
+                $status = "ไม่อนุมัติ";
+        }
+
         return [
             $row->invoice_number,
-            $row->borrow_list_id,
-            $row->borrow_name,
-            $row->borrow_status,
-            $row->borrow_amount,
+            $listId,
+            $newName,
+            $amount,
             $row->borrow_user->firstname,
+            $status,
+            $row->description ?  $row->description : "-",
+            $row->created_at
         ];
     }
 
@@ -71,7 +100,7 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
     {
         // TODO: Implement columnFormats() method.
         return [
-            'I' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
 }
