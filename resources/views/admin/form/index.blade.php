@@ -78,12 +78,12 @@
                                                                     \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
                                                                 }}
                                                             </span>
-                                                            -
+                                                                -
                                                             <span class="text-danger">
                                                                 {{
                                                                     \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
                                                                 }}
-                                                            </span>
+                                                                </span>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4">

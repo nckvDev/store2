@@ -56,6 +56,7 @@
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
                                 <th>วันที่</th>
+                                <th>สถานะ</th>
                                 <th>รายละเอียด</th>
                             </tr>
                         </thead>
@@ -67,7 +68,20 @@
                                 <td>{{ $row->borrow_user->user_id}}</td>
                                 <td>{{ $row->borrow_user->firstname}}</td>
                                 <td>{{ $row->borrow_user->lastname}}</td>
-                                <td>{{ $row->created_at }}</td>
+                                <td>{{ \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('L - LT')  }}</td>
+                                @if($row->borrow_status == 1)
+                                    <td class="align-middle text-sm">
+                                        <span class="badge text-white bg-gradient-warning">รอนุมัติ</span>
+                                    </td>
+                                @elseif($row->borrow_status == 2)
+                                    <td class="align-middle text-sm">
+                                        <span class="badge text-white bg-gradient-success">อนุมัติ</span>
+                                    </td>
+                                @else
+                                    <td class="align-middle text-sm">
+                                        <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
+                                    </td>
+                                @endif
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#Modal{{($row->id)}}">
@@ -84,11 +98,33 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="mb-4">
-                                                        {{
-                                                                \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('LLL')
-                                                            }}
-                                                    </div>
+                                                    @if($row->borrow_status == 1 || $row->borrow_status == 2)
+                                                        <div class="row mb-2">
+                                                            <div class="col-lg-6"> วันที่ยืม</div>
+                                                            <div class="col-lg-6"> วันที่คืน</div>
+                                                        </div>
+                                                        <div class="mb-4 flex-row justify-content-between">
+                                                           <span class="text-gray">
+                                                              {{
+                                                                 \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
+                                                              }}
+                                                           </span>
+                                                            -
+                                                            <span class="text-danger">
+                                                               {{
+                                                                  \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
+                                                               }}
+                                                            </span>
+                                                        </div>
+                                                    @else
+                                                        <div class="mb-4 flex-row justify-content-between">
+                                                            <div class="text-danger">ไม่อนุมัติ</div>
+                                                            <div>
+                                                                <span>หมายเหตุ :</span>
+                                                                <span>{{ $row->description }}</span>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             @foreach($row->borrow_list_id as $id)
