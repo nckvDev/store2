@@ -69,8 +69,8 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row mb-2">
-                                                            <div class="col-lg-6"> วันที่ยืม </div>
-                                                            <div class="col-lg-6"> วันที่คืน </div>
+                                                            <div class="col-lg-6"> วันที่ยืม</div>
+                                                            <div class="col-lg-6"> วันที่คืน</div>
                                                         </div>
                                                         <div class="mb-4 flex-row justify-content-between">
                                                             <span class="text-gray">
@@ -78,7 +78,7 @@
                                                                     \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
                                                                 }}
                                                             </span>
-                                                                 -
+                                                            -
                                                             <span class="text-danger">
                                                                 {{
                                                                     \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
@@ -92,9 +92,13 @@
                                                                 @endforeach
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                @foreach($row->borrow_name as $name)
-                                                                    <div class="mb-2"> {{ $name }} </div>
-                                                                @endforeach
+                                                                @if(isset($row->borrow_name))
+                                                                    @foreach($row->borrow_name as $name)
+                                                                        <div class="mb-2"> {{ $name }} </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <div class="mb-2"> NULL</div>
+                                                                @endif
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 @foreach($row->borrow_amount as $amount)

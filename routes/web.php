@@ -106,14 +106,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         // Form
-        Route::get('confirm-form', [ConfirmFormController::class, 'index'])->name('confirmform');
+        Route::get('confirm-form', [ConfirmFormController::class, 'index'])->name('confirm-form');
         Route::post('confirm-form/update/{id}', [ConfirmFormController::class, 'update']);
         Route::post('confirm-form/add', [ConfirmFormController::class, 'create'])->name('form-add');
 
         Route::get('confirm-user', [ConfirmUserController::class, 'index'])->name('form-detail');
 
         // Report All
-        Route::get('report-all', [reportAllController::class, 'index'])->name('reportAll');
+        Route::get('reportAll', [reportAllController::class, 'index'])->name('reportAll');
         Route::get('report-all/report_days', [reportAllController::class, 'reportDays'])->name('report-days');
         Route::get('report-all/report_months', [reportAllController::class, 'reportMonths'])->name('report-months');
         Route::get('report-all/report_terms', [reportAllController::class, 'reportTerms'])->name('report-terms');

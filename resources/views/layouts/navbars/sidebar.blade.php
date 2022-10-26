@@ -209,7 +209,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('managerole*') ?  'active text-purple' : '' }}"
+                    <a class="nav-link {{ request()->is('manage-role*') ?  'active text-purple' : '' }}"
                         href="{{ route('manage-role') }}">
                         <i class="ni ni-circle-08 text-purple"> </i> {{ __('จัดการข้อมูลผู้ใช้งาน') }}
                     </a>
@@ -238,13 +238,13 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('confirmform*') ? 'active text-primary' : '' }}"
-                        href="{{ route('confirmform') }}">
+                    <a class="nav-link {{ request()->is('confirm-form*') ? 'active text-primary' : '' }}"
+                        href="{{ route('confirm-form') }}">
                         <i class="ni ni-single-copy-04 text-pink "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('confirmuser*') ?  'active text-black' : '' }}"
+                    <a class="nav-link {{ request()->is('confirm-user*') ?  'active text-black' : '' }}"
                         href="{{ route('form-detail') }}">
                         <i class="ni ni-curved-next text-gray"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>

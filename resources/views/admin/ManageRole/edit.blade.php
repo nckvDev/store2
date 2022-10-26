@@ -23,7 +23,7 @@
 
                 <div class="card-body">
                     @foreach($users as $row)
-                    <form method="post" action="{{ url('/managerole/update/'.$users->id) }}" method="post"
+                    <form method="post" action="{{ url('/manage-role/update/'.$users->id) }}" method="post"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         @endforeach
@@ -129,7 +129,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success mt-2">{{ __('บันทึก') }}</button>

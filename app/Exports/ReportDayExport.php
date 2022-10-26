@@ -58,10 +58,19 @@ class ReportDayExport implements FromQuery, WithHeadings, WithMapping, WithColum
     public function map($row): array
     {
         // TODO: Implement map() method.
+        $name = [];
+        $newName = "";
+        if($row) {
+            foreach ($row->borrow_name as $item) {
+                $name[] = json_decode('"'.$item.'"');
+            }
+        }
+        $newName = join(", ", $name);
+
         return [
             $row->invoice_number,
             $row->borrow_list_id,
-            $row->borrow_name,
+            $newName,
             $row->borrow_status,
             $row->borrow_amount,
             $row->borrow_user->user_id,
