@@ -36,7 +36,7 @@ class RegistersController extends Controller
         $prefixs = Prefix::all();
         $departments = Department::all();
         $groups = Group::all();
-        return view('auth.register', compact('prefixs','departments','groups'));
+        return view('auth.register', compact('prefixs', 'departments', 'groups'));
     }
 
     /**
@@ -52,25 +52,40 @@ class RegistersController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     public function registers(Request $request)
     {
-        $request->validate([
-            'user_id' => ['required', 'string', 'max:11', 'unique:users'],
-            'prefix' => ['required', 'string', 'max:255'],
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role' => ['required', 'string', 'max:255'],
-            'department' => ['required', 'string', 'max:255'],
-            'group' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $request->validate(
+            [
+                'user_id' => ['required', 'string', 'max:11', 'unique:users'],
+                'prefix' => ['required', 'string', 'max:255'],
+                'firstname' => ['required', 'string', 'max:255'],
+                'lastname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'role' => ['required', 'string', 'max:255'],
+                'department' => ['required', 'string', 'max:255'],
+                'group' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ],
+            [
+                'user_id.required' => "กรุณาป้อนรหัสด้วยครับ",
+                'user_id.max' => "ห้ามป้อนเกิน 11 ตัว",
+                'user_id.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
+                'prefix.required' => "กรุณาเลือกคำนำหน้าด้วยครับ",
+                'firstname.required' => "กรุณาป้อนชื่อด้วยครับ",
+                'lastname.required' => "กรุณาป้อนนามสกุลด้วยครับ",
+                'email.required' => "กรุณาป้อนอีเมล์ด้วยครับ",
+                'role.required' => "กรุณาเลือกสิทธิ์ด้วยครับ",
+                'department.required' => "กรุณาเลือกแผนกด้วยครับ",
+                'group.required' => "กรุณาเลือกกลุ่มเรียนด้วยครับ",
+                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ"
+            ]
+        );
 
         $masterUser = MasterUser::where('user_id', $request->input('user_id'))->first();
-        if($masterUser !== null) {
+        if ($masterUser !== null) {
             $user = User::create([
                 'prefix_id' => $request->input('prefix'),
                 'user_id' => $request->input('user_id'),

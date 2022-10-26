@@ -164,6 +164,12 @@
                                                                pattern="MM-DD-YYYY HH:mm"
                                                                value="{{ old('started_at') }}">
                                                     </div>
+                                                    @if ($errors->has('started_at'))
+                                                        <span class="invalid-feedback" style="display: block;"
+                                                              role="alert">
+                                                         <strong>{{ $errors->first('started_at') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -180,6 +186,12 @@
                                                                type="datetime-local" pattern="MM-DD-YYYY HH:mm"
                                                                value="{{ old('end_at') }}">
                                                     </div>
+                                                    @if ($errors->has('end_at'))
+                                                        <span class="invalid-feedback" style="display: block;"
+                                                              role="alert">
+                                                         <strong>{{ $errors->first('end_at') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

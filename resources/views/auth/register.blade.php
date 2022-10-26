@@ -105,11 +105,10 @@
                                 <div class="form-group{{ $errors->has('department') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
                                         <select
-                                            class="form-control {{ $errors->has('department') ? ' is-invalid' : '' }}"
-                                            name="department">
-                                            <option>-- เลือกแผนก --</option>
+                                            class="form-control{{ $errors->has('department') ? ' is-invalid' : '' }}" name="department">
+                                            <option value="">-- เลือกแผนก --</option>
                                             @foreach($departments as $row)
-                                            <option>{{ $row->department_name }}</option>
+                                            <option value="{{ $row->department_name }}">{{ $row->department_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -123,11 +122,10 @@
                             <div class="col-lg-6">
                                 <div class="form-group{{ $errors->has('group') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
-                                        <select class="form-control {{ $errors->has('group') ? ' is-invalid' : '' }}"
-                                            name="group">
-                                            <option>-- เลือกกลุ่ม --</option>
+                                        <select class="form-control{{ $errors->has('group') ? ' is-invalid' : '' }}" name="group">
+                                            <option value="">-- เลือกกลุ่ม --</option>
                                             @foreach($groups as $row)
-                                            <option>{{ $row->group_name }}</option>
+                                            <option  value="{{ $row->group_name }}">{{ $row->group_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -161,7 +159,7 @@
                                 </div>
                                 <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                     <option value="">-- เลือกสิทธิ์ --</option>
-                                    <option value="admin">แอดมิน</option>
+{{--                                    <option value="admin">แอดมิน</option>--}}
                                     <option value="personnel">บุคลากร</option>
                                     <option value="student">นักศึกษา</option>
                                 </select>
