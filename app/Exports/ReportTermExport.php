@@ -50,7 +50,7 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
             'borrow_name',
             'borrow_status',
             'borrow_amount',
-            'user_id',
+            'user_borrow',
             'created_at',
             'updated_at',
         ];
@@ -65,7 +65,7 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
             $row->borrow_name,
             $row->borrow_status,
             $row->borrow_amount,
-            $row->borrow_user->user_id,
+            $row->borrow_user->firstname,
         ];
     }
 

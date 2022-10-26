@@ -11,7 +11,7 @@
                             <h3 class="mb-0">จัดการข้อมูลผู้ใช้งาน</h3>
                         </div>
                         <div class="col-8 text-right">
-                            <a href="{{ route('data-import') }}" class="btn btn-sm btn-primary">เพิ่มผู้ใช้งาน</a>
+                            <a href="{{ route('data-import') }}"  class="btn btn-sm btn-primary">เพิ่มผู้ใช้งาน</a>
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item"
-                                                href="{{ url('/managerole/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                href="{{ url('/manage-role/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                             <a class="dropdown-item delete-confirm"
-                                                href="/managerole/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                href="/manage-role/delete/{{$row->id}}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>

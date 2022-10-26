@@ -78,9 +78,18 @@
                                                                     <div class="mb-2 text-primary"> {{ $item }} </div>
                                                                 @endforeach
                                                             </div>
-                                                            <div class="col-lg-8">
-                                                                @foreach($row->borrow_name as $item)
-                                                                    <div class="mb-2"> {{ $item }} </div>
+                                                            <div class="col-lg-4">
+                                                                @if(isset($row->borrow_name))
+                                                                    @foreach($row->borrow_name as $name)
+                                                                        <div class="mb-2"> {{ $name }} </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <div class="mb-2"> NULL </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                @foreach($row->borrow_amount as $amount)
+                                                                    <div class="mb-2"> {{ $amount }} </div>
                                                                 @endforeach
                                                             </div>
                                                         </div>
