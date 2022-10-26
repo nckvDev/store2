@@ -16,6 +16,7 @@ class Borrow extends Model
         'borrow_status',
         'borrow_amount',
         'user_id',
+        'description',
         'started_at',
         'end_at'
     ];

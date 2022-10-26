@@ -67,10 +67,22 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-4">
-                                                            {{
-                                                                \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('LLL')
-                                                            }}
+                                                        <div class="row mb-2">
+                                                            <div class="col-lg-6"> วันที่ยืม</div>
+                                                            <div class="col-lg-6"> วันที่คืน</div>
+                                                        </div>
+                                                        <div class="mb-4 flex-row justify-content-between">
+                                                            <span class="text-gray">
+                                                                {{
+                                                                    \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
+                                                                }}
+                                                            </span>
+                                                            -
+                                                            <span class="text-danger">
+                                                                {{
+                                                                    \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
+                                                                }}
+                                                            </span>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4">

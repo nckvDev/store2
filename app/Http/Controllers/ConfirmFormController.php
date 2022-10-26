@@ -34,6 +34,7 @@ class ConfirmFormController extends Controller
     {
         Borrow::find($id)->update([
             'borrow_status' => $request['borrow_status'],
+            'description' => $request['description']
         ]);
 
         for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
@@ -62,8 +63,5 @@ class ConfirmFormController extends Controller
             return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
         }
         return redirect()->back()->with('error', 'ไม่อนุมัติ');
-
     }
-
-    
 }
