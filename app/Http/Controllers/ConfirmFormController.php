@@ -32,8 +32,10 @@ class ConfirmFormController extends Controller
 
     public function update(Request $request, $id)
     {
+//        dd($request['description']);
         Borrow::find($id)->update([
             'borrow_status' => $request['borrow_status'],
+            'description' => $request['description']
         ]);
 
         for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
@@ -65,5 +67,5 @@ class ConfirmFormController extends Controller
 
     }
 
-    
+
 }

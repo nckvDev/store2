@@ -20,6 +20,7 @@ class CreateBorrowsTable extends Migration
             $table->integer('borrow_status')->default(0);
             $table->string('borrow_amount');
             $table->unsignedBigInteger('user_id');
+            $table->string('description')->nullable();
             $table->string('started_at')->nullable();
             $table->string('end_at')->nullable();
             $table->timestamps();

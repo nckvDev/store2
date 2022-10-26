@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('stock') }}">จัดการข้อมูลผู้ใช้งาน</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('manage-role') }}">จัดการข้อมูลผู้ใช้งาน</a></li>
                     <li class="breadcrumb-item active" aria-current="page">แก้ไข</li>
                 </ol>
             </nav>
@@ -45,8 +45,16 @@
                                 <div class="col-xl-2">
                                     <div class="form-group">
                                         <label class="form-control-label" for="prefix_id">{{ __('คำนำหน้า') }}</label>
-                                        <input type="text" name="prefix_id" value="{{ $users->prefix_id }}"
-                                            class="form-control">
+                                        <select
+                                            class="form-control form-control-alternative{{ $errors->has('prefix_id') ? ' is-invalid' : '' }}"
+                                            name="prefix_id">
+                                            @foreach($prefixes as $row)
+                                                <option value="{{ $row->id }}"
+                                                    {{ $row->id ==  $users->prefix_id ? 'selected' : '' }}>
+                                                    {{ $row->prefix_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         @if ($errors->has('prefix_id'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('prefix_id') }}</strong>
@@ -109,6 +117,12 @@
                                         <label class="form-control-label" for="group">{{ __('กลุ่มเรียน') }}</label>
                                         <input type="text" name="group" value="{{ $users->group }}"
                                             class="form-control">
+
+                                        {{--                                            @foreach($users as $row)--}}
+                                        {{--                                                <option value="{{ $row->id }}"--}}
+                                        {{--                                                    {{ $row->id == $stocks->type_id ? 'selected' : '' }}>--}}
+                                        {{--                                                    {{ $row->type_detail }}</option>--}}
+                                        {{--                                            @endforeach--}}
                                         @if ($errors->has('group'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('group') }}</strong>
@@ -116,16 +130,17 @@
                                         @endif
                                     </div>
                                 </div>
+{{--                                {{dd($users->role)}}--}}
+
                                 <div class="col-xl-2">
                                     <div class="form-group">
                                         <label class="form-control-label" for="role">{{ __('สิทธิ์') }}</label>
                                         <select class="form-control" data-toggle="select" title="Simple select"
                                             data-live-search="true" data-live-search-placeholder="Search ..."
                                             name="role">
-                                            <option>กรุณาเลือกสิทธิ์</option>
-                                            <option value="admin" name="role">admin</option>
-                                            <option value=" personnel" name="role">personnel</option>
-                                            <option value=" student" name="role">student</option>
+                                            <option value="admin" name="role" {{ $users->role == "admin" ? 'selected' : '' }}>admin</option>
+                                            <option value="personnel" name="role"  {{ $users->role == "personnel" ? 'selected' : '' }}>personnel</option>
+                                            <option value="student" name="role"  {{ $users->role == "student" ? 'selected' : '' }}>student</option>
                                         </select>
                                     </div>
                                 </div>

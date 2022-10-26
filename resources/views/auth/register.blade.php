@@ -106,7 +106,7 @@
                                     <div class="input-group input-group-alternative mb-3">
                                         <select
                                             class="form-control{{ $errors->has('department') ? ' is-invalid' : '' }}" name="department">
-                                            <option value="">-- เลือกแผนก --</option>
+                                            <option >-- เลือกแผนก --</option>
                                             @foreach($departments as $row)
                                             <option value="{{ $row->department_name }}">{{ $row->department_name }}</option>
                                             @endforeach
@@ -123,7 +123,7 @@
                                 <div class="form-group{{ $errors->has('group') ? ' has-danger' : '' }}">
                                     <div class="input-group input-group-alternative mb-3">
                                         <select class="form-control{{ $errors->has('group') ? ' is-invalid' : '' }}" name="group">
-                                            <option value="">-- เลือกกลุ่ม --</option>
+                                            <option >-- เลือกกลุ่ม --</option>
                                             @foreach($groups as $row)
                                             <option  value="{{ $row->group_name }}">{{ $row->group_name }}</option>
                                             @endforeach
@@ -159,7 +159,7 @@
                                 </div>
                                 <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                     <option value="">-- เลือกสิทธิ์ --</option>
-{{--                                    <option value="admin">แอดมิน</option>--}}
+                                    <option value="admin">แอดมิน</option>
                                     <option value="personnel">บุคลากร</option>
                                     <option value="student">นักศึกษา</option>
                                 </select>
