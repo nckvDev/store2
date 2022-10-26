@@ -44,7 +44,6 @@ class StockController extends Controller
                 'stock_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'stock_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'stock_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
-//                'stock_name.unique'       => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
                 'image.required' => "กรุณาใส่ภาพด้วยครับ",
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]

@@ -250,7 +250,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('reportAll*') ?  'active text-black' : '' }}"
+                    <a class="nav-link {{ request()->is('reportAll*') || request()->is('report-all*') ?  'active text-black' : '' }}"
                         href="{{ route('reportAll') }}">
                         <i class="ni ni-collection text-green"> </i> {{ __('รายงาน') }}
                     </a>

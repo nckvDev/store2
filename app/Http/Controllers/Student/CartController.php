@@ -83,21 +83,19 @@ class CartController extends Controller
         $amount_borrow = 0;
         $num = 0;
 
+        $request->validate(
+            [
+                'started_at' => ['required'],
+                'end_at' => ['required'],
+            ],
+            [
+                'started_at.required' => "กรุณาป้อนวันที่ยืมด้วยครับ",
+                'end_at.required' => "กรุณาป้อนวันที่คืนด้วยครับ",
+            ]
+        );
+
         $formatTimeStart = strftime('%Y-%m-%d %H:%M', strtotime($request['started_at']));
         $formatTimeEnd = strftime('%Y-%m-%d %H:%M', strtotime($request['end_at']));
-
-        function mat ($matches) {
-            return mb_convert_encoding($matches , 'UTF-8' , 'UTF-16LE');
-        }
-        function u_decode($input){
-            return preg_replace_callback( '/\\\\u([0-9a-zA-Z]{4})/', mat($input) , $input );
-        }
-        function raw_json_encode($input) {
-//         convert 2 utf8 json encode
-            return u_decode( json_encode($input) );
-        }
-        $string = "\u0e44\u0e02\u0e04\u0e27\u0e07";
-//        dd(json_decode('"'.$string.'"'));
 
         if ($request['borrow_list_id']) {
             for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
