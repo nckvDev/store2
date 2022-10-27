@@ -8,7 +8,7 @@
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-muted text-center mb-4"><small>{{ __('Log in ') }}</small></div>
+                        <div class="text-muted text-center mb-4"><small>{{ __('เข้าสู่ระบบ') }}</small></div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
