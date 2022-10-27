@@ -66,7 +66,7 @@ class RegistersController extends Controller
             $isGroup = 'required';
         }
 
-        $validator = $request->validate(
+        $request->validate(
             [
                 'user_id' => ['required', 'string', 'max:10', 'unique:users'],
                 'prefix' => ['required', 'string', 'max:255'],
@@ -80,16 +80,18 @@ class RegistersController extends Controller
             ],
             [
                 'user_id.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'user_id.max' => "ห้ามป้อนเกิน 11 ตัว",
+                'user_id.max' => "ห้ามป้อนเกิน 10 ตัว",
                 'user_id.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'prefix.required' => "กรุณาเลือกคำนำหน้าด้วยครับ",
                 'firstname.required' => "กรุณาป้อนชื่อด้วยครับ",
                 'lastname.required' => "กรุณาป้อนนามสกุลด้วยครับ",
                 'email.required' => "กรุณาป้อนอีเมล์ด้วยครับ",
+                'email.unique' => "อีเมลนี้ถูกใช้ไปแล้ว",
                 'role.required' => "กรุณาเลือกสิทธิ์ด้วยครับ",
                 'department.required' => "กรุณาเลือกแผนกด้วยครับ",
                 'group.required' => "กรุณาเลือกกลุ่มเรียนด้วยครับ",
-                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ"
+                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ",
+                'password.confirmed' => "การยืนยันรหัสผ่านไม่ตรงกัน"
             ]
         );
 
@@ -110,6 +112,6 @@ class RegistersController extends Controller
             Auth::login($user);
         }
 
-        return redirect()->back()->withErrors($validator)->withInput();
+        return redirect()->back()->with('error', 'Wrong!');
     }
 }

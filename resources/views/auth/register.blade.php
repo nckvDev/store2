@@ -185,7 +185,7 @@
                                     </div>
                                     <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                            placeholder="{{ __('รหัสผ่าน') }}" type="password" name="password"
-                                           id="password">
+                                           id="password" value="{{ old('password') }}">
                                     <i class="bg-white pt-3 pr-3 fa fa-eye" id="togglePassword"
                                        style="cursor: pointer"></i>
                                 </div>
@@ -276,8 +276,9 @@
                     $("#personnel").hide();
                 } else {
                     $("#student").show();
+                    $("#personnel").show().removeClass("col-lg-12");
                     // $(".show").css({"display":"flex"})
-                    $("#personnel").removeClass("col-lg-12");
+                    // $("#personnel").removeClass("col-lg-12");
                 }
             });
         });
