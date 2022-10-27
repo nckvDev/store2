@@ -27,13 +27,16 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('prefix_id');
             $table->string('email')->unique();
             $table->string('role');
+//            $table->integer('department_id')->nullable()->unsigned();
             $table->string('department')->nullable();
+//            $table->integer('group_id')->nullable()->unsigned();
             $table->string('group')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 
+//            $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('prefix_id')->references('id')->on('prefixes');
         });
     }
