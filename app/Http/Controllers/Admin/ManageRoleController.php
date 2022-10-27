@@ -28,9 +28,11 @@ class ManageRoleController extends Controller
             'lastname' => $request['lastname'],
             'prefix_id' => $request['prefix_id'],
             'email' => $request['email'],
+            'department' => $request['department'],
+            'group' => $request['group'],
             'role' => $request['role'],
         ]);
-        return redirect()->route('manage-role')->with('success', 'บันทึกข้อมูลเรียบร้อย');
+        return redirect('manage-role')->with('success', 'แก้ไขข้อมูลเรียบร้อย');
     }
 
     public function edit($id)
