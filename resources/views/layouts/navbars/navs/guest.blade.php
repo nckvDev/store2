@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('login') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-4.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">

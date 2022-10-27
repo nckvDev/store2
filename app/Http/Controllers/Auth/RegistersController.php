@@ -33,10 +33,10 @@ class RegistersController extends Controller
 
     public function showRegistrationForm()
     {
-        $prefixs = Prefix::all();
+        $prefixes = Prefix::all();
         $departments = Department::all();
         $groups = Group::all();
-        return view('auth.register', compact('prefixs', 'departments', 'groups'));
+        return view('auth.register', compact('prefixes', 'departments', 'groups'));
     }
 
     /**
@@ -57,50 +57,61 @@ class RegistersController extends Controller
      */
     public function registers(Request $request)
     {
+        $isDepartment = '';
+        $isGroup = '';
+
+        if ($request['role'] === "personnel" || $request['role'] === "student") {
+            $isDepartment = 'required';
+        } elseif ($request['role'] === "student") {
+            $isGroup = 'required';
+        }
+
         $request->validate(
             [
-                'user_id' => ['required', 'string', 'max:11', 'unique:users'],
+                'user_id' => ['required', 'string', 'max:10', 'unique:users'],
                 'prefix' => ['required', 'string', 'max:255'],
                 'firstname' => ['required', 'string', 'max:255'],
                 'lastname' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'role' => ['required', 'string', 'max:255'],
-                'department' => ['required', 'string', 'max:255'],
-                'group' => ['required', 'string', 'max:255'],
+                'department' => [$isDepartment, 'max:255'],
+                'group' => [$isGroup, 'max:255'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ],
             [
                 'user_id.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'user_id.max' => "ห้ามป้อนเกิน 11 ตัว",
+                'user_id.max' => "ห้ามป้อนเกิน 10 ตัว",
                 'user_id.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'prefix.required' => "กรุณาเลือกคำนำหน้าด้วยครับ",
                 'firstname.required' => "กรุณาป้อนชื่อด้วยครับ",
                 'lastname.required' => "กรุณาป้อนนามสกุลด้วยครับ",
                 'email.required' => "กรุณาป้อนอีเมล์ด้วยครับ",
+                'email.unique' => "อีเมลนี้ถูกใช้ไปแล้ว",
                 'role.required' => "กรุณาเลือกสิทธิ์ด้วยครับ",
                 'department.required' => "กรุณาเลือกแผนกด้วยครับ",
                 'group.required' => "กรุณาเลือกกลุ่มเรียนด้วยครับ",
-                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ"
+                'password.required' => "กรุณาป้อนรหัสผ่านด้วยครับ",
+                'password.confirmed' => "การยืนยันรหัสผ่านไม่ตรงกัน"
             ]
         );
 
-        $masterUser = MasterUser::where('user_id', $request->input('user_id'))->first();
+        $masterUser = MasterUser::where('user_id', $request['user_id'])->first();
         if ($masterUser !== null) {
             $user = User::create([
-                'prefix_id' => $request->input('prefix'),
-                'user_id' => $request->input('user_id'),
-                'firstname' => $request->input('firstname'),
-                'lastname' => $request->input('lastname'),
-                'email' => strtolower($request->input('email')),
-                'role' => $request->input('role'),
-                'department' => $request->input('department'),
-                'group' => $request->input('group'),
-                'password' => bcrypt($request->input('password')),
+                'prefix_id' => $request['prefix'],
+                'user_id' => $request['user_id'],
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'email' => strtolower($request['email']),
+                'role' => $request['role'],
+                'department' => $request['department'],
+                'group' => $request['group'],
+                'password' => bcrypt($request['password']),
             ]);
 
             Auth::login($user);
         }
 
-        return redirect()->route('register')->with('error', "อัพเดตข้อมูลเรียบร้อย");
+        return redirect()->back()->with('error', 'Wrong!');
     }
 }
