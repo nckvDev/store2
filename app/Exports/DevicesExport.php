@@ -63,9 +63,4 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
             'J' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
-
-//    public function bindValue(Cell $cell, $value)
-//    {
-//        // TODO: Implement bindValue() method.
-//    }
 }

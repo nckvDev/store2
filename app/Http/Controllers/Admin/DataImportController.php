@@ -12,13 +12,15 @@ use Carbon\Carbon;
 
 class DataImportController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $masterusers = MasterUser::all();
         return view('admin.ImportData.index', compact('masterusers'));
     }
 
-    public function import(Request $request){
-        Excel::import(new DataImport,$request->file);
+    public function import(Request $request)
+    {
+        Excel::import(new DataImport, $request->file);
         return redirect()->back()->with('success', 'เพิ่มข้อมูลสำเร็จ');
     }
 
@@ -35,16 +37,16 @@ class DataImportController extends Controller
             ],
             [
                 'user_id.required' => 'กรุณาป้อนรหัสผู้ใช้งาน',
-                'user_id.max'      => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'user_id.unique'   => "มีข้อมูลชื่อบริการนี้ในฐานข้อมูลแล้ว"
+                'user_id.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'user_id.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว"
             ]
         );
 
         MasterUser::insert([
-           'user_id' => $request->user_id,
-           'firstname' => $request->firstname,
-           'lastname' => $request->lastname,
-           'created_at'  => Carbon::now()
+            'user_id' => $request->user_id,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'created_at' => Carbon::now()
         ]);
 
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
@@ -60,11 +62,11 @@ class DataImportController extends Controller
     {
         $request->validate(
             [
-                'user_id'  => 'required|max:255','unique:master_users'
+                'user_id' => 'required|max:255', 'unique:master_users'
             ],
             [
                 'user_id.required' => "กรุณาป้อนชื่อรูปภาพ",
-                'user_id.max'      => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'user_id.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
             ]
         );
 

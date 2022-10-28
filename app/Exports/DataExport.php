@@ -32,9 +32,6 @@ class DataExport implements FromCollection, WithHeadings, WithMapping, WithColum
             'user_id',
             'firstname',
             'lastname',
-            'created_at',
-            'updated_at',
-           
         ];
     }
 
@@ -46,7 +43,6 @@ class DataExport implements FromCollection, WithHeadings, WithMapping, WithColum
             $row->user_id,
             $row->firstname,
             $row->lastname,
-           
         ];
     }
 
@@ -54,12 +50,7 @@ class DataExport implements FromCollection, WithHeadings, WithMapping, WithColum
     {
         // TODO: Implement columnFormats() method.
         return [
-            'I' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'E' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
-
-//    public function bindValue(Cell $cell, $value)
-//    {
-//        // TODO: Implement bindValue() method.
-//    }
 }

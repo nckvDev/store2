@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('stock') }}">วัสดุ</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('stock') }}">รายการวัสดุ</a></li>
                     <li class="breadcrumb-item active" aria-current="page">เพิ่มวัสดุ</li>
                 </ol>
             </nav>
