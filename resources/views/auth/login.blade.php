@@ -43,26 +43,28 @@
                             </span>
                                 @endif
                             </div>
-                            <!-- <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="customCheckLogin">
-                                <span class="text-muted">{{ __('Remember me') }}</span>
-                            </label>
-                        </div> -->
+{{--                            <div class="custom-control custom-control-alternative custom-checkbox">--}}
+{{--                                <input class="custom-control-input" name="remember" id="customCheckLogin"--}}
+{{--                                       type="checkbox" {{ old('remember') ? 'checked' : '' }}>--}}
+{{--                                <label class="custom-control-label" for="customCheckLogin">--}}
+{{--                                    <span class="text-muted">{{ __('Remember me') }}</span>--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>
                             </div>
                         </form>
-                        @if (session('error'))
-                            <script>
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'error',
-                                    title: 'อีเมล์และรหัสผ่านไม่ถูกต้อง!',
-                                    confirmButtonText: 'ตกลง'
-                                })
-                            </script>
-                        @endif
+                        {{--                        @if (session('error'))--}}
+                        {{--                            <script>--}}
+                        {{--                                Swal.fire({--}}
+                        {{--                                    position: 'center',--}}
+                        {{--                                    icon: 'error',--}}
+                        {{--                                    title: 'อีเมลรหัสผ่านไม่ถูกต้อง!',--}}
+                        {{--                                    showConfirmButton: false,--}}
+                        {{--                                    timer: 2500--}}
+                        {{--                                })--}}
+                        {{--                            </script>--}}
+                        {{--                        @endif--}}
                     </div>
                 </div>
                 <div class="row mt-3">

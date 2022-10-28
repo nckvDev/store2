@@ -232,7 +232,7 @@
                                                            readonly>
                                                     <input type="hidden" value="1" name="borrow_status" readonly>
                                                     <td>
-                                                        <input type="text" name="borrow_amount[]" value="1"
+                                                        <input type="text" name="borrow_amount[]" value="{{ old('borrow_amount') }}"
                                                                class="w-10 text-center bg-gray-100"/>
                                                         <form action="{{ route('student_borrow.update') }}"
                                                               method="POST"

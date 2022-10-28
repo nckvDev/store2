@@ -36,8 +36,6 @@ class DisposablesExport implements FromCollection, WithHeadings, WithMapping, Wi
             'image',
             'amount_minimum',
             'type_id',
-            'created_at',
-            'updated_at',
         ];
     }
 
@@ -52,7 +50,7 @@ class DisposablesExport implements FromCollection, WithHeadings, WithMapping, Wi
             $row->disposable_status,
             $row->image,
             $row->amount_minimum,
-            $row->disposable_type->type_detail,
+            $row->disposable_type->id,
         ];
     }
 

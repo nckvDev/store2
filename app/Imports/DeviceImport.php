@@ -20,7 +20,7 @@ class DeviceImport implements ToModel,WithHeadingRow
             'device_name' => $row['device_name'],
             'device_status' => $row['device_status'],
             'type_id' => $row['type_id'],
-            'location' => $row['location'],
+            'device_amount' => $row['device_amount'],
             'image' => $row['image'],
             'device_year' => $row['device_year'],
             'defective_device' => $row['defective_device'],
