@@ -33,7 +33,7 @@ class LoginController extends Controller
     {
         $input = $request->all();
 
-        $request->validate(
+         $request->validate(
             [
                 'email' => 'required|email',
                 'password' => 'required',
@@ -44,7 +44,7 @@ class LoginController extends Controller
             ]
         );
 
-        if (Auth::attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+        if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
             $role = Auth::user()->role;
             switch ($role) {
                 case 'admin':
@@ -61,8 +61,7 @@ class LoginController extends Controller
                     break;
             }
         } else {
-            return redirect()->back()
-                ->with('error', 'Email-Address And Password Are Wrong.');
+            return back()->withErrors(['email'=>'อีเมลไม่ถูกต้อง', 'password'=>'รหัสผ่านไม่ถูกต้อง']);
         }
 
     }

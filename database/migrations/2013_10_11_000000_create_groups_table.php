@@ -18,7 +18,6 @@ class CreateGroupsTable extends Migration
             $table->string('group_name');
             $table->string('department_name');
             $table->timestamps();
-
         });
     }
 

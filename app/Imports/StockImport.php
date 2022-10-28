@@ -20,8 +20,6 @@ class StockImport implements ToModel,WithHeadingRow
             'stock_amount' => $row['stock_amount'],
             'stock_status' => $row['stock_status'],
             'image' => $row['image'],
-            'position' => $row['position'],
-            'amount_minimum' => $row['amount_minimum'],
             'type_id' => $row['type_id'],
             'stock_num' => $row['stock_num'],
             'defective_stock' => $row['defective_stock'],

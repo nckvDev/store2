@@ -62,7 +62,6 @@ class GroupController extends Controller
             'department_name' => $request->department_name,
         ]);
 
-
         return redirect()->route('group')->with('update', 'อัพเดทเรียบร้อย');
     }
 

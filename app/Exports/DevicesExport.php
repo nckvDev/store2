@@ -36,9 +36,7 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
             'device_amount',
             'image',
             'device_year',
-            'defective_stock',
-            'created_at',
-            'updated_at',
+            'defective_device',
         ];
     }
 
@@ -50,11 +48,11 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
             $row->device_num,
             $row->device_name,
             $row->device_status,
-            $row->device_type->type_detail,
+            $row->device_type->id,
             $row->device_amount,
             $row->image,
             $row->device_year,
-            $row->defective_stock,
+            $row->defective_device,
         ];
     }
 
@@ -62,7 +60,7 @@ class DevicesExport implements FromCollection, WithHeadings, WithMapping, WithCo
     {
         // TODO: Implement columnFormats() method.
         return [
-            'I' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'J' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
 
