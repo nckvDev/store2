@@ -63,9 +63,4 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
             'I' => NumberFormat::FORMAT_DATE_DDMMYYYY
         ];
     }
-
-//    public function bindValue(Cell $cell, $value)
-//    {
-//        // TODO: Implement bindValue() method.
-//    }
 }
