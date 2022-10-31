@@ -16,11 +16,11 @@ class CartController extends Controller
 {
     public function cartList()
     {
-        $types = Type::all();
+//        $types = Type::all();
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $stocks = Stock::all();
+        $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
         return view('users/student/cart', compact('cartItems', 'stocks', 'disposables', 'types'));
@@ -160,8 +160,8 @@ class CartController extends Controller
         $id = $request->get('select');
         $result = array();
         $query = DB::table('types')
-            ->join('devices', 'types.id', '=', 'devices.type_id')
-            ->select('devices.*')
+            ->join('stocks', 'types.id', '=', 'stocks.type_id')
+            ->select('stocks.*')
             ->where('types.id', $id)
             ->get();
         $output = 'ไม่มีข้อมูล';

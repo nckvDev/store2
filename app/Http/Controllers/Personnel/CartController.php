@@ -16,12 +16,12 @@ class CartController extends Controller
 {
     public function cartList()
     {
-        $types = Type::all();
+//        $types = Type::all();
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $devices = Device::all();
-        $stocks = Stock::all();
+        $devices = Device::where('device_status', 0)->where('defective_device', 0)->get();
+        $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
         return view('users/personnel/cart', compact('cartItems', 'devices', 'stocks', 'disposables', 'types'));
@@ -239,11 +239,8 @@ class CartController extends Controller
                         </div>
                       </div>
                         </td>
-
                     </tr>";
         }
-
-
         echo $output;
     }
 }

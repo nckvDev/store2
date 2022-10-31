@@ -42,66 +42,64 @@
                             </thead>
                             <tbody id="datalist">
                             @foreach ($stocks as $item)
-                                @if($item->stock_status == 0 && $item->defective_stock == 0)
-                                    @if($addData)
-                                        @if(!in_array($item->stock_num, $addData))
-                                            <tr>
-                                                <form action="{{ route('student_borrow.add') }}" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-                                                    <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                               readonly
-                                                               style="width: 60px">
-                                                    </td>
-                                                    <td><input type="text" value="{{ $item->stock_name }}" name="name"
-                                                               readonly>
-                                                    </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly>
-                                                    </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                    <input type="hidden" value="{{ $item->image }}" name="image"
-                                                           width="50" height="50"
-                                                           readonly>
-                                                    <td>
-                                                        <input type="text" value="{{ $item->stock_amount }}"
-                                                               name="quantity" readonly style="width: 60px">
-                                                    </td>
-
-                                                    <input type="hidden" value="1" name="price" readonly>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">เลือก</button>
-                                                    </td>
-                                                </form>
-                                            </tr>
-                                        @endif
-                                    @else
+                                @if($addData)
+                                    @if(!in_array($item->stock_num, $addData))
                                         <tr>
                                             <form action="{{ route('student_borrow.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
-                                                <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
+                                                <td><input type="text" value="{{ $item->stock_num }}" name="id"
+                                                           readonly
                                                            style="width: 60px">
                                                 </td>
                                                 <td><input type="text" value="{{ $item->stock_name }}" name="name"
                                                            readonly>
                                                 </td>
-                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly>
+                                                <td><img src="{{ $item->image }}" width="80" height="80" readonly>
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                                <input type="hidden" value="{{ $item->image }}" name="image"
+                                                       width="50" height="50"
+                                                       readonly>
                                                 <td>
-                                                    <input type="text" value="{{ $item->stock_amount }}" name="quantity"
-                                                           readonly style="width: 60px">
+                                                    <input type="text" value="{{ $item->stock_amount }}"
+                                                           name="quantity" readonly style="width: 60px">
                                                 </td>
 
-                                                <input type="hidden" value="1" name="price" readonly
-                                                       style="width: max-content">
+                                                <input type="hidden" value="1" name="price" readonly>
                                                 <td>
                                                     <button class="btn btn-primary btn-sm">เลือก</button>
                                                 </td>
                                             </form>
                                         </tr>
                                     @endif
+                                @else
+                                    <tr>
+                                        <form action="{{ route('student_borrow.add') }}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
+                                                       style="width: 60px">
+                                            </td>
+                                            <td><input type="text" value="{{ $item->stock_name }}" name="name"
+                                                       readonly>
+                                            </td>
+                                            <td><img src="{{ $item->image }}" width="50" height="50" readonly>
+                                            </td>
+                                            <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                            <td>
+                                                <input type="text" value="{{ $item->stock_amount }}" name="quantity"
+                                                       readonly style="width: 60px">
+                                            </td>
+
+                                            <input type="hidden" value="1" name="price" readonly
+                                                   style="width: max-content">
+                                            <td>
+                                                <button class="btn btn-primary btn-sm">เลือก</button>
+                                            </td>
+                                        </form>
+                                    </tr>
                                 @endif
                             @endforeach
                             @foreach ($disposables as $item)
@@ -232,8 +230,9 @@
                                                            readonly>
                                                     <input type="hidden" value="1" name="borrow_status" readonly>
                                                     <td>
-                                                        <input type="text" name="borrow_amount[]" value="{{ old('borrow_amount') }}"
-                                                               class="w-10 text-center bg-gray-100"/>
+                                                        <input type="{{ $item->quantity > 1 ? 'number' : 'text'}}"
+                                                               name="borrow_amount[]" value="1"
+                                                               class="w-10 text-center bg-gray-100">
                                                         <form action="{{ route('student_borrow.update') }}"
                                                               method="POST"
                                                               enctype="multipart/form-data">

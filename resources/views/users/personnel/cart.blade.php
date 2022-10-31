@@ -51,54 +51,20 @@
                             </thead>
                             <tbody id="datalist">
                             @foreach ($devices as $item)
-                                @if($item->device_status == 0 && $item->defective_device == 0)
-                                    @if($addData)
-                                        @if(!in_array($item->device_num, $addData))
-                                            <tr>
-                                                <form action="{{ route('personnel_borrow.add') }}" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-                                                    <td><input type="text" value="{{ $item->device_num }}" name="id"
-                                                               readonly
-                                                               style="width: 60px">
-                                                    </td>
-                                                    <td><input type="text" value="{{ $item->device_name }}" name="name"
-                                                               readonly>
-                                                    </td>
-                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly>
-                                                    </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                    <input type="hidden" value="{{ $item->image }}" name="image"
-                                                           readonly>
-                                                    <td>
-                                                        <input type="text" value="{{ $item->device_amount }}"
-                                                               name="quantity" readonly
-                                                               style="width: 60px">
-                                                    </td>
-
-                                                    <input type="hidden" value="1" name="price" readonly>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">เลือก</button>
-                                                    </td>
-                                                </form>
-                                            </tr>
-                                        @endif
-                                    @else
+                                @if($addData)
+                                    @if(!in_array($item->device_num, $addData))
                                         <tr>
                                             <form action="{{ route('personnel_borrow.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
-                                                <td>
-                                                    <input type="text" value="{{ $item->device_num }}" name="id"
+                                                <td><input type="text" value="{{ $item->device_num }}" name="id"
                                                            readonly
                                                            style="width: 60px">
                                                 </td>
-                                                <td>
-                                                    <input type="text" value="{{ $item->device_name }}" name="name"
+                                                <td><input type="text" value="{{ $item->device_name }}" name="name"
                                                            readonly>
                                                 </td>
-                                                <td>
-                                                    <img src="{{ $item->image }}" width="50" height="50" readonly>
+                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly>
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                 <input type="hidden" value="{{ $item->image }}" name="image" readonly>
@@ -115,71 +81,100 @@
                                             </form>
                                         </tr>
                                     @endif
+                                @else
+                                    <tr>
+                                        <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <td>
+                                                <input type="text" value="{{ $item->device_num }}" name="id"
+                                                       readonly
+                                                       style="width: 60px">
+                                            </td>
+                                            <td>
+                                                <input type="text" value="{{ $item->device_name }}" name="name"
+                                                       readonly>
+                                            </td>
+                                            <td>
+                                                <img src="{{ $item->image }}" width="50" height="50" readonly>
+                                            </td>
+                                            <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                            <td>
+                                                <input type="text" value="{{ $item->device_amount }}"
+                                                       name="quantity" readonly
+                                                       style="width: 60px">
+                                            </td>
+
+                                            <input type="hidden" value="1" name="price" readonly>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm">เลือก</button>
+                                            </td>
+                                        </form>
+                                    </tr>
                                 @endif
                             @endforeach
                             @foreach ($stocks as $item)
-                                @if($item->stock_status == 0 && $item->defective_stock == 0)
-                                    @if($addData)
-                                        @if(!in_array($item->stock_num, $addData))
-                                            <tr>
-                                                <form action="{{ route('personnel_borrow.add') }}" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-                                                    <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                               readonly
-                                                               style="width: 60px">
-                                                    </td>
-                                                    <td><input type="text" value="{{ $item->stock_name }}" name="name"
-                                                               readonly>
-                                                    </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly>
-                                                    </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                    <input type="hidden" value="{{ $item->image }}" name="image"
-                                                           width="50" height="50"
-                                                           readonly>
-                                                    <td>
-                                                        <input type="text" value="{{ $item->stock_amount }}"
-                                                               name="quantity" readonly
-                                                               style="width: 60px">
-                                                    </td>
-
-                                                    <input type="hidden" value="1" name="price" readonly>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">เลือก</button>
-                                                    </td>
-                                                </form>
-                                            </tr>
-                                        @endif
-                                    @else
+                                @if($addData)
+                                    @if(!in_array($item->stock_num, $addData))
                                         <tr>
                                             <form action="{{ route('personnel_borrow.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
-                                                <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
+                                                <td><input type="text" value="{{ $item->stock_num }}" name="id"
+                                                           readonly
                                                            style="width: 60px">
                                                 </td>
                                                 <td><input type="text" value="{{ $item->stock_name }}" name="name"
                                                            readonly>
                                                 </td>
-                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly>
+                                                <td><img src="{{ $item->image }}" width="80" height="80" readonly>
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                                <input type="hidden" value="{{ $item->image }}" name="image"
+                                                       width="50" height="50"
+                                                       readonly>
                                                 <td>
-                                                    <input type="text" value="{{ $item->stock_amount }}" name="quantity"
-                                                           readonly
+                                                    <input type="text" value="{{ $item->stock_amount }}"
+                                                           name="quantity" readonly
                                                            style="width: 60px">
                                                 </td>
 
-                                                <input type="hidden" value="1" name="price" readonly
-                                                       style="width: max-content">
+                                                <input type="hidden" value="1" name="price" readonly>
                                                 <td>
                                                     <button class="btn btn-primary btn-sm">เลือก</button>
                                                 </td>
                                             </form>
                                         </tr>
                                     @endif
+                                @else
+                                    <tr>
+                                        <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
+                                                       style="width: 60px">
+                                            </td>
+                                            <td><input type="text" value="{{ $item->stock_name }}" name="name"
+                                                       readonly>
+                                            </td>
+                                            <td><img src="{{ $item->image }}" width="50" height="50" readonly>
+                                            </td>
+                                            <input type="hidden" value="{{ $item->id }}" name="price" readonly>
+                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                            <td>
+                                                <input type="text" value="{{ $item->stock_amount }}" name="quantity"
+                                                       readonly
+                                                       style="width: 60px">
+                                            </td>
+
+                                            <input type="hidden" value="1" name="price" readonly
+                                                   style="width: max-content">
+                                            <td>
+                                                <button class="btn btn-primary btn-sm">เลือก</button>
+                                            </td>
+                                        </form>
+                                    </tr>
                                 @endif
                             @endforeach
                             @foreach ($disposables as $item)
@@ -334,13 +329,14 @@
                                                 </tbody>
                                             @endforeach
                                         </table>
-                                        <a class="btn btn-outline-danger btn-sm mt-4" href="{{ route('personnel_borrow.clear') }}"> ลบทั้งหมด </a>
-{{--                                        <div>--}}
-{{--                                            <form action="{{ route('personnel_borrow.clear') }}" method="POST">--}}
-{{--                                                @csrf--}}
-{{--                                                <button class="btn btn-danger btn-sm mt-4">ลบทั้งหมด</button>--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
+                                        <a class="btn btn-outline-danger btn-sm mt-4"
+                                           href="{{ route('personnel_borrow.clear') }}"> ลบทั้งหมด </a>
+                                        {{--                                        <div>--}}
+                                        {{--                                            <form action="{{ route('personnel_borrow.clear') }}" method="POST">--}}
+                                        {{--                                                @csrf--}}
+                                        {{--                                                <button class="btn btn-danger btn-sm mt-4">ลบทั้งหมด</button>--}}
+                                        {{--                                            </form>--}}
+                                        {{--                                        </div>--}}
                                         <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                     </form>
 
