@@ -28,7 +28,20 @@
                                 @endphp
                             @endforeach
                         @endif
-                        <input id="search" placeholder="ค้นหา" class="form-control form-control-sm" style="width:30%">
+                        <form action="{{ route('student_borrow.list') }}" method="GET">
+                            <h3>ประเภท</h3>
+                            <div class="mb-3">
+                                <select class="form-control type" name="type" id="data_type">
+                                    <option value="">เลือกประเภทพัสดุ</option>
+                                    @foreach($types as $item)
+                                        <option value="{{$item->id}}" {{ old('types') == $item->id ? 'selected' : '' }} >
+                                            {{$item->type_detail}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <input type="submit" value="Search" class="btn btn-outline-secondary">
+                        </form>
 
                         <table id="example" class="mt-3">
                             <thead class="thead-light">
@@ -305,24 +318,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            var notFoundCount = -7;
-            $("#search").on("keyup", function () {
-                var value = $(this).val().toLowerCase(),
-                    $tr = $("#example tbody tr");
-                $tr.each(function () {
-                    var found = 0;
-                    $(this).find("input").each(function () {
-                        found += $(this).val().indexOf(value)
-                    });
-                    if (found > notFoundCount) {
-                        $(this).closest('tr').show();
-                    } else {
-                        $(this).closest('tr').hide();
-                    }
-                });
-            });
-        });
+        // $(document).ready(function () {
+        //     var notFoundCount = -7;
+        //     $("#search").on("keyup", function () {
+        //         var value = $(this).val().toLowerCase(),
+        //             $tr = $("#example tbody tr");
+        //         $tr.each(function () {
+        //             var found = 0;
+        //             $(this).find("input").each(function () {
+        //                 found += $(this).val().indexOf(value)
+        //             });
+        //             if (found > notFoundCount) {
+        //                 $(this).closest('tr').show();
+        //             } else {
+        //                 $(this).closest('tr').hide();
+        //             }
+        //         });
+        //     });
+        // });
 
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
@@ -373,25 +386,22 @@
             });
         });
 
-        $('#type').change(function () {
-            if ($(this).val() != '') {
-                var select = $(this).val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{route('student_borrow.fetch')}}",
-                    method: "POST",
-                    data: {
-                        select: select,
-                        _token: _token
-                    },
-                    success: function (result) {
-                        // $('.stockname').html(result);
-                        {
-                            $("#datalist").html(result)
-                        }
-                    }
-                })
-            }
-        });
+        {{--$(function () {--}}
+        {{--    $('#data_type').change(function () {--}}
+        {{--        const select = $(this).val();--}}
+        {{--        console.log(select);--}}
+        {{--        $.ajax({--}}
+        {{--            method: "GET",--}}
+        {{--            url: "{{route('student_borrow.search')}}",--}}
+        {{--            data: {selected: select},--}}
+        {{--            success: function (msg) {--}}
+        {{--                console.log('hello', msg)--}}
+        {{--            },--}}
+        {{--            error: function (status, error) {--}}
+        {{--                alert(status);--}}
+        {{--            }--}}
+        {{--        });--}}
+        {{--    });--}}
+        {{--});--}}
     </script>
 @endpush

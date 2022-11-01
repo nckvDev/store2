@@ -14,15 +14,21 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function cartList()
+    public function cartList(Request $request)
     {
-//        $types = Type::all();
+        $select_id = intval($request->input('type'));
+
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
         $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
+
+        if ($select_id) {
+            $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->where('type_id', $select_id)->get();
+            $disposables = Disposable::where('type_id', $select_id)->get();
+        }
         return view('users/student/cart', compact('cartItems', 'stocks', 'disposables', 'types'));
     }
 
@@ -154,6 +160,7 @@ class CartController extends Controller
         }
         return redirect()->back()->with('error', 'ไม่มีรายการที่เลือก');
     }
+
 
     public function fetch(Request $request)
     {
