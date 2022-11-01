@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function cartList()
+    public function cartList(Request $request)
     {
-//        $types = Type::all();
+        $select_id = intval($request->input('type'));
+
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
@@ -24,6 +25,13 @@ class CartController extends Controller
         $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
+
+        if ($select_id) {
+            $devices = Device::where('device_status', 0)->where('defective_device', 0)->where('type_id', $select_id)->get();
+            $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->where('type_id', $select_id)->get();
+            $disposables = Disposable::where('type_id', $select_id)->get();
+        }
+
         return view('users/personnel/cart', compact('cartItems', 'devices', 'stocks', 'disposables', 'types'));
     }
 

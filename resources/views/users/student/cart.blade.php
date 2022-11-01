@@ -31,10 +31,10 @@
                         <form action="{{ route('student_borrow.list') }}" method="GET">
                             <h3>ประเภท</h3>
                             <div class="mb-3">
-                                <select class="form-control type" name="type" id="data_type">
+                                <select class="form-control" name="type" id="data_type">
                                     <option value="">เลือกประเภทพัสดุ</option>
                                     @foreach($types as $item)
-                                        <option value="{{$item->id}}" {{ old('types') == $item->id ? 'selected' : '' }} >
+                                        <option value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
                                             {{$item->type_detail}}
                                         </option>
                                     @endforeach
