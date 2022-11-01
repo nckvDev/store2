@@ -17,15 +17,6 @@
             <div class="col-xl-7 mb-4">
                 <div class="card bg-secondary shadow">
                     <div class="card-body">
-                        <h3>ประเภท</h3>
-                        <div class="mb-3">
-                            <select class="form-control type" name="type" id="type">
-                                <option value="">เลือกประเภทพัสดุ</option>
-                                @foreach($types as $item)
-                                    <option value="{{$item->id}}">{{$item->type_detail}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         @php
                             $addData = array();
                         @endphp
@@ -37,7 +28,20 @@
                                 @endphp
                             @endforeach
                         @endif
-                        <input id="search" placeholder="ค้นหา" class="form-control form-control-sm" style="width:30%">
+                        <form action="{{ route('personnel_borrow.list') }}" method="GET">
+                            <h3>ประเภท</h3>
+                            <div class="mb-3">
+                                <select class="form-control" name="type" id="data_type">
+                                    <option value="">เลือกประเภทพัสดุ</option>
+                                    @foreach($types as $item)
+                                        <option value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
+                                            {{$item->type_detail}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <input type="submit" value="Search" class="btn btn-outline-secondary">
+                        </form>
 
                         <table id="example" class="mt-3">
                             <thead class="thead-light">
@@ -453,26 +457,6 @@
                 "bInfo": false,
                 "bAutoWidth": false,
             });
-        });
-
-        $('#type').change(function () {
-            if ($(this).val() !== '') {
-                const select = $(this).val();
-                const _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{url('personnel_borrow/fetch')}}",
-                    method: "POST",
-                    data: {
-                        select: select,
-                        _token: _token
-                    },
-                    success: function (result) {
-                        {
-                            $("#datalist").html(result)
-                        }
-                    }
-                })
-            }
         });
     </script>
 @endpush
