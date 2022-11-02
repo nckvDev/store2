@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                             @foreach($borrowList as $row)
-                                @if($row->borrow_status == 1 || $row->borrow_status == 2)
+                                @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4)
                                     <tr>
                                         <td>
                                             @foreach($row->borrow_list_id as $item)
@@ -63,6 +63,11 @@
                                                 <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
                                             </td>
                                         @endif
+                                        @if($row->borrow_status=="4")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
+                                            </td>
+                                        @endif
                                         <td>
                                             <form action="{{ url('/student_dashboard/update/'.$row->id) }}"
                                                   method="post">
@@ -70,19 +75,22 @@
                                                 @foreach($row->borrow_list_id as $item)
                                                     <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
                                                 @endforeach
-                                                <input type="hidden" name="borrow_status" value="0">
+                                                <input type="hidden" name="borrow_status" value="4">
                                                 @if($row->borrow_status=="2")
-                                                    @foreach($row->borrow_amount as $amount)
-                                                        @if($amount <= 1)
-                                                            <button type="submit" class="btn btn-primary btn-sm ">
-                                                                ส่งคืน
-                                                            </button>
-                                                        @else
-                                                            <button type="submit" class="btn btn-primary btn-sm ">
-                                                                ส่งคืน
-                                                            </button>
-                                                        @endif
-                                                    @endforeach
+{{--                                                    @foreach($row->borrow_amount as $amount)--}}
+{{--                                                        @if($amount <= 1)--}}
+{{--                                                            <button type="submit" class="btn btn-primary btn-sm ">--}}
+{{--                                                                ส่งคืน--}}
+{{--                                                            </button>--}}
+{{--                                                        @else--}}
+{{--                                                            <button type="submit" class="btn btn-primary btn-sm ">--}}
+{{--                                                                ส่งคืน--}}
+{{--                                                            </button>--}}
+{{--                                                        @endif--}}
+{{--                                                    @endforeach--}}
+                                                    <button type="submit" class="btn btn-primary btn-sm ">
+                                                        ส่งคืน
+                                                    </button>
                                                 @endif
                                             </form>
                                         </td>

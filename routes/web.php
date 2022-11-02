@@ -104,7 +104,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('disposable/import', [DisposableImportController::class, 'index'])->name('disposable-import');
         Route::post('import-disposable', [DisposableImportController::class, 'import'])->name('import-disposable');
 
-
         // Form
         Route::get('confirm-form', [ConfirmFormController::class, 'index'])->name('confirm-form');
         Route::post('confirm-form/update/{id}', [ConfirmFormController::class, 'update']);
