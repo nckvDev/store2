@@ -76,6 +76,10 @@
                                     <td class="align-middle text-sm">
                                         <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                     </td>
+                                @elseif($row->borrow_status == 4)
+                                    <td class="align-middle text-sm">
+                                        <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
+                                    </td>
                                 @else
                                     <td class="align-middle text-sm">
                                         <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
@@ -97,7 +101,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    @if($row->borrow_status == 1 || $row->borrow_status == 2)
+                                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
                                                         <div class="row mb-2">
                                                             <div class="col-lg-6"> วันที่ยืม</div>
                                                             <div class="col-lg-6"> วันที่คืน</div>

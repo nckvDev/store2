@@ -149,7 +149,7 @@
                                                             @foreach($row->borrow_list_id as $item)
                                                                 <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
                                                             @endforeach
-                                                            <input type="hidden" name="borrow_status" value="0">
+                                                            <input type="hidden" name="borrow_status" value="3">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-primary btn-sm" type="submit"> ตกลง </button>

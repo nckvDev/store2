@@ -32,6 +32,14 @@ class ConfirmFormController extends Controller
 
     public function update(Request $request, $id)
     {
+        $status = null;
+
+        if ($request['borrow_status'] === 3) {
+            $status = 0;
+        } else {
+            $status = $request['borrow_status'];
+        }
+
         Borrow::find($id)->update([
             'borrow_status' => $request['borrow_status'],
             'description' => $request['description']
@@ -39,13 +47,13 @@ class ConfirmFormController extends Controller
 
         for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
             DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
-                'stock_status' => $request['borrow_status']
+                'stock_status' => $status
             ]);
         }
 
         for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
             DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
-                'device_status' => $request['borrow_status']
+                'device_status' => $status
             ]);
         }
 
