@@ -23,11 +23,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12">
-                    </div>
-
-
+                    <div class="col-12"></div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
@@ -41,7 +37,7 @@
                             </thead>
                             <tbody>
                             @foreach($borrowList as $row)
-                                @if($row->borrow_status == 1 || $row->borrow_status == 2)
+                                @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4)
                                     <tr>
                                         <td>
                                             @foreach($row->borrow_list_id as $item)
@@ -53,35 +49,35 @@
                                                 {{ $item }}
                                             @endforeach
                                         </td>
-                                        <td>{{ $row->created_at }}</td>
-                                        @if($row->borrow_status=="2")
-                                            <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
-                                            </td>
-                                        @endif
+                                        <td>{{ $row->updated_at }}</td>
+
                                         @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
                                             </td>
                                         @endif
+                                        @if($row->borrow_status=="2")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="4")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
+                                            </td>
+                                        @endif
                                         <td>
                                             <form action="{{ url('/personnel_dashboard/update/'.$row->id) }}"
-                                                  method="post" >
+                                                  method="post">
                                                 @csrf
                                                 @foreach($row->borrow_list_id as $item)
                                                     <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
                                                 @endforeach
-                                                <input type="hidden" name="borrow_status" value="0">
-                                                @if($row->borrow_status=="2")
-                                                    <button type="submit" class="btn btn-primary btn-sm ">
-                                                        ส่งคืน
-                                                    </button>
-                                                @endif
-{{--                                                @if($row->borrow_status=="0")--}}
-{{--                                                    <button type="text" class="btn btn-primary btn-sm disabled">--}}
-{{--                                                        ส่งคืน--}}
-{{--                                                    </button>--}}
-{{--                                                @endif--}}
+                                                <input type="hidden" name="borrow_status" value="4">
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-sm " {{$row->borrow_status != 2 ? 'disabled' : ''}} >
+                                                    ส่งคืน
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

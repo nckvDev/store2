@@ -144,8 +144,8 @@ class StockController extends Controller
 
     public function delete($id)
     {
-        $img = Stock::find($id)->image;
-        unlink($img);
+//        $img = Stock::find($id)->image;
+//        unlink($img);
 
         Stock::destroy($id);
         return redirect()->back()->with('delete', 'ลบข้อมุลเรียบร้อย');

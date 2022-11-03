@@ -30,6 +30,7 @@ class DashboardController extends Controller
         } else {
             $status = $request['borrow_status'];
         }
+
         Borrow::find($id)->update([
             'borrow_status' => $request['borrow_status'],
         ]);

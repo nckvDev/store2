@@ -60,9 +60,9 @@
                                         <select
                                             class="form-control form-control-alternative{{ $errors->has('type_id') ? ' is-invalid' : '' }}"
                                             name="type_id">
-                                            <option>เลือก...</option>
+                                            <option value="">เลือก...</option>
                                             @foreach($types as $row)
-                                            <option value="{{ $row->id }}">{{ $row->type_detail }}</option>
+                                            <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }} >{{ $row->type_detail }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('name'))
@@ -89,8 +89,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label"
                                             for="device_amount">{{ __('จำนวน') }}</label>
-                                        <input type="text" name="device_amount" value="{{ old('device_amount') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
+                                        <input type="text" name="device_amount" value="1"
+                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} " disabled>
                                         @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_amount') }}</strong>

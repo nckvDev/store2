@@ -46,8 +46,8 @@
                                 <td>{{ $row->firstname}}</td>
                                 <td>{{ $row->lastname}}</td>
                                 <td>{{ $row->email}}</td>
-                                <td>{{ $row->department}}</td>
-                                <td>{{ $row->group}}</td>
+                                <td>{{ $row->department ? $row->department : '-'}}</td>
+                                <td>{{ $row->group ? $row->group : '-'}}</td>
                                 <td>{{ $row->role}}</td>
                                 <td class="text-center">
                                     <div class="dropdown">
