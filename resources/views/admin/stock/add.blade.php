@@ -57,7 +57,7 @@
                                         <label class="form-control-label"
                                             for="stock_amount">{{ __('จำนวน') }}</label>
                                         <input type="number" name="stock_amount" value="1"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }}" disabled>
+                                            class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }}">
                                         @if ($errors->has('stock_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('stock_amount') }}</strong>

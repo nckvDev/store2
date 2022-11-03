@@ -90,7 +90,7 @@
                                         <label class="form-control-label"
                                             for="device_amount">{{ __('จำนวน') }}</label>
                                         <input type="text" name="device_amount" value="1"
-                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} " disabled>
+                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_amount') }}</strong>
