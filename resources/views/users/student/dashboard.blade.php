@@ -23,10 +23,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12">
-                    </div>
-
+                    <div class="col-12"></div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
@@ -53,14 +50,14 @@
                                             @endforeach
                                         </td>
                                         <td>{{ $row->created_at }}</td>
-                                        @if($row->borrow_status=="2")
-                                            <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
-                                            </td>
-                                        @endif
                                         @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="2")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                             </td>
                                         @endif
                                         @if($row->borrow_status=="4")

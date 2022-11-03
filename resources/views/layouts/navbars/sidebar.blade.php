@@ -191,7 +191,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('type*') ? 'active text-green' : '' }}"
+                    <a class="nav-link {{ request()->is('type*') ? 'active text-dark' : '' }}"
                         href="{{ route('type') }}">
                         <i class="ni ni-archive-2 text-dark"></i> {{ __('ประเภท') }}
                     </a>
@@ -238,19 +238,19 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('confirm-form*') ? 'active text-primary' : '' }}"
+                    <a class="nav-link {{ request()->is('confirm-form*') ? 'active text-pink' : '' }}"
                         href="{{ route('confirm-form') }}">
                         <i class="ni ni-single-copy-04 text-pink "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('confirm-user*') ?  'active text-black' : '' }}"
+                    <a class="nav-link {{ request()->is('confirm-user*') ?  'active text-gray' : '' }}"
                         href="{{ route('form-detail') }}">
                         <i class="ni ni-curved-next text-gray"> </i> {{ __('ตรวจสอบสถานะอนุมัติ') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('reportAll*') || request()->is('report-all*') ?  'active text-black' : '' }}"
+                    <a class="nav-link {{ request()->is('reportAll*') || request()->is('report-all*') ?  'active text-green' : '' }}"
                         href="{{ route('reportAll') }}">
                         <i class="ni ni-collection text-green"> </i> {{ __('รายงาน') }}
                     </a>

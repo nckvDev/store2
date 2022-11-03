@@ -107,10 +107,10 @@
                                                     <div class="modal-body">
                                                         @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
                                                             <div class="row mb-2">
-                                                                <div class="col-lg-6"> วันที่ยืม</div>
-                                                                <div class="col-lg-6"> วันที่คืน</div>
+                                                                <div class="col-lg-6">กำหนดการยืม</div>
+                                                                <div class="col-lg-6">กำหนดการคืน</div>
                                                             </div>
-                                                            <div class="mb-4 flex-row justify-content-between">
+                                                            <div class="mb-3 flex-row justify-content-between">
                                                                 <span class="text-gray">
                                                                     {{
                                                                         \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
@@ -123,6 +123,16 @@
                                                                     }}
                                                                 </span>
                                                             </div>
+                                                            @if($row->borrow_status == 4)
+                                                                <div class="mb-4 ">
+                                                                    วันที่ส่งคืน
+                                                                    <span class="text-success">
+                                                                        {{
+                                                                            \Carbon\Carbon::parse($row->updated_at)->locale('th')->isoFormat('LLL')
+                                                                        }}
+                                                                    </span>
+                                                                </div>
+                                                            @endif
                                                         @else
                                                             <div class="mb-4 flex-row justify-content-between">
                                                                 <div class="text-danger">ไม่อนุมัติ</div>

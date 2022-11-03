@@ -23,9 +23,9 @@ class ConfirmFormController extends Controller
     public function create(Request $request)
     {
         MasterUser::create([
-            'user_id' => $request->user_id,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'user_id' => $request['user_id'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
         ]);
         return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }

@@ -162,8 +162,8 @@ class DisposableController extends Controller
 
     public function delete($id)
     {
-        $img = Disposable::find($id)->image;
-        unlink($img);
+//        $img = Disposable::find($id)->image;
+//        unlink($img);
 
         Disposable::destroy($id);
         return redirect()->back()->with('delete', 'ลบข้อมุลเรียบร้อย');
