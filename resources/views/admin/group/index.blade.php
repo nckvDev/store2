@@ -1,5 +1,5 @@
 @extends('layouts.app', ['class' => 'bg-neutral'])
-
+@inject('thaiDateHelper', 'App\Services\ThaiDateFormat')
 @section('content')
 @include('layouts.headers.cards')
 <div class="container-fluid mt--9">
@@ -36,7 +36,7 @@
                                     @if ( $row->created_at == NULL)
                                     ไม่ถูกนิยาม
                                     @else
-                                        {{ \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('L - LT') }}
+                                        {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                     @endif
                                 </td>
                                 <td class="text-right">
