@@ -36,7 +36,7 @@
                                     @if ( $row->created_at == NULL)
                                     ไม่ถูกนิยาม
                                     @else
-                                    {{ $row->created_at }}
+                                        {{ \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('L - LT') }}
                                     @endif
                                 </td>
                                 <td class="text-right">
