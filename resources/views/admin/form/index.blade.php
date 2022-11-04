@@ -1,4 +1,5 @@
 @extends('layouts.app', ['class' => 'bg-neutral'])
+@inject('thaiDateHelper', 'App\Services\ThaiDateFormat')
 @section('content')
     @include('layouts.headers.cards')
     <div class="container-fluid mt--9">
@@ -36,7 +37,7 @@
                                     <td>{{ $row->borrow_user->firstname}}</td>
                                     <td>{{ $row->borrow_user->lastname}}</td>
                                     <td>
-                                        {{\Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('L - LT')}}
+                                        {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                     </td>
                                     @if($row->borrow_status=="2")
                                         <td class="align-middle text-sm">
