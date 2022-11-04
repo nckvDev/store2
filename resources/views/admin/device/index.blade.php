@@ -52,11 +52,11 @@
                                     <td>{{ $row->device_num }}</td>
                                     <td>{{ $row->device_name }}</td>
                                     @if($row->image == 0)
-                                        <td><img src="{{asset('images/imageNull/null.png')}}"
+                                        <td><img src="{{asset('images/imageNull/null.png')}}" alt="image null"
                                                  class="rounded mx-auto d-block "
                                                  width="80" height="80"/></td>
                                     @else
-                                        <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
+                                        <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block" alt="image device"
                                                  width="80"
                                                  height="80"/></td>
                                     @endif
@@ -140,9 +140,9 @@
         });
 
         $('#type').change(function () {
-            if ($(this).val() != '') {
-                var select = $(this).val();
-                var _token = $('input[name="_token"]').val();
+            if ($(this).val() !== '') {
+                let select = $(this).val();
+                let _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{route('device.fetch')}}",
                     method: "POST",
@@ -151,7 +151,6 @@
                         _token: _token
                     },
                     success: function (result) {
-                        // $('.stockname').html(result);
                         {
                             $("#datalist").html(result)
                         }

@@ -40,16 +40,24 @@
                                 @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4)
                                     <tr>
                                         <td>
-                                            @foreach($row->borrow_list_id as $item)
-                                                {{ $item }}
+                                            @foreach($row->borrow_list_id as $number => $id)
+                                                @if($number % 2 !== 0)
+                                                    -
+                                                @endif
+                                                {{ $id }}
                                             @endforeach
                                         </td>
                                         <td>
-                                            @foreach($row->borrow_name as $item)
-                                                {{ $item }}
+                                            @foreach($row->borrow_name as $number => $name)
+                                                @if($number % 2 !== 0)
+                                                     -
+                                                @endif
+                                                {{ $name }}
                                             @endforeach
                                         </td>
-                                        <td>{{ $row->created_at }}</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($row->created_at)->locale('th')->isoFormat('L - LT') }}
+                                        </td>
                                         @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
