@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user()->id;
-        $borrowList = Borrow::where(['user_id' => $user])->get();
+        $borrowList = Borrow::where(['user_id' => $user])->latest()->get();
         return view('users.student.dashboard', compact('borrowList'));
     }
 
