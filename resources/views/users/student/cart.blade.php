@@ -44,7 +44,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-dark w-100">
+                                    <button class="btn btn-default w-100">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>

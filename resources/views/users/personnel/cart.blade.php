@@ -36,14 +36,14 @@
                                         <option value="">เลือกประเภทพัสดุ</option>
                                         @foreach($types as $item)
                                             <option
-                                                value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
+                                                value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : null }} >
                                                 {{$item->type_detail}}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-dark w-100">
+                                    <button class="btn  btn-default w-100">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
