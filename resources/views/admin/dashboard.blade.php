@@ -65,18 +65,19 @@
                                         <td>{{ $row->stock_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image null"/>
+                                            </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80"
-                                                     height="80"/>
+                                                     height="80" alt="image stock"/>
                                                 @endif
                                             </td>
 
                                             <td class="text-center">{{ $row->stock_amount }}</td>
 
                                             <td>{{ $row->stock_type->type_detail }}</td>
-                                            @if($row->stock_status == 0)
+                                            @if($row->stock_status == 0 || $row->stock_status == 3)
                                                 <td>
                                                     <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
                                                     </div>
@@ -137,17 +138,18 @@
                                         <td>{{ $row->device_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image devices"/>
+                                            </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80"
-                                                     height="80"/>
+                                                     height="80" alt="image devices"/>
                                                 @endif
                                             </td>
                                             <td class="text-center">{{ $row->device_amount }}</td>
                                             <td>{{ $row->device_year }}</td>
                                             <td>{{ $row->device_type->type_detail }}</td>
-                                            @if($row->device_status == 0)
+                                            @if($row->device_status == 0 || $row->stock_status == 3)
                                                 <td>
                                                     <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
                                                     </div>
@@ -207,11 +209,12 @@
                                         <td>{{ $row->disposable_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80"/></td>
+                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image null"/>
+                                            </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
                                                      width="80"
-                                                     height="80"/>
+                                                     height="80" alt="image disposable"/>
                                                 @endif
                                             </td>
                                             <td class="text-center">{{ $row->disposable_amount }}</td>

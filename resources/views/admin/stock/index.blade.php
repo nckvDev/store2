@@ -55,7 +55,7 @@
                                              width="80"
                                              height="80"/></td>
                                     <td class="text-center">{{ $row->stock_amount }}</td>
-                                    @if($row->stock_status == 0)
+                                    @if($row->stock_status == 0 || $row->stock_status == 3)
                                         <td>
                                             <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
                                         </td>
@@ -140,7 +140,6 @@
                         _token: _token
                     },
                     success: function (result) {
-                        // $('.stockname').html(result);
                         {
                             $("#datalist").html(result)
                         }

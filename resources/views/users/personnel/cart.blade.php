@@ -31,21 +31,22 @@
                         <form action="{{ route('personnel_borrow.list') }}" method="GET">
                             <h3>ประเภท</h3>
                             <div class="row">
-                            <div class="col-sm-10 mb-3">
-                                <select class="form-control" name="type" id="data_type">
-                                    <option value="">เลือกประเภทพัสดุ</option>
-                                    @foreach($types as $item)
-                                        <option value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
-                                            {{$item->type_detail}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-dark w-100">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
+                                <div class="col-sm-10 mb-3">
+                                    <select class="form-control" name="type" id="data_type">
+                                        <option value="">เลือกประเภทพัสดุ</option>
+                                        @foreach($types as $item)
+                                            <option
+                                                value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
+                                                {{$item->type_detail}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-dark w-100">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
                         </form>
 
@@ -75,7 +76,8 @@
                                                     <td><input type="text" value="{{ $item->device_name }}" name="name"
                                                                readonly>
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly alt="image device">
+                                                    <td><img src="{{ $item->image }}" width="50" height="50" readonly
+                                                             alt="image device">
                                                     </td>
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
@@ -108,7 +110,8 @@
                                                            readonly>
                                                 </td>
                                                 <td>
-                                                    <img src="{{ $item->image }}" width="50" height="50" readonly alt="image device">
+                                                    <img src="{{ $item->image }}" width="50" height="50" readonly
+                                                         alt="image device">
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                 <input type="hidden" value="{{ $item->image }}" name="image" readonly>
@@ -140,7 +143,8 @@
                                                     <td><input type="text" value="{{ $item->stock_name }}" name="name"
                                                                readonly>
                                                     </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly alt="image stock">
+                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly
+                                                             alt="image stock">
                                                     </td>
                                                     <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                     <input type="hidden" value="{{ $item->image }}" name="image"
@@ -170,7 +174,8 @@
                                                 <td><input type="text" value="{{ $item->stock_name }}" name="name"
                                                            readonly>
                                                 </td>
-                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly alt="image stock">
+                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly
+                                                         alt="image stock">
                                                 </td>
                                                 <input type="hidden" value="{{ $item->id }}" name="price" readonly>
                                                 <input type="hidden" value="{{ $item->image }}" name="image" readonly>
@@ -204,7 +209,8 @@
                                                        readonly>
                                             </td>
                                             <td>
-                                                <img src="{{ $item->image }}" width="50" height="50" readonly alt="image disposable">
+                                                <img src="{{ $item->image }}" width="50" height="50" readonly
+                                                     alt="image disposable">
                                             </td>
                                             {{--                                            <input type="hidden" value="1" name="price" readonly>--}}
                                             <input type="hidden" value="{{ $item->image }}" name="image" readonly>
