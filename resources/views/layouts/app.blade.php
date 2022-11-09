@@ -29,6 +29,7 @@
         <!-- Extra details for Live View on GitHub Pages -->
 
         <!-- Icons -->
+        <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
         <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
         <!-- Argon CSS -->
@@ -36,10 +37,8 @@
         <link rel="stylesheet" href="assets/vendor/select2/dist/css/select2.min.css">
         <!-- SweetAlert2 -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
         <!-- CheckBox -->
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     </head>

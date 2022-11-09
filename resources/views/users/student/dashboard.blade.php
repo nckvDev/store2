@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.headers.cards')
 
-    <div class="container-fluid mt--9">
+    <div class="container-fluid mt--9 mb-4">
         <div class="row">
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
@@ -41,23 +41,18 @@
                                     <tr>
                                         <td>
                                             @foreach($row->borrow_list_id as $number => $id)
-                                                @if($number % 2 !== 0)
-                                                    -
-                                                @endif
-                                                {{ $id }}
+                                               <h5> {{ $id }} </h5>
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($row->borrow_name as $number => $name)
-                                                @if($number % 2 !== 0)
-                                                     -
-                                                @endif
-                                                {{ $name }}
+                                                <h5> {{ $name }} </h5>
                                             @endforeach
                                         </td>
                                         <td>
-                                            {{ $thaiDateHelper->DateFormat($row->created_at) }}
+                                             {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                         </td>
+
                                         @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
@@ -81,22 +76,10 @@
                                                     <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
                                                 @endforeach
                                                 <input type="hidden" name="borrow_status" value="4">
-                                                @if($row->borrow_status=="2")
-{{--                                                    @foreach($row->borrow_amount as $amount)--}}
-{{--                                                        @if($amount <= 1)--}}
-{{--                                                            <button type="submit" class="btn btn-primary btn-sm ">--}}
-{{--                                                                ส่งคืน--}}
-{{--                                                            </button>--}}
-{{--                                                        @else--}}
-{{--                                                            <button type="submit" class="btn btn-primary btn-sm ">--}}
-{{--                                                                ส่งคืน--}}
-{{--                                                            </button>--}}
-{{--                                                        @endif--}}
-{{--                                                    @endforeach--}}
-                                                    <button type="submit" class="btn btn-primary btn-sm ">
-                                                        ส่งคืน
-                                                    </button>
-                                                @endif
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-sm" {{$row->borrow_status != 2 ? 'disabled' : null}} >
+                                                    ส่งคืน
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

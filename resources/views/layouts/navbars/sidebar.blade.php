@@ -56,17 +56,17 @@
                     <div class="col-6 collapse-brand">
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
                         <a href="{{ route('stock') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" alt="logo brand">
                         </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'personnel')
                         <a href="{{ route('personnel_dashboard') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" alt="logo brand">
                         </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role == 'student')
                         <a href="{{ route('student_dashboard') }}">
-                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png">
+                            <img src="{{ asset('argon') }}/img/brand/brand-logo-2.png" alt="logo brand">
                         </a>
                         @endif
                     </div>

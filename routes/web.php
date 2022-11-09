@@ -184,7 +184,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('student_borrow/borrow', [\App\Http\Controllers\Student\CartController::class, 'addToCart'])->name('student_borrow.add');
         Route::post('student_borrow/update-cart', [\App\Http\Controllers\Student\CartController::class, 'updateCart'])->name('student_borrow.update');
         Route::post('student_borrow/remove', [\App\Http\Controllers\Student\CartController::class, 'removeCart'])->name('student_borrow.remove');
-        Route::post('student_borrow/clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('student_borrow.clear');
+        Route::get('student_borrow/clear', [\App\Http\Controllers\Student\CartController::class, 'clearAllCart'])->name('student_borrow.clear');
         Route::post('student_borrow/save', [\App\Http\Controllers\Student\CartController::class, 'saveCart'])->name('student_borrow.save');
         Route::post('student_borrow/fetch', [\App\Http\Controllers\Student\CartController::class, 'fetch'])->name('student_borrow.fetch');
 

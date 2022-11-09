@@ -75,16 +75,15 @@
                                                         </div>
                                                         <div class="mb-4 flex-row justify-content-between">
                                                             <span class="text-gray">
-                                                                {{
-                                                                    \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
-                                                                }}
+                                                                 {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
+{{--                                                                {{--}}
+{{--                                                                    \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')--}}
+{{--                                                                }}--}}
                                                             </span>
                                                                 -
                                                             <span class="text-danger">
-                                                                {{
-                                                                    \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
-                                                                }}
-                                                                </span>
+                                                                   {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
+                                                            </span>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4">
@@ -153,7 +152,7 @@
                                                             <input type="hidden" name="borrow_status" value="3">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button class="btn btn-primary btn-sm" type="submit"> ตกลง </button>
+                                                            <button class="btn btn-primary btn-sm" type="submit" id="description-submit"> ตกลง </button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -235,6 +234,16 @@
         function submitCheckbox() {
             checkbox.checked = true;
         }
+
+        $(function () {
+            $('#description-submit').prop('disabled', true);
+            $('#description').keyup(function () {
+                let value = $(this).val()
+                if(value.length !== 0) {
+                    $('#description-submit').prop('disabled', false);
+                }
+            })
+        });
     </script>
 
 @endpush

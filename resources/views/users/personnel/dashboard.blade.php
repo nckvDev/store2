@@ -41,18 +41,12 @@
                                     <tr>
                                         <td>
                                             @foreach($row->borrow_list_id as $number => $id)
-                                                @if($number % 2 !== 0)
-                                                    -
-                                                @endif
-                                                {{ $id }}
+                                                <h5> {{ $id }} </h5>
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach($row->borrow_name as $number => $name)
-                                                @if($number % 2 !== 0)
-                                                    -
-                                                @endif
-                                                {{ $name }}
+                                                <h5> {{ $name }} </h5>
                                             @endforeach
                                         </td>
                                         <td>
