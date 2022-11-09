@@ -109,24 +109,18 @@
                                                         </div>
                                                         <div class="mb-4 flex-row justify-content-between">
                                                            <span class="text-gray">
-                                                              {{
-                                                                 \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')
-                                                              }}
+                                                               {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
                                                            </span>
                                                             -
                                                             <span class="text-danger">
-                                                               {{
-                                                                  \Carbon\Carbon::parse($row->end_at)->locale('th')->isoFormat('LLL')
-                                                               }}
+                                                                 {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
                                                             </span>
                                                         </div>
                                                         @if($row->borrow_status == 4)
                                                             <div class="mb-4 ">
                                                                 วันที่ส่งคืน
                                                                 <span class="text-success">
-                                                                        {{
-                                                                            \Carbon\Carbon::parse($row->updated_at)->locale('th')->isoFormat('LLL')
-                                                                        }}
+                                                                     {{ $thaiDateHelper->DateThaiFormat($row->updated_at) }}
                                                                 </span>
                                                             </div>
                                                         @endif

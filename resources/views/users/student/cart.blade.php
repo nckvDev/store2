@@ -266,6 +266,8 @@
                                                 </tbody>
                                             @endforeach
                                         </table>
+                                        <a class="btn btn-outline-danger btn-sm mt-4"
+                                           href="{{ route('student_borrow.clear') }}"> ลบทั้งหมด </a>
                                         <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                     </form>
 
