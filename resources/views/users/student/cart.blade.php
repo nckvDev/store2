@@ -37,7 +37,7 @@
                                         <option value="">เลือกประเภทพัสดุ</option>
                                         @foreach($types as $item)
                                             <option
-                                                value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : '' }} >
+                                                value="{{$item->id}}" {{ old('type') == $item->id ? 'selected' : null }} >
                                                 {{$item->type_detail}}
                                             </option>
                                         @endforeach
@@ -61,7 +61,7 @@
                                     <th>เลือก</th>
                                 </tr>
                                 </thead>
-                                <tbody id="datalist">
+                                <tbody>
                                 @foreach ($stocks as $item)
                                     @if($addData)
                                         @if(!in_array($item->stock_num, $addData))
@@ -335,7 +335,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
                 "sFilterInput": "form-control form-control-sm",
