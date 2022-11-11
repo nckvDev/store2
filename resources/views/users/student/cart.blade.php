@@ -44,7 +44,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input class="form-control w-100" name="name">
+                                    <input class="form-control w-100" name="name" placeholder="ค้นหาชื่อ..">
                                 </div>
                                 <div class="col-sm-2">
                                     <button class="btn btn-default w-100">
