@@ -185,6 +185,12 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('admin_dashboard*') ? 'active text-orange' : '' }}"
+                       href="{{ route('admin_dashboard') }}">
+                        <i class="ni ni-archive-2 text-orange"></i> {{ __('หน้าแรก') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link {{ request()->is('prefix*') ? 'active text-blue' : '' }}"
                         href="{{ route('prefix') }}">
                         <i class="ni ni-badge text-blue"></i> {{ __('คำนำหน้า') }}
@@ -193,7 +199,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-dark' : '' }}"
                         href="{{ route('type') }}">
-                        <i class="ni ni-archive-2 text-dark"></i> {{ __('ประเภท') }}
+                        <i class="ni ni-books text-dark"></i> {{ __('ประเภท') }}
                     </a>
                 </li>
                 <li class="nav-item ">

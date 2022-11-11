@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col-xl-12 mb-4">
-                <div class="card bg-secondary shadow">
+                <div class="card shadow">
                     <div class="card-body">
                         <h3>ประเภท</h3>
                         <div class="form-group">

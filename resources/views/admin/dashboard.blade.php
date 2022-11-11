@@ -21,7 +21,7 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-xl-12 ">
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">

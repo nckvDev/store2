@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col-xl-12 mb-4">
-            <div class="card bg-secondary shadow">
+            <div class="card shadow">
                 <div class="card-body">
                     <table id="table_id" class="">
                         <thead>
