@@ -48,7 +48,7 @@
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ url('/group/edit/'.$row->id) }}">แก้ไข</a>
                                             <a class="dropdown-item delete-confirm"
-                                                href="/group/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                href="{{ url('/group/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>

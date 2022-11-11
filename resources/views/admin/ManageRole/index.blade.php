@@ -59,7 +59,7 @@
                                             <a class="dropdown-item"
                                                 href="{{ url('/manage-role/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                             <a class="dropdown-item delete-confirm"
-                                                href="/manage-role/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                href="{{ url('/manage-role/delete/'.$row->id) }}">ลบข้อมูล</a>
                                         </div>
                                     </div>
                                 </td>

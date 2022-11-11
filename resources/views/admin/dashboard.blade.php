@@ -104,7 +104,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -177,7 +177,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/device/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -244,7 +244,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>

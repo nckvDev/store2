@@ -94,7 +94,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>
