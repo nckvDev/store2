@@ -16,20 +16,33 @@ class CartController extends Controller
 {
     public function cartList(Request $request)
     {
-        $select_id = intval($request->input('type'));
+        $select_id = intval($request['type']);
+        $searchName = $request['name'];
 
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $devices = Device::where('device_status', 0)->where('defective_device', 0)->get();
-        $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
+        $devices = Device::whereIn('device_status', [0, 3])->where('defective_device', 0)->get();
+        $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
 
-        if ($select_id) {
-            $devices = Device::where('device_status', 0)->where('defective_device', 0)->where('type_id', $select_id)->get();
-            $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->where('type_id', $select_id)->get();
+        if ($select_id != null) {
+            $devices = Device::whereIn('device_status', [0, 3])->where('defective_device', 0)->where('type_id', $select_id)->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->get();
             $disposables = Disposable::where('type_id', $select_id)->get();
+        }
+
+        if ($searchName != null) {
+            $devices = Device::whereIn('device_status', [0, 3])->where('defective_device', 0)->where('device_name', 'LIKE', "%" . $searchName . "%")->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
+        }
+
+        if ($select_id != null && $searchName != null) {
+            $devices = Device::whereIn('device_status', [0, 3])->where('defective_device', 0)->where('type_id', $select_id)->where('device_name', 'LIKE', "%" . $searchName . "%")->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('type_id', $select_id)->where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
 
         return view('users/personnel/cart', compact('cartItems', 'devices', 'stocks', 'disposables', 'types'));
