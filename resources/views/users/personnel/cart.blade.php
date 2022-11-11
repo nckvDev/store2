@@ -31,7 +31,7 @@
                         <form action="{{ route('personnel_borrow.list') }}" method="GET">
                             <h3>ประเภท</h3>
                             <div class="row">
-                                <div class="col-sm-10 mb-3">
+                                <div class="col-sm-5 mb-3">
                                     <select class="form-control" name="type" id="data_type">
                                         <option value="">เลือกประเภทพัสดุ</option>
                                         @foreach($types as $item)
@@ -41,6 +41,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input class="form-control w-100" name="name">
                                 </div>
                                 <div class="col-sm-2">
                                     <button class="btn  btn-default w-100">

@@ -17,17 +17,28 @@ class CartController extends Controller
     public function cartList(Request $request)
     {
         $select_id = intval($request->input('type'));
+        $searchName = $request['name'];
 
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->get();
+        $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
 
-        if ($select_id) {
-            $stocks = Stock::where('stock_status', 0)->where('defective_stock', 0)->where('type_id', $select_id)->get();
+        if ($select_id != null) {
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->get();
             $disposables = Disposable::where('type_id', $select_id)->get();
+        }
+
+        if ($searchName != null) {
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
+        }
+
+        if ($select_id != null && $searchName != null) {
+            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('type_id', $select_id)->where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
         return view('users/student/cart', compact('cartItems', 'stocks', 'disposables', 'types'));
     }
