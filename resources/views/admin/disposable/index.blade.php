@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col-xl-12 mb-4">
-                <div class="card bg-secondary shadow">
+                <div class="card shadow">
                     <div class="card-body">
                         <h3>ประเภท</h3>
                         <div class="form-group">
@@ -94,7 +94,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>

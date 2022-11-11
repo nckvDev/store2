@@ -48,7 +48,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/prefix/edit/'.$row->id) }}">แก้ไข</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/prefix/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/prefix/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>

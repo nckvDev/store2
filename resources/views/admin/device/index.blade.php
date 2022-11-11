@@ -23,7 +23,7 @@
         </div>
         <div class="row">
             <div class="col-xl-12 mb-4">
-                <div class="card bg-secondary shadow">
+                <div class="card shadow">
                     <div class="card-body">
                         <h3>ประเภท</h3>
                         <div class="mb-3">
@@ -84,7 +84,7 @@
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                 <a class="dropdown-item" href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/device/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>

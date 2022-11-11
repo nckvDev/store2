@@ -21,7 +21,7 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-xl-12 ">
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
@@ -104,7 +104,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/stock/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/stock/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/stock/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -177,7 +177,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/device/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -244,7 +244,7 @@
                                                         <a class="dropdown-item"
                                                            href="{{ url('/disposable/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
                                                         <a class="dropdown-item delete-confirm"
-                                                           href="/disposable/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                           href="{{ url('/disposable/delete/'.$row->id) }}">ลบข้อมูล</a>
                                                     </div>
                                                 </div>
                                             </td>

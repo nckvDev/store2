@@ -47,7 +47,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/department/edit/'.$row->id) }}">แก้ไข</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/department/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/department/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>

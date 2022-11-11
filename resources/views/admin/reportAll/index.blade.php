@@ -19,11 +19,15 @@
         <div class="col-xl-12 mb-4">
             <div class="card bg-secondary shadow">
                 <div class="card-body">
-                    <table id="table_id" class="">
+                    <table id="table_id1" class="table">
                         <thead>
                             <tr>
-                                <th style="width:50%">หัวข้อ</th>
-                                <th style="width:50%">ข้อมูล</th>
+                                <th>
+                                    <h4> หัวข้อ </h4>
+                                </th>
+                                <th>
+                                    <h4> ข้อมูล </h4>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
