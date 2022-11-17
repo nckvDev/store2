@@ -65,7 +65,8 @@
                                         <td>{{ $row->stock_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image null"/>
+                                                     class="rounded mx-auto d-block " width="80" height="80"
+                                                     alt="image null"/>
                                             </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
@@ -73,24 +74,34 @@
                                                      height="80" alt="image stock"/>
                                                 @endif
                                             </td>
-
                                             <td class="text-center">{{ $row->stock_amount }}</td>
-
                                             <td>{{ $row->stock_type->type_detail }}</td>
-                                            @if($row->stock_status == 0 || $row->stock_status == 3)
+                                            @if(($row->stock_status == 0 || $row->stock_status == 3) && ($row->defective_stock == 0))
                                                 <td>
-                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
+                                                    <div class="rounded text-white bg-gradient-green text-center">
+                                                        พร้อมใช้งาน
                                                     </div>
                                                 </td>
-                                            @elseif($row->stock_status == 1)
+                                            @elseif($row->defective_stock == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ
+                                                    <div class="rounded text-white bg-gradient-red text-center">ชำรุด
                                                     </div>
                                                 </td>
-                                            @elseif($row->stock_status == 2)
+                                            @endif
+                                            @if($row->stock_status == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                                    <div class="rounded text-white bg-gradient-orange text-center">
+                                                        รออนุมัติ
+                                                    </div>
                                                 </td>
+                                            @endif
+                                            @if($row->stock_status == 2)
+                                                <td>
+                                                    <div class="rounded text-white bg-gradient-primary text-center">
+                                                        ถูกยืม
+                                                    </div>
+                                                </td
+                                                >
                                             @endif
                                             <td class="text-right">
                                                 <div class="dropdown">
@@ -138,7 +149,8 @@
                                         <td>{{ $row->device_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image devices"/>
+                                                     class="rounded mx-auto d-block " width="80" height="80"
+                                                     alt="image devices"/>
                                             </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
@@ -149,19 +161,30 @@
                                             <td class="text-center">{{ $row->device_amount }}</td>
                                             <td>{{ $row->device_year }}</td>
                                             <td>{{ $row->device_type->type_detail }}</td>
-                                            @if($row->device_status == 0 || $row->stock_status == 3)
+                                            @if(($row->device_status == 0 || $row->device_status == 3) && ($row->defective_device == 0))
                                                 <td>
-                                                    <div class="rounded text-white bg-green text-center">พร้อมใช้งาน
+                                                    <div class="rounded text-white bg-gradient-green text-center">
+                                                        พร้อมใช้งาน
                                                     </div>
                                                 </td>
-                                            @elseif($row->device_status == 1)
+                                            @elseif($row->defective_device == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-orange text-center">รออนุมัติ
+                                                    <div class="rounded text-white bg-gradient-red text-center">ชำรุด
                                                     </div>
                                                 </td>
-                                            @elseif($row->device_status == 2)
+                                            @endif
+                                            @if($row->device_status == 1)
                                                 <td>
-                                                    <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                                    <div class="rounded text-white bg-gradient-orange text-center">
+                                                        รออนุมัติ
+                                                    </div>
+                                                </td>
+                                            @endif
+                                            @if($row->device_status == 2)
+                                                <td>
+                                                    <div class="rounded text-white bg-gradient-primary text-center">
+                                                        ถูกยืม
+                                                    </div>
                                                 </td>
                                             @endif
                                             <td class="text-center">
@@ -209,7 +232,8 @@
                                         <td>{{ $row->disposable_name }}</td>
                                         @if($row->image == 0)
                                             <td><img src="{{asset('images/imageNull/null.png')}}"
-                                                     class="rounded mx-auto d-block " width="80" height="80" alt="image null"/>
+                                                     class="rounded mx-auto d-block " width="80" height="80"
+                                                     alt="image null"/>
                                             </td>
                                         @else
                                             <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block "
