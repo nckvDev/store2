@@ -52,7 +52,7 @@
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#Modal{{($row->id)}}">
-                                            จัดการสถานะ
+                                            รายละเอียด
                                         </button>
 
                                         <!-- Modal -->
@@ -103,22 +103,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <form action="{{route('update',$row->id)}}" method="post">--}}
-{{--                                                            @csrf--}}
-{{--                                                            <input type="hidden" name="borrow_status" value="1">--}}
-{{--                                                            <button type="submit"--}}
-{{--                                                                    class="btn btn-primary btn-sm">อนุมัติ--}}
-{{--                                                            </button>--}}
-{{--                                                        </form>--}}
-{{--                                                        <form action="{{route('update',$row->id)}}" method="post">--}}
-{{--                                                            @csrf--}}
-{{--                                                            <input type="hidden" name="borrow_status" value="0">--}}
-{{--                                                            <button type="submit"--}}
-{{--                                                                    class="btn btn-danger btn-sm">ไม่อนุมัติ--}}
-{{--                                                            </button>--}}
-{{--                                                        </form>--}}
-{{--                                                    </div>--}}
                                                 </div>
                                             </div>
                                         </div>

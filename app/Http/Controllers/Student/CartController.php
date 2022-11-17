@@ -106,8 +106,8 @@ class CartController extends Controller
                 'end_at' => ['required'],
             ],
             [
-                'started_at.required' => "กรุณาป้อนวันที่ยืมด้วยครับ",
-                'end_at.required' => "กรุณาป้อนวันที่คืนด้วยครับ",
+                'started_at.required' => "กรุณาป้อนวันที่ยืม",
+                'end_at.required' => "กรุณาป้อนวันที่คืน",
             ]
         );
 

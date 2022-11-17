@@ -33,12 +33,13 @@
                                     <th scope="col">รายการ</th>
                                     <th scope="col">เวลา</th>
                                     <th scope="col">สถานะ</th>
+                                    <th scope="col">หมายเหตุ</th>
                                     <th scope="col">ส่งคืน</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($borrowList as $row)
-                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4)
+                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 3 || $row->borrow_status == 4)
                                         <tr>
                                             <td>
                                                 @foreach($row->borrow_list_id as $number => $id)
@@ -64,11 +65,23 @@
                                                     <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                                 </td>
                                             @endif
+                                            @if($row->borrow_status=="3")
+                                                <td class="align-middle text-sm">
+                                                    <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
+                                                </td>
+                                            @endif
                                             @if($row->borrow_status=="4")
                                                 <td class="align-middle text-sm">
                                                     <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
                                                 </td>
                                             @endif
+                                            <td class="align-middle">
+                                                @if($row->description)
+                                                    <span class="text-orange m-0"> {{ $row->description }}</span>
+                                                @else
+                                                    <span> - </span>
+                                                @endif
+                                            </td>
                                             <td class="align-middle">
                                                 <form action="{{ url('/personnel_dashboard/update/'.$row->id) }}"
                                                       method="post">
