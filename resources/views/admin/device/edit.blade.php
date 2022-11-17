@@ -114,12 +114,21 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="defective_device">{{ __('ชำรุด') }}</label>
-                                        <input type="number" name="defective_device"
-                                            value="{{ $devices->defective_device }}"
-                                            class="form-control form-control-alternative{{ $errors->has('defective_device') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
+{{--                                        <label class="form-control-label"--}}
+{{--                                            for="defective_device">{{ __('ชำรุด') }}</label>--}}
+{{--                                        <input type="number" name="defective_device"--}}
+{{--                                            value="{{ $devices->defective_device }}"--}}
+{{--                                            class="form-control form-control-alternative{{ $errors->has('defective_device') ? ' is-invalid' : '' }}  placeholder="--}}
+{{--                                            {{ __('ประเภท') }}">--}}
+
+                                        <label class="form-control-label" for="defective_device">{{ __('สถานะ') }}</label>
+                                        <select
+                                            class="form-control form-control-alternative{{ $errors->has('defective_device') ? ' is-invalid' : '' }} "
+                                            name="defective_device">
+                                            {{--                                                <option>เลือก...</option>--}}
+                                            <option value="0" {{old('defective_device', $devices->defective_device ) == "0" ? 'selected' : null}} >ปกติ</option>
+                                            <option value="1" {{old('defective_device', $devices->defective_device ) == "1" ? 'selected' : null}} >ชำรุด</option>
+                                        </select>
                                         @if ($errors->has('defective_device'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('defective_device') }}</strong>
@@ -156,6 +165,18 @@
                         timer: 1500
                     })
                     </script>
+                    @endif
+
+                    @if (session('update'))
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'อัพเดทเรียบร้อย',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        </script>
                     @endif
                 </div>
             </div>

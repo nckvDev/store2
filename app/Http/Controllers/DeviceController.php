@@ -80,13 +80,12 @@ class DeviceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'device_num' => 'required|unique:devices',
+            'device_num' => 'required',
             'device_name' => 'required|max:255',
             'image' => 'mimes:jpg,jpeg,png'
         ],
             [
                 'device_num.required' => "กรุณาป้อนรหัสอุปกรณ์ด้วยครับ",
-                'device_num.unique' => 'มีรหัสนี้ในฐานข้อมูลแล้ว',
                 'device_name.required' => 'กรุณาป้อนชื่อภาพด้วยครับ',
                 'device_name.max' => 'ห้ามป้อนเกิน 255 ตัวอักษร',
                 'image.mimes' => 'นามสกุลไฟล์ต้องเป็น jpg jpeg png'
@@ -110,6 +109,7 @@ class DeviceController extends Controller
                 'device_amount' => $request['device_amount'],
                 'image' => $full_path,
                 'device_year' => $request['device_year'],
+                'defective_device' => $request['defective_device'],
                 'created_at' => Carbon::now()
             ]);
 
@@ -121,12 +121,12 @@ class DeviceController extends Controller
                     'image' => $full_path,
                 ]);
                 $deviceImage->move($upload_location, $imgName);
-                return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+                return redirect()->route('device')->with('update', 'อัพเดทเรียบร้อย');
             }
             unlink($old_image);
 
             $deviceImage->move($upload_location, $imgName);
-            return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+            return redirect()->route('device')->with('update', 'อัพเดทเรียบร้อย');
         } else {
             Device::find($id)->update([
                 'device_num' => $request['device_num'],
@@ -134,9 +134,10 @@ class DeviceController extends Controller
                 'type_id' => $request['type_id'],
                 'device_amount' => $request['device_amount'],
                 'device_year' => $request['device_year'],
+                'defective_device' => $request['defective_device'],
                 'created_at' => Carbon::now()
             ]);
-            return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
+            return redirect()->route('device')->with('update', 'อัพเดทเรียบร้อย');
         }
     }
 

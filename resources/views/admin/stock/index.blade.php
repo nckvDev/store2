@@ -55,18 +55,25 @@
                                              width="80"
                                              height="80"/></td>
                                     <td class="text-center">{{ $row->stock_amount }}</td>
-                                    @if($row->stock_status == 0 || $row->stock_status == 3)
+                                    @if(($row->stock_status == 0 || $row->stock_status == 3) && ($row->defective_stock == 0))
                                         <td>
-                                            <div class="rounded text-white bg-green text-center">พร้อมใช้งาน</div>
+                                            <div class="rounded text-white bg-gradient-green text-center">พร้อมใช้งาน</div>
                                         </td>
-                                    @elseif($row->stock_status == 1)
+                                    @elseif($row->defective_stock == 1)
                                         <td>
-                                            <div class="rounded text-white bg-orange text-center">รออนุมัติ</div>
+                                            <div class="rounded text-white bg-gradient-red text-center">ชำรุด</div>
                                         </td>
-                                    @elseif($row->stock_status == 2)
+                                    @endif
+                                    @if($row->stock_status == 1)
                                         <td>
-                                            <div class="rounded text-white bg-red text-center">ถูกยืม</div>
+                                            <div class="rounded text-white bg-gradient-orange text-center">รออนุมัติ</div>
                                         </td>
+                                        @endif
+                                    @if($row->stock_status == 2)
+                                        <td>
+                                            <div class="rounded text-white bg-gradient-primary text-center">ถูกยืม</div>
+                                        </td
+                                        >
                                     @endif
                                     <td class="text-center">
                                         <div class="dropdown">
