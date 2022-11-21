@@ -18,7 +18,6 @@
                 <div class="card shadow">
                     <div class="table-responsive">
                         <div class="card-body">
-                            {{--                            <table class="table align-items-center table-flush">--}}
                             <table id="borrow-student" class="table">
                                 <thead class="thead-light">
                                 <tr>
