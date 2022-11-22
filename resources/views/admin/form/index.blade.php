@@ -14,8 +14,8 @@
         </div>
         <div class="row">
             <div class="col-xl-12 mb-4">
-                <div class="card shadow">
-                    <div class="card-body">
+                <div class="card shadow p-4">
+                    <div class="table-responsive">
                         <table id="table_id" class="">
                             <thead>
                             <tr>

@@ -34,70 +34,78 @@
                                 @endforeach
                             </select>
                         </div>
-                        <table id="table_id">
-                            <thead>
-                            <tr>
-                                <th>รหัสครุภัณฑ์</th>
-                                <th>ชื่อครุภัณฑ์</th>
-                                <th class="text-center">รูปภาพ</th>
-                                <th class="text-center">จำนวน</th>
-                                <th class="text-center">ปี</th>
-                                <th>สถานะ</th>
-                                <th class="text-center">จัดการข้อมูล</th>
-                            </tr>
-                            </thead>
-                            <tbody id="datalist">
-                            @foreach($devices as $row)
+                        <div class="table-responsive">
+                            <table id="table_id">
+                                <thead>
                                 <tr>
-                                    <td>{{ $row->device_num }}</td>
-                                    <td>{{ $row->device_name }}</td>
-                                    @if($row->image == 0)
-                                        <td><img src="{{asset('images/imageNull/null.png')}}" alt="image null"
-                                                 class="rounded mx-auto d-block "
-                                                 width="80" height="80"/></td>
-                                    @else
-                                        <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block" alt="image device"
-                                                 width="80"
-                                                 height="80"/></td>
-                                    @endif
-                                    <td class="text-center">{{ $row->device_amount }}</td>
-                                    <td class="text-center">{{ $row->device_year }}</td>
-                                    @if(($row->device_status == 0 || $row->device_status == 3) && ($row->defective_device == 0))
-                                        <td>
-                                            <div class="rounded text-white bg-gradient-green text-center">พร้อมใช้งาน</div>
-                                        </td>
-                                    @elseif($row->defective_device == 1)
-                                        <td>
-                                            <div class="rounded text-white bg-gradient-red text-center">ชำรุด</div>
-                                        </td>
-                                    @endif
-                                    @if($row->device_status == 1)
-                                        <td>
-                                            <div class="rounded text-white bg-gradient-orange text-center">รออนุมัติ</div>
-                                        </td>
-                                    @endif
-                                    @if($row->device_status == 2)
-                                        <td>
-                                            <div class="rounded text-white bg-gradient-primary text-center">ถูกยืม</div>
-                                        </td>
-                                    @endif
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
-                                                <a class="dropdown-item delete-confirm"
-                                                   href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>รหัสครุภัณฑ์</th>
+                                    <th>ชื่อครุภัณฑ์</th>
+                                    <th class="text-center">รูปภาพ</th>
+                                    <th class="text-center">จำนวน</th>
+                                    <th class="text-center">ปี</th>
+                                    <th>สถานะ</th>
+                                    <th class="text-center">จัดการข้อมูล</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody id="datalist">
+                                @foreach($devices as $row)
+                                    <tr>
+                                        <td>{{ $row->device_num }}</td>
+                                        <td>{{ $row->device_name }}</td>
+                                        @if($row->image == 0)
+                                            <td><img src="{{asset('images/imageNull/null.png')}}" alt="image null"
+                                                     class="rounded mx-auto d-block "
+                                                     width="80" height="80"/></td>
+                                        @else
+                                            <td><img src="{{ asset($row->image) }}" class="rounded mx-auto d-block"
+                                                     alt="image device"
+                                                     width="80"
+                                                     height="80"/></td>
+                                        @endif
+                                        <td class="text-center">{{ $row->device_amount }}</td>
+                                        <td class="text-center">{{ $row->device_year }}</td>
+                                        @if(($row->device_status == 0 || $row->device_status == 3) && ($row->defective_device == 0))
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-green text-center">
+                                                    พร้อมใช้งาน
+                                                </div>
+                                            </td>
+                                        @elseif($row->defective_device == 1)
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-red text-center">ชำรุด</div>
+                                            </td>
+                                        @endif
+                                        @if($row->device_status == 1)
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-orange text-center">
+                                                    รออนุมัติ
+                                                </div>
+                                            </td>
+                                        @endif
+                                        @if($row->device_status == 2)
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-primary text-center">ถูกยืม
+                                                </div>
+                                            </td>
+                                        @endif
+                                        <td class="text-center">
+                                            <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    <a class="dropdown-item" href="{{ url('/device/edit/'.$row->id) }}">แก้ไขข้อมูล</a>
+                                                    <a class="dropdown-item delete-confirm"
+                                                       href="{{ url('/device/delete/'.$row->id) }}">ลบข้อมูล</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

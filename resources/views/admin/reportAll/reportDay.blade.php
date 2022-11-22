@@ -51,93 +51,97 @@
                                 </div>
                             </div>
                         </form>
-                        <table id="table_id">
-                            <thead>
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>รหัสผู้ใช้งาน</th>
-                                <th>ชื่อ</th>
-                                <th>นามสกุล</th>
-                                <th>วันที่</th>
-                                <th>สถานะ</th>
-                                <th>รายละเอียด</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($report_days as $row)
+                        <div class="table-responsive">
+
+                            <table id="table_id">
+                                <thead>
                                 <tr>
-                                    <td>{{ $row->id}}</td>
-                                    <td>{{ $row->borrow_user->user_id}}</td>
-                                    <td>{{ $row->borrow_user->firstname}}</td>
-                                    <td>{{ $row->borrow_user->lastname}}</td>
-                                    <td>
-                                        {{ $thaiDateHelper->DateFormat($row->created_at) }}
-                                    </td>
-                                    @if($row->borrow_status == 1)
-                                        <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-warning">รอนุมัติ</span>
+                                    <th>ลำดับ</th>
+                                    <th>รหัสผู้ใช้งาน</th>
+                                    <th>ชื่อ</th>
+                                    <th>นามสกุล</th>
+                                    <th>วันที่</th>
+                                    <th>สถานะ</th>
+                                    <th>รายละเอียด</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($report_days as $row)
+                                    <tr>
+                                        <td>{{ $row->id}}</td>
+                                        <td>{{ $row->borrow_user->user_id}}</td>
+                                        <td>{{ $row->borrow_user->firstname}}</td>
+                                        <td>{{ $row->borrow_user->lastname}}</td>
+                                        <td>
+                                            {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                         </td>
-                                    @elseif($row->borrow_status == 2)
-                                        <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-success">อนุมัติ</span>
-                                        </td>
-                                    @elseif($row->borrow_status == 4)
-                                        <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
-                                        </td>
-                                    @else
-                                        <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
-                                        </td>
-                                    @endif
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#Modal{{($row->id)}}">
-                                            รายละเอียด
-                                        </button>
-                                        <div class="modal fade" id="Modal{{($row->id)}}" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel">รายการยืม</h3>
-                                                        <button class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
-                                                            <div class="row mb-2">
-                                                                <div class="col-lg-6">กำหนดการยืม</div>
-                                                                <div class="col-lg-6">กำหนดการคืน</div>
-                                                            </div>
-                                                            <div class="mb-3 flex-row justify-content-between">
+                                        @if($row->borrow_status == 1)
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-warning">รอนุมัติ</span>
+                                            </td>
+                                        @elseif($row->borrow_status == 2)
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-success">อนุมัติ</span>
+                                            </td>
+                                        @elseif($row->borrow_status == 4)
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
+                                            </td>
+                                        @else
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                    data-target="#Modal{{($row->id)}}">
+                                                รายละเอียด
+                                            </button>
+                                            <div class="modal fade" id="Modal{{($row->id)}}" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel">
+                                                                รายการยืม</h3>
+                                                            <button class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
+                                                                <div class="row mb-2">
+                                                                    <div class="col-lg-6">กำหนดการยืม</div>
+                                                                    <div class="col-lg-6">กำหนดการคืน</div>
+                                                                </div>
+                                                                <div class="mb-3 flex-row justify-content-between">
                                                                 <span class="text-gray">
                                                                       {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
                                                                 </span>
                                                                     -
-                                                                <span class="text-danger">
+                                                                    <span class="text-danger">
                                                                       {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
                                                                 </span>
-                                                            </div>
-                                                            @if($row->borrow_status == 4)
-                                                                <div class="mb-4 ">
-                                                                    วันที่ส่งคืน
-                                                                    <span class="text-success">
+                                                                </div>
+                                                                @if($row->borrow_status == 4)
+                                                                    <div class="mb-4 ">
+                                                                        วันที่ส่งคืน
+                                                                        <span class="text-success">
                                                                         {{ $thaiDateHelper->DateThaiFormat($row->updated_at) }}
                                                                     </span>
-                                                                </div>
-                                                            @endif
-                                                        @else
-                                                            <div class="mb-4 flex-row justify-content-between">
-                                                                <div class="text-danger">ไม่อนุมัติ</div>
+                                                                    </div>
+                                                                @endif
+                                                            @else
+                                                                <div class="mb-4 flex-row justify-content-between">
+                                                                    <div class="text-danger">ไม่อนุมัติ</div>
                                                                     <div>
                                                                         <span>หมายเหตุ :</span>
                                                                         <span>{{ $row->description }}</span>
                                                                     </div>
-                                                            </div>
-                                                        @endif
-                                                        <div class="row">
+                                                                </div>
+                                                            @endif
+                                                            <div class="row">
                                                                 <div class="col-lg-4">
                                                                     @foreach($row->borrow_list_id as $id)
                                                                         <div class="mb-2 text-primary"> {{ $id }} </div>
@@ -154,15 +158,17 @@
                                                                     @endforeach
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                         <div class="mt-2">
                             <a href="{{route('reportAll')}}" class="btn btn-success ">ย้อนกลับ</a>
                         </div>
