@@ -7,7 +7,7 @@
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">
-                        <h3 class="mb-0">{{ __('แก้ไขแผนก') }}</h3>
+                        <h3 class="mb-0">{{ __('แก้ไขผู้ใช้งาน') }}</h3>
                     </div>
                 </div>
                 <div class="card-body">

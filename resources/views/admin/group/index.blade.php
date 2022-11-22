@@ -137,8 +137,6 @@ $(function() {
     });
     $('#table_id').dataTable({
         "lengthChange": false,
-        "paginate": false,
-        "info": false,
         "language": {
             "search": "ค้นหา ",
             "lengthMenu": "จำนวนข้อมูลที่แสดง _MENU_",
