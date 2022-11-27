@@ -124,7 +124,7 @@ class StockController extends Controller
                 $stockImage->move($upload_location, $imgName);
                 return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
             }
-            unlink($old_image);
+//            unlink($old_image);
 
             $stockImage->move($upload_location, $imgName);
 

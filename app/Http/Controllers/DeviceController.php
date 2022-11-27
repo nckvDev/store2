@@ -123,7 +123,7 @@ class DeviceController extends Controller
                 $deviceImage->move($upload_location, $imgName);
                 return redirect()->route('device')->with('update', 'อัพเดทเรียบร้อย');
             }
-            unlink($old_image);
+//            unlink($old_image);
 
             $deviceImage->move($upload_location, $imgName);
             return redirect()->route('device')->with('update', 'อัพเดทเรียบร้อย');

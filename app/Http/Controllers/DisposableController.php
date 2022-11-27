@@ -142,7 +142,7 @@ class DisposableController extends Controller
                 $disposableImage->move($upload_location, $imgName);
                 return redirect()->route('device')->with('success', 'อัพเดทเรียบร้อย');
             }
-            unlink($old_image);
+//            unlink($old_image);
 
             $disposableImage->move($upload_location, $imgName);
 
