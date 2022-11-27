@@ -36,8 +36,6 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
             'image',
             'type_id',
             'defective_stock',
-            'created_at',
-            'updated_at',
         ];
     }
 
@@ -51,7 +49,7 @@ class StocksExport implements FromCollection, WithHeadings, WithMapping, WithCol
             $row->stock_amount,
             $row->stock_status,
             $row->image,
-            $row->stock_type->type_detail,
+            $row->stock_type->id,
             $row->defective_stock,
         ];
     }

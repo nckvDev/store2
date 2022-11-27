@@ -16,12 +16,12 @@ class StockImport implements ToModel,WithHeadingRow
     public function model(array $row)
     {
         return new Stock([
+            'stock_num' => $row['stock_num'],
             'stock_name' => $row['stock_name'],
             'stock_amount' => $row['stock_amount'],
             'stock_status' => $row['stock_status'],
             'image' => $row['image'],
             'type_id' => $row['type_id'],
-            'stock_num' => $row['stock_num'],
             'defective_stock' => $row['defective_stock'],
         ]);
     }
