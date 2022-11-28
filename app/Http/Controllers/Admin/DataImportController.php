@@ -43,9 +43,9 @@ class DataImportController extends Controller
         );
 
         MasterUser::insert([
-            'user_id' => $request->user_id,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'user_id' => $request['user_id'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
             'created_at' => Carbon::now()
         ]);
 
@@ -54,8 +54,8 @@ class DataImportController extends Controller
 
     public function edit($id)
     {
-        $masterusers = MasterUser::find($id);
-        return view('admin.ImportData.edit', compact('masterusers'));
+        $masterUsers = MasterUser::find($id);
+        return view('admin.ImportData.edit', compact('masterUsers'));
     }
 
     public function update(Request $request, $id)
@@ -71,10 +71,12 @@ class DataImportController extends Controller
         );
 
         MasterUser::find($id)->update([
-            'user_id' => $request->user_id
+            'user_id' => $request['user_id'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
         ]);
 
-        return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
+        return redirect()->route('data-import')->with('update', 'บันทึกข้อมูลเรียบร้อย');
     }
 
     public function delete($id)

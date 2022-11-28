@@ -111,7 +111,7 @@
             <script>
                 Swal.fire({
                     position: 'center',
-                    icon: 'error',
+                    icon: 'success',
                     title: 'ลบข้อมูลเรียบร้อย',
                     showConfirmButton: false,
                     timer: 1500
@@ -160,7 +160,7 @@
                                                 <a class="dropdown-item"
                                                    href="{{ url('/data-import/edit/'.$row->id) }}">แก้ไข</a>
                                                 <a class="dropdown-item delete-confirm"
-                                                   href="/data-import/delete/{{$row->id}}">ลบข้อมูล</a>
+                                                   href="{{ url('/data-import/delete/'.$row->id) }}">ลบข้อมูล</a>
                                             </div>
                                         </div>
                                     </td>
