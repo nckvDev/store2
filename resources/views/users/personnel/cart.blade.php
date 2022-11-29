@@ -261,7 +261,7 @@
                                                             <span class="input-group-text"><i
                                                                     class="ni ni-calendar-grid-58"></i></span>
                                                         </div>
-                                                        <input class="form-control" name="started_at"
+                                                        <input class="form-control" name="started_at" id="start-date"
                                                                placeholder="Start date" type="datetime-local"
                                                                pattern="MM-DD-YYYY HH:mm"
                                                                value="{{ old('started_at') }}">
@@ -284,7 +284,7 @@
                                                             <span class="input-group-text"><i
                                                                     class="ni ni-calendar-grid-58"></i></span>
                                                         </div>
-                                                        <input class="form-control" name="end_at" placeholder="End date"
+                                                        <input class="form-control" name="end_at" id="end-date" placeholder="End date"
                                                                type="datetime-local" pattern="MM-DD-YYYY HH:mm"
                                                                value="{{ old('end_at') }}">
                                                     </div>
@@ -412,6 +412,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
+        let StartDateInput = document.getElementById("start-date");
+        let EndDateInput = document.getElementById("end-date");
+        StartDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+        EndDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
         // $(document).ready(function () {
         //     const notFoundCount = -7;
         //     $("#search").on("keyup", function () {
@@ -430,6 +435,25 @@
         //         });
         //     });
         // });
+        $(document).ready(function () {
+            $('#end-date').on('change', function(){
+                let startDate = $('#start-date').val();
+                let endDate = $('#end-date').val();
+                if (endDate < startDate){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'วันที่คืนน้อยกว่าวันที่ยืม!',
+                        showConfirmButton: true,
+                        confirmButtonText: 'ตกลง'
+                    })
+                    $('#start-date').val('');
+                    $('#end-date').val('');
+                }
+            });
+        })
+
+
 
         $(document).ready(function () {
 

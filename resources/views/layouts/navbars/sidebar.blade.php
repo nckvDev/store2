@@ -223,7 +223,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('stock*') ? 'active text-orange' : '' }}"
                         href="{{ route('stock') }}">
-                        <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุ') }}
+                        <i class="ni ni-settings text-orange"> </i> {{ __('วัสดุถาวร') }}
                     </a>
                 </li>
                 <li class="nav-item ">
