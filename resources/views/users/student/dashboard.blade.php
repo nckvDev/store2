@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($borrowList as $row)
-                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 3 || $row->borrow_status == 4)
+                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 3 || $row->borrow_status == 4 || $row->borrow_status == 5)
                                         <tr>
                                             <td>
                                                 @foreach($row->borrow_list_id as $number => $id)
@@ -49,7 +49,7 @@
 
                                             @if($row->borrow_status=="1")
                                                 <td class="align-middle text-sm">
-                                                    <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
+                                                    <span class="badge text-white bg-gradient-warning">รออนุมัติขอยืม</span>
                                                 </td>
                                             @endif
                                             @if($row->borrow_status=="2")
@@ -63,6 +63,11 @@
                                                 </td>
                                             @endif
                                             @if($row->borrow_status=="4")
+                                                <td class="align-middle text-sm">
+                                                    <span class="badge text-white bg-gradient-info">รออนุมัติส่งคืน</span>
+                                                </td>
+                                            @endif
+                                            @if($row->borrow_status=="5")
                                                 <td class="align-middle text-sm">
                                                     <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
                                                 </td>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DisposableImportController;
 use App\Http\Controllers\Admin\DashboardControlle;
 use App\Http\Controllers\Admin\reportAllController;
 use App\Http\Controllers\ConfirmFormController;
+use App\Http\Controllers\ConfirmReturnController;
 use App\Http\Controllers\ConfirmUserController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HomeController;
@@ -104,10 +105,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('disposable/import', [DisposableImportController::class, 'index'])->name('disposable-import');
         Route::post('import-disposable', [DisposableImportController::class, 'import'])->name('import-disposable');
 
-        // Form
+        // Confirm
         Route::get('confirm-form', [ConfirmFormController::class, 'index'])->name('confirm-form');
         Route::post('confirm-form/update/{id}', [ConfirmFormController::class, 'update']);
         Route::post('confirm-form/add', [ConfirmFormController::class, 'create'])->name('form-add');
+
+        // Return
+        Route::get('confirm-return', [ConfirmReturnController::class, 'index'])->name('confirm-return');
+        Route::post('confirm-return/update/{id}', [ConfirmReturnController::class, 'update']);
 
         Route::get('confirm-user', [ConfirmUserController::class, 'index'])->name('form-detail');
 

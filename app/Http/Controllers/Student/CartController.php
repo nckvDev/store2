@@ -22,22 +22,22 @@ class CartController extends Controller
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->get();
+        $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->get();
         $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
 
         if ($select_id != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('type_id', $select_id)->get();
             $disposables = Disposable::where('type_id', $select_id)->get();
         }
 
         if ($searchName != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
             $disposables = Disposable::where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
 
         if ($select_id != null && $searchName != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3])->where('defective_stock', 0)->where('type_id', $select_id)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('type_id', $select_id)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
             $disposables = Disposable::where('type_id', $select_id)->where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
         return view('users/student/cart', compact('cartItems', 'stocks', 'disposables', 'types'));
@@ -54,7 +54,7 @@ class CartController extends Controller
                 'image' => $request->image,
             )
         ]);
-        session()->flash('success', 'Product is Added to Cart Successfully !');
+        session()->flash('success', 'เพิ่มอุปกรณ์ในรายการ');
 
         return redirect()->back();
     }
@@ -71,7 +71,7 @@ class CartController extends Controller
             ]
         );
 
-        session()->flash('success', 'Item Cart is Updated Successfully !');
+        session()->flash('success', 'อัพเดทรายการอุปกรณ์');
 
         return redirect()->back();
     }
@@ -79,7 +79,7 @@ class CartController extends Controller
     public function removeCart(Request $request)
     {
         \Cart::remove($request->id);
-        session()->flash('success', 'Item Cart Remove Successfully !');
+        session()->flash('success', 'ลบรายการที่เลือก');
 
         return redirect()->back();
     }
@@ -88,7 +88,7 @@ class CartController extends Controller
     {
         \Cart::clear();
 
-        session()->flash('success', 'All Item Cart Clear Successfully !');
+        session()->flash('success', 'ลบรายการที่เลือกทั้งหมด');
 
         return redirect()->back();
     }

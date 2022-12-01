@@ -56,7 +56,7 @@
                                                  width="80"
                                                  height="80"/></td>
                                         <td class="text-center">{{ $row->stock_amount }}</td>
-                                        @if(($row->stock_status == 0 || $row->stock_status == 3) && ($row->defective_stock == 0))
+                                        @if(($row->stock_status == 0 || $row->stock_status == 3 || $row->stock_status == 5) && ($row->defective_stock == 0))
                                             <td>
                                                 <div class="rounded text-white bg-gradient-green text-center">
                                                     พร้อมใช้งาน
@@ -78,8 +78,13 @@
                                             <td>
                                                 <div class="rounded text-white bg-gradient-primary text-center">ถูกยืม
                                                 </div>
-                                            </td
-                                            >
+                                            </td>
+                                        @endif
+                                        @if($row->stock_status == 4)
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-info text-center">รออนุมัติส่งคืน
+                                                </div>
+                                            </td>
                                         @endif
                                         <td class="text-center">
                                             <div class="dropdown">
@@ -161,34 +166,34 @@
                     }
                 });
 
-
-                $('.delete-confirm').on('click', function (event) {
-                    event.preventDefault();
-                    const url = $(this).attr('href');
-                    Swal.fire({
-                        title: 'คุณแน่ใจ?',
-                        text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
-                        icon: 'warning',
-                        focusCancel: true,
-                        showCancelButton: true,
-                        confirmButtonColor: '#007bff',
-                        cancelButtonColor: '#dc3545',
-                        confirmButtonText: 'ตกลง',
-                        cancelButtonText: 'ยกเลิก'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = url;
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: 'ลบข้อมูลเรียบร้อย',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        }
-                    });
+                $(function () {
+                    $('.delete-confirm').on('click', function (event) {
+                        event.preventDefault();
+                        const url = $(this).attr('href');
+                        Swal.fire({
+                            title: 'คุณแน่ใจ?',
+                            text: "คุณต้องการลบข้อมูลนี้หรือไม่!",
+                            icon: 'warning',
+                            focusCancel: true,
+                            showCancelButton: true,
+                            confirmButtonColor: '#007bff',
+                            cancelButtonColor: '#dc3545',
+                            confirmButtonText: 'ตกลง',
+                            cancelButtonText: 'ยกเลิก'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = url;
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'ลบข้อมูลเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                    })
                 });
-
             </script>
             <script src="{{ asset('js/app.js') }}"></script>
     @endpush

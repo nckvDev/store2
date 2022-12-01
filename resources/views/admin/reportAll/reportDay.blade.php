@@ -112,17 +112,17 @@
                                                         <div class="modal-body">
                                                             @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
                                                                 <div class="row mb-2">
-                                                                    <div class="col-lg-6">กำหนดการยืม</div>
-                                                                    <div class="col-lg-6">กำหนดการคืน</div>
+                                                                    <div class="col-lg-6">วันที่ยืม</div>
+                                                                    <div class="col-lg-6">วันที่คืน</div>
                                                                 </div>
                                                                 <div class="mb-3 flex-row justify-content-between">
-                                                                <span class="text-gray">
-                                                                      {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
-                                                                </span>
+                                                                    <span class="text-gray">
+                                                                          {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
+                                                                    </span>
                                                                     -
                                                                     <span class="text-danger">
                                                                       {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
-                                                                </span>
+                                                                     </span>
                                                                 </div>
                                                                 @if($row->borrow_status == 4)
                                                                     <div class="mb-4 ">
