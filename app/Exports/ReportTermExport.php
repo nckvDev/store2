@@ -38,7 +38,7 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
     public function query()
     {
         // TODO: Implement query() method.
-        return Borrow::query()->whereBetween('created_at', [$this->fromDate, $this->toDate ]);
+        return Borrow::query()->whereBetween('created_at', [$this->fromDate, $this->toDate ])->orderBy('borrow_status', 'desc');
     }
 
     public function headings(): array

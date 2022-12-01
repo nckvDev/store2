@@ -36,7 +36,7 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
     public function query()
     {
         // TODO: Implement query() method.
-        return Borrow::query()->whereMonth('created_at', $this->month);
+        return Borrow::query()->whereMonth('created_at', $this->month)->orderBy('borrow_status', 'desc');
     }
 
     public function headings(): array
