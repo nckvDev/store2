@@ -106,7 +106,7 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
     {
         // TODO: Implement columnFormats() method.
         return [
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'G' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }

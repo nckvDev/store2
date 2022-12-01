@@ -105,7 +105,7 @@ class ReportDayExport implements FromQuery, WithHeadings, WithMapping, WithColum
     {
         // TODO: Implement columnFormats() method.
         return [
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'G' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }
