@@ -36,21 +36,20 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
     public function query()
     {
         // TODO: Implement query() method.
-        return Borrow::query()->whereMonth('created_at', $this->month);
+        return Borrow::query()->whereMonth('created_at', $this->month)->orderBy('borrow_status', 'desc');
     }
 
     public function headings(): array
     {
         // TODO: Implement headings() method.
         return [
-            'id',
-            'borrow_list_id',
-            'borrow_name',
-            'borrow_status',
-            'borrow_amount',
-            'user_borrow',
-            'description',
-            'created_at',
+            'รหัสอุปกรณ์',
+            'ชื่ออุปกรณ์',
+            'จำนวน',
+            'ชื่อ-นามสกุล',
+            'สถานะ',
+            'หมายเหตุ',
+            'อัพเดทวันที่',
         ];
     }
 
@@ -75,21 +74,26 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
 
         switch ($row->borrow_status) {
             case 1:
-                $status = "รออนุมัติ";
+                $status = "รออนุมัติขอยืม";
                 break;
             case 2:
                 $status = "อนุมัติ";
+                break;
+            case 4:
+                $status = "รออนุมัติส่งคืน";
+                break;
+            case 5:
+                $status = "ส่งคืนแล้ว";
                 break;
             default:
                 $status = "ไม่อนุมัติ";
         }
 
         return [
-            $row->invoice_number,
             $listId,
             $newName,
             $amount,
-            $row->borrow_user->firstname,
+            $row->borrow_user->firstname . " " . $row->borrow_user->lastname,
             $status,
             $row->description ?  $row->description : "-",
             $row->created_at
@@ -100,7 +104,7 @@ class ReportMonthExport implements FromQuery, WithHeadings, WithMapping, WithCol
     {
         // TODO: Implement columnFormats() method.
         return [
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY
+            'G' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }

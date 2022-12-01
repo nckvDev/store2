@@ -89,7 +89,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label"
                                             for="device_amount">{{ __('จำนวน') }}</label>
-                                        <input type="text" name="device_amount" value="1"
+                                        <input type="number" name="device_amount" value="1" min="1" max="1"
                                             class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_amount'))
                                         <span class="invalid-feedback" role="alert">
@@ -101,7 +101,7 @@
                                 <div class="col-xl-2">
                                     <div class="form-group">
                                         <label class="form-control-label" for="device_year">{{ __('ปี') }}</label>
-                                        <input type="number" name="device_year" value="{{ old('device_year') }}"
+                                        <input type="number" name="device_year" value="{{ old('device_year') }}" min="1" max="2565"
                                             class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_year'))
                                         <span class="invalid-feedback" role="alert">
