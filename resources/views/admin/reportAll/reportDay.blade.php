@@ -75,21 +75,29 @@
                                         <td>
                                             {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                         </td>
-                                        @if($row->borrow_status == 1)
+                                        @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-warning">รอนุมัติ</span>
+                                                <span class="badge text-white bg-gradient-warning">รออนุมัติขอยืม</span>
                                             </td>
-                                        @elseif($row->borrow_status == 2)
+                                        @endif
+                                        @if($row->borrow_status=="2")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                             </td>
-                                        @elseif($row->borrow_status == 4)
-                                            <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
-                                            </td>
-                                        @else
+                                        @endif
+                                        @if($row->borrow_status=="3")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="4")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-info">รออนุมัติส่งคืน</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="5")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
                                             </td>
                                         @endif
                                         <td>
@@ -112,17 +120,17 @@
                                                         <div class="modal-body">
                                                             @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 4 )
                                                                 <div class="row mb-2">
-                                                                    <div class="col-lg-6">กำหนดการยืม</div>
-                                                                    <div class="col-lg-6">กำหนดการคืน</div>
+                                                                    <div class="col-lg-6">วันที่ยืม</div>
+                                                                    <div class="col-lg-6">วันที่คืน</div>
                                                                 </div>
                                                                 <div class="mb-3 flex-row justify-content-between">
-                                                                <span class="text-gray">
-                                                                      {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
-                                                                </span>
+                                                                    <span class="text-gray">
+                                                                          {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
+                                                                    </span>
                                                                     -
                                                                     <span class="text-danger">
                                                                       {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
-                                                                </span>
+                                                                     </span>
                                                                 </div>
                                                                 @if($row->borrow_status == 4)
                                                                     <div class="mb-4 ">

@@ -7,7 +7,7 @@
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">ยืนยันแบบฟอร์ม</li>
+                        <li class="breadcrumb-item active" aria-current="page">ยืนยันแบบฟอร์มส่งคืน</li>
                     </ol>
                 </nav>
             </div>
@@ -19,7 +19,7 @@
                         <table id="table_id" class="">
                             <thead>
                             <tr>
-{{--                                <th>ลำดับ</th>--}}
+                                {{--                                <th>ลำดับ</th>--}}
                                 <th>รหัสผู้ใช้งาน</th>
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
@@ -30,23 +30,19 @@
                             </thead>
                             <tbody>
 
-                            @foreach($conforms as $row)
+                            @foreach($returns as $row)
                                 <tr>
-{{--                                    <td>{{ $row->id}}</td>--}}
+
+                                    {{--                                    <td>{{ $row->id}}</td>--}}
                                     <td>{{ $row->borrow_user->user_id}}</td>
                                     <td>{{ $row->borrow_user->firstname}}</td>
                                     <td>{{ $row->borrow_user->lastname}}</td>
                                     <td>
                                         {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                     </td>
-                                    @if($row->borrow_status=="2")
+                                    @if($row->borrow_status=="4")
                                         <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-success">อนุมัติ</span>
-                                        </td>
-                                    @endif
-                                    @if($row->borrow_status=="1")
-                                        <td class="align-middle text-sm">
-                                            <span class="badge text-white bg-gradient-warning">รออนุมัติ</span>
+                                            <span class="badge text-white bg-gradient-info">รออนุมัติส่งคืน</span>
                                         </td>
                                     @endif
                                     <td>
@@ -62,7 +58,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel">รายการยืม</h3>
+                                                        <h3 class="modal-title" id="exampleModalLabel">รายการส่งคืน</h3>
                                                         <button class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -70,21 +66,29 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row mb-2">
-                                                            <div class="col-lg-6"> วันที่ยืม</div>
-                                                            <div class="col-lg-6"> วันที่คืน</div>
+                                                            <div class="col-lg-6">วันที่ยืม</div>
+                                                            <div class="col-lg-6">วันที่คืน</div>
                                                         </div>
                                                         <div class="mb-4 flex-row justify-content-between">
                                                             <span class="text-gray">
                                                                  {{ $thaiDateHelper->DateThaiFormat($row->started_at) }}
-{{--                                                                {{--}}
-{{--                                                                    \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')--}}
-{{--                                                                }}--}}
+                                                                {{--                                                                {{--}}
+                                                                {{--                                                                    \Carbon\Carbon::parse($row->started_at)->locale('th')->isoFormat('LLL')--}}
+                                                                {{--                                                                }}--}}
                                                             </span>
-                                                                -
+                                                            -
                                                             <span class="text-danger">
                                                                    {{ $thaiDateHelper->DateThaiFormat($row->end_at) }}
                                                             </span>
                                                         </div>
+                                                        @if($row->borrow_status == 4)
+                                                            <div class="mb-4 ">
+                                                                วันที่ส่งคืน
+                                                                <span class="text-success">
+                                                                        {{ $thaiDateHelper->DateThaiFormat($row->updated_at) }}
+                                                                    </span>
+                                                            </div>
+                                                        @endif
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 @foreach($row->borrow_list_id as $id)
@@ -108,56 +112,56 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="{{ url('/confirm-form/update/'.$row->id) }}"
+                                                        <form action="{{ url('/confirm-return/update/'.$row->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @foreach($row->borrow_list_id as $item)
                                                                 <input type="hidden" name="borrow_list_id[]"
                                                                        value="{{ $item }}">
                                                             @endforeach
-                                                            <input type="hidden" name="borrow_status" value="2">
+                                                            <input type="hidden" name="borrow_status" value="5">
                                                             <button class="btn btn-primary btn-sm" type="submit">
                                                                 อนุมัติ
                                                             </button>
                                                         </form>
-                                                        <button type="button" class="btn btn-danger btn-sm"
-                                                                data-toggle="modal"
-                                                                data-target="#Note{{($row->id)}}">
-                                                            ไม่อนุมัติ
-                                                        </button>
+{{--                                                        <button type="button" class="btn btn-danger btn-sm"--}}
+{{--                                                                data-toggle="modal"--}}
+{{--                                                                data-target="#Note{{($row->id)}}">--}}
+{{--                                                            ไม่อนุมัติ--}}
+{{--                                                        </button>--}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- Modal Note-->
-                                        <div class="modal fade" id="Note{{($row->id)}}" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <form action="{{ url('/confirm-form/update/'.$row->id) }}" method="POST">
-                                                    @csrf
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel">หมายเหตุ</h3>
-                                                            <button class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <textarea class="border-dark form-control" id="description" name="description" rows="5" cols="55" autofocus> </textarea>
-                                                            @foreach($row->borrow_list_id as $item)
-                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">
-                                                            @endforeach
-                                                            <input type="hidden" name="borrow_status" value="3">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-primary btn-sm" type="submit" id="description-submit"> ตกลง </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+{{--                                        <div class="modal fade" id="Note{{($row->id)}}" tabindex="-1" role="dialog"--}}
+{{--                                             aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--                                            <div class="modal-dialog" role="document">--}}
+{{--                                                <form action="{{ url('/confirm-return/update/'.$row->id) }}" method="POST">--}}
+{{--                                                    @csrf--}}
+{{--                                                    <div class="modal-content">--}}
+{{--                                                        <div class="modal-header">--}}
+{{--                                                            <h3 class="modal-title" id="exampleModalLabel">หมายเหตุ</h3>--}}
+{{--                                                            <button class="close" data-dismiss="modal"--}}
+{{--                                                                    aria-label="Close">--}}
+{{--                                                                <span aria-hidden="true">&times;</span>--}}
+{{--                                                            </button>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="modal-body">--}}
+{{--                                                            <textarea class="border-dark form-control" id="description" name="description" rows="5" cols="55" autofocus> </textarea>--}}
+{{--                                                            @foreach($row->borrow_list_id as $item)--}}
+{{--                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">--}}
+{{--                                                            @endforeach--}}
+{{--                                                            <input type="hidden" name="borrow_status" value="6">--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="modal-footer">--}}
+{{--                                                            <button class="btn btn-primary btn-sm" type="submit" id="description-submit"> ตกลง </button>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </form>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -168,7 +172,7 @@
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
-                                    title: 'ยืนยันรายการยืมสำเร็จ',
+                                    title: 'ยืนยันรายการส่งคืนสำเร็จ',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })

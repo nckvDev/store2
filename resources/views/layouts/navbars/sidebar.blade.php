@@ -246,7 +246,13 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('confirm-form*') ? 'active text-pink' : '' }}"
                         href="{{ route('confirm-form') }}">
-                        <i class="ni ni-single-copy-04 text-pink "> </i> {{ __('ยืนยันแบบฟอร์ม') }}
+                        <i class="ni ni-single-copy-04 text-pink "> </i> {{ __('ยืนยันแบบฟอร์มขอยืม') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('confirm-return*') ? 'active text-info' : '' }}"
+                       href="{{ route('confirm-return') }}">
+                        <i class="ni ni-spaceship text-info "> </i> {{ __('ยืนยันแบบฟอร์มส่งคืน') }}
                     </a>
                 </li>
                 <li class="nav-item ">

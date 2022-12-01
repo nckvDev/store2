@@ -64,7 +64,7 @@
                                         @endif
                                         <td class="text-center">{{ $row->device_amount }}</td>
                                         <td class="text-center">{{ $row->device_year }}</td>
-                                        @if(($row->device_status == 0 || $row->device_status == 3) && ($row->defective_device == 0))
+                                        @if(($row->device_status == 0 || $row->device_status == 3 || $row->device_status == 5) && ($row->defective_device == 0))
                                             <td>
                                                 <div class="rounded text-white bg-gradient-green text-center">
                                                     พร้อมใช้งาน
@@ -85,6 +85,12 @@
                                         @if($row->device_status == 2)
                                             <td>
                                                 <div class="rounded text-white bg-gradient-primary text-center">ถูกยืม
+                                                </div>
+                                            </td>
+                                        @endif
+                                        @if($row->device_status == 4)
+                                            <td>
+                                                <div class="rounded text-white bg-gradient-info text-center">รออนุมัติส่งคืน
                                                 </div>
                                             </td>
                                         @endif

@@ -23,29 +23,21 @@ class DashboardController extends Controller
 
     public function update(Request $request, $id)
     {
-        $status = null;
-
-        if ($request['borrow_status'] == 4) {
-            $status = 0;
-        } else {
-            $status = $request['borrow_status'];
-        }
-
         Borrow::find($id)->update([
             'borrow_status' => $request['borrow_status'],
         ]);
 
         for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
             DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
-                'stock_status' => $status
+                'stock_status' => $request['borrow_status']
             ]);
         }
 
-        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
-            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
-                'device_status' => $status
-            ]);
-        }
+//        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+//            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
+//                'device_status' => $request['borrow_status']
+//            ]);
+//        }
 
         return redirect()->back()->with('success', 'ส่งคืนรายการเรียบร้อย');
     }

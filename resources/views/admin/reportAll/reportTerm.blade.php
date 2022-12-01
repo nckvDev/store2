@@ -66,21 +66,29 @@
                                         <td>{{ $row->borrow_user->firstname}}</td>
                                         <td>{{ $row->borrow_user->lastname}}</td>
                                         <td>  {{ $thaiDateHelper->DateFormat($row->created_at) }}</td>
-                                        @if($row->borrow_status == 1)
+                                        @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-warning">รอนุมัติ</span>
+                                                <span class="badge text-white bg-gradient-warning">รออนุมัติขอยืม</span>
                                             </td>
-                                        @elseif($row->borrow_status == 2)
+                                        @endif
+                                        @if($row->borrow_status=="2")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-success">อนุมัติ</span>
                                             </td>
-                                        @elseif($row->borrow_status == 4)
-                                            <td class="align-middle text-sm">
-                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
-                                            </td>
-                                        @else
+                                        @endif
+                                        @if($row->borrow_status=="3")
                                             <td class="align-middle text-sm">
                                                 <span class="badge text-white bg-gradient-danger">ไม่อนุมัติ</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="4")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-info">รออนุมัติส่งคืน</span>
+                                            </td>
+                                        @endif
+                                        @if($row->borrow_status=="5")
+                                            <td class="align-middle text-sm">
+                                                <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
                                             </td>
                                         @endif
                                         <td>

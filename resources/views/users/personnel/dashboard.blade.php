@@ -16,14 +16,6 @@
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
                 <div class="card shadow">
-                    {{--                    <div class="card-header border-0 pb-0">--}}
-                    {{--                        <div class="row align-items-center">--}}
-                    {{--                            <div class="col-8">--}}
-                    {{--                                <h3 class="mb-0">รายการยืม</h3>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-{{--                    <div class="col-12"></div>--}}
                     <div class="table-responsive">
                         <div class="card-body">
                             <table id="borrow-person" class="table ">
@@ -39,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($borrowList as $row)
-                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 3 || $row->borrow_status == 4)
+                                    @if($row->borrow_status == 1 || $row->borrow_status == 2 || $row->borrow_status == 3 || $row->borrow_status == 4 || $row->borrow_status == 5)
                                         <tr>
                                             <td>
                                                 @foreach($row->borrow_list_id as $number => $id)
@@ -71,6 +63,11 @@
                                                 </td>
                                             @endif
                                             @if($row->borrow_status=="4")
+                                                <td class="align-middle text-sm">
+                                                    <span class="badge text-white bg-gradient-info">รออนุมัติส่งคืน</span>
+                                                </td>
+                                            @endif
+                                            @if($row->borrow_status=="5")
                                                 <td class="align-middle text-sm">
                                                     <span class="badge text-white bg-gradient-gray">ส่งคืนแล้ว</span>
                                                 </td>
