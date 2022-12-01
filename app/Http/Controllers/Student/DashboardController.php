@@ -33,11 +33,11 @@ class DashboardController extends Controller
             ]);
         }
 
-        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
-            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
-                'device_status' => $request['borrow_status']
-            ]);
-        }
+//        for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
+//            DB::table('devices')->where('device_num', $request['borrow_list_id'][$i])->update([
+//                'device_status' => $request['borrow_status']
+//            ]);
+//        }
 
         return redirect()->back()->with('success', 'ส่งคืนรายการเรียบร้อย');
     }

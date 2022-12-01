@@ -25,7 +25,7 @@ class ConfirmReturnController extends Controller
         }
 
         Borrow::find($id)->update([
-            'borrow_status' => $request['borrow_status'],
+            'borrow_status' => $status,
             'description' => $request['description']
         ]);
 

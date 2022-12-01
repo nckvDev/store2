@@ -46,7 +46,6 @@
                                             <td class="align-middle">
                                                 {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                             </td>
-
                                             @if($row->borrow_status=="1")
                                                 <td class="align-middle text-sm">
                                                     <span class="badge text-white bg-gradient-warning">รออนุมัติขอยืม</span>
