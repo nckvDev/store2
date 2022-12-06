@@ -70,12 +70,12 @@ class DisposableController extends Controller
         $full_path = $upload_location . $imgName;
 
         Disposable::create([
-            'disposable_name' => $request->disposable_name,
-            'disposable_amount' => $request->disposable_amount,
+            'disposable_name' => $request['disposable_name'],
+            'disposable_amount' => $request['disposable_amount'],
             'image' => $full_path,
-            'amount_minimum' => $request->amount_minimum,
-            'type_id' => $request->type_id,
-            'disposable_num' => $request->disposable_num,
+            'amount_minimum' => $request['amount_minimum'],
+            'type_id' => $request['type_id'],
+            'disposable_num' => $request['disposable_num'],
             'created_at' => Carbon::now()
         ]);
 
@@ -123,12 +123,12 @@ class DisposableController extends Controller
             $full_path = $upload_location . $imgName;
 
             Disposable::find($id)->update([
-                'disposable_num' => $request->disposable_num,
-                'disposable_name' => $request->disposable_name,
-                'disposable_amount' => $request->disposable_amount,
+                'disposable_num' => $request['disposable_num'],
+                'disposable_name' => $request['disposable_name'],
+                'disposable_amount' => $request['disposable_amount'],
                 'image' => $full_path,
-                'amount_minimum' => $request->amount_minimum,
-                'type_id' => $request->type_id,
+                'amount_minimum' => $request['amount_minimum'],
+                'type_id' => $request['type_id'],
                 'updated_at' => Carbon::now()
             ]);
 
@@ -148,11 +148,11 @@ class DisposableController extends Controller
 
         } else {
             Disposable::find($id)->update([
-                'disposable_num' => $request->disposable_num,
-                'disposable_name' => $request->disposable_name,
-                'disposable_amount' => $request->disposable_amount,
-                'amount_minimum' => $request->amount_minimum,
-                'type_id' => $request->type_id,
+                'disposable_num' => $request['disposable_num'],
+                'disposable_name' => $request['disposable_name'],
+                'disposable_amount' => $request['disposable_amount'],
+                'amount_minimum' => $request['amount_minimum'],
+                'type_id' => $request['type_id'],
                 'updated_at' => Carbon::now()
             ]);
         }

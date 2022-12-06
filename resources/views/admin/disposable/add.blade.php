@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label"
                                             for="disposable_amount">{{ __('จำนวนทั้งหมด') }}</label>
-                                        <input type="number" name="disposable_amount"
+                                        <input type="number" id="disposable_amount" name="disposable_amount"
                                             value="{{ old('disposable_amount') }}"
                                             class="form-control form-control-alternative{{ $errors->has('disposable_amount') ? ' is-invalid' : '' }} placeholder="
                                             {{ __('ประเภท') }}">
@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label"
                                             for="amount_minimum">{{ __('จำนวนน้อยสุด') }}</label>
-                                        <input type="number" name="amount_minimum" value="{{ old('amount_minimum') }}"
+                                        <input type="number" id="amount_minimum" name="amount_minimum" value="{{ old('amount_minimum') }}"
                                             class="form-control form-control-alternative{{ $errors->has('amount_minimum') ? ' is-invalid' : '' }} placeholder="
                                             {{ __('ประเภท') }}">
                                         @if ($errors->has('amount_minimum'))
@@ -141,3 +141,30 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        let disposableAmount = document.getElementById("disposable_amount");
+        let amountMinimum = document.getElementById("amount_minimum");
+
+        $(document).ready(function () {
+            $('#amount_minimum').on('change', function(){
+                const valAmount = $('#disposable_amount').val();
+                const valMinimum = $('#amount_minimum').val();
+                if (valAmount < valMinimum){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'จำนวนทั้งหมดควรมากกว่าจำนวนน้อยสุด!',
+                        showConfirmButton: true,
+                        confirmButtonText: 'ตกลง'
+                    })
+                }
+            });
+        })
+    </script>
+@endpush
