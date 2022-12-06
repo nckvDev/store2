@@ -95,7 +95,7 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
             $listId,
             $newName,
             $amount,
-            $row->borrow_user->firstname . " " . $row->borrow_user->lastname,
+            $row->borrow_user->user_prefix->prefix_name . " " . $row->borrow_user->firstname . " " . $row->borrow_user->lastname,
             $status,
             $row->description ?  $row->description : "-",
             $row->created_at

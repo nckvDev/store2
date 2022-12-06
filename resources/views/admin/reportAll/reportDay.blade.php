@@ -56,22 +56,20 @@
                             <table id="table_id">
                                 <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
+{{--                                    <th>ลำดับ</th>--}}
                                     <th>รหัสผู้ใช้งาน</th>
-                                    <th>ชื่อ</th>
-                                    <th>นามสกุล</th>
+                                    <th>ชื่อ-นามสกุล</th>
                                     <th>วันที่</th>
                                     <th>สถานะ</th>
-                                    <th>รายละเอียด</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($report_days as $row)
                                     <tr>
-                                        <td>{{ $row->id}}</td>
+{{--                                        <td>{{ $row->id}}</td>--}}
                                         <td>{{ $row->borrow_user->user_id}}</td>
-                                        <td>{{ $row->borrow_user->firstname}}</td>
-                                        <td>{{ $row->borrow_user->lastname}}</td>
+                                        <td>{{ $row->borrow_user->user_prefix->prefix_name}} {{ $row->borrow_user->firstname}}  {{ $row->borrow_user->lastname}}</td>
                                         <td>
                                             {{ $thaiDateHelper->DateFormat($row->created_at) }}
                                         </td>

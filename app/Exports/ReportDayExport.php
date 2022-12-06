@@ -94,7 +94,7 @@ class ReportDayExport implements FromQuery, WithHeadings, WithMapping, WithColum
             $listId,
             $newName,
             $amount,
-            $row->borrow_user->firstname . " " . $row->borrow_user->lastname,
+            $row->borrow_user->user_prefix->prefix_name . " " . $row->borrow_user->firstname . " " . $row->borrow_user->lastname,
             $status,
             $row->description ?  $row->description : "-",
             $row->updated_at

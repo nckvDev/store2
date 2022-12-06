@@ -58,7 +58,7 @@
                             <table id="table_id">
                                 <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
+{{--                                    <th>ลำดับ</th>--}}
                                     <th>รหัสผู้ใช้งาน</th>
                                     <th>ชื่อ</th>
                                     <th>นามสกุล</th>
@@ -70,7 +70,7 @@
                                 <tbody>
                                 @foreach($report_months as $row)
                                     <tr>
-                                        <td>{{ $row->id}}</td>
+{{--                                        <td>{{ $row->id}}</td>--}}
                                         <td>{{ $row->borrow_user->user_id}}</td>
                                         <td>{{ $row->borrow_user->firstname}}</td>
                                         <td>{{ $row->borrow_user->lastname}}</td>
