@@ -8,7 +8,7 @@
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">ยืม-เบิกพัสดุ</li>
+                        <li class="breadcrumb-item active" aria-current="page">เบิกวัสดุสิ้นเปลือง</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
                             @endforeach
                         @endif
 
-                        <form action="{{ route('student_borrow_stock.list') }}" method="GET">
+                        <form action="{{ route('student_borrow_disposable.list') }}" method="GET">
                             <h3>ประเภท</h3>
                             <div class="row">
                                 <div class="col-sm-5 mb-3">
@@ -65,68 +65,36 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($stocks as $item)
-                                    @if($addData)
-                                        @if(!in_array($item->stock_num, $addData))
-                                            <tr>
-                                                <form action="{{ route('student_borrow_stock.add') }}" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    @csrf
-                                                    <td><input type="text" value="{{ $item->stock_num }}" name="id"
-                                                               readonly
-                                                               style="width: 60px">
-                                                    </td>
-                                                    <td><input type="text" value="{{ $item->stock_name }}" name="name"
-                                                               readonly>
-                                                    </td>
-                                                    <td><img src="{{ $item->image }}" width="80" height="80" readonly
-                                                             alt="image stock">
-                                                    </td>
-                                                    <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                    <input type="hidden" value="{{ $item->image }}" name="image"
-                                                           width="50" height="50"
-                                                           readonly>
-                                                    <td>
-                                                        <input type="text" value="{{ $item->stock_amount }}"
-                                                               name="quantity" readonly style="width: 60px">
-                                                    </td>
+                                @foreach ($disposables as $item)
+                                    <tr>
+                                        <form action="{{ route('student_borrow_disposable.add') }}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <td><input type="text" value="{{ $item->disposable_num }}" name="id"
+                                                       readonly style="width: 60px">
+                                            </td>
+                                            <td><input type="text" value="{{ $item->disposable_name }}" name="name"
+                                                       readonly>
+                                            </td>
+                                            <td><img src="{{ $item->image }}" width="50" height="50" readonly
+                                                     alt="image disposable"></td>
+                                            {{--                                            <input type="hidden" value="1" name="price" readonly>--}}
+                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
+                                            <td>
+                                                <input type="text" value="{{ $item->disposable_amount }}"
+                                                       name="quantity"
+                                                       readonly style="width: 60px">
+                                            </td>
 
-                                                    <input type="hidden" value="1" name="price" readonly>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">เลือก</button>
-                                                    </td>
-                                                </form>
-                                            </tr>
-                                        @endif
-                                    @else
-                                        <tr>
-                                            <form action="{{ route('student_borrow_stock.add') }}" method="POST"
-                                                  enctype="multipart/form-data">
-                                                @csrf
-                                                <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
-                                                           style="width: 60px">
-                                                </td>
-                                                <td><input type="text" value="{{ $item->stock_name }}" name="name"
-                                                           readonly>
-                                                </td>
-                                                <td><img src="{{ $item->image }}" width="50" height="50" readonly
-                                                         alt="image stock">
-                                                </td>
-                                                <input type="hidden" value="{{ $item->id }}" name="price" readonly>
-                                                <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                                <td>
-                                                    <input type="text" value="{{ $item->stock_amount }}" name="quantity"
-                                                           readonly style="width: 60px">
-                                                </td>
-
-                                                <input type="hidden" value="1" name="price" readonly
-                                                       style="width: max-content">
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm">เลือก</button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                    @endif
+                                            <input type="hidden" value="1" name="price" readonly
+                                                   style="width: max-content">
+                                            <td>
+                                                <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#exampleModal">เลือก
+                                                </button>
+                                            </td>
+                                        </form>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -143,66 +111,8 @@
                         <div class="container">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('student_borrow_stock.save') }}" method="post">
+                                    <form action="{{ route('student_borrow_disposable.save') }}" method="post">
                                         @csrf
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="started_at">
-                                                        วันที่ยืม
-                                                    </label>
-                                                    <div class="input-group input-group-alternative">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="ni ni-calendar-grid-58"></i></span>
-                                                        </div>
-                                                        <input class="form-control" name="started_at" id="start-date"
-                                                               placeholder="Start date" type="datetime-local"
-                                                               pattern="MM-DD-YYYY HH:mm"
-                                                               value="{{ old('started_at') }}">
-                                                    </div>
-                                                    @if ($errors->has('started_at'))
-                                                        <span class="invalid-feedback" style="display: block;"
-                                                              role="alert">
-                                                         <strong>{{ $errors->first('started_at') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="started_at">
-                                                        วันที่คืน
-                                                    </label>
-                                                    <div class="input-group input-group-alternative">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i
-                                                                    class="ni ni-calendar-grid-58"></i></span>
-                                                        </div>
-                                                        <input class="form-control" name="end_at" id="end-date" placeholder="End date"
-                                                               type="datetime-local" pattern="MM-DD-YYYY HH:mm"
-                                                               value="{{ old('end_at') }}">
-                                                    </div>
-                                                    @if ($errors->has('end_at'))
-                                                        <span class="invalid-feedback" style="display: block;"
-                                                              role="alert">
-                                                         <strong>{{ $errors->first('end_at') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{--                                        <div class="flex flex-col sm:flex-row">--}}
-                                        {{--                                            <svg class="w-5 h-5" fill="none" stroke-linecap="round"--}}
-                                        {{--                                                 stroke-linejoin="round"--}}
-                                        {{--                                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">--}}
-                                        {{--                                                <path--}}
-                                        {{--                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">--}}
-                                        {{--                                                </path>--}}
-                                        {{--                                            </svg>--}}
-                                        {{--                                            {{ Cart::getTotalQuantity()}}--}}
-                                        {{--                                            </a>--}}
-                                        {{--                                        </div>--}}
                                         <div class="table-responsive">
                                             <table id="myTable">
                                                 <thead>
@@ -233,14 +143,14 @@
                                                             <input type="{{ $item->quantity > 1 ? 'number' : 'text'}}"
                                                                    name="borrow_amount[]" value="1"
                                                                    class="w-10 text-center bg-gray-100">
-                                                            <form action="{{ route('student_borrow_stock.update') }}"
+                                                            <form action="{{ route('student_borrow_disposable.update') }}"
                                                                   method="POST"
                                                                   enctype="multipart/form-data">
                                                                 @csrf
                                                             </form>
                                                         </td>
                                                         <td>
-                                                            <form action="{{ route('student_borrow_stock.remove') }}"
+                                                            <form action="{{ route('student_borrow_disposable.remove') }}"
                                                                   method="POST"
                                                                   enctype="multipart/form-data">
                                                                 @csrf
@@ -255,7 +165,7 @@
                                             </table>
                                         </div>
                                         <a class="btn btn-outline-danger btn-sm mt-4"
-                                           href="{{ route('student_borrow_stock.clear') }}"> ลบทั้งหมด </a>
+                                           href="{{ route('student_borrow_disposable.clear') }}"> ลบทั้งหมด </a>
                                         <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                     </form>
 
@@ -307,29 +217,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-        let StartDateInput = document.getElementById("start-date");
-        let EndDateInput = document.getElementById("end-date");
-        StartDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
-        EndDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
-
-        $(document).ready(function () {
-            $('#end-date').on('change', function(){
-                let startDate = $('#start-date').val();
-                let endDate = $('#end-date').val();
-                if (endDate < startDate){
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'warning',
-                        title: 'วันที่คืนน้อยกว่าวันที่ยืม!',
-                        showConfirmButton: true,
-                        confirmButtonText: 'ตกลง'
-                    })
-                    $('#start-date').val('');
-                    $('#end-date').val('');
-                }
-            });
-        })
-
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
                 "sFilterInput": "form-control form-control-sm",

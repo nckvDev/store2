@@ -60,11 +60,11 @@ class StockController extends Controller
         $full_path = $upload_location . $imgName;
 
         Stock::create([
-            'stock_name' => $request->stock_name,
-            'stock_amount' => $request->stock_amount,
+            'stock_name' => $request['stock_name'],
+            'stock_amount' => $request['stock_amount'],
             'image' => $full_path,
-            'type_id' => $request->type_id,
-            'stock_num' => $request->stock_num,
+            'type_id' => $request['type_id'],
+            'stock_num' => $request['stock_num'],
             'created_at' => Carbon::now()
         ]);
 
@@ -130,11 +130,11 @@ class StockController extends Controller
 
         } else {
             Stock::find($id)->update([
-                'stock_num' => $request->stock_num,
-                'stock_name' => $request->stock_name,
-                'stock_amount' => $request->stock_amount,
-                'type_id' => $request->type_id,
-                'defective_stock' => $request->defective_stock,
+                'stock_num' => $request['stock_num'],
+                'stock_name' => $request['stock_name'],
+                'stock_amount' => $request['stock_amount'],
+                'type_id' => $request['type_id'],
+                'defective_stock' => $request['defective_stock'],
                 'updated_at' => Carbon::now()
             ]);
         }
