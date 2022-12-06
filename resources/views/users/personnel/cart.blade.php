@@ -28,7 +28,7 @@
                                 @endphp
                             @endforeach
                         @endif
-                        <form action="{{ route('personnel_borrow.list') }}" method="GET">
+                        <form action="{{ route('personnel_borrow_stock.list') }}" method="GET">
                             <h3>ประเภท</h3>
                             <div class="row">
                                 <div class="col-sm-5 mb-3">
@@ -69,7 +69,7 @@
                                     @if($addData)
                                         @if(!in_array($item->device_num, $addData))
                                             <tr>
-                                                <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                                <form action="{{ route('personnel_borrow_stock.add') }}" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->device_num }}" name="id"
@@ -100,7 +100,7 @@
                                         @endif
                                     @else
                                         <tr>
-                                            <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                            <form action="{{ route('personnel_borrow_stock.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 <td>
@@ -136,7 +136,7 @@
                                     @if($addData)
                                         @if(!in_array($item->stock_num, $addData))
                                             <tr>
-                                                <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                                <form action="{{ route('personnel_borrow_stock.add') }}" method="POST"
                                                       enctype="multipart/form-data">
                                                     @csrf
                                                     <td><input type="text" value="{{ $item->stock_num }}" name="id"
@@ -168,7 +168,7 @@
                                         @endif
                                     @else
                                         <tr>
-                                            <form action="{{ route('personnel_borrow.add') }}" method="POST"
+                                            <form action="{{ route('personnel_borrow_stock.add') }}" method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 <td><input type="text" value="{{ $item->stock_num }}" name="id" readonly
@@ -197,42 +197,6 @@
                                         </tr>
                                     @endif
                                 @endforeach
-                                @foreach ($disposables as $item)
-                                    <tr>
-                                        <form action="{{ route('personnel_borrow.add') }}" method="POST"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            <td>
-                                                <input type="text" value="{{ $item->disposable_num }}" name="id"
-                                                       readonly
-                                                       style="width: 60px">
-                                            </td>
-                                            <td>
-                                                <input type="text" value="{{ $item->disposable_name }}" name="name"
-                                                       readonly>
-                                            </td>
-                                            <td>
-                                                <img src="{{ $item->image }}" width="50" height="50" readonly
-                                                     alt="image disposable">
-                                            </td>
-                                            {{--                                            <input type="hidden" value="1" name="price" readonly>--}}
-                                            <input type="hidden" value="{{ $item->image }}" name="image" readonly>
-                                            <td>
-                                                <input type="text" value="{{ $item->disposable_amount }}"
-                                                       name="quantity"
-                                                       readonly style="width: 60px">
-                                            </td>
-
-                                            <input type="hidden" value="1" name="price" readonly
-                                                   style="width: max-content">
-                                            <td>
-                                                <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                        data-target="#exampleModal">เลือก
-                                                </button>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -248,7 +212,7 @@
                         <div class="container">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('personnel_borrow.save') }}" method="post">
+                                    <form action="{{ route('personnel_borrow_stock.save') }}" method="post">
                                         @csrf
                                         <div class="row align-items-center">
                                             <div class="col">
@@ -336,14 +300,14 @@
                                                         <td>
                                                             <input type="text" name="borrow_amount[]" value="1"
                                                                    class="w-10 text-center bg-gray-100"/>
-                                                            <form action="{{ route('personnel_borrow.update') }}"
+                                                            <form action="{{ route('personnel_borrow_stock.update') }}"
                                                                   method="POST"
                                                                   enctype="multipart/form-data">
                                                                 @csrf
                                                             </form>
                                                         </td>
                                                         <td>
-                                                            <form action="{{ route('personnel_borrow.remove') }}"
+                                                            <form action="{{ route('personnel_borrow_stock.remove') }}"
                                                                   method="POST"
                                                                   enctype="multipart/form-data">
                                                                 @csrf
@@ -358,7 +322,7 @@
                                             </table>
                                         </div>
                                         <a class="btn btn-outline-danger btn-sm mt-4"
-                                           href="{{ route('personnel_borrow.clear') }}"> ลบทั้งหมด </a>
+                                           href="{{ route('personnel_borrow_stock.clear') }}"> ลบทั้งหมด </a>
                                         <button type="submit" class="btn btn-success btn-sm mt-4">ยืนยัน</button>
                                     </form>
 

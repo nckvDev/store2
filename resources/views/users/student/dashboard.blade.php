@@ -8,7 +8,7 @@
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"> รายการยืม</li>
+                        <li class="breadcrumb-item active" aria-current="page"> รายการยืม </li>
                     </ol>
                 </nav>
             </div>
@@ -100,7 +100,6 @@
                                                             ส่งคืน
                                                         </button>
                                                     @endif
-
                                                 </form>
                                             </td>
                                         </tr>

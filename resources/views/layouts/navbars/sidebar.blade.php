@@ -280,15 +280,15 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('personnel_borrow*') ? 'active text-green' : '' }}"
-                        href="{{ route('personnel_borrow.list') }}">
-                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืม/เบิกวัสดุ-พัสดุ') }}
+                    <a class="nav-link {{ request()->is('personnel_borrow_stock*') ? 'active text-green' : '' }}"
+                        href="{{ route('personnel_borrow_stock.list') }}">
+                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืมวัสดุ-พัสดุ') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('personnel_borrow*') ? 'active text-green' : '' }}"
-                       href="{{ route('personnel_borrow.list') }}">
-                        <i class="ni ni-archive-2 text-green"></i> {{ __('ยืม/เบิกวัสดุ-พัสดุ') }}
+                    <a class="nav-link {{ request()->is('personnel_borrow_disposable*') ? 'active text-info' : '' }}"
+                       href="{{ route('personnel_borrow_disposable.list') }}">
+                        <i class="ni ni-archive-2 text-info"></i> {{ __('เบิกวัสดุสิ้นเปลือง') }}
                     </a>
                 </li>
             </ul>

@@ -8,7 +8,7 @@
             <div class="col-xl-12">
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"> รายการยืม</li>
+                        <li class="breadcrumb-item active" aria-current="page"> รายการยืม </li>
                     </ol>
                 </nav>
             </div>
@@ -23,10 +23,11 @@
                                 <tr>
                                     <th scope="col">รหัส</th>
                                     <th scope="col">รายการ</th>
+                                    <th scope="col">จำนวน</th>
                                     <th scope="col">เวลา</th>
                                     <th scope="col">สถานะ</th>
                                     <th scope="col">หมายเหตุ</th>
-                                    <th scope="col">ส่งคืน</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +42,11 @@
                                             <td>
                                                 @foreach($row->borrow_name as $number => $name)
                                                     <h5> {{ $name }} </h5>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach($row->borrow_amount as $number => $amount)
+                                                    <h5> {{ $amount }} </h5>
                                                 @endforeach
                                             </td>
                                             <td class="align-middle">
@@ -88,10 +94,13 @@
                                                                value="{{ $item }}">
                                                     @endforeach
                                                     <input type="hidden" name="borrow_status" value="4">
-                                                    <button type="submit"
-                                                            class="btn btn-primary btn-sm " {{$row->borrow_status != 2 ? 'disabled' : ''}} >
-                                                        ส่งคืน
-                                                    </button>
+                                                    @if($row->borrow_status != 2 || $row->started_at == null)
+                                                    @else
+                                                        <button type="submit"
+                                                                class="btn btn-primary btn-sm" >
+                                                            ส่งคืน
+                                                        </button>
+                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>

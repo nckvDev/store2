@@ -173,13 +173,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('personnel_dashboard', [\App\Http\Controllers\Personnel\DashboardController::class, 'index'])->name('personnel_dashboard');
         Route::post('personnel_dashboard/update/{id}', [\App\Http\Controllers\Personnel\DashboardController::class, 'update']);
 
-        Route::get('personnel_borrow', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('personnel_borrow.list');
-        Route::post('personnel_borrow/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('personnel_borrow.add');
-        Route::post('personnel_borrow/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('personnel_borrow.update');
-        Route::post('personnel_borrow/remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('personnel_borrow.remove');
-        Route::get('personnel_borrow/clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('personnel_borrow.clear');
-        Route::post('personnel_borrow/save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('personnel_borrow.save');
-        Route::post('personnel_borrow/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel_borrow.fetch');
+        Route::get('personnel_borrow_stock', [\App\Http\Controllers\Personnel\CartController::class, 'cartList'])->name('personnel_borrow_stock.list');
+        Route::post('personnel_borrow_stock/borrow', [\App\Http\Controllers\Personnel\CartController::class, 'addToCart'])->name('personnel_borrow_stock.add');
+        Route::post('personnel_borrow_stock/update-cart', [\App\Http\Controllers\Personnel\CartController::class, 'updateCart'])->name('personnel_borrow_stock.update');
+        Route::post('personnel_borrow_stock/remove', [\App\Http\Controllers\Personnel\CartController::class, 'removeCart'])->name('personnel_borrow_stock.remove');
+        Route::get('personnel_borrow_stock/clear', [\App\Http\Controllers\Personnel\CartController::class, 'clearAllCart'])->name('personnel_borrow_stock.clear');
+        Route::post('personnel_borrow_stock/save', [\App\Http\Controllers\Personnel\CartController::class, 'saveCart'])->name('personnel_borrow_stock.save');
+        Route::post('personnel_borrow_stock/fetch', [\App\Http\Controllers\Personnel\CartController::class, 'fetch'])->name('personnel_borrow_stock.fetch');
+
+        Route::get('personnel_borrow_disposable', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'cartList'])->name('personnel_borrow_disposable.list');
+        Route::post('personnel_borrow_disposable/borrow', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'addToCart'])->name('personnel_borrow_disposable.add');
+        Route::post('personnel_borrow_disposable/update-cart', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'updateCart'])->name('personnel_borrow_disposable.update');
+        Route::post('personnel_borrow_disposable/remove', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'removeCart'])->name('personnel_borrow_disposable.remove');
+        Route::get('personnel_borrow_disposable/clear', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'clearAllCart'])->name('personnel_borrow_disposable.clear');
+        Route::post('personnel_borrow_disposable/save', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'saveCart'])->name('personnel_borrow_disposable.save');
+        Route::post('personnel_borrow_disposable/fetch', [\App\Http\Controllers\Personnel\BorrowDisposable::class, 'fetch'])->name('personnel_borrow_disposable.fetch');
+
     });
     Route::group(['middleware' => 'role:student'], function () {
         Route::get('student_dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student_dashboard');
