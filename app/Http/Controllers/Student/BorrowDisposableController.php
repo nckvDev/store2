@@ -12,7 +12,7 @@ use App\Models\Borrow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class CartController extends Controller
+class BorrowDisposableController extends Controller
 {
     public function cartList(Request $request)
     {
@@ -22,21 +22,21 @@ class CartController extends Controller
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
-        $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->get();
+        $disposables = Disposable::all();
         $cartItems = \Cart::getContent();
 
         if ($select_id != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('type_id', $select_id)->get();
+            $disposables = Disposable::where('type_id', $select_id)->get();
         }
 
         if ($searchName != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
 
         if ($select_id != null && $searchName != null) {
-            $stocks = Stock::whereIn('stock_status', [0, 3, 5])->where('defective_stock', 0)->where('type_id', $select_id)->where('stock_name', 'LIKE', "%" . $searchName . "%")->get();
+            $disposables = Disposable::where('type_id', $select_id)->where('disposable_name', 'LIKE', "%" . $searchName . "%")->get();
         }
-        return view('users/student/cart', compact('cartItems', 'stocks', 'types'));
+        return view('users/student/borrowDisposable', compact('cartItems', 'disposables', 'types'));
     }
 
     public function addToCart(Request $request)
@@ -46,9 +46,6 @@ class CartController extends Controller
             'name' => $request['name'],
             'price' => $request['price'],
             'quantity' => $request['quantity'],
-//            'attributes' => array(
-//                'image' => $request->image,
-//            )
         ]);
         session()->flash('success', 'เพิ่มอุปกรณ์ในรายการ');
 
@@ -58,7 +55,7 @@ class CartController extends Controller
     public function updateCart(Request $request)
     {
         \Cart::update(
-            $request['id'],
+            $request->id,
             [
                 'quantity' => [
                     'relative' => false,
@@ -66,13 +63,15 @@ class CartController extends Controller
                 ],
             ]
         );
+
         session()->flash('success', 'อัพเดทรายการอุปกรณ์');
+
         return redirect()->back();
     }
 
     public function removeCart(Request $request)
     {
-        \Cart::remove($request['id']);
+        \Cart::remove($request->id);
         session()->flash('success', 'ลบรายการที่เลือก');
         return redirect()->back();
     }
@@ -88,43 +87,40 @@ class CartController extends Controller
     {
         $user_id = Auth::user()['id'];
         $stock_borrow = null;
-        $amount_borrow = 0;
-        $num = 0;
-
-        $request->validate(
-            [
-                'started_at' => ['required'],
-                'end_at' => ['required'],
-            ],
-            [
-                'started_at.required' => "กรุณาป้อนวันที่ยืม",
-                'end_at.required' => "กรุณาป้อนวันที่คืน",
-            ]
-        );
-
-        $formatTimeStart = strftime('%Y-%m-%d %H:%M', strtotime($request['started_at']));
-        $formatTimeEnd = strftime('%Y-%m-%d %H:%M', strtotime($request['end_at']));
+        $amount_borrow = 0; // จำนวนวัสดุทั้งหมด
+        $num = 0; // จำนวนขอเบิก
 
         if ($request['borrow_list_id']) {
+
             for ($i = 0; $i < count($request['borrow_list_id']); $i++) {
-                $stock_borrow = DB::table('stocks')->where('stock_num', $request['borrow_list_id'][$i])->update([
-                    'stock_status' => 1
-                ]);
+                $disposable = DB::table('disposables')->where('disposable_num', $request['borrow_list_id'][$i])->get();
+                foreach ($disposable as $item) {
+                    $amount_borrow = $item->disposable_amount - $item->amount_minimum;
+                }
             }
 
-            if ($stock_borrow) {
+            for ($i = 0; $i < count($request['borrow_amount']); $i++) {
+                $amount = $request['borrow_amount'][$i];
+                if (intval($amount) > 1) {
+                    $num = intval($amount);
+                }
+            }
+
+           if ($num <= $amount_borrow) {
                 Borrow::create([
                     'borrow_list_id' => $request['borrow_list_id'],
                     'borrow_name' => $request['borrow_name'],
                     'borrow_status' => $request['borrow_status'],
                     'borrow_amount' => $request['borrow_amount'],
                     'user_id' => $user_id,
-                    'started_at' => $formatTimeStart,
-                    'end_at' => $formatTimeEnd,
                 ]);
+
                 \Cart::clear();
                 session()->flash('success', 'All Item Cart Clear Successfully !');
+
                 return redirect()->back()->with('successes', 'ยืนยันรายการยืมสำเร็จ');
+            } else {
+                return redirect()->back()->with('warning', 'จำนวนวัสดุไม่เพียงพอ');
             }
         }
         return redirect()->back()->with('error', 'ไม่มีรายการที่เลือก');

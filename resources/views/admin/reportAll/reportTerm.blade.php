@@ -49,10 +49,9 @@
                             <table id="table_id" class="">
                                 <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
+{{--                                    <th>ลำดับ</th>--}}
                                     <th>รหัสผู้ใช้งาน</th>
-                                    <th>ชื่อ</th>
-                                    <th>นามสกุล</th>
+                                    <th>ชื่อ-นามสกุล</th>
                                     <th>วันที่</th>
                                     <th>สถานะ</th>
                                     <th>รายละเอียด</th>
@@ -61,10 +60,9 @@
                                 <tbody>
                                 @foreach($report_terms as $row)
                                     <tr>
-                                        <td>{{ $row->id}}</td>
+{{--                                        <td>{{ $row->id}}</td>--}}
                                         <td>{{ $row->borrow_user->user_id}}</td>
-                                        <td>{{ $row->borrow_user->firstname}}</td>
-                                        <td>{{ $row->borrow_user->lastname}}</td>
+                                        <td>{{ $row->borrow_user->user_prefix->prefix_name }} {{ $row->borrow_user->firstname }}  {{ $row->borrow_user->lastname }}</td>
                                         <td>  {{ $thaiDateHelper->DateFormat($row->created_at) }}</td>
                                         @if($row->borrow_status=="1")
                                             <td class="align-middle text-sm">
