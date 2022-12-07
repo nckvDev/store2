@@ -35,6 +35,7 @@
                                                 class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }}"
                                                 placeholder="{{ __('รหัสนักศึกษาหรือบุคลากร') }}" type="text"
                                                 name="user_id"
+                                                id="user_id"
                                                 value="{{ old('user_id') }}" autofocus>
                                         </div>
                                         @if ($errors->has('user_id'))
@@ -120,14 +121,14 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}" id="group">
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-badge"></i></span>
                                     </div>
-                                    <select id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
+                                    <select id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role" id="role">
                                         <option value="">-- เลือกสิทธิ์ --</option>
-                                        <option value="admin" {{ old('role') === "admin" ? 'selected' : '' }}>แอดมิน</option>
+{{--                                        <option value="admin" {{ old('role') === "admin" ? 'selected' : '' }}>แอดมิน</option>--}}
                                         <option value="personnel" {{ old('role') === "personnel" ? 'selected' : '' }}>บุคลากร</option>
                                         <option value="student" {{ old('role') === "student" ? 'selected' : '' }}>นักศึกษา</option>
                                     </select>
@@ -266,7 +267,6 @@
                 localStorage.setItem('isRole', value);
                 let getRole = localStorage.getItem('isRole');
 
-                console.log(getRole)
                 if (getRole === "personnel") {
                     $("#student").hide();
                     $("#personnel").show().addClass("col-lg-12");
@@ -279,6 +279,22 @@
                     $("#personnel").show().removeClass("col-lg-12");
                     // $(".show").css({"display":"flex"})
                     // $("#personnel").removeClass("col-lg-12");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#user_id').on('keyup change', function(){
+                let userID = $('#user_id').val();
+                console.log('userID', userID.length)
+                if(userID > 4) {
+                    $('#role').val('student').change();
+                    $("#student").show();
+                    $("#personnel").show().removeClass("col-lg-12");
+                } else {
+                    $('#role').val('personnel').change();
+                    $("#student").hide();
+                    $("#personnel").show().addClass("col-lg-12");
                 }
             });
         });
