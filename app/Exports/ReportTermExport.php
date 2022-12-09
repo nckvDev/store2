@@ -15,12 +15,14 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize
+class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -70,9 +72,9 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
                 $name[] = json_decode('"'.$item.'"');
             }
         }
-        $newName = join(", ", $name);
-        $listId = join(", ", $row->borrow_list_id);
-        $amount = join(", ", $row->borrow_amount);
+        $newName = join("\n", $name);
+        $listId = join("\n", $row->borrow_list_id);
+        $amount = join("\n", $row->borrow_amount);
 
         switch ($row->borrow_status) {
             case 1:
@@ -100,6 +102,44 @@ class ReportTermExport implements FromQuery, WithHeadings, WithMapping, WithColu
             $row->description ?  $row->description : "-",
             $row->created_at
         ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        $styleArray = [
+            'font' => [
+                'name' => 'TH SarabunPSK',
+                'size' => 18,
+            ],
+        ];
+        $styleHeader = [
+            'font' => [
+//                'name' => 'TH SarabunPSK',
+                'size' => 19,
+                'bold' => true,
+            ],
+        ];
+        $styleBold = [
+            'font' => [
+                'bold' => true
+            ]
+        ];
+        $colorHeader = [
+            'fillType' => 'solid','rotation' => 0, 'color' => ['rgb' => 'D9D9D9']
+        ];
+
+        $sheet->getStyle('A:C')->getAlignment()->setWrapText(true);
+        $sheet->getStyle('A:C')->getAlignment()->setHorizontal('left');
+        $sheet->getStyle('A:G')->getAlignment()->setVertical('center');
+        $sheet->setAutoFilter('B1:G1');
+        $sheet->getStyle('A:G')->applyFromArray($styleArray);
+        $sheet->getStyle('A1:G1')->applyFromArray($styleHeader);
+        $sheet->getStyle('A1:G1')->getFill()->applyFromArray($colorHeader);
+        $sheet->getStyle('A')->applyFromArray($styleBold);
+//        return [
+//            // Style the first row as bold text.
+//            1    => ['font' => ['size' => 14]],
+//        ];
     }
 
     public function columnFormats(): array
