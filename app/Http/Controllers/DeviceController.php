@@ -6,6 +6,7 @@ use App\Exports\DevicesExport;
 use App\Models\Device;
 use App\Models\Type;
 use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -31,20 +32,22 @@ class DeviceController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
         $request->validate([
-            'device_num' => 'required|unique:devices',
             'device_name' => 'required|max:255',
+            'type_id' => 'required',
+            'device_year' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png'
         ],
             [
-                'device_num.required' => "กรุณาป้อนรหัสอุปกรณ์ด้วยครับ",
-                'device_num.unique' => 'มีรหัสนี้ในฐานข้อมูลแล้ว',
                 'device_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'device_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
+                'type_id.required' => "กรุณาเลือกประเภทด้วยครับ",
+                'device_year.required' => "กรุณาป้อนปีด้วยครับ",
                 'image.required' => "กรุณาใส่ภาพด้วยครับ",
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]);
+
+        $device_num = IdGenerator::generate(['table' => 'devices', 'field' => 'device_num', 'length' => 7, 'prefix' => 'DV-']);
 
         $deviceImage = $request->file('image');
 
@@ -57,7 +60,7 @@ class DeviceController extends Controller
         $full_path = $upload_location . $imgName;
 
         Device::create([
-            'device_num' => $request['device_num'],
+            'device_num' => $device_num,
             'device_name' => $request['device_name'],
             'type_id' => $request['type_id'],
             'device_amount' => $request['device_amount'],
@@ -160,22 +163,22 @@ class DeviceController extends Controller
         $id = $request->get('select');
         $result = array();
         $query = DB::table('types')
-        ->join('devices','types.id','=','devices.type_id')
-        ->select('devices.*')
-        ->where('types.id',$id)
-        ->get();
+            ->join('devices', 'types.id', '=', 'devices.type_id')
+            ->select('devices.*')
+            ->where('types.id', $id)
+            ->get();
         $output = 'ไม่มีข้อมูล';
-            foreach($query as $row){
-                // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
-                $img = asset($row->image);
-                $path_edit = url('/device/edit/'.$row->id);
-                $path_del = url('/device/delete/'.$row->id);
-                if($row->device_status == 0)
-                    $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
-                elseif($row->device_status == 1)
-                    $status ="<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
-                elseif($row->device_status == 2)
-                    $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
+        foreach ($query as $row) {
+            // $output.='<option value="'.$row->stock_name.'">'.$row->stock_name.'</option>';
+            $img = asset($row->image);
+            $path_edit = url('/device/edit/' . $row->id);
+            $path_del = url('/device/delete/' . $row->id);
+            if ($row->device_status == 0)
+                $status = "<div class='rounded text-white bg-green text-center'>พร้อมใช้งาน</div>";
+            elseif ($row->device_status == 1)
+                $status = "<div class='rounded text-white bg-orange text-center'>รออนุมัติ</div>";
+            elseif ($row->device_status == 2)
+                $status = "<div class='rounded text-white bg-red text-center'>ถูกยืม</div>";
 
             echo "<tr>
                         <td>
@@ -209,7 +212,7 @@ class DeviceController extends Controller
                                         </div>
                                     </td>
                     </tr>";
-                echo " <script>
+            echo " <script>
                      $('.delete-confirm').on('click', function (event) {
                                 event.preventDefault();
                                 const url = $(this).attr('href');

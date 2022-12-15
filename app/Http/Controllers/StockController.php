@@ -6,6 +6,7 @@ use App\Exports\StocksExport;
 use App\Models\Stock;
 use App\Models\Type;
 use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -33,22 +34,20 @@ class StockController extends Controller
     {
         $request->validate(
             [
-                'stock_num' => 'required|unique:stocks|max:5',
                 'stock_name' => 'required|max:255',
                 'type_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'stock_num.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'stock_num.max' => "ห้ามป้อนเกิน 5 ตัว",
-                'stock_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'stock_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'stock_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
                 'image.required' => "กรุณาใส่ภาพด้วยครับ",
+                'type_id.required' => "กรุณาเลือกประเภทด้วยครับ",
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
 
+        $stock_num = IdGenerator::generate(['table' => 'stocks', 'field'=>'stock_num', 'length' => 7, 'prefix' => 'ST-']);
         $stockImage = $request->file('image');
 
         $nameGen = hexdec(uniqid());
@@ -64,7 +63,7 @@ class StockController extends Controller
             'stock_amount' => $request['stock_amount'],
             'image' => $full_path,
             'type_id' => $request['type_id'],
-            'stock_num' => $request['stock_num'],
+            'stock_num' =>  $stock_num,
             'created_at' => Carbon::now()
         ]);
 

@@ -26,28 +26,46 @@
                         @csrf
                         <div class="pl-lg-2">
                             <div class="row">
-                                <div class="col-xl-4">
+{{--                                <div class="col-xl-4">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="form-control-label" for="stock_num">{{ __('รหัสวัสดุ') }}</label>--}}
+{{--                                        <input type="text" name="stock_num"--}}
+{{--                                            value="{{ old('stock_num') ? old('stock_num') : '' }}"--}}
+{{--                                            class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }}"--}}
+{{--                                            autofocus>--}}
+{{--                                        @if ($errors->has('stock_num'))--}}
+{{--                                        <span class="invalid-feedback" role="alert">--}}
+{{--                                            <strong>{{ $errors->first('stock_num') }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <div class="col-xl-5">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="stock_num">{{ __('รหัสวัสดุ') }}</label>
-                                        <input type="text" name="stock_num"
-                                            value="{{ old('stock_num') ? old('stock_num') : '' }}"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }}"
-                                            autofocus>
-                                        @if ($errors->has('stock_num'))
+                                        <label class="form-control-label" for="stock_name">{{ __('ชื่อวัสดุ') }}</label>
+                                        <input type="text" name="stock_name" value="{{ old('stock_name') }}"
+                                            class="form-control form-control-alternative {{ $errors->has('stock_name') ? ' is-invalid' : '' }}">
+                                        @if ($errors->has('stock_name'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('stock_num') }}</strong>
+                                            <strong>{{ $errors->first('stock_name') }}</strong>
                                         </span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-6">
+                                <div class="col-xl-5">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="stock_name">{{ __('ชื่อวัสดุ') }}</label>
-                                        <input type="text" name="stock_name" value="{{ old('stock_name') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_name') ? ' is-invalid' : '' }}">
-                                        @if ($errors->has('stock_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('stock_name') }}</strong>
+                                        <label class="form-control-label" for="type_id">{{ __('ประเภท') }}</label>
+                                        <select
+                                            class="form-control form-control-alternative {{ $errors->has('type_id') ? ' is-invalid' : '' }}"
+                                            name="type_id">
+                                            <option value="">เลือก...</option>
+                                            @foreach($types as $row)
+                                                <option value="{{ $row->id }}">{{ $row->type_detail }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('type_id'))
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('type_id') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -57,7 +75,7 @@
                                         <label class="form-control-label"
                                             for="stock_amount">{{ __('จำนวน') }}</label>
                                         <input type="number" name="stock_amount" value="1" min="1" max="1"
-                                            class="form-control form-control-alternative{{ $errors->has('stock_amount') ? ' is-invalid' : '' }}">
+                                            class="form-control form-control-alternative {{ $errors->has('stock_amount') ? ' is-invalid' : '' }}">
                                         @if ($errors->has('stock_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('stock_amount') }}</strong>
@@ -67,32 +85,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-6">
+                                <div class="col-xl-12">
                                     <div class="form-group">
                                         <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
                                         <input type="file" name="image" value="{{ old('image') }}"
-                                            class="form-control {{ $errors->has('image') ? ' is-invalid' : '' }}">
+                                            class="form-control form-control-alternative {{ $errors->has('image') ? ' is-invalid' : '' }}">
                                         @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('image') }}</strong></span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="type_id">{{ __('ประเภท') }}</label>
-                                        <select
-                                            class="form-control form-control-alternative{{ $errors->has('type_id') ? ' is-invalid' : '' }}"
-                                            name="type_id">
-                                            <option>เลือก...</option>
-                                            @foreach($types as $row)
-                                            <option value="{{ $row->id }}">{{ $row->type_detail }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
                                         @endif
                                     </div>
                                 </div>
