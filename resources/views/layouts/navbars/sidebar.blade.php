@@ -197,6 +197,12 @@
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link {{ request()->is('category*') ? 'active text-success' : '' }}"
+                       href="{{ route('category') }}">
+                        <i class="ni ni-books text-success"></i> {{ __('หมวดหมู่') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link {{ request()->is('type*') ? 'active text-dark' : '' }}"
                         href="{{ route('type') }}">
                         <i class="ni ni-books text-dark"></i> {{ __('ประเภท') }}

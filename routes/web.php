@@ -20,6 +20,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\DisposableController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Personnel\BorrowController;
 use App\Http\Controllers\Personnel\BorrowAllController;
 use App\Http\Controllers\Personnel\CartController;
@@ -128,6 +129,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('type/edit/{id}', [TypeController::class, 'edit']);
         Route::post('type/update/{id}', [TypeController::class, 'update']);
         Route::get('type/delete/{id}', [TypeController::class, 'delete']);
+
+        // Category
+        Route::get('category', [CategoryController::class, 'index'])->name('category');
+        Route::post('category/add', [CategoryController::class, 'store'])->name('addCategory');
+        Route::get('category/edit/{id}', [CategoryController::class, 'edit']);
+        Route::post('category/update/{id}', [CategoryController::class, 'update']);
+        Route::get('category/delete/{id}', [CategoryController::class, 'delete']);
 
         // Stock
         Route::get('stock', [StockController::class, 'index'])->name('stock');
