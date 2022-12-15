@@ -21,6 +21,7 @@
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ประเภท</th>
+                                <th>หมวดหมู่</th>
                                 <th>วันที่สร้าง</th>
                                 <th></th>
                             </tr>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ $types->firstItem()+$loop->index }}</td>
                                     <td>{{ $row->type_detail }}</td>
+                                    <td>{{ $row->type_category->category_detail }}</td>
                                     <td>
                                         @if ( $row->created_at == NULL)
                                             ไม่ถูกนิยาม
@@ -70,7 +72,23 @@
                         <form method="post" action="{{ route('addType') }}" autocomplete="off">
                             @csrf
                             <div class="pl-lg-2">
-                                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <div class="form-group{{ $errors->has('category_id') ? ' has-danger' : '' }}">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <select class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}"
+                                                name="category_id">
+                                            <option value="">เลือกหมวดหมู่</option>
+                                            @foreach($categorys as $row)
+                                                <option value="{{ $row->id }}" {{ old('category_id') == $row->category_detail ? 'selected' : '' }}>{{ $row->category_detail }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if ($errors->has('category_id'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                                <strong>{{ $errors->first('category_id') }}</strong>
+                                            </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('type_detail') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('ประเภท') }}</label>
                                     <input type="text" name="type_detail" id="input-name"
                                            class="form-control form-control-alternative{{ $errors->has('type_detail') ? ' is-invalid' : '' }}"
@@ -78,8 +96,8 @@
 
                                     @if ($errors->has('type_detail'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('type_detail') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('type_detail') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                                 <div class="text-center">

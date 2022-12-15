@@ -14,4 +14,9 @@ class Category extends Model
         'category_detail'
     ];
 
+    public function category_type()
+    {
+        return $this->hasMany('App\Models\Type', 'category_id', 'id');
+    }
+
 }
