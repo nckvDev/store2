@@ -105,13 +105,10 @@ class BorrowDisposable extends Controller
 
             for ($i = 0; $i < count($request['borrow_amount']); $i++) {
                 $amount = $request['borrow_amount'][$i];
-                if (intval($amount) > 1) {
-                    $borrow_name = $request['borrow_name'][$i];
-                    $num = intval($amount);
-                }
+                $num = intval($amount);
             }
 
-            if ($num < $amount_borrow) {
+            if ($num <= $amount_borrow) {
                 Borrow::create([
                     'borrow_list_id' => $request['borrow_list_id'],
                     'borrow_name' => $request['borrow_name'],

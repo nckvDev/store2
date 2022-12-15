@@ -68,7 +68,7 @@ class RegistersController extends Controller
 
         $request->validate(
             [
-                'user_id' => ['required', 'string', 'max:10', 'unique:users'],
+                'user_id' => ['required', 'string', 'max:11', 'unique:users'],
                 'prefix' => ['required', 'string', 'max:255'],
                 'firstname' => ['required', 'string', 'max:255'],
                 'lastname' => ['required', 'string', 'max:255'],
@@ -80,7 +80,7 @@ class RegistersController extends Controller
             ],
             [
                 'user_id.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'user_id.max' => "ห้ามป้อนเกิน 10 ตัว",
+                'user_id.max' => "ห้ามป้อนเกิน 11 ตัว",
                 'user_id.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'prefix.required' => "กรุณาเลือกคำนำหน้าด้วยครับ",
                 'firstname.required' => "กรุณาป้อนชื่อด้วยครับ",

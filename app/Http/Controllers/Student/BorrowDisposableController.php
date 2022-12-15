@@ -101,9 +101,7 @@ class BorrowDisposableController extends Controller
 
             for ($i = 0; $i < count($request['borrow_amount']); $i++) {
                 $amount = $request['borrow_amount'][$i];
-                if (intval($amount) > 1) {
-                    $num = intval($amount);
-                }
+                $num = intval($amount);
             }
 
            if ($num <= $amount_borrow) {

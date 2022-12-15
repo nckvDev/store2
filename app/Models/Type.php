@@ -29,4 +29,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Disposable', 'type_id', 'id');
     }
+
+    public function type_category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
 }
