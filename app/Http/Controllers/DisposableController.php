@@ -6,6 +6,7 @@ use App\Exports\DisposablesExport;
 use App\Models\Disposable;
 use App\Models\Type;
 use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,7 +17,6 @@ class DisposableController extends Controller
     public function index()
     {
         $disposables = Disposable::all();
-        $types = Type::all();
         $types = DB::table('types')
             ->orderBy('type_detail', 'asc')
             ->get();
@@ -42,23 +42,29 @@ class DisposableController extends Controller
     {
         $request->validate(
             [
-                'disposable_num' => 'required|unique:disposables|max:5',
+//                'disposable_num' => 'required|unique:disposables|max:5',
                 'disposable_name' => 'required|unique:disposables|max:255',
                 'type_id' => 'required',
+                'disposable_amount' => 'required',
+                'amount_minimum' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png'
             ],
             [
-                'disposable_num.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'disposable_num.max' => "ห้ามป้อนเกิน 5 ตัว",
-                'disposable_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
+//                'disposable_num.required' => "กรุณาป้อนรหัสด้วยครับ",
+//                'disposable_num.max' => "ห้ามป้อนเกิน 5 ตัว",
+//                'disposable_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'disposable_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'disposable_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
                 'disposable_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
+                'type_id.required' => "กรุณาเลือกประเภทด้วยครับ",
+                'disposable_amount.required' => "ป้อนจำนวนทั้งหมดด้วยครับ",
+                'amount_minimum.required' => "ป้อนจำนวนน้อยสุดด้วยครับ",
                 'image.required' => "กรุณาใส่ภาพด้วยครับ",
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
 
+        $disposable_num = IdGenerator::generate(['table' => 'disposables', 'field' => 'disposable_num', 'length' => 7, 'prefix' => 'DP-']);
         $disposableImage = $request->file('image');
 
         $nameGen = hexdec(uniqid());
@@ -75,7 +81,7 @@ class DisposableController extends Controller
             'image' => $full_path,
             'amount_minimum' => $request['amount_minimum'],
             'type_id' => $request['type_id'],
-            'disposable_num' => $request['disposable_num'],
+            'disposable_num' => $disposable_num,
             'created_at' => Carbon::now()
         ]);
 

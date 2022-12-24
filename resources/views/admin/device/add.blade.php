@@ -26,22 +26,22 @@
                         @csrf
                         <div class="pl-lg-2">
                             <div class="row">
-                                <div class="col-xl-2">
-                                    <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="device_num">{{ __('รหัสครุภัณฑ์') }}</label>
-                                        <input type="text" name="device_num"
-                                            value="{{ old('device_num') ? old('device_num') : '' }}"
-                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }} "
-                                            autofocus>
-                                        @if ($errors->has('device_num'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('device_num') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-5">
+{{--                                <div class="col-xl-2">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="form-control-label"--}}
+{{--                                            for="device_num">{{ __('รหัสครุภัณฑ์') }}</label>--}}
+{{--                                        <input type="text" name="device_num"--}}
+{{--                                            value="{{ old('device_num') ? old('device_num') : '' }}"--}}
+{{--                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }} "--}}
+{{--                                            autofocus>--}}
+{{--                                        @if ($errors->has('device_num'))--}}
+{{--                                        <span class="invalid-feedback" role="alert">--}}
+{{--                                            <strong>{{ $errors->first('device_num') }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <div class="col-xl-4">
                                     <div class="form-group">
                                         <label class="form-control-label"
                                             for="device_name">{{ __('ชื่อครุภัณฑ์') }}</label>
@@ -54,7 +54,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-5">
+                                <div class="col-xl-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="type_id">{{ __('ประเภท') }}</label>
                                         <select
@@ -65,35 +65,9 @@
                                             <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }} >{{ $row->type_detail }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('name'))
+                                        @if ($errors->has('type_id'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
-                                        <input type="file" name="image" value="{{ old('image') }}"
-                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }} ">
-                                        @if ($errors->has('image'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('image') }}</strong></span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-xl-2">
-                                    <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="device_amount">{{ __('จำนวน') }}</label>
-                                        <input type="number" name="device_amount" value="1" min="1" max="1"
-                                            class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
-                                        @if ($errors->has('device_amount'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('device_amount') }}</strong>
+                                            <strong>{{ $errors->first('type_id') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -102,11 +76,37 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="device_year">{{ __('ปี') }}</label>
                                         <input type="number" name="device_year" value="{{ old('device_year') }}" min="1" max="2565"
-                                            class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }} ">
+                                               class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_year'))
-                                        <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('device_year') }}</strong>
                                         </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-xl-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               for="device_amount">{{ __('จำนวน') }}</label>
+                                        <input type="number" name="device_amount" value="1" min="1" max="1"
+                                               class="form-control form-control-alternative{{ $errors->has('device_amount') ? ' is-invalid' : '' }} ">
+                                        @if ($errors->has('device_amount'))
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('device_amount') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
+                                        <input type="file" name="image" value="{{ old('image') }}"
+                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }} ">
+                                        @if ($errors->has('image'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('image') }}</strong></span>
                                         @endif
                                     </div>
                                 </div>

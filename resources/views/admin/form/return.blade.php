@@ -122,44 +122,50 @@
                                                                 อนุมัติ
                                                             </button>
                                                         </form>
-                                                        {{--                                                        <button type="button" class="btn btn-danger btn-sm"--}}
-                                                        {{--                                                                data-toggle="modal"--}}
-                                                        {{--                                                                data-target="#Note{{($row->id)}}">--}}
-                                                        {{--                                                            ไม่อนุมัติ--}}
-                                                        {{--                                                        </button>--}}
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#Note{{($row->id)}}">
+                                                            ไม่อนุมัติ
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- Modal Note-->
-                                        {{--                                        <div class="modal fade" id="Note{{($row->id)}}" tabindex="-1" role="dialog"--}}
-                                        {{--                                             aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-                                        {{--                                            <div class="modal-dialog" role="document">--}}
-                                        {{--                                                <form action="{{ url('/confirm-return/update/'.$row->id) }}" method="POST">--}}
-                                        {{--                                                    @csrf--}}
-                                        {{--                                                    <div class="modal-content">--}}
-                                        {{--                                                        <div class="modal-header">--}}
-                                        {{--                                                            <h3 class="modal-title" id="exampleModalLabel">หมายเหตุ</h3>--}}
-                                        {{--                                                            <button class="close" data-dismiss="modal"--}}
-                                        {{--                                                                    aria-label="Close">--}}
-                                        {{--                                                                <span aria-hidden="true">&times;</span>--}}
-                                        {{--                                                            </button>--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                        <div class="modal-body">--}}
-                                        {{--                                                            <textarea class="border-dark form-control" id="description" name="description" rows="5" cols="55" autofocus> </textarea>--}}
-                                        {{--                                                            @foreach($row->borrow_list_id as $item)--}}
-                                        {{--                                                                <input type="hidden" name="borrow_list_id[]" value="{{ $item }}">--}}
-                                        {{--                                                            @endforeach--}}
-                                        {{--                                                            <input type="hidden" name="borrow_status" value="6">--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                        <div class="modal-footer">--}}
-                                        {{--                                                            <button class="btn btn-primary btn-sm" type="submit" id="description-submit"> ตกลง </button>--}}
-                                        {{--                                                        </div>--}}
-                                        {{--                                                    </div>--}}
-                                        {{--                                                </form>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
+                                        <div class="modal fade" id="Note{{($row->id)}}" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <form action="{{ url('/confirm-return/update/'.$row->id) }}"
+                                                      method="POST">
+                                                    @csrf
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel">หมายเหตุ</h3>
+                                                            <button class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <textarea class="border-dark form-control" id="description"
+                                                                      name="description" rows="5" cols="55"
+                                                                      autofocus> </textarea>
+                                                            @foreach($row->borrow_list_id as $item)
+                                                                <input type="hidden" name="borrow_list_id[]"
+                                                                       value="{{ $item }}">
+                                                            @endforeach
+                                                            <input type="hidden" name="borrow_status" value="6">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-primary btn-sm" type="submit"
+                                                                    id="description-submit"> ตกลง
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
