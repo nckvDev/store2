@@ -61,7 +61,7 @@
                                             <option value="">เลือก...</option>
                                             @foreach($types as $row)
                                                 @if($row->type_category->category_detail === 'วัสดุถาวร')
-                                                <option value="{{ $row->id }}">{{   $row->type_detail }}</option>
+                                                <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }}>{{   $row->type_detail }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
