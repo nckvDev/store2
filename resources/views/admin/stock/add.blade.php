@@ -64,8 +64,6 @@
                                                 <option value="{{ $row->id }}">{{   $row->type_detail }}</option>
                                                 @endif
                                             @endforeach
-
-                                            $row->type_category->category_detail
                                         </select>
                                         @if ($errors->has('type_id'))
                                             <span class="invalid-feedback" role="alert">
