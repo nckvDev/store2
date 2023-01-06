@@ -62,7 +62,9 @@
                                             name="type_id">
                                             <option value="">เลือก...</option>
                                             @foreach($types as $row)
-                                            <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }} >{{ $row->type_detail }}</option>
+                                                @if($row->type_category->category_detail === 'ครุภัณฑ์')
+                                                 <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }} >{{ $row->type_detail }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         @if ($errors->has('type_id'))

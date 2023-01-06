@@ -11,7 +11,7 @@ class TypeController extends Controller
 {
     public function index()
     {
-        $types = Type::paginate(5);
+        $types = Type::paginate(100);
         $categorys = Category::all();
         return view('admin.type.index', compact('types', 'categorys'));
     }

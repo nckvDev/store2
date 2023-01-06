@@ -48,7 +48,9 @@
                                             name="type_id">
                                             <option value="">เลือก...</option>
                                             @foreach($types as $row)
+                                                @if($row->type_category->category_detail === 'วัสดุสิ้นเปลือง')
                                                 <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }}>{{ $row->type_detail }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         @if ($errors->has('type_id'))
