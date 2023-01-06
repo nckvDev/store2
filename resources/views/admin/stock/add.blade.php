@@ -60,8 +60,12 @@
                                             name="type_id">
                                             <option value="">เลือก...</option>
                                             @foreach($types as $row)
-                                                <option value="{{ $row->id }}">{{ $row->type_detail }}</option>
+                                                @if($row->type_category->category_detail === 'วัสดุถาวร')
+                                                <option value="{{ $row->id }}">{{   $row->type_detail }}</option>
+                                                @endif
                                             @endforeach
+
+                                            $row->type_category->category_detail
                                         </select>
                                         @if ($errors->has('type_id'))
                                             <span class="invalid-feedback" role="alert">
