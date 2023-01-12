@@ -42,7 +42,9 @@
                             <select class="form-control type" name="type" id="type">
                                 <option value="">เลือกประเภทวัสดุสิ้นเปลือง</option>
                                 @foreach($types as $row)
-                                    <option value="{{$row->id}}">{{$row->type_detail}}</option>
+                                    @if($row->type_category->category_detail === 'วัสดุสิ้นเปลือง')
+                                        <option value="{{ $row->id }}" {{ old('type_id') == $row->id ? 'selected' : '' }}>{{ $row->type_detail }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
