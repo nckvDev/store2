@@ -16,9 +16,9 @@ class StockController extends Controller
     public function index()
     {
         $types = Type::all();
-        $types = DB::table('types')
-            ->orderBy('type_detail', 'asc')
-            ->get();
+//        $types = DB::table('types')
+//            ->orderBy('type_detail', 'asc')
+//            ->get();
         $stocks = Stock::all();
         return view('admin.stock.index', compact('stocks', 'types'));
     }

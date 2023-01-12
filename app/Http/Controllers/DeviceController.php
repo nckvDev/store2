@@ -16,9 +16,9 @@ class DeviceController extends Controller
     public function index()
     {
         $types = Type::all();
-        $types = DB::table('types')
-            ->orderBy('type_detail', 'asc')
-            ->get();
+//        $types = DB::table('types')
+//            ->orderBy('type_detail', 'asc')
+//            ->get();
         $devices = Device::all();
         return view('admin.device.index', compact('devices', 'types'));
     }

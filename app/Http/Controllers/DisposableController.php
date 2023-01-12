@@ -17,9 +17,10 @@ class DisposableController extends Controller
     public function index()
     {
         $disposables = Disposable::all();
-        $types = DB::table('types')
-            ->orderBy('type_detail', 'asc')
-            ->get();
+        $types = Type::all();
+//        $types = DB::table('types')
+//            ->orderBy('type_detail', 'asc')
+//            ->get();
 
         foreach ($disposables as $item) {
             if ($item->disposable_amount <= $item->amount_minimum) {
