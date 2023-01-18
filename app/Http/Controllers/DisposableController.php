@@ -101,19 +101,14 @@ class DisposableController extends Controller
     {
         $request->validate(
             [
-                'disposable_num' => 'required|max:5',
+                'disposable_num' => 'required',
                 'disposable_name' => 'required|max:255',
-                'type_id' => 'required',
-                'image' => 'required|mimes:jpg,jpeg,png'
+                'image' => 'mimes:jpg,jpeg,png'
             ],
             [
                 'disposable_num.required' => "กรุณาป้อนรหัสด้วยครับ",
-                'disposable_num.max' => "ห้ามป้อนเกิน 5 ตัว",
-                'disposable_num.unique' => "มีข้อมูลรหัสนี้ในฐานข้อมูลแล้ว",
                 'disposable_name.required' => "กรุณาป้อนชื่ออุปกรณ์ด้วยครับ",
                 'disposable_name.max' => "ห้ามป้อนเกิน 255 ตัวอักษร",
-                'disposable_name.unique' => "มีข้อมูลชื่อนี้ในฐานข้อมูลแล้ว",
-                'image.required' => "กรุณาใส่ภาพด้วยครับ",
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]
         );
