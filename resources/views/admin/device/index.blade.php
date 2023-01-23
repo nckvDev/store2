@@ -44,7 +44,7 @@
                                     <th>ชื่อครุภัณฑ์</th>
                                     <th class="text-center">รูปภาพ</th>
                                     <th class="text-center">จำนวน</th>
-                                    <th class="text-center">ปี</th>
+                                    <th class="text-center">เลขครุภัณฑ์</th>
                                     <th>สถานะ</th>
                                     <th class="text-center">จัดการข้อมูล</th>
                                 </tr>
