@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-xl-2">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="device_year">{{ __('ปี') }}</label>
+                                        <label class="form-control-label" for="device_year">{{ __('เลขครุภัณฑ์') }}</label>
                                         <input type="number" name="device_year" value="{{ old('device_year') }}" min="1" max="2565"
                                                class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_year'))
