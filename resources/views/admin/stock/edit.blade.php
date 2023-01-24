@@ -33,7 +33,7 @@
                                                    for="stock_num">{{ __('รหัสวัสดุ') }}</label>
                                             <input type="text" name="stock_num" value="{{ $stocks->stock_num }}"
                                                    class="form-control form-control-alternative{{ $errors->has('stock_num') ? ' is-invalid' : '' }}"
-                                                   placeholder="{{ __('ประเภท') }}" autofocus>
+                                                   placeholder="{{ __('ประเภท') }}" readonly>
                                             @if ($errors->has('stock_num'))
                                                 <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('stock_num') }}</strong>

@@ -286,8 +286,7 @@
         $(document).ready(function () {
             $('#user_id').on('keyup change', function(){
                 let userID = $('#user_id').val();
-                console.log('userID', userID.length)
-                if(userID > 4) {
+                if(userID.length > 4) {
                     $('#role').val('student').change();
                     $("#student").show();
                     $("#personnel").show().removeClass("col-lg-12");
