@@ -82,6 +82,7 @@ class StockController extends Controller
     {
         $request->validate(
             [
+                'stock_num' => 'required',
                 'stock_name' => 'required|max:255',
                 'image' => 'mimes:jpg,jpeg,png'
             ],

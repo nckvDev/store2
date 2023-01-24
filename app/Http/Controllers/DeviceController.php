@@ -47,7 +47,7 @@ class DeviceController extends Controller
                 'image.mimes' => "ประเภทไฟล์ไม่ถูกต้อง"
             ]);
 
-        $device_num = IdGenerator::generate(['table' => 'devices', 'field' => 'device_num', 'length' => 7, 'prefix' => 'DV-']);
+//        $device_num = IdGenerator::generate(['table' => 'devices', 'field' => 'device_num', 'length' => 7, 'prefix' => 'DV-']);
 
         $deviceImage = $request->file('image');
 
@@ -60,7 +60,7 @@ class DeviceController extends Controller
         $full_path = $upload_location . $imgName;
 
         Device::create([
-            'device_num' => $device_num,
+            'device_num' => $request['device_num'],
             'device_name' => $request['device_name'],
             'type_id' => $request['type_id'],
             'device_amount' => $request['device_amount'],

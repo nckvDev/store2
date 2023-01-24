@@ -26,21 +26,21 @@
                         @csrf
                         <div class="pl-lg-2">
                             <div class="row">
-{{--                                <div class="col-xl-2">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label class="form-control-label"--}}
-{{--                                            for="device_num">{{ __('รหัสครุภัณฑ์') }}</label>--}}
-{{--                                        <input type="text" name="device_num"--}}
-{{--                                            value="{{ old('device_num') ? old('device_num') : '' }}"--}}
-{{--                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }} "--}}
-{{--                                            autofocus>--}}
-{{--                                        @if ($errors->has('device_num'))--}}
-{{--                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                            <strong>{{ $errors->first('device_num') }}</strong>--}}
-{{--                                        </span>--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                <div class="col-xl-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                            for="device_num">{{ __('รหัสครุภัณฑ์') }}</label>
+                                        <input type="text" name="device_num" id="device_num"
+                                            value="{{ old('device_num') ? old('device_num') : '' }}"
+                                            class="form-control form-control-alternative{{ $errors->has('device_num') ? ' is-invalid' : '' }} "
+                                            autofocus>
+                                        @if ($errors->has('device_num'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('device_num') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
                                         <label class="form-control-label"
@@ -76,8 +76,8 @@
                                 </div>
                                 <div class="col-xl-2">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="device_year">{{ __('เลขครุภัณฑ์') }}</label>
-                                        <input type="number" name="device_year" value="{{ old('device_year') }}" min="1" max="2565"
+                                        <label class="form-control-label" for="device_year">{{ __('ปี') }}</label>
+                                        <input type="number" name="device_year" value="{{ old('device_year') }}" min="1" max="{{ date('Y') + 543 }}"
                                                class="form-control form-control-alternative{{ $errors->has('device_year') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('device_year'))
                                             <span class="invalid-feedback" role="alert">

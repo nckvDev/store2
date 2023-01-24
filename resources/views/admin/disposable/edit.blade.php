@@ -32,8 +32,7 @@
                                             for="disposable_num">{{ __('รหัสวัสดุสิ้นเปลือง') }}</label>
                                         <input type="text" name="disposable_num"
                                             value="{{ $disposables->disposable_num }}"
-                                            class="form-control form-control-alternative{{ $errors->has('disposable_num') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}" autofocus>
+                                            class="form-control form-control-alternative{{ $errors->has('disposable_num') ? ' is-invalid' : '' }}"  readonly>
                                         @if ($errors->has('disposable_num'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('disposable_num') }}</strong>
@@ -47,8 +46,7 @@
                                             for="disposable_name">{{ __('ชื่อวัสดุสิ้นเปลือง') }}</label>
                                         <input type="text" name="disposable_name"
                                             value="{{ $disposables->disposable_name }}"
-                                            class="form-control form-control-alternative{{ $errors->has('disposable_name') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
+                                            class="form-control form-control-alternative{{ $errors->has('disposable_name') ? ' is-invalid' : '' }}"  >
                                         @if ($errors->has('disposable_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('disposable_name') }}</strong>
@@ -62,8 +60,7 @@
                                             for="disposable_amount">{{ __('จำนวนทั้งหมด') }}</label>
                                         <input type="number" name="disposable_amount"
                                             value="{{ $disposables->disposable_amount }}"
-                                            class="form-control form-control-alternative{{ $errors->has('disposable_amount') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
+                                            class="form-control form-control-alternative{{ $errors->has('disposable_amount') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('disposable_amount'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('disposable_amount') }}</strong>
@@ -77,8 +74,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="image">{{ __('รูปภาพ') }}</label>
                                         <input type="file" name="image" value="{{ $disposables->image }}"
-                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
+                                            class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}">
                                         <input type="hidden" name="old_image" value="{{ $disposables->image }}">
                                         @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">
@@ -93,12 +89,10 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label class="form-control-label"
-                                            for="amount_minimum">{{ __('จำนวนน้อยสุด') }}</label>
+                                        <label class="form-control-label" for="amount_minimum">{{ __('จำนวนน้อยสุด') }}</label>
                                         <input type="number" name="amount_minimum"
                                             value="{{ $disposables->amount_minimum }}"
-                                            class="form-control form-control-alternative{{ $errors->has('amount_minimum') ? ' is-invalid' : '' }}  placeholder="
-                                            {{ __('ประเภท') }}">
+                                            class="form-control form-control-alternative{{ $errors->has('amount_minimum') ? ' is-invalid' : '' }} ">
                                         @if ($errors->has('amount_minimum'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('amount_minimum') }}</strong>
