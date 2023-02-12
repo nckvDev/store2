@@ -16,8 +16,8 @@
                                 <form action="{{route('report_month_xlsm')}}" enctype="multipart/form-data"
                                       method="get">
                                     <input type="hidden" name="regMonth" value="{{$regMonth}}">
-                                    <button type="submit"
-                                            class="btn btn-sm btn-outline-danger" {{$regMonth !== '' ? '' : 'disabled'}}>
+                                    <button type="submit" id="check"
+                                            class="btn btn-sm btn-outline-danger" disabled>
                                         Export Excel
                                     </button>
                                 </form>
@@ -42,13 +42,13 @@
                                                     <span class="input-group-text"><i
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Select date"
+                                                <input id="fromMonth" class="form-control datepicker" placeholder="Select date"
                                                        name="fromMonth" type="month">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <button class="btn btn-primary btn" type="submit">ตกลง</button>
+                                        <button id="submit" class="btn btn-primary btn" type="submit">ตกลง</button>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 @foreach($report_months as $row)
                                     <tr>
 {{--                                        <td>{{ $row->id}}</td>--}}
-                                        <td>{{ $row->borrow_user->user_id}}</td>
+                                        <td id="user_id">{{ $row->borrow_user->user_id}}</td>
                                         <td>{{ $row->borrow_user->user_prefix->prefix_name}} {{ $row->borrow_user->firstname}}  {{ $row->borrow_user->lastname}}</td>
                                         <td>  {{ $thaiDateHelper->DateFormat($row->created_at) }} </td>
                                         @if($row->borrow_status=="1")
@@ -211,8 +211,31 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script>
+        (function () {
+            let userId = document.getElementById("user_id").innerText
+            let disabledChecked = document.getElementById("check");
+            if(userId) {
+                disabledChecked.disabled = false
+                $('#end-date').val('');
+            }
+        })();
+    </script>
+    <script>
+        let disabledSubmit = document.getElementById("submit");
+        disabledSubmit.disabled = true
+
+        $(document).ready(function () {
+            $('#fromMonth').on('change', function(){
+                let fromMonth = $('#fromMonth').val();
+                disabledSubmit.disabled = true
+                if (fromMonth){
+                    disabledSubmit.disabled = false
+                    $('#start-date').val('');
+                }
+            });
+        })
+
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
                 "sFilterInput": "form-control form-control-sm",
