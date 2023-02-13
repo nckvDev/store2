@@ -15,7 +15,7 @@
                                 <form action="{{route('report_term_xlsm')}}" enctype="multipart/form-data" method="get">
                                     <input type="hidden" name="fromDate" value="{{$fromDate}}">
                                     <input type="hidden" name="toDate" value="{{$toDate}}">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <button type="submit" id="check" class="btn btn-sm btn-outline-danger" disabled>
                                         Export Excel
                                     </button>
                                 </form>
@@ -40,7 +40,7 @@
                                         <input type="date" id="toDate" name="toDate" class="form-control">
                                     </div>
                                     <div class="col-lg-2 text-aligns">
-                                        <input class="btn btn-primary btn" type="submit">
+                                        <input id="submit" class="btn btn-primary btn" type="submit">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 @foreach($report_terms as $row)
                                     <tr>
 {{--                                        <td>{{ $row->id}}</td>--}}
-                                        <td>{{ $row->borrow_user->user_id}}</td>
+                                        <td id="user_id">{{ $row->borrow_user->user_id}}</td>
                                         <td>{{ $row->borrow_user->user_prefix->prefix_name }} {{ $row->borrow_user->firstname }}  {{ $row->borrow_user->lastname }}</td>
                                         <td>  {{ $thaiDateHelper->DateFormat($row->created_at) }}</td>
                                         @if($row->borrow_status=="1")
@@ -202,8 +202,46 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script>
+        (function () {
+            let userId = document.getElementById("user_id").innerText
+            let disabledChecked = document.getElementById("check");
+            if(userId) {
+                disabledChecked.disabled = false
+                $('#end-date').val('');
+            }
+        })();
+    </script>
+    <script>
+        let StartDateInput = document.getElementById("fromDate");
+        let EndDateInput = document.getElementById("toDate");
+        StartDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+        EndDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
+        let disabledSubmit = document.getElementById("submit");
+        disabledSubmit.disabled = true
+
+        $(document).ready(function () {
+
+            $('#toDate').on('change', function(){
+                let startDate = $('#fromDate').val();
+                let endDate = $('#toDate').val();
+                disabledSubmit.disabled = false
+                if (endDate < startDate){
+                    disabledSubmit.disabled = true
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'วันที่สิ้นสุดน้อยกว่าวันเร่ิมต้น!',
+                        showConfirmButton: true,
+                        confirmButtonText: 'ตกลง'
+                    })
+                    $('#start-date').val('');
+                    $('#end-date').val('');
+                }
+            });
+        })
+
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
                 "sFilterInput": "form-control form-control-sm",

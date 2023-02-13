@@ -14,8 +14,8 @@
                             <div class="col-4 text-right">
                                 <form action="{{route('report_day_xlsm')}}" enctype="multipart/form-data" method="get">
                                     <input type="hidden" name="fromDay" value="{{$fromDay}}">
-                                    <button type="submit"
-                                            class="btn btn-sm btn-outline-danger" {{$fromDay !== null ? '' : 'disabled'}}>
+                                    <button type="submit" id="check"
+                                            class="btn btn-sm btn-outline-danger" disabled>
                                         Export Excel
                                     </button>
                                 </form>
@@ -40,13 +40,13 @@
                                                     <span class="input-group-text"><i
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Select date"
+                                                <input id="fromDay" class="form-control datepicker" placeholder="Select date"
                                                        name="fromDay" type="date">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <button class="btn btn-primary btn" type="submit">ตกลง</button>
+                                        <button id="submit" class="btn btn-primary btn" type="submit">ตกลง</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                 @foreach($report_days as $row)
                                     <tr>
 {{--                                        <td>{{ $row->id}}</td>--}}
-                                        <td>{{ $row->borrow_user->user_id}}</td>
+                                        <td id="user_id">{{ $row->borrow_user->user_id}}</td>
                                         <td>{{ $row->borrow_user->user_prefix->prefix_name}} {{ $row->borrow_user->firstname}}  {{ $row->borrow_user->lastname}}</td>
                                         <td>
                                             {{ $thaiDateHelper->DateFormat($row->created_at) }}
@@ -212,8 +212,31 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
     <script>
+        (function () {
+            let userId = document.getElementById("user_id").innerText
+            let disabledChecked = document.getElementById("check");
+            if(userId) {
+                disabledChecked.disabled = false
+                $('#end-date').val('');
+            }
+        })();
+    </script>
+    <script>
+        let disabledSubmit = document.getElementById("submit");
+        disabledSubmit.disabled = true
+
+        $(document).ready(function () {
+            $('#fromDay').on('change', function(){
+                let fromMonth = $('#fromDay').val();
+                disabledSubmit.disabled = true
+                if (fromMonth){
+                    disabledSubmit.disabled = false
+                    $('#start-date').val('');
+                }
+            });
+        })
+
         $(function () {
             $.extend($.fn.dataTableExt.oStdClasses, {
                 "sFilterInput": "form-control form-control-sm",
