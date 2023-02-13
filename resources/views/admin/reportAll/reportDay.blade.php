@@ -217,7 +217,6 @@
             let userId = document.getElementById("user_id").innerText
             let disabledChecked = document.getElementById("check");
             if(userId) {
-                console.log('user -->', userId)
                 disabledChecked.disabled = false
                 $('#end-date').val('');
             }

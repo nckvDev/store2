@@ -224,13 +224,10 @@
         $(document).ready(function () {
 
             $('#toDate').on('change', function(){
-            // let userId = $('#user_id').val();
                 let startDate = $('#fromDate').val();
                 let endDate = $('#toDate').val();
                 disabledSubmit.disabled = false
-            // console.log('hello -->', userId)
                 if (endDate < startDate){
-                console.log(startDate, endDate)
                     disabledSubmit.disabled = true
                     Swal.fire({
                         position: 'center',
